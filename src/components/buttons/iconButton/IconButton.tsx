@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import { withThemeProvider } from '@/hoc/withThemeProvider';
 
 import * as S from './IconButton.style';
 
@@ -30,4 +29,4 @@ const IconButton = ({
     </S.Wrapper>
   );
 };
-export default withThemeProvider(IconButton);
+export default IconButton;

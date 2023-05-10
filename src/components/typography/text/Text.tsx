@@ -6,7 +6,6 @@ import styled, { css } from 'styled-components';
 import { SizeTypes } from '@/types/styles.type';
 
 import { Combine } from '@/types/utils.type';
-import { withThemeProvider } from '@/hoc/withThemeProvider';
 
 export type TextProps = Combine<
   {
@@ -96,4 +95,4 @@ const Text = ({
   );
 };
 
-export default withThemeProvider(Text);
+export default Text;
