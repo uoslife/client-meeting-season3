@@ -1,11 +1,11 @@
 'use client';
 import Image from 'next/image';
 
-import { MainHeader, Text } from '@/components';
+import { Button, MainHeader, Text } from '@/components';
 
 import * as S from '@/styles/pages/page.style';
 
-const Home = () => {
+const Main = () => {
   return (
     <S.MainWrapper>
       <MainHeader />
@@ -23,8 +23,9 @@ const Home = () => {
         size={'base'}
       />
       <Text label={'신청기간'} size={'lg'} weight={300} />
+      <Button primary="active" label="신청 정보 확인하기" />
     </S.MainWrapper>
   );
 };
 
-export default Home;
+export default Main;

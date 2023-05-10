@@ -8,4 +8,5 @@ export const Header = styled.header`
   flex-direction: row;
   align-items: center;
   justify-content: start;
+  width: 100%;
 `;
