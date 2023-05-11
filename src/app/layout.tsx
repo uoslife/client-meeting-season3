@@ -1,4 +1,5 @@
 import StyledComponentsRegistry from '@/lib/registry';
+import { Providers } from '@/store/provider';
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -17,7 +18,9 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         />
       </head>
       <body>
-        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        <Providers>
+          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        </Providers>
       </body>
     </html>
   );
