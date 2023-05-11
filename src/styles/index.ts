@@ -12,6 +12,13 @@ export const globalFontFamily = 'Pretendard';
 export const GlobalStyles = createGlobalStyle`
   ${reset}
 
+  @font-face {
+    font-family: 'LeferiPoint-SpecialA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-SpecialA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+
   * {
     font-family: ${globalFontFamily};
     font-weight: 500;
@@ -22,6 +29,11 @@ export const GlobalStyles = createGlobalStyle`
     max-width: 414px;
     margin: 0 auto;
   }
+
+  a { 
+    text-decoration: none;
+  }
+
   h1 {
     ${theme.Heading1};
   }

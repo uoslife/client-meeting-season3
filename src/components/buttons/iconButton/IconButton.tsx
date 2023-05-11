@@ -1,12 +1,11 @@
 'use client';
 
 import Image from 'next/image';
-import { withThemeProvider } from '@/hoc/withThemeProvider';
 
 import * as S from './IconButton.style';
 
 export type IconButtonProps = {
-  iconName?: 'Left' | '';
+  iconName?: 'Left' | 'Share' | 'Instagram' | 'Kakaotalk';
   width?: number;
   height?: number;
   onClick?: () => void;
@@ -30,4 +29,4 @@ const IconButton = ({
     </S.Wrapper>
   );
 };
-export default withThemeProvider(IconButton);
+export default IconButton;

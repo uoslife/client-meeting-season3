@@ -6,7 +6,6 @@ import styled, { css } from 'styled-components';
 import { SizeTypes } from '@/types/styles.type';
 
 import { Combine } from '@/types/utils.type';
-import { withThemeProvider } from '@/hoc/withThemeProvider';
 
 export type TextProps = Combine<
   {
@@ -15,6 +14,7 @@ export type TextProps = Combine<
     size?: SizeTypes;
     weight?: number;
     color?: string;
+    font?: string;
   },
   HTMLAttributes<'div'>
 >;
@@ -56,6 +56,16 @@ const getSizeStyles = (size?: SizeTypes) => {
         ${({ theme }) => theme.Text_2xl};
       `;
     }
+    case '3xl': {
+      return css`
+        ${({ theme }) => theme.Text_3xl};
+      `;
+    }
+    case '4xl': {
+      return css`
+        ${({ theme }) => theme.Text_4xl};
+      `;
+    }
     default: {
       return css`
         ${({ theme }) => theme.Text_base};
@@ -70,6 +80,7 @@ const Text = ({
   size = 'base',
   weight = 400,
   color,
+  font,
   ...props
 }: TextProps): JSX.Element => {
   if (weight < 100 || weight > 900) {
@@ -81,6 +92,7 @@ const Text = ({
     font-weight: ${({ weight }) => weight};
     ${({ size }) => getSizeStyles(size)};
     color: ${({ color }) => color};
+    font-family: ${({ font }) => font};
   `;
 
   return (
@@ -89,6 +101,7 @@ const Text = ({
       weight={weight}
       size={size}
       color={color}
+      font={font}
       {...props}
     >
       {label}
@@ -96,4 +109,4 @@ const Text = ({
   );
 };
 
-export default withThemeProvider(Text);
+export default Text;

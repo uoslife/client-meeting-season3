@@ -1,5 +1,4 @@
 'use client';
-import { withThemeProvider } from '@/hoc/withThemeProvider';
 
 import * as S from './MainHeader.style';
 
@@ -21,4 +20,4 @@ const MainHeader = () => {
   );
 };
 
-export default withThemeProvider(MainHeader);
+export default MainHeader;
