@@ -138,4 +138,12 @@ export const typographies = {
     font-size: 24px;
     line-height: 36px;
   `,
+  Text_3xl: css`
+    font-size: 24px;
+    line-height: 36px;
+  `,
+  Text_4xl: css`
+    font-size: 36px;
+    line-height: 54px;
+  `,
 };
