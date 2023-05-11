@@ -1,6 +1,6 @@
 'use client';
 
-import { HTMLAttributes } from 'react';
+import { ComponentProps } from 'react';
 
 import styled, { css } from 'styled-components';
 import { SizeTypes } from '@/types/styles.type';
@@ -16,7 +16,7 @@ export type TextProps = Combine<
     color?: string;
     font?: string;
   },
-  HTMLAttributes<'div'>
+  ComponentProps<'div'>
 >;
 
 const getSizeStyles = (size?: SizeTypes) => {
@@ -88,13 +88,6 @@ const Text = ({
     weight = weight < 100 ? 100 : weight > 900 ? 900 : weight;
   }
 
-  const AsStyled = styled(as)<TextProps>`
-    font-weight: ${({ weight }) => weight};
-    ${({ size }) => getSizeStyles(size)};
-    color: ${({ color }) => color};
-    font-family: ${({ font }) => font};
-  `;
-
   return (
     <AsStyled
       label={label}
@@ -108,5 +101,11 @@ const Text = ({
     </AsStyled>
   );
 };
+const AsStyled = styled.div<TextProps>`
+  font-weight: ${({ weight }) => weight};
+  ${({ size }) => getSizeStyles(size)};
+  color: ${({ color }) => color};
+  font-family: ${({ font }) => font};
+`;
 
 export default Text;
