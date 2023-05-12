@@ -18,6 +18,7 @@ export type TextProps = Combine<
      * 기본 폰트는 Pretendard 입니다.
      */
     font?: 'LeferiPoint-SpecialA' | '';
+    hightlight?: string;
   },
   ComponentProps<'div'>
 >;
@@ -84,6 +85,7 @@ const Text = ({
   weight = 400,
   color,
   font,
+  hightlight,
   ...props
 }: TextProps): JSX.Element => {
   return (
