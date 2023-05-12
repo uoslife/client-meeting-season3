@@ -5,9 +5,17 @@ import * as S from './MainHeader.style';
 import { IconButton, Text } from '@/components';
 
 const MainHeader = () => {
+  const onClickBackButton = () => {
+    document.location.href = 'http://uoslife.com';
+  };
   return (
     <S.Header>
-      <IconButton iconName="Left" width={12} height={20} />
+      <IconButton
+        iconName="Left"
+        width={12}
+        height={20}
+        onClick={onClickBackButton}
+      />
       <Text
         label="시대생 메인"
         as="div"
