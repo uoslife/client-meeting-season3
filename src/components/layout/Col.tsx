@@ -1,5 +1,3 @@
-'use client';
-
 import styled, { css } from 'styled-components';
 import { Combine } from '@/types/utils.type';
 
@@ -37,11 +35,12 @@ export type ColProps = Combine<
   },
   React.ComponentProps<'div'>
 >;
+
 const Col = ({ children, ...props }: ColProps) => {
   return <Container {...props}>{children}</Container>;
 };
 
-Col.defalutProps = {
+Col.defaultProps = {
   gap: 0,
   reverse: false,
   justify: 'flex-start',

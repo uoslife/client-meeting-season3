@@ -43,6 +43,7 @@ export type PaddleProps = Combine<
 const Paddler = ({ children, ...props }: PaddleProps) => {
   return <Container {...props}>{children}</Container>;
 };
+
 Paddler.defaultProps = {
   top: 0,
   right: 0,
