@@ -3,7 +3,7 @@
 import { ComponentProps } from 'react';
 
 import styled, { css } from 'styled-components';
-import { SizeTypes } from '@/types/styles.type';
+import { SizeTypes, WeightTypes } from '@/types/styles.type';
 
 import { Combine } from '@/types/utils.type';
 
@@ -12,9 +12,12 @@ export type TextProps = Combine<
     label: string;
     as?: 'p' | 'span' | 'div';
     size?: SizeTypes;
-    weight?: number;
+    weight?: WeightTypes;
     color?: string;
-    font?: string;
+    /**
+     * 기본 폰트는 Pretendard 입니다.
+     */
+    font?: 'LeferiPoint-SpecialA' | '';
   },
   ComponentProps<'div'>
 >;
@@ -83,11 +86,6 @@ const Text = ({
   font,
   ...props
 }: TextProps): JSX.Element => {
-  if (weight < 100 || weight > 900) {
-    console.warn('Text only accept`100~900` as `weight` value');
-    weight = weight < 100 ? 100 : weight > 900 ? 900 : weight;
-  }
-
   return (
     <AsStyled
       label={label}
