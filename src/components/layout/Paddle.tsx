@@ -1,52 +1,53 @@
 'use client';
 
-import styled, {css} from "styled-components";
+import { Combine } from '@/types/utils.type';
+import styled, { css } from 'styled-components';
 
-const Container = styled.div`
-    ${({top}) =>
-  top &&
-  css`
+const Container = styled.div<PaddleProps>`
+  ${({ top }) =>
+    top &&
+    css`
       padding-top: ${top}px;
     `};
 
-    ${({bottom}) =>
-  bottom &&
-  css`
+  ${({ bottom }) =>
+    bottom &&
+    css`
       padding-bottom: ${bottom}px;
     `};
 
-    ${({left}) =>
-  left &&
-  css`
+  ${({ left }) =>
+    left &&
+    css`
       padding-left: ${left}px;
     `};
 
-    ${({right}) =>
-  right &&
-  css`
+  ${({ right }) =>
+    right &&
+    css`
       padding-right: ${right}px;
     `};
-    `;
+`;
 
-type PaddleProps = {
-  top?: number;
-  right?: number;
-  bottom?: number;
-  left?: number;
+export type PaddleProps = Combine<
+  {
+    top?: number;
+    right?: number;
+    bottom?: number;
+    left?: number;
+    children: React.ReactNode;
+  },
+  React.ComponentProps<'div'>
+>;
+
+const Paddler = ({ children, ...props }: PaddleProps) => {
+  return <Container {...props}>{children}</Container>;
 };
-
-const Paddler = ({children, ...props}:PaddleProps) => {
-  return (
-    <Container {...props}>
-      {children}
-    </Container>
-  )
-}
 Paddler.defaultProps = {
   top: 0,
   right: 0,
   bottom: 0,
   left: 0,
-}
+};
 
 export default Paddler;
