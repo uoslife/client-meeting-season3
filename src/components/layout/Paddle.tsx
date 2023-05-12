@@ -1,5 +1,6 @@
 'use client';
 
+import { Combine } from '@/types/utils.type';
 import styled, { css } from 'styled-components';
 
 const Container = styled.div<PaddleProps>`
@@ -28,17 +29,21 @@ const Container = styled.div<PaddleProps>`
     `};
 `;
 
-export type PaddleProps = {
-  top?: number;
-  right?: number;
-  bottom?: number;
-  left?: number;
-  children?: React.ReactNode;
-};
+export type PaddleProps = Combine<
+  {
+    top?: number;
+    right?: number;
+    bottom?: number;
+    left?: number;
+    children: React.ReactNode;
+  },
+  React.ComponentProps<'div'>
+>;
 
 const Paddler = ({ children, ...props }: PaddleProps) => {
   return <Container {...props}>{children}</Container>;
 };
+
 Paddler.defaultProps = {
   top: 0,
   right: 0,
