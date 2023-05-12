@@ -5,7 +5,7 @@ import Image from 'next/image';
 import * as S from './IconButton.style';
 
 export type IconButtonProps = {
-  iconName?: 'Left' | 'Share' | 'Instagram' | 'Kakaotalk';
+  iconName?: 'Left' | 'Share' | 'Instagram' | 'Kakaotalk' | string;
   width?: number;
   height?: number;
   onClick?: () => void;
