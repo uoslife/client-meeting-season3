@@ -1,38 +1,34 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-type CounterState = {
-  value: number;
+export type ApplyInfoState = {
+  meetingType: 'group' | 'personal' | '';
+  curPage: number;
+  maxPage: number;
+  curStep: number;
+  maxStep: number;
 };
 
-const initialState = {
-  value: 0,
-} as CounterState;
+const initialState: ApplyInfoState = {
+  meetingType: '',
+  curPage: 0,
+  maxPage: 0,
+  curStep: 0,
+  maxStep: 0,
+};
 
 export const applyInfo = createSlice({
   name: 'applyInfo',
   initialState,
   reducers: {
     reset: () => initialState,
-    increment: state => {
-      state.value += 1;
+    incrementStep: state => {
+      state.curStep += 1;
     },
-    decrement: state => {
-      state.value -= 1;
-    },
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
-    },
-    decrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value -= action.payload;
+    decrementStep: state => {
+      state.curStep -= 1;
     },
   },
 });
 
-export const {
-  increment,
-  incrementByAmount,
-  decrement,
-  decrementByAmount,
-  reset,
-} = applyInfo.actions;
+export const { incrementStep, decrementStep, reset } = applyInfo.actions;
 export default applyInfo.reducer;
