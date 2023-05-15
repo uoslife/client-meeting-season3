@@ -18,7 +18,7 @@ const Footer = ({ disabled = false, onClick }: FooterProps) => {
       <FooterStepButton
         type={'next'}
         disabled={disabled}
-        onClick={disabled ? '' : onClick}
+        onClick={disabled ? undefined : onClick}
       ></FooterStepButton>
     </S.StepHandler>
   );

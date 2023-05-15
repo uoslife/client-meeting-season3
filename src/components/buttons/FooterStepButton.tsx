@@ -2,6 +2,7 @@
 
 import styled, { css } from 'styled-components';
 import { colors } from '@/styles/styles';
+import { Combine } from '@/types/utils.type';
 
 const Button = styled.div<FooterButtonProps>`
   display: flex;
@@ -60,17 +61,20 @@ const Button = styled.div<FooterButtonProps>`
       }
     `}
 `;
-export type FooterButtonProps = {
-  disabled?: boolean;
-  type?: 'next' | 'prev';
-  onClick?: () => void;
-} & React.ComponentProps<'div'>;
+export type FooterButtonProps = Combine<
+  {
+    disabled?: boolean;
+    type?: 'next' | 'prev';
+    onClick?: () => void;
+  },
+  React.ComponentProps<'div'>
+>;
 
 const FooterStepButton = ({
   onClick,
   type,
   disabled = false,
-}): FooterButtonProps => {
+}: FooterButtonProps) => {
   return (
     <Button onClick={onClick} type={type} disabled={disabled}>
       <svg height={24} viewBox="0 0 32 24" xmlns="http://www.w3.org/2000/svg">
