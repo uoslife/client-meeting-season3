@@ -13,6 +13,11 @@ export type { TextProps } from './typography/text/Text';
 // header
 export { default as MainHeader } from './header/mainHeader/MainHeader';
 
+// footer
+export { default as Footer } from './footer/Footer';
+export type { FooterProps } from './footer/Footer';
+
+// layout
 export { default as Col } from './layout/Col';
 export type { ColProps } from './layout/Col';
 export { default as Paddle } from './layout/Paddle';
