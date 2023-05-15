@@ -3,32 +3,52 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export type ApplyInfoState = {
   meetingType: 'group' | 'personal' | '';
   curPage: number;
-  maxPage: number;
   curStep: number;
-  maxStep: number;
 };
 
 const initialState: ApplyInfoState = {
   meetingType: '',
-  curPage: 0,
-  maxPage: 0,
-  curStep: 0,
-  maxStep: 0,
+  curPage: 1,
+  curStep: 1,
 };
 
 export const applyInfo = createSlice({
   name: 'applyInfo',
   initialState,
   reducers: {
-    reset: () => initialState,
     incrementStep: state => {
       state.curStep += 1;
     },
     decrementStep: state => {
       state.curStep -= 1;
     },
+    incrementPage: state => {
+      state.curPage += 1;
+    },
+    decrementPage: state => {
+      state.curPage -= 1;
+    },
+    setPage: (state, action: PayloadAction<number>) => {
+      state.curPage = action.payload;
+    },
+    resetAll: () => initialState,
+    resetStep: state => {
+      state.curStep = initialState.curStep;
+    },
+    resetPage: state => {
+      state.curPage = initialState.curPage;
+    },
   },
 });
 
-export const { incrementStep, decrementStep, reset } = applyInfo.actions;
+export const {
+  incrementStep,
+  decrementStep,
+  incrementPage,
+  decrementPage,
+  setPage,
+  resetAll,
+  resetStep,
+  resetPage,
+} = applyInfo.actions;
 export default applyInfo.reducer;
