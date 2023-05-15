@@ -6,7 +6,7 @@ import { colors } from '@/styles/styles';
 import { useAppSelector } from '@/store/hooks';
 import { IconButton } from '@/components';
 import { SOCIAL_LINK } from '@/constants';
-const ProgressHeader = ({ onApply }) => {
+const ProgressHeader = ({ onApply = true }: { onApply: boolean }) => {
   const { maxPage, currentPage, isProgressbar, title } = useAppSelector(
     state => state.progressHeader,
   );
@@ -39,10 +39,6 @@ const ProgressHeader = ({ onApply }) => {
       </S.Decorator>
     </S.Wrapper>
   );
-};
-
-ProgressHeader.defaultProps = {
-  onApply: true,
 };
 
 export default ProgressHeader;

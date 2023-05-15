@@ -4,3 +4,5 @@ export const SOCIAL_LINK = {
   Kakaotalk: 'https://pf.kakao.com/_gMEHK',
   Uoslife: 'https://uoslife.com/',
 };
+
+export const PERSONAL_MAX_PAGE_ARR = [3, 6, 2, 3, 3];
