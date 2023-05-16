@@ -1,11 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import applyInfoReducer from './feature/applyInfo';
-import progressHeaderReducer from './feature/progressHeaderSlice';
 
 const rootReducer = {
   applyInfo: applyInfoReducer,
-  progressHeader: progressHeaderReducer,
 };
 
 export const store = configureStore({
