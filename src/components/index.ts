@@ -14,6 +14,7 @@ export type { TextProps } from './typography/text/Text';
 // header
 export { default as MainHeader } from './header/mainHeader/MainHeader';
 export { default as ProgressHeader } from './header/progressHeader/ProgressHeader';
+export type { ProgressHeaderProps } from './header/progressHeader/ProgressHeader';
 
 // footer
 export { default as Footer } from './footer/Footer';

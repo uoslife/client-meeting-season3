@@ -37,7 +37,7 @@ const Personal = () => {
 
   return (
     <>
-      <ProgressHeader />
+      <ProgressHeader isProgress={true} isProgressbar={true} />
       {switchStep(applyInfo)}
     </>
   );
