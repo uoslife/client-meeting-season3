@@ -26,3 +26,7 @@ export { default as Paddle } from './layout/Paddle';
 export type { PaddleProps } from './layout/Paddle';
 export { default as Row } from './layout/Row';
 export type { RowProps } from './layout/Row';
+
+// input
+export { default as TextRoundInput } from './input/textRoundInput/TextRoundInput';
+export type { TextRoundInputProps } from './input/textRoundInput/TextRoundInput';
