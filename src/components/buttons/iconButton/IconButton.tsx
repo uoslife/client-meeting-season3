@@ -5,7 +5,14 @@ import Image from 'next/image';
 import * as S from './IconButton.style';
 
 export type IconButtonProps = {
-  iconName?: 'Left' | 'Share' | 'Instagram' | 'Kakaotalk' | string;
+  iconName?:
+    | 'Left'
+    | 'Share'
+    | 'Instagram'
+    | 'Kakaotalk'
+    | 'Delete'
+    | 'DropdownArrow'
+    | 'Home';
   width?: number;
   height?: number;
   onClick?: () => void;
