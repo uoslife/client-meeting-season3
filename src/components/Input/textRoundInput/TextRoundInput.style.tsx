@@ -2,8 +2,9 @@
 
 import styled, { css } from 'styled-components';
 import { typographies, colors } from '@/styles/styles';
+import { TextRoundInputProps } from '@/components';
 
-export const Container = styled.div`
+export const Container = styled.div<TextRoundInputProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,7 +12,7 @@ export const Container = styled.div`
   flex-direction: column;
 `;
 
-export const Wrapper = styled.div<{ status: string; disabled: false }>`
+export const Wrapper = styled.div<TextRoundInputProps>`
   display: flex;
   border-radius: 24px;
   padding: 12px 20px;
@@ -42,7 +43,7 @@ export const Wrapper = styled.div<{ status: string; disabled: false }>`
     `}
 `;
 
-export const Input = styled.input<{ status: string }>`
+export const Input = styled.input<TextRoundInputProps>`
   ${() => typographies};
   width: 100%;
   border: none;
@@ -66,13 +67,13 @@ export const Input = styled.input<{ status: string }>`
   }
 `;
 
-export const Icon = styled.div`
+export const Icon = styled.div<TextRoundInputProps>`
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
-export const StatusMessage = styled.p<{ status: string }>`
+export const StatusMessage = styled.p<TextRoundInputProps>`
   ${() => typographies};
   padding-left: 20px;
 

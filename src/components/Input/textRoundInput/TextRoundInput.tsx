@@ -21,7 +21,7 @@ const TextRoundInput = ({
   statusMessage,
   status,
   onClick,
-}) => {
+}: TextRoundInputProps) => {
   const [inputValue, handleInputValue, setInputValue] = useInput(value);
   return (
     <>
