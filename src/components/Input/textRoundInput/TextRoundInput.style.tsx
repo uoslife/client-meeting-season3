@@ -3,7 +3,6 @@
 import styled, { css } from 'styled-components';
 import { typographies, colors } from '@/styles/styles';
 import { TextRoundInputProps } from '@/components';
-import { boolean } from 'zod';
 
 export const Container = styled.div<TextRoundInputProps>`
   display: flex;
