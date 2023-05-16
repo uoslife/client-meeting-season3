@@ -3,20 +3,22 @@
 import styled, { css } from 'styled-components';
 import { typographies, colors } from '@/styles/styles';
 
+import { ProgressHeaderProps } from '@/components';
+
 export const Wrapper = styled.header`
   position: sticky;
   top: 0;
   z-index: 1000;
 `;
 
-export const Container = styled.div<{ onApply: boolean }>`
+export const Container = styled.div<Pick<ProgressHeaderProps, 'isProgress'>>`
   position: relative;
   padding: 16px 24px;
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(5px);
 
-  ${({ onApply }) =>
-    onApply &&
+  ${({ isProgress }) =>
+    isProgress &&
     css`
       background: ${colors.Primary700};
       color: ${colors.White};
