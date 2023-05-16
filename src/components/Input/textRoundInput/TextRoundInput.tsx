@@ -22,15 +22,15 @@ const TextRoundInput = ({
   status,
   onClick,
 }: TextRoundInputProps) => {
-  const [inputValue, handleInputValue, setInputValue] = useInput(value);
+  const [inputValue, handleInputValue] = useInput(value);
   return (
     <>
       <S.Container>
-        <Col gap="4">
+        <Col gap={4}>
           <Row>
-            <S.Wrapper status={status} isActive={inputValue?.length > 0}>
+            <S.Wrapper status={status} isActive={inputValue!.length > 0}>
               <S.Input
-                value={value}
+                value={inputValue}
                 type={type}
                 placeholder={placeholder}
                 onChange={handleInputValue}
@@ -42,7 +42,7 @@ const TextRoundInput = ({
               )}
             </S.Wrapper>
           </Row>
-          {statusMessage?.length > 0 && (
+          {statusMessage!.length > 0 && (
             <S.StatusMessage status={status}>{statusMessage}</S.StatusMessage>
           )}
         </Col>

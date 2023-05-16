@@ -3,6 +3,7 @@
 import styled, { css } from 'styled-components';
 import { typographies, colors } from '@/styles/styles';
 import { TextRoundInputProps } from '@/components';
+import { boolean } from 'zod';
 
 export const Container = styled.div<TextRoundInputProps>`
   display: flex;
@@ -12,7 +13,7 @@ export const Container = styled.div<TextRoundInputProps>`
   flex-direction: column;
 `;
 
-export const Wrapper = styled.div<TextRoundInputProps>`
+export const Wrapper = styled.div<TextRoundInputProps & { isActive: boolean }>`
   display: flex;
   border-radius: 24px;
   padding: 12px 20px;
