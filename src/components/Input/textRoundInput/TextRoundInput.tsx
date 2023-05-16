@@ -11,13 +11,11 @@ export type TextRoundInputProps = {
   isSearch?: boolean;
   status?: 'success' | 'error' | 'default';
   statusMessage?: string;
-  disabled?: boolean;
   onClick?: () => void;
-};
+} & React.ComponentProps<'input'>;
 const TextRoundInput = ({
   type = 'text',
   placeholder,
-  disabled,
   value,
   isSearch = false,
   statusMessage,
@@ -36,7 +34,6 @@ const TextRoundInput = ({
                 type={type}
                 placeholder={placeholder}
                 onChange={handleInputValue}
-                disabled={disabled}
               />
               {isSearch && (
                 <S.Icon status={status} onClick={onClick}>
