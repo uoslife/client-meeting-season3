@@ -2,9 +2,9 @@
 
 import * as S from './TextRoundInput.style';
 
-import { Col, IconButton, Row } from '@/components';
-import useInput from '@/hooks/useInput';
+import { Col, IconButton, Row, Text } from '@/components';
 import { Combine } from '@/types/utils.type';
+import { ChangeEvent } from 'react';
 
 export type TextRoundInputProps = Combine<
   {
@@ -15,6 +15,7 @@ export type TextRoundInputProps = Combine<
     status?: 'success' | 'error' | 'default';
     statusMessage?: string;
     onClick?: () => void;
+    onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
     isActive?: boolean;
   },
   React.ComponentProps<'input'>
@@ -25,21 +26,21 @@ const TextRoundInput = ({
   value,
   isSearch = false,
   statusMessage,
-  status,
+  status = 'default',
   onClick,
+  onChange,
 }: TextRoundInputProps) => {
-  const [inputValue, handleInputValue] = useInput(value!);
   return (
     <>
       <S.Container>
         <Col gap={4}>
           <Row>
-            <S.Wrapper status={status} isActive={inputValue?.length > 0}>
+            <S.Wrapper status={status} isActive={value!.length > 0}>
               <S.Input
-                value={inputValue}
+                value={value}
                 type={type}
                 placeholder={placeholder}
-                onChange={handleInputValue}
+                onChange={onChange}
               />
               {isSearch && (
                 <S.Icon status={status} onClick={onClick}>
