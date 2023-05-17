@@ -12,7 +12,7 @@ export const Container = styled.div<TextRoundInputProps>`
   flex-direction: column;
 `;
 
-export const Wrapper = styled.div<TextRoundInputProps & { isActive: boolean }>`
+export const Wrapper = styled.div<TextRoundInputProps>`
   display: flex;
   border-radius: 24px;
   padding: 12px 20px;

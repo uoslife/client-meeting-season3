@@ -4,16 +4,21 @@ import * as S from './TextRoundInput.style';
 
 import { Col, IconButton, Row } from '@/components';
 import useInput from '@/hooks/useInput';
+import { Combine } from '@/types/utils.type';
 
-export type TextRoundInputProps = {
-  type?: string;
-  value?: string;
-  placeholder?: string;
-  isSearch?: boolean;
-  status?: 'success' | 'error' | 'default';
-  statusMessage?: string;
-  onClick?: () => void;
-} & React.ComponentProps<'input'>;
+export type TextRoundInputProps = Combine<
+  {
+    type?: string;
+    value?: string;
+    placeholder?: string;
+    isSearch?: boolean;
+    status?: 'success' | 'error' | 'default';
+    statusMessage?: string;
+    onClick?: () => void;
+    isActive?: boolean;
+  },
+  React.ComponentProps<'input'>
+>;
 const TextRoundInput = ({
   type = 'text',
   placeholder,
@@ -23,13 +28,13 @@ const TextRoundInput = ({
   status,
   onClick,
 }: TextRoundInputProps) => {
-  const [inputValue, handleInputValue] = useInput(value);
+  const [inputValue, handleInputValue] = useInput(value!);
   return (
     <>
       <S.Container>
         <Col gap={4}>
           <Row>
-            <S.Wrapper status={status} isActive={inputValue!.length > 0}>
+            <S.Wrapper status={status} isActive={inputValue?.length > 0}>
               <S.Input
                 value={inputValue}
                 type={type}
@@ -43,7 +48,7 @@ const TextRoundInput = ({
               )}
             </S.Wrapper>
           </Row>
-          {statusMessage!.length > 0 && (
+          {statusMessage && statusMessage.length > 0 && (
             <S.StatusMessage status={status}>{statusMessage}</S.StatusMessage>
           )}
         </Col>
