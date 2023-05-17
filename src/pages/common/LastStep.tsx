@@ -32,6 +32,7 @@ const LastStep = () => {
             size="base"
             weight={700}
             font="LeferiBaseType-RegularA"
+            color="#3B4046"
           />
           <Col align="center">
             <Text
