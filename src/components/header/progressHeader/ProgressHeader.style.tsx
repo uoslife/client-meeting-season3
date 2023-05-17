@@ -11,14 +11,14 @@ export const Wrapper = styled.header`
   z-index: 1000;
 `;
 
-export const Container = styled.div<Pick<ProgressHeaderProps, 'isProgress'>>`
+export const Container = styled.div<Pick<ProgressHeaderProps, 'isprogress'>>`
   position: relative;
   padding: 16px 24px;
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(5px);
 
-  ${({ isProgress }) =>
-    isProgress &&
+  ${({ isprogress }) =>
+    isprogress &&
     css`
       background: ${colors.Primary700};
       color: ${colors.White};
