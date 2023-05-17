@@ -11,7 +11,7 @@ const Container = styled.div<RowProps>`
   justify-content: ${({ justify }) => justify};
   align-items: ${({ align }) => align};
   gap: ${({ gap }) => gap}px;
-  padding: ${({ padding }) => padding}px;
+  padding: ${({ padding }) => padding};
 
   ${({ fill }) =>
     fill &&
@@ -32,25 +32,24 @@ export type RowProps = Combine<
       | 'space-around';
     wrap?: 'nowrap' | 'wrap' | 'wrap-reverse';
     align?: 'flex-start' | 'flex-end' | 'center';
-    padding?: number;
+    padding?: string;
     fill?: boolean;
     children: React.ReactNode;
   },
   React.ComponentProps<'div'>
 >;
 
-const Row = ({ children, ...props }: RowProps) => {
+const Row = ({
+  gap = 0,
+  reverse = false,
+  justify = 'flex-start',
+  align = 'flex-start',
+  padding = '0',
+  fill = false,
+  children,
+  ...props
+}: RowProps) => {
   return <Container {...props}>{children}</Container>;
-};
-
-Row.defaultProps = {
-  gap: 0,
-  reverse: false,
-  wrap: 'nowrap',
-  justify: 'flex-start',
-  align: 'flex-start',
-  padding: 0,
-  fill: false,
 };
 
 export default Row;
