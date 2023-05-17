@@ -31,3 +31,7 @@ export type { RowProps } from './layout/Row';
 // input
 export { default as TextRoundInput } from './input/textRoundInput/TextRoundInput';
 export type { TextRoundInputProps } from './input/textRoundInput/TextRoundInput';
+
+// molecules
+export { default as ResultBox } from './molecules/resultBox/ResultBox';
+export type { ResultBoxProps } from './molecules/resultBox/ResultBox';
