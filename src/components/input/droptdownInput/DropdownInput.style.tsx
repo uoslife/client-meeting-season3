@@ -33,14 +33,15 @@ export const Icon = styled.div<DropdownInputProps>`
 
 export const DropdownWrapper = styled.div<DropdownInputProps>`
   position: fixed;
+  top: 0;
+  left: 0;
   height: 100vh;
   display: flex;
   flex-direction: column;
   z-index: 1000;
-  max-width: 414px;
+  width: 100%;
   background: rgba(0, 0, 0, 0.8);
   margin: 0 auto;
-  width: 100%;
   backdrop-filter: blur(3px);
 `;
 
