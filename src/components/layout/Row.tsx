@@ -49,7 +49,19 @@ const Row = ({
   children,
   ...props
 }: RowProps) => {
-  return <Container {...props}>{children}</Container>;
+  return (
+    <Container
+      gap={gap}
+      reverse={reverse}
+      justify={justify}
+      align={align}
+      padding={padding}
+      fill={fill}
+      {...props}
+    >
+      {children}
+    </Container>
+  );
 };
 
 export default Row;

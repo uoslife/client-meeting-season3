@@ -46,7 +46,19 @@ const Col = ({
   children,
   ...props
 }: ColProps) => {
-  return <Container {...props}>{children}</Container>;
+  return (
+    <Container
+      gap={gap}
+      reverse={reverse}
+      justify={justify}
+      align={align}
+      padding={padding}
+      fill={fill}
+      {...props}
+    >
+      {children}
+    </Container>
+  );
 };
 
 export default Col;
