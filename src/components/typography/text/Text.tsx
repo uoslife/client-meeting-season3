@@ -18,7 +18,7 @@ export type TextProps = Combine<
     /**
      * 기본 폰트는 Pretendard 입니다.
      */
-    font?: 'LeferiPoint-SpecialA' | '';
+    font?: 'LeferiPoint-SpecialA' | 'LeferiBaseType-RegularA' | '';
     hightlight?: string;
   },
   ComponentProps<'div'>
