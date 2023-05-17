@@ -6,6 +6,10 @@ export type { IconButtonProps } from './buttons/iconButton/IconButton';
 export { default as Checkbox } from './buttons/checkbox/Checkbox';
 export type { CheckboxProps } from './buttons/checkbox/Checkbox';
 export { default as FooterStepButton } from './buttons/footerStepButton/FooterStepButton';
+export { default as RoundedRectangleButton } from './buttons/roundedRectangleButton/RoundedRectangleButton';
+export type { RoundedRectangleButtonProps } from './buttons/roundedRectangleButton/RoundedRectangleButton';
+export { default as DeleteButton } from './buttons/deleteButton/DeleteButton';
+export type { DeleteButtonProps } from './buttons/deleteButton/DeleteButton';
 
 // typography
 export { default as Text } from './typography/text/Text';

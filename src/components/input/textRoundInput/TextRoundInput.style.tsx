@@ -44,7 +44,8 @@ export const Wrapper = styled.div<TextRoundInputProps>`
 `;
 
 export const Input = styled.input<TextRoundInputProps>`
-  ${() => typographies};
+  ${() => typographies.Heading6};
+  font-weight: 400;
   width: 100%;
   border: none;
   color: ${({}) => colors.Secondary700};
@@ -74,8 +75,9 @@ export const Icon = styled.div<TextRoundInputProps>`
 `;
 
 export const StatusMessage = styled.p<TextRoundInputProps>`
-  ${() => typographies};
+  ${() => typographies.Text_xs};
   padding-left: 20px;
+  padding-top: 5px;
 
   ${({ status }) =>
     status === 'error' &&
