@@ -35,3 +35,5 @@ export type { TextRoundInputProps } from './input/textRoundInput/TextRoundInput'
 // molecules
 export { default as ResultBox } from './molecules/resultBox/ResultBox';
 export type { ResultBoxProps } from './molecules/resultBox/ResultBox';
+export { default as OathBox } from './molecules/oathBox/OathBox';
+export type { OathBoxProps } from './molecules/oathBox/OathBox';
