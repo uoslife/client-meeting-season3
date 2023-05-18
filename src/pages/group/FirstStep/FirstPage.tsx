@@ -9,7 +9,6 @@ import {
 } from '@/components';
 import { useState } from 'react';
 import useInput from '@/hooks/useInput';
-import DropdownInput from '@/components/input/droptdownInput/DropdownInput';
 
 const FirstPage = ({ setIsFinishPage }: StepProps) => {
   const [nameStatus, setNameStatus] = useState<'success' | 'error' | 'default'>(
@@ -49,7 +48,6 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
             onClick={handleName}
           />
         </Row>
-        <DropdownInput label={'안녕하세요'} />
       </Col>
     </Paddle>
   );

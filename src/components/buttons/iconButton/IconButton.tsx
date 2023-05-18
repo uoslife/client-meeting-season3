@@ -12,7 +12,9 @@ export type IconButtonProps = {
     | 'Kakaotalk'
     | 'DropdownArrow'
     | 'Home'
-    | 'SearchIcon';
+    | 'SearchIcon'
+    | 'Person'
+    | 'User';
   width?: number;
   height?: number;
   onClick?: () => void;

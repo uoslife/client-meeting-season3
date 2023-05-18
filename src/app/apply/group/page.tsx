@@ -15,6 +15,8 @@ const Group = () => {
     switch (applyInfo.curStep) {
       case 1:
         return <FirstStep />;
+      case 2:
+        return <FirstStep />;
       default:
         return <></>;
     }
