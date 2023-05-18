@@ -10,6 +10,8 @@ export { default as RoundedRectangleButton } from './buttons/roundedRectangleBut
 export type { RoundedRectangleButtonProps } from './buttons/roundedRectangleButton/RoundedRectangleButton';
 export { default as DeleteButton } from './buttons/deleteButton/DeleteButton';
 export type { DeleteButtonProps } from './buttons/deleteButton/DeleteButton';
+export { default as CheckCircle } from './buttons/checkCircle/CheckCircle';
+export type { CheckCircleProps } from './buttons/checkCircle/CheckCircle';
 
 // typography
 export { default as Text } from './typography/text/Text';
@@ -35,3 +37,7 @@ export type { RowProps } from './layout/Row';
 // input
 export { default as TextRoundInput } from './input/textRoundInput/TextRoundInput';
 export type { TextRoundInputProps } from './input/textRoundInput/TextRoundInput';
+
+// modal
+export { default as BottomSheet } from './modal/bottomSheet/BottomSheet';
+export type { BottomSheetProps } from './modal/bottomSheet/BottomSheet';
