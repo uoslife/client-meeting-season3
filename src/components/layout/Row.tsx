@@ -11,6 +11,7 @@ const Container = styled.div<RowProps>`
   justify-content: ${({ justify }) => justify};
   align-items: ${({ align }) => align};
   gap: ${({ gap }) => gap}px;
+  width: 100%;
   padding: ${({ padding }) => padding};
 
   ${({ fill }) =>
