@@ -1,7 +1,7 @@
 'use client';
 
 import * as S from './DropdownInput.style';
-import { IconButton, Text } from '@/components';
+import { DeleteButton, IconButton, Text } from '@/components';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { Combine } from '@/types/utils.type';
 export type DropdownInputProps = Combine<
@@ -35,11 +35,11 @@ const DropdownInput = ({ setValue, label, options }: DropdownInputProps) => {
           <S.Dropdown showOption={showOption}>
             <S.DropdownHeader>
               {label}
-              <IconButton
-                onClick={() => setShowOption(!showOption)}
-                iconName="Delete"
+              <DeleteButton
+                type={'black'}
                 width={20}
                 height={20}
+                onClick={() => setShowOption(!showOption)}
               />
             </S.DropdownHeader>
             <S.DropdownOptions>

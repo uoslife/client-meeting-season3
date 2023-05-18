@@ -4,6 +4,10 @@ import { Combine } from '@/types/utils.type';
 import styled, { css } from 'styled-components';
 
 const Container = styled.div<PaddleProps>`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
   ${({ top }) =>
     top &&
     css`

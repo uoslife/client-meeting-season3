@@ -10,9 +10,11 @@ export type IconButtonProps = {
     | 'Share'
     | 'Instagram'
     | 'Kakaotalk'
-    | 'Delete'
     | 'DropdownArrow'
-    | 'Home';
+    | 'Home'
+    | 'SearchIcon'
+    | 'Person'
+    | 'User';
   width?: number;
   height?: number;
   onClick?: () => void;

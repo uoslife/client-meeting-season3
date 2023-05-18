@@ -6,6 +6,12 @@ export type { IconButtonProps } from './buttons/iconButton/IconButton';
 export { default as Checkbox } from './buttons/checkbox/Checkbox';
 export type { CheckboxProps } from './buttons/checkbox/Checkbox';
 export { default as FooterStepButton } from './buttons/footerStepButton/FooterStepButton';
+export { default as RoundedRectangleButton } from './buttons/roundedRectangleButton/RoundedRectangleButton';
+export type { RoundedRectangleButtonProps } from './buttons/roundedRectangleButton/RoundedRectangleButton';
+export { default as DeleteButton } from './buttons/deleteButton/DeleteButton';
+export type { DeleteButtonProps } from './buttons/deleteButton/DeleteButton';
+export { default as CheckCircle } from './buttons/checkCircle/CheckCircle';
+export type { CheckCircleProps } from './buttons/checkCircle/CheckCircle';
 
 // typography
 export { default as Text } from './typography/text/Text';
@@ -32,8 +38,14 @@ export type { RowProps } from './layout/Row';
 export { default as TextRoundInput } from './input/textRoundInput/TextRoundInput';
 export type { TextRoundInputProps } from './input/textRoundInput/TextRoundInput';
 
+
+// modal
+export { default as BottomSheet } from './modal/bottomSheet/BottomSheet';
+export type { BottomSheetProps } from './modal/bottomSheet/BottomSheet';
+
 // molecules
 export { default as ResultBox } from './molecules/resultBox/ResultBox';
 export type { ResultBoxProps } from './molecules/resultBox/ResultBox';
 export { default as OathBox } from './molecules/oathBox/OathBox';
 export type { OathBoxProps } from './molecules/oathBox/OathBox';
+

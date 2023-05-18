@@ -107,6 +107,7 @@ const AsStyled = styled.div<TextProps>`
   ${({ size }) => getSizeStyles(size)};
   color: ${({ color }) => color};
   font-family: ${({ font }) => font};
+  white-space: pre-line;
 `;
 
 export default Text;
