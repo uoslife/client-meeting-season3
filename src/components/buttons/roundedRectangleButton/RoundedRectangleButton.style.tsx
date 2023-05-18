@@ -30,6 +30,14 @@ export const Wrapper = styled.div<Omit<RoundedRectangleButtonProps, 'label'>>`
           color: ${colors.Primary600};
           border-radius: 12px;
         `;
+      case 'white':
+        return css`
+          border: #acb4bf 1px solid;
+          padding: 12px 16px;
+          background: ${colors.White};
+          color: ${colors.Black};
+          border-radius: 12px;
+        `;
       default:
         return '';
     }

@@ -7,7 +7,7 @@ import { Combine } from '@/types/utils.type';
 
 export type RoundedRectangleButtonProps = Combine<
   {
-    type?: 'primary' | 'skyBlue';
+    type?: 'primary' | 'skyBlue' | 'white';
     label: string;
     height?: number;
     fontSize?: SizeTypes;
