@@ -8,6 +8,6 @@ $ yarn install
 ```bash
 $ yarn storybook
 ```
-배포된 storybook은 [여기](https://client-meeting-season3.vercel.app/)에서 확인할 수 있습니다.
+배포된 storybook은 [여기](https://client-meeting.netlify.app/)에서 확인할 수 있습니다.
 
 
