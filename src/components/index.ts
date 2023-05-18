@@ -38,6 +38,14 @@ export type { RowProps } from './layout/Row';
 export { default as TextRoundInput } from './input/textRoundInput/TextRoundInput';
 export type { TextRoundInputProps } from './input/textRoundInput/TextRoundInput';
 
+
 // modal
 export { default as BottomSheet } from './modal/bottomSheet/BottomSheet';
 export type { BottomSheetProps } from './modal/bottomSheet/BottomSheet';
+
+// molecules
+export { default as ResultBox } from './molecules/resultBox/ResultBox';
+export type { ResultBoxProps } from './molecules/resultBox/ResultBox';
+export { default as OathBox } from './molecules/oathBox/OathBox';
+export type { OathBoxProps } from './molecules/oathBox/OathBox';
+

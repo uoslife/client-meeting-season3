@@ -14,7 +14,6 @@ import LastStep from '@/pages/common/LastStep';
 
 const Personal = () => {
   const applyInfo = useAppSelector(state => state.applyInfo);
-  console.log(applyInfo);
 
   const switchStep = (applyInfo: ApplyInfoState) => {
     switch (applyInfo.curStep) {
@@ -37,7 +36,7 @@ const Personal = () => {
 
   return (
     <>
-      <ProgressHeader isProgress={true} isProgressbar={true} />
+      <ProgressHeader isprogress={true} isprogressbar={true} />
       {switchStep(applyInfo)}
     </>
   );

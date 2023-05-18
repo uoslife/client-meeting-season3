@@ -36,17 +36,29 @@ export type ColProps = Combine<
   React.ComponentProps<'div'>
 >;
 
-const Col = ({ children, ...props }: ColProps) => {
-  return <Container {...props}>{children}</Container>;
-};
-
-Col.defaultProps = {
-  gap: 0,
-  reverse: false,
-  justify: 'flex-start',
-  align: 'flex-start',
-  padding: 0,
-  fill: false,
+const Col = ({
+  gap = 0,
+  reverse = false,
+  justify = 'flex-start',
+  align = 'flex-start',
+  padding = '0',
+  fill = false,
+  children,
+  ...props
+}: ColProps) => {
+  return (
+    <Container
+      gap={gap}
+      reverse={reverse}
+      justify={justify}
+      align={align}
+      padding={padding}
+      fill={fill}
+      {...props}
+    >
+      {children}
+    </Container>
+  );
 };
 
 export default Col;

@@ -4,6 +4,7 @@ import { ComponentProps } from 'react';
 
 import styled, { css } from 'styled-components';
 import { SizeTypes, WeightTypes } from '@/types/styles.type';
+import { theme } from '@/styles';
 
 import { Combine } from '@/types/utils.type';
 
@@ -17,7 +18,7 @@ export type TextProps = Combine<
     /**
      * 기본 폰트는 Pretendard 입니다.
      */
-    font?: 'LeferiPoint-SpecialA' | '';
+    font?: 'LeferiPoint-SpecialA' | 'LeferiBaseType-RegularA' | '';
     hightlight?: string;
   },
   ComponentProps<'div'>
@@ -27,52 +28,52 @@ const getSizeStyles = (size?: SizeTypes) => {
   switch (size) {
     case 'xs': {
       return css`
-        ${({ theme }) => theme.Text_xs};
+        ${theme.Text_xs};
       `;
     }
     case 'sm': {
       return css`
-        ${({ theme }) => theme.Text_sm};
+        ${theme.Text_sm};
       `;
     }
     case 'md': {
       return css`
-        ${({ theme }) => theme.Text_md};
+        ${theme.Text_md};
       `;
     }
     case 'base': {
       return css`
-        ${({ theme }) => theme.Text_base};
+        ${theme.Text_base};
       `;
     }
     case 'lg': {
       return css`
-        ${({ theme }) => theme.Text_lg};
+        ${theme.Text_lg};
       `;
     }
     case 'xl': {
       return css`
-        ${({ theme }) => theme.Text_xl};
+        ${theme.Text_xl};
       `;
     }
     case '2xl': {
       return css`
-        ${({ theme }) => theme.Text_2xl};
+        ${theme.Text_2xl};
       `;
     }
     case '3xl': {
       return css`
-        ${({ theme }) => theme.Text_3xl};
+        ${theme.Text_3xl};
       `;
     }
     case '4xl': {
       return css`
-        ${({ theme }) => theme.Text_4xl};
+        ${theme.Text_4xl};
       `;
     }
     default: {
       return css`
-        ${({ theme }) => theme.Text_base};
+        ${theme.Text_base};
       `;
     }
   }
