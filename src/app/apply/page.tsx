@@ -73,7 +73,7 @@ function Apply() {
             <Button
               primary={meetingTypeState[0].active ? 'active' : 'inactive'}
               label="1:1 미팅"
-              fontSize={'base'}
+              textSize="sm"
               onClick={() =>
                 setMeetingTypeState(() => {
                   const newState = meetingTypeInitState;
@@ -85,7 +85,7 @@ function Apply() {
             <Button
               primary={meetingTypeState[1].active ? 'active' : 'inactive'}
               label="3:3 미팅"
-              fontSize={'base'}
+              textSize="sm"
               onClick={() =>
                 setMeetingTypeState(() => {
                   const newState = meetingTypeInitState;
