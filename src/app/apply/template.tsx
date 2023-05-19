@@ -5,12 +5,14 @@ import { usePathname } from 'next/navigation';
 
 const Template = ({ children }: { children: React.ReactNode }) => {
   const changeIsProgress = () => {
-    return usePathname() !== '/apply/complete';
+    return (
+      usePathname() !== '/apply/complete' && usePathname() !== '/apply/confirm'
+    );
   };
   const changeIsProgressBar = () => {
     return (
       usePathname() === '/apply/personal' ||
-      usePathname() === '/apply/groupowner'
+      usePathname() === '/apply/groupLeader'
     );
   };
   const returnHeaderTitle = () => {
@@ -22,7 +24,8 @@ const Template = ({ children }: { children: React.ReactNode }) => {
         return '3대3 미팅';
       case '/apply/complete':
         return '신청 완료!';
-
+      case '/apply/confirm':
+        return '신청 정보';
       default:
         return undefined;
     }
