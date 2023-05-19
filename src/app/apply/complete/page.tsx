@@ -1,9 +1,7 @@
 'use client';
 
-import ProgressHeader from '@/components/header/progressHeader/ProgressHeader';
-
-import { Button, Col, Paddle, Text } from '@/components';
 import styled from 'styled-components';
+import { Button, Col, Paddle, Text } from '@/components';
 
 const BottomSelectWrapper = styled.div`
   position: fixed;
@@ -22,7 +20,6 @@ const FinishPage = () => {
   };
   return (
     <>
-      <ProgressHeader isprogress={false} isprogressbar={false} />
       <Col fill>
         <Paddle top={60}>
           <Col gap={30}>
@@ -37,10 +34,10 @@ const FinishPage = () => {
 
             <Col align={'center'} gap={8}>
               <Col align={'center'}>
-                <Text label="10/28 금요일 저녁!" weight={600} />
+                <Text label="05/28 일요일 저녁!" weight={600} />
                 <Text label="시대생 어플로 알림을 보내드려요." />
               </Col>
-              <Text label="(신청 취소 기한:10일 27일 자정까지)" />
+              <Text label="(신청 취소 기한: 5월 27일 자정까지)" />
             </Col>
           </Col>
         </Paddle>

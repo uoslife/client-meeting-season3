@@ -63,7 +63,7 @@ const Footer = ({
     // 마지막 step, page인 경우
     if (type === 'lastStep') {
       // api POST 로직
-      router.push('/'); // 신청완료 페이지로
+      router.push('/apply/complete'); // 신청완료 페이지로
     }
 
     // 기본

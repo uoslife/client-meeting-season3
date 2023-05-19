@@ -30,7 +30,7 @@ const Group = () => {
 
   return (
     <>
-      <ProgressHeader isProgress={true} isProgressbar={true} />
+      <ProgressHeader isprogress={true} isprogressbar={true} />
       {switchStep(applyInfo)}
     </>
   );
