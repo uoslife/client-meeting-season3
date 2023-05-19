@@ -45,12 +45,13 @@ const FinishPage = () => {
       <BottomSelectWrapper>
         <Button
           primary={'inactive'}
+          textSize="sm"
           onClick={handleCheckInformation}
           label={'신청 정보 확인하기'}
         />
 
         <a href="https://www.instagram.com/uoslife_official/" target={'_blank'}>
-          <Button primary={'disabled'} label={'시대팅 안내'} />
+          <Button primary={'disabled'} textSize="sm" label={'시대팅 안내'} />
         </a>
       </BottomSelectWrapper>
     </>

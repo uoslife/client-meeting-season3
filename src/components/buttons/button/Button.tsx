@@ -11,7 +11,7 @@ export type ButtonProps = Combine<
     label: string;
     width?: number | 'full';
     height?: number;
-    fontSize?: SizeTypes;
+    textSize?: 'base' | 'sm';
     onClick?: () => void;
   },
   React.ComponentProps<'button'>
@@ -22,10 +22,21 @@ const Button = ({
   label,
   width = 'full',
   height = 56,
-  fontSize = 'xl',
+  textSize = 'base',
   onClick,
   ...props
 }: ButtonProps) => {
+  const switchTextSize = () => {
+    switch (textSize) {
+      case 'base':
+        return 'xl';
+      case 'sm':
+        return 'base';
+
+      default:
+        return 'xl';
+    }
+  };
   return (
     <S.Wrapper
       type="button"
@@ -35,7 +46,7 @@ const Button = ({
       onClick={onClick}
       {...props}
     >
-      <Text label={label} weight={600} size={fontSize} />
+      <Text label={label} weight={600} size={switchTextSize()} />
     </S.Wrapper>
   );
 };
