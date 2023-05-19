@@ -3,23 +3,43 @@
 import { Text, Button, Checkbox, Footer } from '@/components';
 import Col from '@/components/layout/Col';
 import Row from '@/components/layout/Row';
+import { setMeetingType } from '@/store/feature/applyInfo';
+import { useAppDispatch } from '@/store/store';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function Apply() {
   const router = useRouter();
-  const meetingTypeInitState = [
+  const dispatch = useAppDispatch();
+  const groupTypeInitState = [
     {
-      name: 'personal',
+      name: 'groupLeader',
       active: false,
     },
     {
-      name: 'group',
+      name: 'groupMember',
       active: false,
     },
   ];
-  const [meetingTypeState, setMeetingTypeState] =
-    useState(meetingTypeInitState);
+  const [groupTypeState, setGroupTypeState] = useState(groupTypeInitState);
+
+  const [isFinishPage, setIsFinishPage] = useState(false);
+  useEffect(() => {
+    if (!groupTypeState.find(data => data.active)) setIsFinishPage(false);
+    else setIsFinishPage(true);
+  }, [groupTypeState]);
+
+  const onClickPrev = () => {
+    router.push('apply');
+  };
+  const onClickNext = () => {
+    const currentName = groupTypeState.find(state => state.active)!.name as
+      | 'groupLeader'
+      | 'groupMember';
+    dispatch(setMeetingType(currentName));
+    router.push('apply/groupLeader');
+  };
+
   return (
     <>
       <Col gap={36} padding={'32px 24px'}>
@@ -53,24 +73,24 @@ function Apply() {
           </Col>
           <Col gap={12}>
             <Button
-              primary={meetingTypeState[0].active ? 'active' : 'inactive'}
+              primary={groupTypeState[0].active ? 'active' : 'inactive'}
               label="팅 만들기"
               textSize="sm"
               onClick={() =>
-                setMeetingTypeState(() => {
-                  const newState = meetingTypeInitState;
+                setGroupTypeState(() => {
+                  const newState = groupTypeInitState;
                   newState[0].active = true;
                   return newState;
                 })
               }
             />
             <Button
-              primary={meetingTypeState[1].active ? 'active' : 'inactive'}
+              primary={groupTypeState[1].active ? 'active' : 'inactive'}
               label="팅 참여하기"
               textSize="sm"
               onClick={() =>
-                setMeetingTypeState(() => {
-                  const newState = meetingTypeInitState;
+                setGroupTypeState(() => {
+                  const newState = groupTypeInitState;
                   newState[1].active = true;
                   return newState;
                 })
@@ -81,8 +101,9 @@ function Apply() {
       </Col>
       <Footer
         maxPage={1}
-        onClickPrev={() => router.push('apply')}
-        onClickNext={() => router.push('apply/group')}
+        disabled={!isFinishPage}
+        onClickPrev={onClickPrev}
+        onClickNext={onClickNext}
       />
     </>
   );

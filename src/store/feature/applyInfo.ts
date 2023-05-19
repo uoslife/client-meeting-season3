@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type ApplyInfoState = {
-  meetingType: 'personal' | 'group' | 'groupOwner' | 'groupMember' | '';
+  meetingType: 'personal' | 'group' | 'groupLeader' | 'groupMember' | '';
   curPage: number;
   curStep: number;
 };

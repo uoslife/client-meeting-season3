@@ -3,8 +3,6 @@
 import { ApplyInfoState } from '@/store/feature/applyInfo';
 import { useAppSelector } from '@/store/hooks';
 
-import ProgressHeader from '@/components/header/progressHeader/ProgressHeader';
-
 import FirstStep from '@/pages/personal/FirstStep';
 import SecondStep from '@/pages/personal/SecondStep';
 import ThirdStep from '@/pages/personal/ThirdStep';

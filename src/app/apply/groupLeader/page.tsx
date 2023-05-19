@@ -5,9 +5,9 @@ import { useAppSelector } from '@/store/hooks';
 
 import ProgressHeader from '@/components/header/progressHeader/ProgressHeader';
 
-import FirstStep from '@/pages/group/FirstStep';
-import SecondStep from '@/pages/group/SecondStep';
-import ThirdStep from '@/pages/group/ThirdStep';
+import FirstStep from '@/pages/groupLeader/FirstStep';
+import SecondStep from '@/pages/groupLeader/SecondStep';
+import ThirdStep from '@/pages/groupLeader/ThirdStep';
 import LastStep from '@/pages/common/LastStep';
 
 const Group = () => {
@@ -28,12 +28,7 @@ const Group = () => {
     }
   };
 
-  return (
-    <>
-      <ProgressHeader isprogress={true} isprogressbar={true} />
-      {switchStep(applyInfo)}
-    </>
-  );
+  return <>{switchStep(applyInfo)}</>;
 };
 
 export default Group;
