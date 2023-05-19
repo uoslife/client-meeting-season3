@@ -34,12 +34,7 @@ const Personal = () => {
     }
   };
 
-  return (
-    <>
-      <ProgressHeader isprogress={true} isprogressbar={true} />
-      {switchStep(applyInfo)}
-    </>
-  );
+  return <>{switchStep(applyInfo)}</>;
 };
 
 export default Personal;

@@ -21,14 +21,22 @@ export type FooterProps = {
   maxPage: number;
   disabled?: boolean;
   type?: 'firstPage' | 'lastPage' | 'lastStep';
+  onClickPrev?: () => void;
+  onClickNext?: () => void;
 };
 
-const Footer = ({ disabled = false, maxPage, type }: FooterProps) => {
+const Footer = ({
+  disabled = false,
+  maxPage,
+  type,
+  onClickPrev,
+  onClickNext,
+}: FooterProps) => {
   const { curStep, curPage } = useAppSelector(state => state.applyInfo);
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const onClickPrev = () => {
+  const onClickStepPrev = () => {
     // 처음 step, page인 경우
     if (type === 'firstPage' && curStep === 1) {
       dispatch(resetAll);
@@ -51,7 +59,7 @@ const Footer = ({ disabled = false, maxPage, type }: FooterProps) => {
     }
   };
 
-  const onClickNext = () => {
+  const onClickStepNext = () => {
     // 마지막 step, page인 경우
     if (type === 'lastStep') {
       // api POST 로직
@@ -69,12 +77,15 @@ const Footer = ({ disabled = false, maxPage, type }: FooterProps) => {
 
   return (
     <S.StepHandler>
-      <FooterStepButton type={'prev'} onClick={onClickPrev}></FooterStepButton>
+      <FooterStepButton
+        type={'prev'}
+        onClick={onClickPrev || onClickStepPrev}
+      ></FooterStepButton>
       <S.StepText>{`${curPage} / ${maxPage}`}</S.StepText>
       <FooterStepButton
         type={'next'}
         disabled={disabled}
-        onClick={disabled ? undefined : onClickNext}
+        onClick={disabled ? undefined : onClickNext || onClickStepNext}
       ></FooterStepButton>
     </S.StepHandler>
   );

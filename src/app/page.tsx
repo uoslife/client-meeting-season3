@@ -7,8 +7,10 @@ import * as S from '@/styles/pages/page.style';
 
 import { copyLink } from '@/utils';
 import { SOCIAL_LINK } from '@/constants';
+import { useRouter } from 'next/navigation';
 
 const Main = () => {
+  const router = useRouter();
   return (
     <>
       <S.MainWrapper>
@@ -65,7 +67,11 @@ const Main = () => {
           </S.DateTextWrapper>
         </S.DateWrapper>
         <div style={{ width: '100%', padding: '0 48px' }}>
-          <Button primary="active" label="지금 참여하기  >" />
+          <Button
+            primary="active"
+            label="지금 참여하기 >"
+            onClick={() => router.push('/apply')}
+          />
         </div>
       </S.MainWrapper>
       <S.BottomWrapper>

@@ -21,8 +21,8 @@ const LastStep = () => {
     checkboxState.includes(false)
       ? setIsFinishPage(false)
       : setIsFinishPage(true);
-    console.log(checkboxState);
   }, [checkboxState]);
+
   return (
     <>
       <Col gap={32} padding="32px 24px">
