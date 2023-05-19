@@ -33,7 +33,7 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
             color="#656D78"
           />
         </Col>
-        <Row gap={8}>
+        <Row gap={8} width="full">
           <TextRoundInput
             placeholder={'팅 이름 입력(2글자 이상)'}
             status={nameStatus}

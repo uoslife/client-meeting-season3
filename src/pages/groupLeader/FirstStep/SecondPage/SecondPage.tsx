@@ -1,6 +1,6 @@
 import { StepProps } from '@/types/step.type';
-import GroupLeaderPage from '@/pages/group/FirstStep/SecondPage/GroupLeaderPage/GroupLeaderPage';
-import GroupMemberPage from '@/pages/group/FirstStep/SecondPage/GroupMemberPage/GroupMemberPage';
+import GroupLeaderPage from '@/pages/groupLeader/FirstStep/SecondPage/GroupLeaderPage/GroupLeaderPage';
+import GroupMemberPage from '@/pages/groupLeader/FirstStep/SecondPage/GroupMemberPage/GroupMemberPage';
 import { useEffect, useState } from 'react';
 
 const SecondPage = ({ setIsFinishPage }: StepProps) => {
@@ -10,7 +10,7 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
   }, []);
 
   {
-    return isLeader ? <GroupLeaderPage /> : <GroupMemberPage />;
+    return !isLeader ? <GroupLeaderPage /> : <GroupMemberPage />;
   }
 };
 

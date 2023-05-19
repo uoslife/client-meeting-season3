@@ -30,7 +30,7 @@ const ProgressHeader = ({
     switch (meetingType) {
       case 'personal':
         return PERSONAL_PROGRESSBAR_TITLE[curStep - 1];
-      case 'groupOwner':
+      case 'groupLeader':
         return GROUP_PROGRESSBAR_TITLE[curStep - 1];
       default:
         return '';
