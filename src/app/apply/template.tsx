@@ -6,7 +6,8 @@ import { usePathname } from 'next/navigation';
 const Template = ({ children }: { children: React.ReactNode }) => {
   const changeIsProgressBar = () => {
     return (
-      usePathname() === '/apply/personal' || usePathname() === '/apply/group'
+      usePathname() === '/apply/personal' ||
+      usePathname() === '/apply/groupowner'
     );
   };
   const returnHeaderTitle = () => {
