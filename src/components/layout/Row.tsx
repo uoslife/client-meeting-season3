@@ -11,14 +11,13 @@ const Container = styled.div<RowProps>`
   justify-content: ${({ justify }) => justify};
   align-items: ${({ align }) => align};
   gap: ${({ gap }) => gap}px;
-  width: 100%;
   padding: ${({ padding }) => padding};
-
+  width: ${({ width }) => !!width && '100%'};
   ${({ fill }) =>
     fill &&
     css`
       flex: 1;
-    `}
+    `};
 `;
 
 export type RowProps = Combine<
@@ -35,6 +34,7 @@ export type RowProps = Combine<
     align?: 'flex-start' | 'flex-end' | 'center';
     padding?: string;
     fill?: boolean;
+    width?: 'full';
     children: React.ReactNode;
   },
   React.ComponentProps<'div'>
@@ -47,6 +47,7 @@ const Row = ({
   align = 'flex-start',
   padding = '0',
   fill = false,
+  width,
   children,
   ...props
 }: RowProps) => {
@@ -57,6 +58,7 @@ const Row = ({
       justify={justify}
       align={align}
       padding={padding}
+      width={width}
       fill={fill}
       {...props}
     >
