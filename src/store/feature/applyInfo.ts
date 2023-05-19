@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type ApplyInfoState = {
-  meetingType: 'group' | 'personal' | '';
+  meetingType: 'personal' | 'group' | 'groupOwner' | 'groupMember' | '';
   curPage: number;
   curStep: number;
 };
@@ -16,6 +16,12 @@ export const applyInfo = createSlice({
   name: 'applyInfo',
   initialState,
   reducers: {
+    setMeetingType: (
+      state,
+      action: PayloadAction<ApplyInfoState['meetingType']>,
+    ) => {
+      state.meetingType = action.payload;
+    },
     incrementStep: state => {
       state.curStep += 1;
     },
@@ -42,6 +48,7 @@ export const applyInfo = createSlice({
 });
 
 export const {
+  setMeetingType,
   incrementStep,
   decrementStep,
   incrementPage,

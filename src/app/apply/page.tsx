@@ -1,11 +1,15 @@
 'use client';
 
-import { Text, Button, Checkbox } from '@/components';
+import { Text, Button, Checkbox, Footer } from '@/components';
 import Col from '@/components/layout/Col';
 import Row from '@/components/layout/Row';
-import { useState } from 'react';
+import { setMeetingType } from '@/store/feature/applyInfo';
+import { useAppDispatch } from '@/store/store';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 function Apply() {
+  const dispatch = useAppDispatch();
   const meetingTypeInitState = [
     {
       name: 'personal',
@@ -18,17 +22,41 @@ function Apply() {
   ];
   const [meetingTypeState, setMeetingTypeState] =
     useState(meetingTypeInitState);
+
   const [checkboxState, setCheckboxState] = useState([false, false]);
+  const [isFinishPage, setIsFinishPage] = useState(false);
+  const router = useRouter();
+
+  const onClickPrev = () => router.push('/');
+  const onClickNext = () => {
+    if (meetingTypeState.find(data => data.active)!.name === 'group') {
+      dispatch(setMeetingType('group'));
+      router.push('/apply/branching');
+    } else {
+      dispatch(setMeetingType('personal'));
+      router.push('apply/personal');
+    }
+  };
+
+  useEffect(() => {
+    if (
+      !meetingTypeState.find(data => data.active) ||
+      checkboxState.includes(false)
+    )
+      setIsFinishPage(false);
+    else setIsFinishPage(true);
+  }, [meetingTypeState, checkboxState]);
+
   return (
     <>
-      <Col gap={36} padding={'32px 24px 410px'}>
+      <Col gap={36} padding={'32px 24px'}>
         <Col gap={32}>
           <Col gap={12} align="center">
             <Text
               label="참여하고자 하는 미팅 종류를 선택해주세요."
               weight={700}
             />
-            <Col>
+            <Col align="center">
               <Text
                 label="서울시립대학교 구성원만 신청 가능하며"
                 size="sm"
@@ -98,6 +126,12 @@ function Apply() {
           </Row>
         </Col>
       </Col>
+      <Footer
+        maxPage={1}
+        disabled={!isFinishPage}
+        onClickPrev={onClickPrev}
+        onClickNext={onClickNext}
+      />
     </>
   );
 }

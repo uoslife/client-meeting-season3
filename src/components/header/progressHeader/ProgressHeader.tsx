@@ -14,6 +14,7 @@ import {
 export type ProgressHeaderProps = {
   isprogress: boolean;
   isprogressbar: boolean;
+  title?: string;
 };
 
 const MAX_STEP = 6;
@@ -21,6 +22,7 @@ const MAX_STEP = 6;
 const ProgressHeader = ({
   isprogress = true,
   isprogressbar = false,
+  title,
 }: ProgressHeaderProps) => {
   const { meetingType, curStep } = useAppSelector(state => state.applyInfo);
 
@@ -28,7 +30,7 @@ const ProgressHeader = ({
     switch (meetingType) {
       case 'personal':
         return PERSONAL_PROGRESSBAR_TITLE[curStep - 1];
-      case 'group':
+      case 'groupOwner':
         return GROUP_PROGRESSBAR_TITLE[curStep - 1];
       default:
         return '';
@@ -42,7 +44,7 @@ const ProgressHeader = ({
           <S.SocialLink href={SOCIAL_LINK.Uoslife}>
             <IconButton iconName="Home" width={24} height={24} />
           </S.SocialLink>
-          <S.HeaderTitle>{returnTitleByMeetingType()}</S.HeaderTitle>
+          <S.HeaderTitle>{title || returnTitleByMeetingType()}</S.HeaderTitle>
           <S.Icon />
         </Row>
 
