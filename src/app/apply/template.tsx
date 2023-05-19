@@ -4,6 +4,9 @@ import { ProgressHeader } from '@/components';
 import { usePathname } from 'next/navigation';
 
 const Template = ({ children }: { children: React.ReactNode }) => {
+  const changeIsProgress = () => {
+    return usePathname() !== '/apply/complete';
+  };
   const changeIsProgressBar = () => {
     return (
       usePathname() === '/apply/personal' ||
@@ -15,9 +18,11 @@ const Template = ({ children }: { children: React.ReactNode }) => {
     switch (pathname) {
       case '/apply':
         return '시대팅 종류 선택';
-
       case '/apply/branching':
         return '3대3 미팅';
+      case '/apply/complete':
+        return '신청 완료!';
+
       default:
         return undefined;
     }
@@ -25,7 +30,7 @@ const Template = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <ProgressHeader
-        isprogress={true}
+        isprogress={changeIsProgress()}
         isprogressbar={changeIsProgressBar()}
         title={returnHeaderTitle()}
       />
