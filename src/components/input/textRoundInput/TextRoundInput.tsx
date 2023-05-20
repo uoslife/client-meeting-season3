@@ -34,7 +34,7 @@ const TextRoundInput = ({
     <>
       <S.Container>
         <Col gap={4}>
-          <Row>
+          <Row width={'full'}>
             <S.Wrapper status={status} isActive={value!.length > 0}>
               <S.Input
                 value={value}

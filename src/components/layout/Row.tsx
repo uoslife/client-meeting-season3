@@ -31,7 +31,7 @@ export type RowProps = Combine<
       | 'space-between'
       | 'space-around';
     wrap?: 'nowrap' | 'wrap' | 'wrap-reverse';
-    align?: 'flex-start' | 'flex-end' | 'center';
+    align?: 'flex-start' | 'flex-end' | 'center' | 'unset';
     padding?: string;
     fill?: boolean;
     width?: 'full';

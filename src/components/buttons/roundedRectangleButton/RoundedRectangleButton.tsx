@@ -29,7 +29,7 @@ const RoundedRectangleButton = ({
   return (
     <S.Wrapper type={type} height={height} onClick={onClick} {...props}>
       <Row justify={'center'} align={'center'} gap={6.5}>
-        {isDelete && <DeleteButton type={'white'} width={8} height={8} />}
+        {isDelete && <DeleteButton type={'white'} width={9} height={9} />}
         <Text label={label} weight={600} size={fontSize} />
       </Row>
     </S.Wrapper>
