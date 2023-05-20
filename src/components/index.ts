@@ -49,3 +49,5 @@ export { default as OathBox } from './molecules/oathBox/OathBox';
 export type { OathBoxProps } from './molecules/oathBox/OathBox';
 export { default as TeamStatusBox } from './molecules/teamStatusBox/TeamStatusBox';
 export type { TeamStatusBoxProps } from './molecules/teamStatusBox/TeamStatusBox';
+export { default as DepartmentSelectBox } from './molecules/departmentSelectBox/DepartmentSelectBox';
+export type { DepartmentSelectBoxProps } from './molecules/departmentSelectBox/DepartmentSelectBox';
