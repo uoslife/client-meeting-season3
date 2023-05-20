@@ -10,7 +10,7 @@ const ThirdPage = ({ setIsFinishPage }: StepProps) => {
           <Text
             label="Q1"
             font="LeferiPoint-SpecialA"
-            color="rgba(76, 137, 255, 1)"
+            color="#4C89FF"
           />
           <Text label="우리 팅의 분위기는..." font="LeferiBaseType-RegularA" />
         </Col>
