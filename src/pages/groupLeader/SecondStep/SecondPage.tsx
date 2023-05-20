@@ -1,6 +1,5 @@
 import {
   Button,
-  CheckCircle,
   Col,
   Paddle,
   RoundedRectangleButton,
@@ -8,9 +7,6 @@ import {
   Text,
   TextRoundInput,
 } from '@/components';
-import DropdownInput from '@/components/input/droptdownInput/DropdownInput';
-import { Dropdown } from '@/components/input/droptdownInput/DropdownInput.style';
-import Paddler from '@/components/layout/Paddle';
 import { StepProps } from '@/types/step.type';
 
 const SecondPage = ({ setIsFinishPage }: StepProps) => {
