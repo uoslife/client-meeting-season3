@@ -8,11 +8,23 @@ export const Wrapper = styled.div<DeleteButtonProps>`
 `;
 
 export type DeleteButtonProps = {
-  type?: 'black' | 'white';
+  type?: 'black' | 'white' | 'grey';
   height?: number;
   width?: number;
   onClick?: () => void;
 } & React.ComponentProps<'div'>;
+
+const getColorType = (type: string) => {
+  switch (type) {
+    case 'black':
+      return '#222222';
+    case 'white':
+      return '#fff';
+    case 'grey':
+      return '#97A1AE';
+  }
+};
+
 const DeleteButton = ({ type, height, width, onClick }: DeleteButtonProps) => {
   return (
     <Wrapper type={type} onClick={onClick}>
@@ -25,7 +37,7 @@ const DeleteButton = ({ type, height, width, onClick }: DeleteButtonProps) => {
       >
         <path
           d="M0.5 0.5L7.5 7.5M7.5 0.5L0.5 7.5"
-          stroke={`${type === 'black' ? '#222222' : '#fff'}`}
+          stroke={getColorType!(type)}
           strokeLinecap="round"
         />
       </svg>
