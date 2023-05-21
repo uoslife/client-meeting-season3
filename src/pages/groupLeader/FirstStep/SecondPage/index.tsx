@@ -1,8 +1,18 @@
-import { CheckCircle, Col, IconButton, Paddle, Row, Text } from '@/components';
+import { StepProps } from '@/types/step.type';
+import {
+  CheckCircle,
+  Col,
+  IconButton,
+  Paddle,
+  Row,
+  TeamStatusBox,
+  Text,
+} from '@/components';
 import * as S from './GroupLeaderPage.style';
+
 import { useState } from 'react';
-import TeamStatusBox from '@/components/molecules/teamStatusBox/TeamStatusBox';
-const GroupLeaderPage = () => {
+
+const SecondPage = ({ setIsFinishPage }: StepProps) => {
   const [code, setCode] = useState(8250);
   return (
     <Col fill padding={'24px 0 140px 0'}>
@@ -40,4 +50,4 @@ const GroupLeaderPage = () => {
   );
 };
 
-export default GroupLeaderPage;
+export default SecondPage;
