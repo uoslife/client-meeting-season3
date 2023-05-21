@@ -9,6 +9,7 @@ import ThirdStep from '@/pages/personal/ThirdStep';
 import FourthStep from '@/pages/personal/FourthStep';
 import FifthStep from '@/pages/personal/FifthStep';
 import LastStep from '@/pages/common/LastStep';
+import Slider from '@/components/molecules/slider/Slider';
 
 const Personal = () => {
   const applyInfo = useAppSelector(state => state.applyInfo);
@@ -32,7 +33,12 @@ const Personal = () => {
     }
   };
 
-  return <>{switchStep(applyInfo)}</>;
+  return (
+    <>
+      {switchStep(applyInfo)}
+      <Slider />
+    </>
+  );
 };
 
 export default Personal;
