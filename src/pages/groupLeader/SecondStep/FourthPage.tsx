@@ -13,8 +13,16 @@ const FourthPage = ({ setIsFinishPage }: StepProps) => {
         {/* src 채워야함 */}
         <Image width={300} height={240} alt="" src={'/몰?루'} />
         <Col gap={12}>
-          <Button label="다 같이 술게임을 하고 싶어요!" primary="inactive" textSize="sm" />
-          <Button label="술게임보단 대화를 많이 나누고 싶어요!" primary="inactive" textSize="sm" />
+          <Button
+            label="다 같이 술게임을 하고 싶어요!"
+            primary="inactive"
+            textSize="sm"
+          />
+          <Button
+            label="술게임보단 대화를 많이 나누고 싶어요!"
+            primary="inactive"
+            textSize="sm"
+          />
         </Col>
       </Col>
     </Paddle>

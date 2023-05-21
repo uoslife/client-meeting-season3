@@ -13,21 +13,9 @@ const FifthPage = ({ setIsFinishPage }: StepProps) => {
         {/* src 채워야함 */}
         <Image width={300} height={240} alt="" src={'/몰?루'} />
         <Col gap={12}>
-          <Button
-            label="조금만 마실래요!"
-            primary="inactive"
-            textSize="sm"
-          />
-          <Button
-            label="적당히 마실래요!"
-            primary="inactive"
-            textSize="sm"
-          />
-          <Button
-            label="마시고 죽을래요!"
-            primary="inactive"
-            textSize="sm"
-          />
+          <Button label="조금만 마실래요!" primary="inactive" textSize="sm" />
+          <Button label="적당히 마실래요!" primary="inactive" textSize="sm" />
+          <Button label="마시고 죽을래요!" primary="inactive" textSize="sm" />
         </Col>
       </Col>
     </Paddle>

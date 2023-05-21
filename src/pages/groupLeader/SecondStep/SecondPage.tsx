@@ -70,7 +70,7 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
               <Paddle top={24} bottom={12}>
                 <Row>
                   {/* 띄어쓰기 이게 맞나 */}
-                  <Text label={'선택된 학과'} />
+                  <Text label={'선택된 학과'} weight={400} />
                   &nbsp;
                   {/* 색상 선택 이게 맞나..?*/}
                   <Text label={'(3개)'} color="rgba(76, 137, 255, 1)" />

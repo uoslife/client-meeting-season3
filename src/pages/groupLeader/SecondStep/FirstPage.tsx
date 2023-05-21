@@ -18,7 +18,11 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
           <Button label="남자" primary="inactive" />
           <Button label="여자" primary="inactive" />
         </Col>
-        <Text label={'2. 팅원들의 평균 나이를 선택해주세요.'} weight={700} />
+        <Text
+          label={'2. 팅원들의 평균 나이를 선택해주세요.'}
+          size="sm"
+          weight={700}
+        />
 
         <DropdownInput label="평균 나이 선택" />
       </Col>
