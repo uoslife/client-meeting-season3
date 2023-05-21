@@ -25,7 +25,7 @@ export const Wrapper = styled.div<Omit<RoundedRectangleButtonProps, 'label'>>`
         `;
       case 'skyBlue':
         return css`
-          padding: 12px 16px;
+          padding: 5.5px 12px;
           background: ${colors.Primary100};
           color: ${colors.Primary600};
           border-radius: 12px;
