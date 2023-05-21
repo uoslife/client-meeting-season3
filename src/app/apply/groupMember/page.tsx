@@ -1,3 +1,5 @@
+'use client';
+
 import { BottomSheet, Col, Paddle, Text } from '@/components';
 import * as S from './GroupMemberPage.style';
 import { useEffect, useRef, useState } from 'react';
