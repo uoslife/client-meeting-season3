@@ -8,8 +8,9 @@ import { ApplyInfoState } from '@/store/feature/applyInfo';
 import FirstPage from './FirstPage';
 import SecondPage from './SecondPage';
 import ThirdPage from './ThirdPage';
+import FourthPage from './FourthPage';
 
-const MAX_PAGE = 3;
+const MAX_PAGE = 4;
 
 const FirstStep = () => {
   const { curPage } = useAppSelector(state => state.applyInfo);
@@ -24,6 +25,8 @@ const FirstStep = () => {
         return <SecondPage setIsFinishPage={setIsFinishPage} />;
       case 3:
         return <ThirdPage setIsFinishPage={setIsFinishPage} />;
+      case 4:
+        return <FourthPage setIsFinishPage={setIsFinishPage} />;
       default:
         return <></>;
     }
