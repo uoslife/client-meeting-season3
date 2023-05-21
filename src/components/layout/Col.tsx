@@ -10,7 +10,7 @@ const Container = styled.div<ColProps>`
   padding: ${({ padding }) => padding};
   width: 100%;
   height: 100%;
-
+  width: ${({ width }) => !!width && '100%'};
   ${fill =>
     fill &&
     css`
@@ -31,6 +31,7 @@ export type ColProps = Combine<
     align?: 'flex-start' | 'flex-end' | 'center';
     padding?: string;
     fill?: boolean;
+    width?: 'full';
     children: React.ReactNode;
   },
   React.ComponentProps<'div'>
@@ -43,6 +44,7 @@ const Col = ({
   align = 'flex-start',
   padding = '0',
   fill = false,
+  width,
   children,
   ...props
 }: ColProps) => {
@@ -54,6 +56,7 @@ const Col = ({
       align={align}
       padding={padding}
       fill={fill}
+      width={width}
       {...props}
     >
       {children}
