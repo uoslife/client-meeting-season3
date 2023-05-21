@@ -45,12 +45,12 @@ const Main = () => {
           <Text label={'신청기간'} size={'lg'} weight={300} />
           <S.DateTextWrapper>
             <Text
-              label={'05.29'}
+              label={'05.26'}
               size={'3xl'}
               weight={800}
               font="LeferiPoint-SpecialA"
             />
-            <Text label={'(월)'} size={'xl'} weight={500} />
+            <Text label={'(금)'} size={'xl'} weight={500} />
             <Text
               label={'-'}
               size={'3xl'}
@@ -58,12 +58,12 @@ const Main = () => {
               font="LeferiPoint-SpecialA"
             />
             <Text
-              label={'05.31'}
+              label={'05.28'}
               size={'3xl'}
               weight={800}
               font="LeferiPoint-SpecialA"
             />
-            <Text label={'(수)'} size={'xl'} weight={500} />
+            <Text label={'(일)'} size={'xl'} weight={500} />
           </S.DateTextWrapper>
         </S.DateWrapper>
         <div style={{ width: '100%', padding: '0 48px' }}>
