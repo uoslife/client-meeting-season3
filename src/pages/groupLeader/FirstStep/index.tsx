@@ -6,7 +6,7 @@ import { useAppSelector } from '@/store/hooks';
 import { ApplyInfoState } from '@/store/feature/applyInfo';
 
 import FirstPage from './FirstPage';
-import SecondPage from './SecondPage/SecondPage';
+import SecondPage from './SecondPage';
 
 const MAX_PAGE = 2;
 
