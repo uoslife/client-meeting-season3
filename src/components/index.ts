@@ -1,6 +1,8 @@
 //buttons
 export { default as Button } from './buttons/button/Button';
 export type { ButtonProps } from './buttons/button/Button';
+export { default as AnimalButton } from './buttons/animalButton/AnimalButton';
+export type { AnimalButtonProps } from './buttons/animalButton/AnimalButton';
 export { default as IconButton } from './buttons/iconButton/IconButton';
 export type { IconButtonProps } from './buttons/iconButton/IconButton';
 export { default as Checkbox } from './buttons/checkbox/Checkbox';
