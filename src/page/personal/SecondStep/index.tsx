@@ -11,12 +11,12 @@ import FirstPage from './FirstPage';
 import SecondPage from './SecondPage';
 import ThirdPage from './ThirdPage';
 import FourthPage from './FourthPage';
-import FifthPage from './FifthPage';
-import SixthPage from './SixthPage';
 
-const MAX_PAGE = 6;
+import { PERSONAL_MAX_PAGE_ARR } from '@/constants';
 
-const SecondStep = () => {
+const MAX_PAGE = PERSONAL_MAX_PAGE_ARR[1];
+
+const PersonalSecondStep = () => {
   const { curPage } = useAppSelector(state => state.applyInfo);
 
   const [isFinishPage, setIsFinishPage] = useState(false);
@@ -31,10 +31,6 @@ const SecondStep = () => {
         return <ThirdPage setIsFinishPage={setIsFinishPage} />;
       case 4:
         return <FourthPage setIsFinishPage={setIsFinishPage} />;
-      case 5:
-        return <FifthPage setIsFinishPage={setIsFinishPage} />;
-      case 6:
-        return <SixthPage setIsFinishPage={setIsFinishPage} />;
       default:
         return <></>;
     }
@@ -62,4 +58,4 @@ const SecondStep = () => {
   );
 };
 
-export default SecondStep;
+export default PersonalSecondStep;

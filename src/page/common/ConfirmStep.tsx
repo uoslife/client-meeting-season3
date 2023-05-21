@@ -5,37 +5,39 @@ import { useState } from 'react';
 import { Footer } from '@/components';
 
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-
-import FirstPage from './FirstPage';
-
 import {
   incrementStep,
   decrementStep,
   setPage,
   resetPage,
 } from '@/store/feature/applyInfo';
+import { PERSONAL_MAX_PAGE_ARR, GROUP_MAX_PAGE_ARR } from '@/constants';
 
-import { GROUP_MAX_PAGE_ARR } from '@/constants';
+const ConfirmStep = () => {
+  const [isFinishPage, setIsFinishPage] = useState(false);
 
-const MAX_PAGE = GROUP_MAX_PAGE_ARR[2];
-
-const GroupThirdStep = () => {
-  const { curStep } = useAppSelector(state => state.applyInfo);
+  const { curStep, meetingType } = useAppSelector(state => state.applyInfo);
   const dispatch = useAppDispatch();
+  const isPersonal = meetingType === 'personal';
   const onClickPrev = () => {
-    dispatch(setPage(GROUP_MAX_PAGE_ARR[curStep - 2]));
+    dispatch(
+      setPage(
+        isPersonal
+          ? PERSONAL_MAX_PAGE_ARR[curStep - 2]
+          : GROUP_MAX_PAGE_ARR[curStep - 2],
+      ),
+    );
     dispatch(decrementStep());
   };
   const onClickNext = () => {
     dispatch(resetPage());
     dispatch(incrementStep());
   };
-  const [isFinishPage, setIsFinishPage] = useState(false);
+
   return (
     <>
-      <FirstPage setIsFinishPage={setIsFinishPage} />;
       <Footer
-        maxPage={MAX_PAGE}
+        maxPage={1}
         disabled={isFinishPage}
         onClickPrev={onClickPrev}
         onClickNext={onClickNext}
@@ -44,4 +46,4 @@ const GroupThirdStep = () => {
   );
 };
 
-export default GroupThirdStep;
+export default ConfirmStep;
