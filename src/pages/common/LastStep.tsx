@@ -2,11 +2,15 @@ import { useEffect, useState } from 'react';
 
 import { Col, Footer, OathBox, Text } from '@/components';
 import { OATH_PHRASES } from '@/constants';
+import { useRouter } from 'next/navigation';
 
 // import { useAppSelector } from '@/store/hooks';
 // import { ApplyInfoState } from '@/store/feature/applyInfo';
 
 const LastStep = () => {
+  const router = useRouter();
+  useEffect(() => router.prefetch('apply/complete'), [router]);
+
   const [isFinishPage, setIsFinishPage] = useState(false);
   const [checkboxState, setCheckboxState] = useState([false, false, false]);
   const onClickOathBox = (order: number) => {
