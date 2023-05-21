@@ -1,4 +1,4 @@
-import { StepProps } from '.';
+import { StepProps } from '@/types/step.type';
 
 const FirstPage = ({ setIsFinishPage }: StepProps) => {
   return <></>;

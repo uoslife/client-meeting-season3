@@ -14,9 +14,11 @@ import FourthPage from './FourthPage';
 import FifthPage from './FifthPage';
 import SixthPage from './SixthPage';
 
-const MAX_PAGE = 6;
+import { GROUP_MAX_PAGE_ARR } from '@/constants';
 
-const GroupFirstStep = () => {
+const MAX_PAGE = GROUP_MAX_PAGE_ARR[1];
+
+const GroupSecondStep = () => {
   const { curPage } = useAppSelector(state => state.applyInfo);
 
   const [isFinishPage, setIsFinishPage] = useState(false);
@@ -63,4 +65,4 @@ const GroupFirstStep = () => {
   );
 };
 
-export default GroupFirstStep;
+export default GroupSecondStep;

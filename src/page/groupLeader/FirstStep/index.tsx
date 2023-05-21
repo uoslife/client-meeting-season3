@@ -10,7 +10,9 @@ import { ApplyInfoState } from '@/store/feature/applyInfo';
 import FirstPage from './FirstPage';
 import SecondPage from './SecondPage';
 
-const MAX_PAGE = 2;
+import { GROUP_MAX_PAGE_ARR } from '@/constants';
+
+const MAX_PAGE = GROUP_MAX_PAGE_ARR[0];
 
 const GroupFirstStep = () => {
   const { curPage } = useAppSelector(state => state.applyInfo);

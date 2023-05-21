@@ -6,8 +6,7 @@ import { useAppSelector } from '@/store/hooks';
 import FirstStep from '@/page/personal/FirstStep';
 import SecondStep from '@/page/personal/SecondStep';
 import ThirdStep from '@/page/personal/ThirdStep';
-import FourthStep from '@/page/personal/FourthStep';
-import FifthStep from '@/page/personal/FifthStep';
+import ConfirmStep from '@/page/common/ConfirmStep';
 import LastStep from '@/page/common/LastStep';
 
 const Personal = () => {
@@ -22,10 +21,8 @@ const Personal = () => {
       case 3:
         return <ThirdStep />;
       case 4:
-        return <FourthStep />;
+        return <ConfirmStep />;
       case 5:
-        return <FifthStep />;
-      case 6:
         return <LastStep />;
       default:
         return <></>;
