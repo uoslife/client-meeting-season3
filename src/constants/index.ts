@@ -41,3 +41,29 @@ export const OATH_PHRASES = [
     desc: '코로나 증상이 의심되는 경우, 미팅 참여를 지양해주시고 해당 상황으로 인해 노쇼가 발생할 경우 상대방에게 양해를 구해주세요.',
   },
 ];
+
+export const MBTI_TITLE = [
+  '1. 처음 보는 사람을 만났을 때 대화를',
+  '2. 나는 사람을 볼 떄',
+  '3. 애인이 어렴움에 처했을 떄 나는',
+  '데이트할 때 나는',
+];
+
+export const MBTI_QUESTIONS = [
+  {
+    type: ['E', 'I'],
+    description: ['외향형', '내향형'],
+  },
+  {
+    type: ['S', 'N'],
+    description: ['직관형', '돌진형'],
+  },
+  {
+    type: ['T', 'F'],
+    description: ['조언부터', '공감부터'],
+  },
+  {
+    type: ['J', 'P'],
+    description: ['계획부터', '즉흥형'],
+  },
+];

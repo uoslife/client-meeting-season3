@@ -51,3 +51,5 @@ export { default as TeamStatusBox } from './molecules/teamStatusBox/TeamStatusBo
 export type { TeamStatusBoxProps } from './molecules/teamStatusBox/TeamStatusBox';
 export { default as DepartmentSelectBox } from './molecules/departmentSelectBox/DepartmentSelectBox';
 export type { DepartmentSelectBoxProps } from './molecules/departmentSelectBox/DepartmentSelectBox';
+export { default as MbtiSelectBox } from './molecules/mbtiSelectBox/MbtiButton';
+export type { MbtiSelectBoxProps } from './molecules/mbtiSelectBox/MbtiButton';
