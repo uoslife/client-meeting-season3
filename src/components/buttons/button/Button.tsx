@@ -13,6 +13,7 @@ export type ButtonProps = Combine<
     height?: number;
     textSize?: 'base' | 'sm';
     onClick?: () => void;
+    children?: React.ReactNode;
   },
   React.ComponentProps<'button'>
 >;
@@ -24,6 +25,7 @@ const Button = ({
   height = 56,
   textSize = 'base',
   onClick,
+  children,
   ...props
 }: ButtonProps) => {
   const switchTextSize = () => {
@@ -46,6 +48,7 @@ const Button = ({
       onClick={onClick}
       {...props}
     >
+      {children}
       <Text label={label} weight={600} size={switchTextSize()} />
     </S.Wrapper>
   );
