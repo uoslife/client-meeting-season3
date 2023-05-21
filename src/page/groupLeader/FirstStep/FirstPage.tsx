@@ -1,3 +1,5 @@
+'use client';
+
 import { StepProps } from '@/types/step.type';
 import {
   Col,

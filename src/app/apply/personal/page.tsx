@@ -3,12 +3,12 @@
 import { ApplyInfoState } from '@/store/feature/applyInfo';
 import { useAppSelector } from '@/store/hooks';
 
-import FirstStep from '@/pages/personal/FirstStep';
-import SecondStep from '@/pages/personal/SecondStep';
-import ThirdStep from '@/pages/personal/ThirdStep';
-import FourthStep from '@/pages/personal/FourthStep';
-import FifthStep from '@/pages/personal/FifthStep';
-import LastStep from '@/pages/common/LastStep';
+import FirstStep from '@/page/personal/FirstStep';
+import SecondStep from '@/page/personal/SecondStep';
+import ThirdStep from '@/page/personal/ThirdStep';
+import FourthStep from '@/page/personal/FourthStep';
+import FifthStep from '@/page/personal/FifthStep';
+import LastStep from '@/page/common/LastStep';
 
 const Personal = () => {
   const applyInfo = useAppSelector(state => state.applyInfo);

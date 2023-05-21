@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 
 import { Footer } from '@/components';
@@ -11,7 +13,7 @@ import ThirdPage from './ThirdPage';
 
 const MAX_PAGE = 3;
 
-const FourthStep = () => {
+const FifthStep = () => {
   const { curPage } = useAppSelector(state => state.applyInfo);
 
   const [isFinishPage, setIsFinishPage] = useState(false);
@@ -51,4 +53,4 @@ const FourthStep = () => {
   );
 };
 
-export default FourthStep;
+export default FifthStep;

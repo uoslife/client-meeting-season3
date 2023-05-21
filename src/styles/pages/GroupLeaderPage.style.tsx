@@ -1,7 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import { typographies, colors } from '@/styles/styles';
-
-const spinner = keyframes`
+export const spinner = keyframes`
   0% {
     transform: rotate(0deg);
     border: 2px solid #0000ffff;

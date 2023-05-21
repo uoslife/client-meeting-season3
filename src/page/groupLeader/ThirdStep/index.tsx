@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 
 import { Footer } from '@/components';
@@ -7,10 +9,11 @@ import { ApplyInfoState } from '@/store/feature/applyInfo';
 
 import FirstPage from './FirstPage';
 import SecondPage from './SecondPage';
+import ThirdPage from './ThirdPage';
 
-const MAX_PAGE = 2;
+const MAX_PAGE = 3;
 
-const ThirdStep = () => {
+const GroupFirstStep = () => {
   const { curPage } = useAppSelector(state => state.applyInfo);
 
   const [isFinishPage, setIsFinishPage] = useState(false);
@@ -21,6 +24,8 @@ const ThirdStep = () => {
         return <FirstPage setIsFinishPage={setIsFinishPage} />;
       case 2:
         return <SecondPage setIsFinishPage={setIsFinishPage} />;
+      case 3:
+        return <ThirdPage setIsFinishPage={setIsFinishPage} />;
       default:
         return <></>;
     }
@@ -48,4 +53,4 @@ const ThirdStep = () => {
   );
 };
 
-export default ThirdStep;
+export default GroupFirstStep;

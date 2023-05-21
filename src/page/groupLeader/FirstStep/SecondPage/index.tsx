@@ -1,3 +1,5 @@
+'use client';
+
 import { StepProps } from '@/types/step.type';
 import {
   CheckCircle,
@@ -8,7 +10,7 @@ import {
   TeamStatusBox,
   Text,
 } from '@/components';
-import * as S from './GroupLeaderPage.style';
+import * as S from '@/styles/pages/GroupLeaderPage.style';
 
 import { useState } from 'react';
 

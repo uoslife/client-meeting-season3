@@ -5,10 +5,10 @@ import { useAppSelector } from '@/store/hooks';
 
 import ProgressHeader from '@/components/header/progressHeader/ProgressHeader';
 
-import FirstStep from '@/pages/groupLeader/FirstStep';
-import SecondStep from '@/pages/groupLeader/SecondStep';
-import ThirdStep from '@/pages/groupLeader/ThirdStep';
-import LastStep from '@/pages/common/LastStep';
+import FirstStep from '@/page/groupLeader/FirstStep';
+import SecondStep from '@/page/groupLeader/SecondStep';
+import ThirdStep from '@/page/groupLeader/ThirdStep';
+import LastStep from '@/page/common/LastStep';
 
 const Group = () => {
   const applyInfo = useAppSelector(state => state.applyInfo);
