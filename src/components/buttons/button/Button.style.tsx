@@ -9,7 +9,7 @@ export const Wrapper = styled.button<Omit<ButtonProps, 'label'>>`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 16px 0px;
+  padding: 16px 0;
 
   width: ${({ width }) => (width === 'full' ? '100%' : `${width}px`)};
   height: ${({ height }) => `${height}px`};
