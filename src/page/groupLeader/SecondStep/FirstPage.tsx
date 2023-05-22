@@ -1,32 +1,35 @@
-import { Button, Col, Paddle, Text, TextRoundInput } from '@/components';
-import DropdownInput from '@/components/input/droptdownInput/DropdownInput';
+'use client';
+
 import { StepProps } from '@/types/step.type';
+import { Col, Paddle, Row, Text, TextRoundInput } from '@/components';
+import useInput from '@/hooks/useInput';
 
 const FirstPage = ({ setIsFinishPage }: StepProps) => {
+  const [nameValue, handleNameValue] = useInput('');
+  setIsFinishPage(true);
   return (
     <Paddle top={32} left={24} right={24}>
-      <Col gap={32} align={'center'}>
-        <Col gap={12} align={'center'}>
-          <Text label={'1. 팅원들의 성별은 무엇인가요?'} weight={700} />
+      <Col gap={32}>
+        <Col gap={16} align={'center'}>
+          <Text label="우리 팅의 이름을 정해주세요." weight={700} />
           <Text
-            label={'모든 팅원들이 같은 성별이어야 참여 가능합니다.'}
+            label={
+              '지금부터 입력하는 정보는 상대 팅에게 공개됩니다. \n 욕설 및 비하 단어는 삼가해 주세요'
+            }
             size="sm"
             color="#656D78"
           />
         </Col>
-        <Col gap={12} align={'center'}>
-          <Button label="남자" primary="inactive" />
-          <Button label="여자" primary="inactive" />
-        </Col>
-        <Text
-          label={'2. 팅원들의 평균 나이를 선택해주세요.'}
-          size="sm"
-          weight={700}
-        />
-
-        <DropdownInput label="평균 나이 선택" />
+        <Row gap={8} width="full">
+          <TextRoundInput
+            placeholder={'팅 이름 입력(2글자 이상)'}
+            value={nameValue}
+            onChange={handleNameValue}
+          ></TextRoundInput>
+        </Row>
       </Col>
     </Paddle>
   );
 };
+
 export default FirstPage;

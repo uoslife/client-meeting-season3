@@ -3,7 +3,11 @@
 import FooterStepButton from '@/components/buttons/footerStepButton/FooterStepButton';
 import * as S from '@/components/footer/Footer.style';
 
-import { GROUP_MAX_PAGE_ARR, PERSONAL_MAX_PAGE_ARR } from '@/constants';
+import {
+  GROUP_LEADER_MAX_PAGE_ARR,
+  GROUP_MEMBER_MAX_PAGE_ARR,
+  PERSONAL_MAX_PAGE_ARR,
+} from '@/constants';
 
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
@@ -39,9 +43,16 @@ const Footer = ({
   const router = useRouter();
 
   const changePageArrByMeetingType = () => {
-    const isPersonal = meetingType === 'personal';
-    if (isPersonal) return PERSONAL_MAX_PAGE_ARR[curStep - 2];
-    else return GROUP_MAX_PAGE_ARR[curStep - 2];
+    switch (meetingType) {
+      case 'personal':
+        return PERSONAL_MAX_PAGE_ARR[curStep - 2];
+      case 'groupLeader':
+        return GROUP_LEADER_MAX_PAGE_ARR[curStep - 2];
+      case 'groupMember':
+        return GROUP_MEMBER_MAX_PAGE_ARR[curStep - 2];
+      default:
+        return 0;
+    }
   };
 
   const onClickStepPrev = () => {

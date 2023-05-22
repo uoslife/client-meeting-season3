@@ -13,7 +13,8 @@ const Template = ({ children }: { children: React.ReactNode }) => {
   const changeIsProgressBar = () => {
     return (
       usePathname() === '/apply/personal' ||
-      usePathname() === '/apply/groupLeader'
+      usePathname() === '/apply/groupLeader' ||
+      usePathname() === '/apply/groupMember'
     );
   };
   const returnHeaderTitle = () => {

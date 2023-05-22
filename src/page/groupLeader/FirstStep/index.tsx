@@ -1,24 +1,27 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { Footer, ProgressHeader } from '@/components';
+import { Footer } from '@/components';
 
 import { useAppSelector } from '@/store/hooks';
 import { ApplyInfoState } from '@/store/feature/applyInfo';
 
-import FirstPage from './FirstPage';
-import SecondPage from './SecondPage';
+import FirstPage from '@/page/common/applyMyInfoStep/FirstPage';
+import SecondPage from '@/page/common/applyMyInfoStep/SecondPage';
 
-import { GROUP_MAX_PAGE_ARR } from '@/constants';
+import { GROUP_LEADER_MAX_PAGE_ARR } from '@/constants';
 
-const MAX_PAGE = GROUP_MAX_PAGE_ARR[0];
+const MAX_PAGE = GROUP_LEADER_MAX_PAGE_ARR[0];
 
-const GroupFirstStep = () => {
+const GroupLeaderFirstStep = () => {
   const { curPage } = useAppSelector(state => state.applyInfo);
 
   const [isFinishPage, setIsFinishPage] = useState(false);
 
+  useEffect(() => {
+    setIsFinishPage(false);
+  }, [curPage]);
   const changePage = (curPage: ApplyInfoState['curPage']) => {
     switch (curPage) {
       case 1:
@@ -52,4 +55,4 @@ const GroupFirstStep = () => {
   );
 };
 
-export default GroupFirstStep;
+export default GroupLeaderFirstStep;
