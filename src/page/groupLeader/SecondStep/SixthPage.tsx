@@ -13,8 +13,12 @@ const SixthPage = ({ setIsFinishPage }: StepProps) => {
             font="LeferiBaseType-RegularA"
           />
         </Col>
-        {/* src 채워야함 */}
-        <Image width={300} height={240} alt="" src={'/몰?루'} />
+        <Image
+          width={360}
+          height={276}
+          alt=""
+          src={'/images/illust/group/4.jpg'}
+        />
         <Col gap={12}>
           <Button
             label="친구를 만들고 싶어요!"

@@ -10,8 +10,12 @@ const FourthPage = ({ setIsFinishPage }: StepProps) => {
           <Text label="Q2" font="LeferiPoint-SpecialA" color="#4C89FF" />
           <Text label="우리 팅은 미팅에서..." font="LeferiBaseType-RegularA" />
         </Col>
-        {/* src 채워야함 */}
-        <Image width={300} height={240} alt="" src={'/몰?루'} />
+        <Image
+          width={360}
+          height={212}
+          alt=""
+          src={'/images/illust/group/2.jpg'}
+        />
         <Col gap={12}>
           <Button
             label="다 같이 술게임을 하고 싶어요!"

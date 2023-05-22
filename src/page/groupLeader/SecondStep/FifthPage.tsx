@@ -10,8 +10,12 @@ const FifthPage = ({ setIsFinishPage }: StepProps) => {
           <Text label="Q3" font="LeferiPoint-SpecialA" color="#4C89FF" />
           <Text label="우리 팅의 주량은..." font="LeferiBaseType-RegularA" />
         </Col>
-        {/* src 채워야함 */}
-        <Image width={300} height={240} alt="" src={'/몰?루'} />
+        <Image
+          width={360}
+          height={230}
+          alt=""
+          src={'/images/illust/group/3.jpg'}
+        />
         <Col gap={12}>
           <Button label="조금만 마실래요!" primary="inactive" textSize="sm" />
           <Button label="적당히 마실래요!" primary="inactive" textSize="sm" />
