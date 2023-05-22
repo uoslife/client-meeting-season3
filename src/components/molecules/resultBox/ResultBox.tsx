@@ -16,8 +16,8 @@ const ResultBox = ({ title, applyDataArr }: ResultBoxProps) => {
     <S.Wrapper>
       <Text label={`💙 ${title}`} size="base" weight={600} color="#3B4046" />
       <S.TextWrapper>
-        {applyDataArr.map(data => (
-          <S.TextBox key={data.title_en}>
+        {applyDataArr.map((data, i) => (
+          <S.TextBox key={i}>
             <Text
               label={data.title_kr}
               size="sm"

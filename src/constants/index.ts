@@ -45,6 +45,31 @@ export const OATH_PHRASES = [
   },
 ];
 
+export const MBTI_TITLE = [
+  'Q. 처음 보는 사람을 만났을 때 나는',
+  'Q. 문제를 해결할 때 나는',
+  'Q. 애인이 어려움에 처했을 때 나는',
+  'Q. 데이트할 때 나는',
+];
+
+export const MBTI_QUESTIONS = [
+  {
+    type: ['E', 'I'],
+    description: ['외향적', '내향적'],
+  },
+  {
+    type: ['S', 'N'],
+    description: ['현실적', '직관적'],
+  },
+  {
+    type: ['T', 'F'],
+    description: ['이성적', '감성적'],
+  },
+  {
+    type: ['J', 'P'],
+    description: ['계획적', '즉흥적'],
+  },
+=======
 export const INTERESTS = [
   '독서',
   '운동',
