@@ -3,7 +3,7 @@
 import FooterStepButton from '@/components/buttons/footerStepButton/FooterStepButton';
 import * as S from '@/components/footer/Footer.style';
 
-import { PERSONAL_MAX_PAGE_ARR } from '@/constants';
+import { GROUP_MAX_PAGE_ARR, PERSONAL_MAX_PAGE_ARR } from '@/constants';
 
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
@@ -32,20 +32,28 @@ const Footer = ({
   onClickPrev,
   onClickNext,
 }: FooterProps) => {
-  const { curStep, curPage } = useAppSelector(state => state.applyInfo);
+  const { curStep, curPage, meetingType } = useAppSelector(
+    state => state.applyInfo,
+  );
   const dispatch = useAppDispatch();
   const router = useRouter();
+
+  const changePageArrByMeetingType = () => {
+    const isPersonal = meetingType === 'personal';
+    if (isPersonal) return PERSONAL_MAX_PAGE_ARR[curStep - 2];
+    else return GROUP_MAX_PAGE_ARR[curStep - 2];
+  };
 
   const onClickStepPrev = () => {
     // 처음 step, page인 경우
     if (type === 'firstPage' && curStep === 1) {
-      dispatch(resetAll);
+      dispatch(resetAll());
       router.push('/apply');
       return;
     }
     // 마지막 step, page인 경우
     if (type === 'lastStep') {
-      dispatch(setPage(PERSONAL_MAX_PAGE_ARR[curStep - 2]));
+      dispatch(setPage(changePageArrByMeetingType()));
       dispatch(decrementStep());
       return;
     }
@@ -54,7 +62,7 @@ const Footer = ({
     if (type !== 'firstPage') dispatch(decrementPage());
     // 처음 step인 경우
     else {
-      dispatch(setPage(PERSONAL_MAX_PAGE_ARR[curStep - 2]));
+      dispatch(setPage(changePageArrByMeetingType()));
       dispatch(decrementStep());
     }
   };
@@ -62,6 +70,7 @@ const Footer = ({
   const onClickStepNext = () => {
     // 마지막 step, page인 경우
     if (type === 'lastStep') {
+      dispatch(resetAll());
       // api POST 로직
       router.push('/apply/complete'); // 신청완료 페이지로
     }

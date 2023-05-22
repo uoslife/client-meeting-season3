@@ -7,7 +7,8 @@ import { useAppSelector } from '@/store/hooks';
 import { IconButton } from '@/components';
 import {
   PERSONAL_PROGRESSBAR_TITLE,
-  GROUP_PROGRESSBAR_TITLE,
+  GROUP_LEADER_PROGRESSBAR_TITLE,
+  GROUP_MEMBER_PROGRESSBAR_TITLE,
   SOCIAL_LINK,
 } from '@/constants';
 
@@ -17,7 +18,7 @@ export type ProgressHeaderProps = {
   title?: string;
 };
 
-const MAX_STEP = 6;
+const MAX_STEP = 5;
 
 const ProgressHeader = ({
   isprogress = true,
@@ -31,7 +32,9 @@ const ProgressHeader = ({
       case 'personal':
         return PERSONAL_PROGRESSBAR_TITLE[curStep - 1];
       case 'groupLeader':
-        return GROUP_PROGRESSBAR_TITLE[curStep - 1];
+        return GROUP_LEADER_PROGRESSBAR_TITLE[curStep - 1];
+      case 'groupMember':
+        return GROUP_MEMBER_PROGRESSBAR_TITLE[0];
       default:
         return '';
     }

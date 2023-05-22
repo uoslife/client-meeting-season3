@@ -6,12 +6,14 @@ export type CheckboxProps = {
   variant: 'primary' | 'secondary' | 'teritary';
   onClick?: () => void;
   isActive?: boolean;
+  size?: 'base' | 'lg';
 } & React.ComponentProps<'button'>;
 
 const switchCheckboxIcon = ({
   variant,
   isActive,
-}: Pick<CheckboxProps, 'variant' | 'isActive'>) => {
+  size,
+}: Pick<CheckboxProps, 'variant' | 'isActive' | 'size'>) => {
   switch (variant) {
     case 'primary':
       return (
@@ -65,8 +67,8 @@ const switchCheckboxIcon = ({
     case 'teritary':
       return (
         <svg
-          width={18}
-          height={18}
+          width={size === 'lg' ? 30 : 18}
+          height={size === 'lg' ? 30 : 18}
           viewBox="0 0 18 18"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -81,10 +83,16 @@ const switchCheckboxIcon = ({
       return;
   }
 };
-const Checkbox = ({ variant, onClick, isActive, ...props }: CheckboxProps) => {
+const Checkbox = ({
+  variant,
+  onClick,
+  isActive,
+  size,
+  ...props
+}: CheckboxProps) => {
   return (
     <S.Wrapper variant={variant} {...props}>
-      {switchCheckboxIcon({ variant, isActive })}
+      {switchCheckboxIcon({ variant, isActive, size })}
     </S.Wrapper>
   );
 };

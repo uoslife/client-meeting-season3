@@ -37,7 +37,7 @@ function Apply() {
       | 'groupLeader'
       | 'groupMember';
     dispatch(setMeetingType(currentName));
-    router.push('apply/groupLeader');
+    router.push(`apply/${currentName}`);
   };
 
   return (
