@@ -69,4 +69,16 @@ export const MBTI_QUESTIONS = [
     type: ['J', 'P'],
     description: ['계획적', '즉흥적'],
   },
+=======
+export const INTERESTS = [
+  '독서',
+  '운동',
+  '게임',
+  '여행',
+  '동물',
+  '음악',
+  '그림',
+  '영화/드라마',
+  '패션',
+  '요리',
 ];

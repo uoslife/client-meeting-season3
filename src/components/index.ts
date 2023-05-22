@@ -14,6 +14,8 @@ export { default as DeleteButton } from './buttons/deleteButton/DeleteButton';
 export type { DeleteButtonProps } from './buttons/deleteButton/DeleteButton';
 export { default as CheckCircle } from './buttons/checkCircle/CheckCircle';
 export type { CheckCircleProps } from './buttons/checkCircle/CheckCircle';
+export { default as InterestSelectButton } from './buttons/interstSelectButton/InterestSelectButton';
+export type { InterestSelectButtonProps } from './buttons/interstSelectButton/InterestSelectButton';
 
 // typography
 export { default as Text } from './typography/text/Text';
