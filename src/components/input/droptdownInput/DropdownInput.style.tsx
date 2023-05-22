@@ -61,14 +61,13 @@ export const Dropdown = styled.div<
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.8);
   animation: ${downToUp} 0.4s;
 `;
 
 export const DropdownHeader = styled.div<DropdownInputProps>`
   ${() => typographies.Heading5};
   background: ${colors.White};
-  border-radius: 16px 16px 0 0;
+  border-radius: 18px 18px 0 0;
   width: 100%;
   padding: 16px 24px;
   color: ${colors.Secondary600};
@@ -78,8 +77,6 @@ export const DropdownHeader = styled.div<DropdownInputProps>`
 
   svg {
     cursor: pointer;
-    height: 10px;
-    width: 10px;
   }
 `;
 

@@ -6,7 +6,6 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { Combine } from '@/types/utils.type';
 export type DropdownInputProps = Combine<
   {
-    selectedOption?: number | string;
     setValue?: Dispatch<SetStateAction<number | string>>;
     label?: string;
     options?: number[] | string[];
@@ -24,9 +23,9 @@ const DropdownInput = ({ setValue, label, options }: DropdownInputProps) => {
   return (
     <>
       <S.InputWrapper onClick={() => setShowOption(!showOption)}>
-        <Text label={label!} size="base" weight={600} />
+        <Text label={label!} size="sm" color={'#808A98'} />
         <S.Icon>
-          <IconButton iconName="DropdownArrow" width={12} height={6} />
+          <IconButton iconName="DropdownArrow" width={14} height={8} />
         </S.Icon>
       </S.InputWrapper>
       {showOption && (
@@ -34,22 +33,26 @@ const DropdownInput = ({ setValue, label, options }: DropdownInputProps) => {
           <S.DummyBox></S.DummyBox>
           <S.Dropdown showOption={showOption}>
             <S.DropdownHeader>
-              {label}
+              <Text label={label!} color={'#808A98'} />
               <DeleteButton
-                type={'black'}
-                width={20}
-                height={20}
+                width={12}
+                height={12}
+                type={'grey'}
                 onClick={() => setShowOption(!showOption)}
               />
             </S.DropdownHeader>
             <S.DropdownOptions>
-              {options?.map((val: string | number, key) => {
-                return (
-                  <S.DropdownOption onClick={handleOptionSelect(val)} key={key}>
-                    {val}
-                  </S.DropdownOption>
-                );
-              })}
+              {!!options &&
+                options.map((val: string | number, key) => {
+                  return (
+                    <S.DropdownOption
+                      onClick={handleOptionSelect(val)}
+                      key={key}
+                    >
+                      {val}
+                    </S.DropdownOption>
+                  );
+                })}
             </S.DropdownOptions>
           </S.Dropdown>
         </S.DropdownWrapper>
