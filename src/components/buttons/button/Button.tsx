@@ -11,7 +11,7 @@ export type ButtonProps = Combine<
     label: string;
     width?: number | 'full';
     height?: number;
-    textSize?: 'base' | 'sm';
+    textSize?: SizeTypes;
     onClick?: () => void;
     children?: React.ReactNode;
   },
@@ -23,22 +23,11 @@ const Button = ({
   label,
   width = 'full',
   height = 56,
-  textSize = 'base',
+  textSize = 'xl',
   onClick,
   children,
   ...props
 }: ButtonProps) => {
-  const switchTextSize = () => {
-    switch (textSize) {
-      case 'base':
-        return 'xl';
-      case 'sm':
-        return 'base';
-
-      default:
-        return 'xl';
-    }
-  };
   return (
     <S.Wrapper
       type="button"
@@ -49,7 +38,7 @@ const Button = ({
       {...props}
     >
       {children}
-      <Text label={label} weight={600} size={switchTextSize()} />
+      <Text label={label} weight={600} size={textSize} />
     </S.Wrapper>
   );
 };

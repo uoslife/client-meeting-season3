@@ -6,7 +6,8 @@ export const SOCIAL_LINK = {
 };
 
 export const PERSONAL_MAX_PAGE_ARR = [5, 4, 4, 1, 1];
-export const GROUP_MAX_PAGE_ARR = [2, 6, 1, 1, 1];
+export const GROUP_LEADER_MAX_PAGE_ARR = [2, 2, 5, 1, 1, 1];
+export const GROUP_MEMBER_MAX_PAGE_ARR = [2, 1];
 
 export const PERSONAL_PROGRESSBAR_TITLE = [
   '01. 나의 정보 입력하기',
@@ -17,14 +18,19 @@ export const PERSONAL_PROGRESSBAR_TITLE = [
 ];
 
 export const GROUP_LEADER_PROGRESSBAR_TITLE = [
-  '01. 팅 만들기',
-  '02. 우리 팅 정보 입력하기',
-  '03. 만나고 싶은 팅 정보 입력하기',
-  '04. 신청 정보 확인하기',
-  '05. 시대팅 이용 서약',
+  '01. 나의 정보 입력하기',
+  '02. 팅 만들기',
+  '03. 우리 팅 정보 입력하기',
+  '04. 만나고 싶은 팅 정보 입력하기',
+  '05. 신청 정보 확인하기',
+  '06. 시대팅 이용 서약',
 ];
 
-export const GROUP_MEMBER_PROGRESSBAR_TITLE = ['팅 참여하기'];
+export const GROUP_MEMBER_PROGRESSBAR_TITLE = [
+  '01. 나의 정보 입력하기',
+  '02. 팅 만들기',
+  '03. 시대팅 이용 서약',
+];
 
 export const OATH_PHRASES = [
   {

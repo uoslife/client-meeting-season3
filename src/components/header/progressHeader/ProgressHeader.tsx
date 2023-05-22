@@ -11,6 +11,7 @@ import {
   GROUP_MEMBER_PROGRESSBAR_TITLE,
   SOCIAL_LINK,
 } from '@/constants';
+import { useEffect, useState } from 'react';
 
 export type ProgressHeaderProps = {
   isprogress: boolean;
@@ -18,14 +19,30 @@ export type ProgressHeaderProps = {
   title?: string;
 };
 
-const MAX_STEP = 5;
-
 const ProgressHeader = ({
   isprogress = true,
   isprogressbar = false,
   title,
 }: ProgressHeaderProps) => {
   const { meetingType, curStep } = useAppSelector(state => state.applyInfo);
+
+  const [maxStep, setMaxStep] = useState(0);
+
+  useEffect(() => {
+    switch (meetingType) {
+      case 'personal':
+        setMaxStep(5);
+        break;
+      case 'groupLeader':
+        setMaxStep(6);
+        break;
+      case 'groupMember':
+        setMaxStep(2);
+        break;
+      default:
+        break;
+    }
+  }, [meetingType]);
 
   const returnTitleByMeetingType = () => {
     switch (meetingType) {
@@ -53,8 +70,8 @@ const ProgressHeader = ({
 
         {isprogressbar && (
           <S.ProgressContainer>
-            <S.ProgressBar size={(curStep / MAX_STEP) * 100}></S.ProgressBar>
-            <S.ProgressLabel>{`${curStep} / ${MAX_STEP}`}</S.ProgressLabel>
+            <S.ProgressBar size={(curStep / maxStep) * 100}></S.ProgressBar>
+            <S.ProgressLabel>{`${curStep} / ${maxStep}`}</S.ProgressLabel>
           </S.ProgressContainer>
         )}
       </S.Container>
