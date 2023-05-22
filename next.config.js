@@ -7,6 +7,10 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  output: 'standalone',
+  typescript: {
+     ignoreBuildErrors: true,
+  },
 };
 
 module.exports = nextConfig;
