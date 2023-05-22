@@ -1,7 +1,9 @@
+'use client';
+
 import { StepProps } from '@/types/step.type';
 
-const ThirdPage = ({ setIsFinishPage }: StepProps) => {
+function ThirdPage({ setIsFinishPage }: StepProps) {
   return <></>;
-};
+}
 
 export default ThirdPage;
