@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { InterestSelectButtonProps } from '@/components/buttons/interstSelectButton/InterestSelectButton';
 
-export const Wrapper = styled.button<InterestSelectButtonProps>`
+export const Wrapper = styled.button`
   all: unset;
   box-sizing: border-box;
   position: relative;
@@ -13,7 +13,9 @@ export const Wrapper = styled.button<InterestSelectButtonProps>`
   cursor: pointer;
 `;
 
-export const ImgWrapper = styled.div<InterestSelectButtonProps>`
+export const ImgWrapper = styled.div<
+  Pick<InterestSelectButtonProps, 'isActive'>
+>`
   width: 90px;
   height: 90px;
   display: flex;
@@ -23,7 +25,7 @@ export const ImgWrapper = styled.div<InterestSelectButtonProps>`
   background: ${({ isActive }) => (isActive ? '#000000B2' : '#F0F5FF')};
 `;
 
-export const GridWrapper = styled.div<InterestSelectButtonProps>`
+export const GridWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
