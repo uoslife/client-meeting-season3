@@ -80,7 +80,7 @@ const ProgressHeader = ({
         {isprogress && (
           <path
             d="M28 28C28 28 28 0 0 3.05176e-05H28V28Z"
-            fill={colors.Primary700}
+            fill={colors.Primary_500}
           />
         )}
       </S.Decorator>

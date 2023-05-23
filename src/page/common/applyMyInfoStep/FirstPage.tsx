@@ -9,7 +9,7 @@ import {
   Text,
   TextRoundInput,
 } from '@/components';
-import DropdownInput from '@/components/input/droptdownInput/DropdownInput';
+import { DropdownInput } from '@/components';
 import { StepProps } from '@/types/step.type';
 
 const FirstPage = ({ setIsFinishPage }: StepProps) => {

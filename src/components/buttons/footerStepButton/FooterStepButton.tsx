@@ -18,15 +18,15 @@ const Button = styled.div<FooterButtonProps>`
     switch (type) {
       case 'prev':
         return css`
-          border: 2px solid ${colors.Primary600};
+          border: 2px solid ${colors.Primary_400};
           background: ${colors.White};
           svg {
             rotate: 180deg;
-            fill: ${colors.Primary600};
+            fill: ${colors.Primary_400};
           }
           &:hover {
             border: 2px solid ${colors.White};
-            background: ${colors.Primary600};
+            background: ${colors.Primary_400};
             svg {
               fill: ${colors.White};
             }
@@ -35,14 +35,14 @@ const Button = styled.div<FooterButtonProps>`
       default:
       case 'next':
         return css`
-          background: ${colors.Primary700};
+          background: ${colors.Primary_500};
           svg {
             fill: ${colors.White};
           }
           &:hover {
             background: ${colors.White};
             svg {
-              fill: ${colors.Primary700};
+              fill: ${colors.Primary_500};
             }
           }
         `;

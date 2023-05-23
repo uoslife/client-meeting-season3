@@ -20,14 +20,14 @@ export const Wrapper = styled.button<Omit<ButtonProps, 'label'>>`
     switch (primary) {
       case 'active':
         return css`
-          background: #2e74ff;
+          background: #34aaff;
           color: #ffffff;
         `;
       case 'inactive':
         return css`
-          background: #f0f5ff;
+          background: #eaf7ff;
           /* Primary/500 */
-          color: #4c89ff;
+          color: #34aaff;
         `;
       case 'disabled':
         return css`
