@@ -41,6 +41,8 @@ export type { RowProps } from './layout/Row';
 // input
 export { default as TextRoundInput } from './input/textRoundInput/TextRoundInput';
 export type { TextRoundInputProps } from './input/textRoundInput/TextRoundInput';
+export { default as DropdownInput } from './input/dropdownInput/DropdownInput';
+export type { DropdownInputProps } from './input/dropdownInput/DropdownInput';
 
 // modal
 export { default as BottomSheet } from './modal/bottomSheet/BottomSheet';

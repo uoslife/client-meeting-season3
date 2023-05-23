@@ -1,4 +1,4 @@
-('use client');
+'use client';
 
 import { BottomSheet, Col, Footer, Paddle, Text } from '@/components';
 import * as S from '@/styles/pages/GroupMemberPage.style';

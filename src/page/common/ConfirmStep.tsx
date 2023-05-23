@@ -11,7 +11,7 @@ import {
   setPage,
   resetPage,
 } from '@/store/feature/applyInfo';
-import { PERSONAL_MAX_PAGE_ARR, GROUP_MAX_PAGE_ARR } from '@/constants';
+import { PERSONAL_MAX_PAGE_ARR, GROUP_LEADER_MAX_PAGE_ARR } from '@/constants';
 
 const ConfirmStep = () => {
   const [isFinishPage, setIsFinishPage] = useState(false);
@@ -24,7 +24,7 @@ const ConfirmStep = () => {
       setPage(
         isPersonal
           ? PERSONAL_MAX_PAGE_ARR[curStep - 2]
-          : GROUP_MAX_PAGE_ARR[curStep - 2],
+          : GROUP_LEADER_MAX_PAGE_ARR[curStep - 2],
       ),
     );
     dispatch(decrementStep());

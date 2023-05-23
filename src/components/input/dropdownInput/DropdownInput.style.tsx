@@ -2,7 +2,7 @@
 
 import styled, { keyframes } from 'styled-components';
 import { typographies, colors } from '@/styles/styles';
-import { DropdownInputProps } from '@/components/input/droptdownInput/DropdownInput';
+import { DropdownInputProps } from '@/components/input/dropdownInput/DropdownInput';
 
 export const downToUp = keyframes`
   0% {
@@ -14,7 +14,7 @@ export const downToUp = keyframes`
     transform: translateZ(0);
   }
 `;
-export const InputWrapper = styled.div<DropdownInputProps>`
+export const InputWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -25,13 +25,13 @@ export const InputWrapper = styled.div<DropdownInputProps>`
   cursor: pointer;
 `;
 
-export const Icon = styled.div<DropdownInputProps>`
+export const Icon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
-export const DropdownWrapper = styled.div<DropdownInputProps>`
+export const DropdownWrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -45,14 +45,12 @@ export const DropdownWrapper = styled.div<DropdownInputProps>`
   backdrop-filter: blur(3px);
 `;
 
-export const DummyBox = styled.div<DropdownInputProps>`
+export const DummyBox = styled.div`
   height: 100%;
   flex: 1;
 `;
 
-export const Dropdown = styled.div<
-  DropdownInputProps & { showOption: boolean }
->`
+export const Dropdown = styled.div<{ showOption: boolean }>`
   max-width: 414px;
   height: 350px;
   width: 100%;
@@ -64,7 +62,7 @@ export const Dropdown = styled.div<
   animation: ${downToUp} 0.4s;
 `;
 
-export const DropdownHeader = styled.div<DropdownInputProps>`
+export const DropdownHeader = styled.div`
   ${() => typographies.Heading5};
   background: ${colors.White};
   border-radius: 18px 18px 0 0;
@@ -80,7 +78,7 @@ export const DropdownHeader = styled.div<DropdownInputProps>`
   }
 `;
 
-export const DropdownOptions = styled.div<DropdownInputProps>`
+export const DropdownOptions = styled.div`
   background: ${colors.White};
   height: 100%;
   width: 100%;
@@ -89,7 +87,7 @@ export const DropdownOptions = styled.div<DropdownInputProps>`
   padding: 0 24px;
 `;
 
-export const DropdownOption = styled.div<DropdownInputProps>`
+export const DropdownOption = styled.div`
   ${() => typographies.Heading5};
   padding: 12px 0;
   color: ${colors.Secondary900};

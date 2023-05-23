@@ -38,7 +38,7 @@ const GroupLeaderFourthStep = () => {
       <FirstPage setIsFinishPage={setIsFinishPage} />;
       <Footer
         maxPage={MAX_PAGE}
-        disabled={isFinishPage}
+        disabled={!isFinishPage}
         onClickPrev={onClickPrev}
         onClickNext={onClickNext}
       />

@@ -3,7 +3,7 @@
 import { ApplyInfoState } from '@/store/feature/applyInfo';
 import { useAppSelector } from '@/store/hooks';
 
-import FirstStep from '@/page/groupLeader/FirstStep';
+import ApplyMyInfoStep from '@/page/common/applyMyInfoStep';
 import SecondStep from '@/page/groupLeader/SecondStep';
 import ThirdStep from '@/page/groupLeader/ThirdStep';
 import FourthStep from '@/page/groupLeader/FourthStep';
@@ -16,7 +16,7 @@ const Group = () => {
   const switchStep = (applyInfo: ApplyInfoState) => {
     switch (applyInfo.curStep) {
       case 1:
-        return <FirstStep />;
+        return <ApplyMyInfoStep />;
       case 2:
         return <SecondStep />;
       case 3:

@@ -1,29 +1,47 @@
 'use client';
 
 import * as S from './DropdownInput.style';
+
 import { DeleteButton, IconButton, Text } from '@/components';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { Combine } from '@/types/utils.type';
 export type DropdownInputProps = Combine<
   {
-    setValue?: Dispatch<SetStateAction<number | string>>;
-    label?: string;
-    options?: number[] | string[];
+    value: string | number;
+    setValue: Dispatch<SetStateAction<string | number>>;
+    label: string;
+    options: number[] | string[];
   },
   React.ComponentProps<'button'>
 >;
 
-const DropdownInput = ({ setValue, label, options }: DropdownInputProps) => {
+const DropdownInput = ({
+  value,
+  setValue,
+  label,
+  options,
+}: DropdownInputProps) => {
   const [showOption, setShowOption] = useState(false);
 
-  const handleOptionSelect = (selectedOption: number | string) => () => {
-    setValue?.(selectedOption);
+  const onClickOptionSelect = (selectedOption: number | string) => () => {
+    setValue(selectedOption);
     setShowOption(false);
   };
+
   return (
     <>
       <S.InputWrapper onClick={() => setShowOption(!showOption)}>
-        <Text label={label!} size="sm" color={'#808A98'} />
+        <Text
+          label={
+            !!value
+              ? typeof value === 'number'
+                ? value.toString()
+                : value
+              : label
+          }
+          size="sm"
+          color={!value ? '#808A98' : '#3B4046'}
+        />
         <S.Icon>
           <IconButton iconName="DropdownArrow" width={14} height={8} />
         </S.Icon>
@@ -33,7 +51,7 @@ const DropdownInput = ({ setValue, label, options }: DropdownInputProps) => {
           <S.DummyBox></S.DummyBox>
           <S.Dropdown showOption={showOption}>
             <S.DropdownHeader>
-              <Text label={label!} color={'#808A98'} />
+              <Text label={label} color={'#808A98'} />
               <DeleteButton
                 width={12}
                 height={12}
@@ -42,17 +60,13 @@ const DropdownInput = ({ setValue, label, options }: DropdownInputProps) => {
               />
             </S.DropdownHeader>
             <S.DropdownOptions>
-              {!!options &&
-                options.map((val: string | number, key) => {
-                  return (
-                    <S.DropdownOption
-                      onClick={handleOptionSelect(val)}
-                      key={key}
-                    >
-                      {val}
-                    </S.DropdownOption>
-                  );
-                })}
+              {options.map((val: string | number, i) => {
+                return (
+                  <S.DropdownOption onClick={onClickOptionSelect(val)} key={i}>
+                    {val}
+                  </S.DropdownOption>
+                );
+              })}
             </S.DropdownOptions>
           </S.Dropdown>
         </S.DropdownWrapper>
