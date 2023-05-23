@@ -9,7 +9,7 @@ const SquareBackground = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 28px, 24px;
+  padding: 27px;
   gap: 24px;
   width: 360px;
   height: 293px;
@@ -26,7 +26,7 @@ const BottomSelectWrapper = styled.div`
   bottom: 0;
   display: flex;
   flex-direction: column;
-  padding: 16px 24px;
+  padding: 16px 40px;
   width: 100%;
 `;
 
@@ -54,7 +54,7 @@ function FinishPage() {
                     <Text
                       label={`한정된 인원으로 매칭에\n어려움이 생겼음을 알려드립니다.\n다음 시즌에 더욱 좋은 서비스로 보답하겠습니다.\n관심을 갖고 이벤트에 참여해 주셔서 감사합니다.`}
                       weight={400}
-                      size="base"
+                      size="sm"
                       color="#808A98"
                     />
                   </Col>
@@ -66,7 +66,8 @@ function FinishPage() {
       </Col>
       <BottomSelectWrapper>
         <Button
-          primary="inactive"
+          primary="active"
+          color="#34AAFF"
           textSize="sm"
           onClick={() => router.push('/')}
           label="홈 화면으로 돌아가기"
