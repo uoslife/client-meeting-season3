@@ -23,7 +23,7 @@ const DepartmentSelectBox = ({
   setSelectedDepartments,
 }: DepartmentSelectBoxProps) => {
   const [searchText, handleSearchText, setSearchText] = useInput('');
-  const [department, setDepartment] = useState<string[]>([]);
+  const [department, setDepartment] = useState<string[]>([]); // api 요청할 데이터
 
   const updateDepartment = (isAdd: boolean, item?: string, i?: number) => {
     return selectedDepartments!.filter((name, index) =>
@@ -64,7 +64,7 @@ const DepartmentSelectBox = ({
     <Col gap={24}>
       <Col gap={16}>
         <TextRoundInput
-          placeholder={'원하시는 과를 입력해주세요.'}
+          placeholder={'학과명 입력 (2글자 이상)'}
           isSearch={true}
           value={searchText}
           onChange={handleSearchText}

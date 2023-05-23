@@ -7,7 +7,7 @@ export const SOCIAL_LINK = {
 
 export const PERSONAL_MAX_PAGE_ARR = [5, 4, 4, 1, 1];
 export const GROUP_LEADER_MAX_PAGE_ARR = [2, 2, 5, 1, 1, 1];
-export const GROUP_MEMBER_MAX_PAGE_ARR = [2, 1];
+export const GROUP_MEMBER_MAX_PAGE_ARR = [2, 1, 1];
 
 export const PERSONAL_PROGRESSBAR_TITLE = [
   '01. 나의 정보 입력하기',
