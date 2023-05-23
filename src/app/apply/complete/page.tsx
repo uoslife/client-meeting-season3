@@ -1,7 +1,10 @@
 'use client';
 
 import styled from 'styled-components';
+import { Player } from '@lottiefiles/react-lottie-player';
 import { Button, Col, Paddle, Text } from '@/components';
+import { useRef } from 'react';
+import congratulation from '@/assets/lottie/congratulation.json';
 
 const BottomSelectWrapper = styled.div`
   position: fixed;
@@ -15,12 +18,25 @@ const BottomSelectWrapper = styled.div`
 `;
 
 const FinishPage = () => {
+  const playerRef = useRef(Player);
+
   const handleCheckInformation = () => {
     // 신청 정보 페이지 만들어지면 로직 추가할 예정
   };
   return (
     <>
       <Col fill>
+        <Player
+          src={congratulation}
+          autoplay={true}
+          Ref={playerRef}
+          speed={0.5}
+          style={{
+            height: '100vh',
+            position: 'absolute',
+            top: '-280px',
+          }}
+        />
         <Paddle top={60}>
           <Col gap={30}>
             <Col align={'center'}>
