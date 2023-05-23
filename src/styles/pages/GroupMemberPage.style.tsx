@@ -40,6 +40,6 @@ export const Code = styled.div<{ active: Boolean }>`
   ${({ active }) =>
     active &&
     css`
-      border-color: ${colors.Primary600};
+      border-color: ${colors.Primary_500};
     `};
 `;

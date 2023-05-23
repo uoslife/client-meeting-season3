@@ -77,7 +77,7 @@ export const Button = styled.div<BottomSheetProps>`
       case 'primary':
         return css`
           padding: 25px 80px;
-          background: ${colors.Primary700};
+          background: ${colors.Primary_500};
           color: ${colors.White};
           border-radius: 8px;
         `;

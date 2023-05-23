@@ -1,6 +1,6 @@
 ('use client');
 
-import { BottomSheet, Col, Footer, Paddle, Text } from '@/components';
+import { BottomSheet, Col, Text } from '@/components';
 import * as S from '@/styles/pages/GroupMemberPage.style';
 import { StepProps } from '@/types/step.type';
 import { useEffect, useRef, useState } from 'react';
@@ -43,7 +43,7 @@ const GroupMemberFirstPage = ({ setIsFinishPage }: StepProps) => {
           <Text
             label={statusMessage}
             weight={600}
-            color={statusResult ? '#2F80ED' : '#FD6666'}
+            color={statusResult ? '#34AAFF' : '#FD6666'}
           />
         )}
         <BottomSheet

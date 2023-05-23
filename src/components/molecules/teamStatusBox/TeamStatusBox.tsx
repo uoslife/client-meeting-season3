@@ -18,7 +18,7 @@ const MemberTextWrapper = () => {
         <Text label="호랑이 (본인)" weight={600} />
       </Row>
       <Row gap={8} align={'center'}>
-        <Text label="입장완료" weight={600} />
+        <Text label="입장완료" color={'#34AAFF'} weight={600} />
         <Checkbox variant="teritary" isActive={true} />
       </Row>
     </Row>
@@ -48,7 +48,7 @@ const TeamStatusBox = ({ teamName, type, status }: TeamStatusBoxProps) => {
               label={isWaiting ? '팅 결성 대기중' : '팅 결성이 완료되었습니다'}
               weight={600}
               size="base"
-              color={isWaiting ? '#808A98' : '#2E74FF'}
+              color={isWaiting ? '#808A98' : '#34AAFF'}
             />
           </Row>
           <Row gap={4} align="center" style={{ width: '' }}>

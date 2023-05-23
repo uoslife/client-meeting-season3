@@ -19,15 +19,15 @@ export const Wrapper = styled.div<Omit<RoundedRectangleButtonProps, 'label'>>`
       case 'primary':
         return css`
           padding: 6px 12px;
-          background: ${colors.Primary600};
+          background: ${colors.Primary_500};
           color: ${colors.White};
           border-radius: 8px;
         `;
       case 'skyBlue':
         return css`
           padding: 5.5px 12px;
-          background: ${colors.Primary100};
-          color: ${colors.Primary600};
+          background: ${colors.Primary_100};
+          color: ${colors.Primary_500};
           border-radius: 12px;
         `;
       case 'white':
