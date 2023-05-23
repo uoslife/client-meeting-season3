@@ -9,9 +9,8 @@ const SquareBackground = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 27px;
   gap: 24px;
-  width: 360px;
+  width: 380px;
   height: 293px;
   background: #f9f9fa;
   border-radius: 16px;
@@ -48,13 +47,13 @@ function FinishPage() {
             </Col>
             <Col align="center">
               <SquareBackground>
-                <Paddle left={24} right={24} bottom={90} top={28}>
+                <Paddle top={28} bottom={90}>
                   <Col align="center" gap={24}>
                     <Text label="😢" weight={400} size="4xl" />
                     <Text
                       label={`한정된 인원으로 매칭에\n어려움이 생겼음을 알려드립니다.\n다음 시즌에 더욱 좋은 서비스로 보답하겠습니다.\n관심을 갖고 이벤트에 참여해 주셔서 감사합니다.`}
                       weight={400}
-                      size="sm"
+                      size="base"
                       color="#808A98"
                     />
                   </Col>
@@ -67,7 +66,6 @@ function FinishPage() {
       <BottomSelectWrapper>
         <Button
           primary="active"
-          color="#34AAFF"
           textSize="sm"
           onClick={() => router.push('/')}
           label="홈 화면으로 돌아가기"
