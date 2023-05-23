@@ -10,12 +10,24 @@ import { ApplyInfoState } from '@/store/feature/applyInfo';
 import FirstPage from '@/page/common/applyMyInfoStep/FirstPage';
 import SecondPage from '@/page/common/applyMyInfoStep/SecondPage';
 
-import { GROUP_LEADER_MAX_PAGE_ARR } from '@/constants';
+import {
+  GROUP_LEADER_MAX_PAGE_ARR,
+  GROUP_MEMBER_MAX_PAGE_ARR,
+} from '@/constants';
 
-const MAX_PAGE = GROUP_LEADER_MAX_PAGE_ARR[0];
+const ApplyMyInfoStep = () => {
+  const { curPage, meetingType } = useAppSelector(state => state.applyInfo);
 
-const GroupLeaderFirstStep = () => {
-  const { curPage } = useAppSelector(state => state.applyInfo);
+  const returnMaxPage = () => {
+    switch (meetingType) {
+      case 'groupLeader':
+        return GROUP_LEADER_MAX_PAGE_ARR[0];
+      case 'groupMember':
+        return GROUP_MEMBER_MAX_PAGE_ARR[0];
+      default:
+        return 0;
+    }
+  };
 
   const [isFinishPage, setIsFinishPage] = useState(false);
 
@@ -37,7 +49,7 @@ const GroupLeaderFirstStep = () => {
     switch (curPage) {
       case 1:
         return 'firstPage';
-      case MAX_PAGE:
+      case returnMaxPage():
         return 'lastPage';
       default:
         return;
@@ -47,7 +59,7 @@ const GroupLeaderFirstStep = () => {
     <>
       {changePage(curPage)}
       <Footer
-        maxPage={MAX_PAGE}
+        maxPage={returnMaxPage()}
         disabled={isFinishPage}
         type={switchPageType()}
       />
@@ -55,4 +67,4 @@ const GroupLeaderFirstStep = () => {
   );
 };
 
-export default GroupLeaderFirstStep;
+export default ApplyMyInfoStep;
