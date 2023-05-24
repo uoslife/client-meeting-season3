@@ -6,26 +6,28 @@ import {
   Text,
   Button,
   DropdownInput,
+  Slider,
   DepartmentSelectBox,
 } from '@/components';
+import { AGE_SLIDER_ARR } from '@/constants';
 
 import useClickButton from '@/hooks/useClickButton';
 import { StepProps } from '@/types/step.type';
 import { useEffect, useState } from 'react';
 
 const FirstPage = ({ setIsFinishPage }: StepProps) => {
+  const [value, setValue] = useState({ min: 0, max: 100 });
+
   const buttonLabelArr = ['활발한 편', '차분한 편', '둘 다 좋아요!'];
-  const { onClickButton, buttonActiveState, isClickedButton, selectedLabel } =
+  const [onClickButton, buttonActiveState, isClickedButton, selectedLabel] =
     useClickButton(buttonLabelArr);
 
-  const [avgBirthYear, setAvgBirthYear] = useState<string | number>(0);
-
   useEffect(() => {
-    if (isClickedButton && avgBirthYear !== 0) {
+    if (isClickedButton) {
       // selectedLabel 사용한 전역 저장 로직
       setIsFinishPage(true);
-    }
-  }, [avgBirthYear, isClickedButton, selectedLabel, setIsFinishPage]);
+    } else setIsFinishPage(false);
+  }, [isClickedButton, selectedLabel, setIsFinishPage]);
 
   return (
     <Paddle top={32} left={24} right={24}>
@@ -38,11 +40,14 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
             color="#3B4046"
           />
           {/* DropdownInput 글자 수정 필요 */}
-          <DropdownInput
-            value={avgBirthYear}
-            setValue={setAvgBirthYear}
-            label="평균 나이 선택"
-            options={[20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33]}
+          <Slider
+            guideText={AGE_SLIDER_ARR}
+            labelExplain="세"
+            min={0}
+            max={100}
+            step={10}
+            value={value}
+            onChange={setValue}
           />
         </Col>
         <Col gap={12} align={'center'}>
