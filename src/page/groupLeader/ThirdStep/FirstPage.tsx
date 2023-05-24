@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 
 const FirstPage = ({ setIsFinishPage }: StepProps) => {
   const buttonLabelArr = ['월', '화', '수', '목', '금', '토', '일'];
-  const { onClickButton, buttonActiveState, isClickedButton, selectedLabel } =
+  const [onClickButton, buttonActiveState, isClickedButton, selectedLabel] =
     useClickButton(buttonLabelArr);
 
   useEffect(() => {

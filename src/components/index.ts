@@ -59,3 +59,5 @@ export { default as DepartmentSelectBox } from './molecules/departmentSelectBox/
 export type { DepartmentSelectBoxProps } from './molecules/departmentSelectBox/DepartmentSelectBox';
 export { default as MbtiSelectBox } from './molecules/mbtiSelectBox/MbtiButton';
 export type { MbtiSelectBoxProps } from './molecules/mbtiSelectBox/MbtiButton';
+export { default as Slider } from './molecules/slider/Slider';
+export type { SliderProps } from './molecules/slider/Slider';

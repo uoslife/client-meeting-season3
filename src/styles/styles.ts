@@ -146,7 +146,7 @@ export const typographies = {
     line-height: 36px;
   `,
   Text_3xl: css`
-    font-size: 24px;
+    font-size: 28px;
     line-height: 36px;
   `,
   Text_4xl: css`

@@ -14,6 +14,7 @@ import {
   GROUP_LEADER_MAX_PAGE_ARR,
   GROUP_MEMBER_MAX_PAGE_ARR,
 } from '@/constants';
+import useCurPageReset from '@/hooks/useCurPageReset';
 
 const ApplyMyInfoStep = () => {
   const { curPage, meetingType } = useAppSelector(state => state.applyInfo);
@@ -31,9 +32,8 @@ const ApplyMyInfoStep = () => {
 
   const [isFinishPage, setIsFinishPage] = useState(false);
 
-  useEffect(() => {
-    setIsFinishPage(false);
-  }, [curPage]);
+  useCurPageReset({ setIsFinishPage, curPage });
+
   const changePage = (curPage: ApplyInfoState['curPage']) => {
     switch (curPage) {
       case 1:

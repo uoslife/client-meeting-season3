@@ -12,7 +12,6 @@ import LastStep from '@/page/common/LastStep';
 
 const Group = () => {
   const applyInfo = useAppSelector(state => state.applyInfo);
-
   const switchStep = (applyInfo: ApplyInfoState) => {
     switch (applyInfo.curStep) {
       case 1:
