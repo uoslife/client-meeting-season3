@@ -10,9 +10,36 @@ import {
   TextRoundInput,
 } from '@/components';
 import { DropdownInput } from '@/components';
+import useClickButton from '@/hooks/useClickButton';
+import useInput from '@/hooks/useInput';
 import { StepProps } from '@/types/step.type';
+import { useEffect } from 'react';
 
 const SecondPage = ({ setIsFinishPage }: StepProps) => {
+  const [kakaoId, onChangeKakaoId] = useInput('');
+
+  const studentTypeArr = ['학부생', '대학원생', '졸업생'];
+  const [
+    onClickStudentTypeButton,
+    studentTypeButtonActiveState,
+    isClickedStudentType,
+    studentType,
+  ] = useClickButton(studentTypeArr);
+
+  const smokingArr = ['흡연', '비흡연'];
+  const [
+    onClickSmokingButton,
+    smokingButtonActiveState,
+    isClickedSmoking,
+    smoking,
+  ] = useClickButton(smokingArr);
+
+  useEffect(() => {
+    const isSubmitKakaoId = kakaoId !== '';
+    if (isSubmitKakaoId && isClickedStudentType && isClickedSmoking) {
+      setIsFinishPage(true);
+    } else setIsFinishPage(false);
+  }, [isClickedSmoking, isClickedStudentType, kakaoId, setIsFinishPage]);
   return (
     <>
       <Paddle top={32} left={24} right={24} bottom={32}>
@@ -35,9 +62,8 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
             </Col>
             <TextRoundInput
               placeholder={'카카오톡 ID 입력'}
-              value={''}
-              onChange={() => {}}
-              onClick={() => {}}
+              value={kakaoId}
+              onChange={onChangeKakaoId}
             />
           </Col>
 
@@ -67,9 +93,17 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
               />
             </Col>
             <Col gap={12}>
-              <Button label="학부생" primary="inactive" textSize="base" />
-              <Button label="대학원생" primary="inactive" textSize="base" />
-              <Button label="졸업생" primary="inactive" textSize="base" />
+              {studentTypeArr.map((label, i) => (
+                <Button
+                  key={i}
+                  label={label}
+                  primary={
+                    studentTypeButtonActiveState(i) ? 'active' : 'inactive'
+                  }
+                  textSize="sm"
+                  onClick={() => onClickStudentTypeButton(i)}
+                />
+              ))}
             </Col>
           </Col>
         </Col>
@@ -87,8 +121,15 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
             />
           </Col>
           <Col gap={12}>
-            <Button label="흡연" primary="inactive" textSize="base" />
-            <Button label="비흡연" primary="inactive" textSize="base" />{' '}
+            {smokingArr.map((label, i) => (
+              <Button
+                key={i}
+                label={label}
+                primary={smokingButtonActiveState(i) ? 'active' : 'inactive'}
+                textSize="sm"
+                onClick={() => onClickSmokingButton(i)}
+              />
+            ))}
           </Col>
         </Col>
       </Paddle>

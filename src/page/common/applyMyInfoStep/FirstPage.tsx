@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Button,
   Col,
@@ -11,22 +11,29 @@ import {
   TextRoundInput,
 } from '@/components';
 import { DropdownInput } from '@/components';
-import useInput from '@/hooks/useInput';
 
 import { StepProps } from '@/types/step.type';
 import useClickButton from '@/hooks/useClickButton';
+import { AGE_ARR, HEIGHT_ARR } from '@/constants';
 
 const FirstPage = ({ setIsFinishPage }: StepProps) => {
-  const [nameStatus, setNameStatus] = useState<'success' | 'error' | 'default'>(
-    'default',
-  );
-  const [statusValue, setStatusValue] = useState('');
-  const [nameValue, handleNameValue] = useInput('');
-  // 초기화 필요 setIsFinishPage(false);
-  const onClickDoubleCheckButton = () => {
-    setNameStatus('error');
-    setStatusValue('이미 있는 이름입니다.');
-    setIsFinishPage(true);
+  const [currentNicknameStatus, setCurrentNicknameStatus] = useState<
+    'success' | 'error' | 'default'
+  >('default');
+  const [nicknameStatusMessage, setNicknameStatusMessage] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [isFinishNickname, setIsFinishNickname] = useState(false);
+
+  const onChangeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCurrentNicknameStatus('default');
+    setNicknameStatusMessage('');
+    setNickname(e.target.value);
+    setIsFinishNickname(false);
+  };
+  const handleDoubleCheckButton = () => {
+    setCurrentNicknameStatus('error');
+    setNicknameStatusMessage('이미 있는 이름입니다.');
+    setIsFinishNickname(true);
   };
 
   //gender
@@ -38,11 +45,18 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
   const [age, setAge] = useState<string | number>(0);
 
   //height
-  const [heigth, setHeight] = useState<string | number>(0);
+  const [height, setHeight] = useState<string | number>(0);
+
+  useEffect(() => {
+    const isClickAge = age !== 0;
+    const isClickHeight = height !== 0;
+    if (isFinishNickname && isClickedButton && isClickAge && isClickHeight) {
+      setIsFinishPage(true);
+    } else setIsFinishPage(false);
+  }, [age, height, isClickedButton, isFinishNickname, setIsFinishPage]);
 
   return (
-    // footer와 겹침 문제: bottom에 padding 임시방편
-    <Paddle top={32} left={24} right={24} bottom={300}>
+    <Paddle top={32} left={24} right={24} bottom={140}>
       <Col gap={32} align="center">
         <Col gap={12} align="center">
           <Text
@@ -62,13 +76,19 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
         <Row gap={8} width="full">
           {/* placeholder 설정 필요 */}
           <TextRoundInput
-            placeholder={''}
-            value={''}
-            onChange={() => {}}
-            onClick={() => {}}
+            placeholder={'닉네임 입력 (2글자 이상)'}
+            value={nickname}
+            status={currentNicknameStatus}
+            statusMessage={nicknameStatusMessage}
+            onChange={onChangeNickname}
           />
           {/* font-size가 분명 16으로 되어있기는 한데 피그마랑 미묘하게 다른느낌.. */}
-          <RoundedRectangleButton label="중복확인" height={48} type="skyBlue" />
+          <RoundedRectangleButton
+            label="중복확인"
+            height={48}
+            type="skyBlue"
+            onClick={handleDoubleCheckButton}
+          />
         </Row>
         <Text
           label={'1. 본인의 성별을 선택해주세요.'}
@@ -95,7 +115,7 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
           label="나이 선택"
           value={age}
           setValue={setAge}
-          options={[20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34]}
+          options={AGE_ARR}
         />
         <Text
           label={'3. 본인의 키를 선택해주세요.'}
@@ -104,9 +124,9 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
         />
         <DropdownInput
           label="키 선택"
-          value={heigth}
+          value={height}
           setValue={setHeight}
-          options={[130, 131]}
+          options={HEIGHT_ARR}
         />
       </Col>
     </Paddle>
