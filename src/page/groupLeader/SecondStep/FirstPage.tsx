@@ -3,10 +3,16 @@
 import { StepProps } from '@/types/step.type';
 import { Col, Paddle, Row, Text, TextRoundInput } from '@/components';
 import useInput from '@/hooks/useInput';
+import { useEffect } from 'react';
 
 const FirstPage = ({ setIsFinishPage }: StepProps) => {
   const [nameValue, handleNameValue] = useInput('');
-  setIsFinishPage(true);
+
+  useEffect(() => {
+    if (nameValue !== '') setIsFinishPage(true);
+    else setIsFinishPage(false);
+  }, [nameValue, setIsFinishPage]);
+
   return (
     <Paddle top={32} left={24} right={24}>
       <Col gap={32}>
