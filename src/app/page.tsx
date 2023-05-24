@@ -16,10 +16,10 @@ const Main = () => {
       <S.MainWrapper>
         <MainHeader />
         <Image
-          src={'/images/MainBanner.png'}
+          src={'/images/MainPoster.png'}
           alt="메인 배너"
-          height={333}
-          width={414}
+          height={421}
+          width={366}
         />
         <S.MainTextWrapper>
           <Text
