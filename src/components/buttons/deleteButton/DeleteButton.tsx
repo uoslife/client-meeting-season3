@@ -8,7 +8,7 @@ export const Wrapper = styled.div<DeleteButtonProps>`
 `;
 
 export type DeleteButtonProps = {
-  type?: 'black' | 'white' | 'grey';
+  type?: 'black' | 'white' | 'grey' | 'red';
   height?: number;
   width?: number;
   onClick?: () => void;
@@ -22,6 +22,8 @@ const getColorType = (type: string) => {
       return '#fff';
     case 'grey':
       return '#97A1AE';
+    case 'red':
+      return '#FF5334';
   }
 };
 
