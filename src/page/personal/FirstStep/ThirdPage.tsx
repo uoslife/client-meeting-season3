@@ -5,23 +5,18 @@ import { AnimalButton, Col, Text } from '@/components';
 import * as S from '@/components/buttons/interstSelectButton/InterestSelectButton.style';
 import { ANIMALS } from '@/constants';
 import { useEffect, useState } from 'react';
+import useClickButton from '@/hooks/useClickButton';
 
 function ThirdPage({ setIsFinishPage }: StepProps) {
-  const [animalValue, setAnimalValue] = useState<string[]>([]);
-  const handleSelectInterest = (value: string) => () => {
-    const deleteInterestState = animalValue.filter(item => item != value);
+  const [onClickButton, buttonActiveState, isClickedButton, selectedLabel] =
+    useClickButton(ANIMALS, 2);
 
-    if (!animalValue.includes(value))
-      return setAnimalValue([...animalValue, value]);
-    setAnimalValue(deleteInterestState);
-  };
-  const handleIsFinishPage = () => {
-    if (animalValue.length > 1) setIsFinishPage(true);
-  };
+  const [animalValue, setAnimalValue] = useState<string[]>([]);
 
   useEffect(() => {
-    handleIsFinishPage();
-  }, [animalValue]);
+    // selectedLabel;
+    isClickedButton && setIsFinishPage(true);
+  }, [isClickedButton, selectedLabel, setIsFinishPage]);
 
   return (
     <Col gap={44} padding={'32px 24px'}>
@@ -38,17 +33,15 @@ function ThirdPage({ setIsFinishPage }: StepProps) {
         />
       </Col>
       <S.GridWrapper>
-        {ANIMALS.map((item, i) => {
-          return (
-            <AnimalButton
-              key={i}
-              isActive={animalValue.includes(item)}
-              order={i + 1}
-              label={ANIMALS[i]}
-              onClick={handleSelectInterest(item)}
-            />
-          );
-        })}
+        {ANIMALS.map((label, i) => (
+          <AnimalButton
+            key={i}
+            order={i + 1}
+            label={label}
+            isActive={buttonActiveState(i)}
+            onClick={() => onClickButton(i)}
+          />
+        ))}
       </S.GridWrapper>
     </Col>
   );
