@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react';
 
 const FirstPage = ({ setIsFinishPage }: StepProps) => {
   const buttonLabelArr = ['활발한 편', '차분한 편', '둘 다 좋아요!'];
+  const [dislikeDepartment, setDislikeDepartment] = useState<string[]>([]);
   const { onClickButton, buttonActiveState, isClickedButton, selectedLabel } =
     useClickButton(buttonLabelArr);
 
@@ -69,7 +70,11 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
             color="#656D78"
           />
 
-          <DepartmentSelectBox isGroup />
+          <DepartmentSelectBox
+            selectedDepartments={dislikeDepartment}
+            setSelectedDepartments={setDislikeDepartment}
+            isDislike={true}
+          />
         </Col>
         <Col gap={32} align={'center'}>
           <Text
