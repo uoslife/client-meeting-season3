@@ -6,7 +6,7 @@ import { StepProps } from '@/types/step.type';
 import { useEffect, useRef, useState } from 'react';
 
 const GroupMemberFirstPage = ({ setIsFinishPage }: StepProps) => {
-  const [code, setCode] = useState<any[]>();
+  const [code, setCode] = useState<(string | number)[]>();
   const [statusResult, setStatusResult] = useState<boolean>();
   const [isModal, setIsModal] = useState(false);
   const [statusMessage, setStatusMessage] = useState();
@@ -15,8 +15,18 @@ const GroupMemberFirstPage = ({ setIsFinishPage }: StepProps) => {
     const input = inputRef.current;
     !!input && input.focus();
   }, [inputRef]);
+
+  useEffect(() => {
+    if (code?.length === 4) setIsModal(true); // code가 맞는지 api 로직 추가
+  }, [code]);
   const handleInputValue = (e: any) => {
     setCode(e.target.value);
+  };
+  const onClickSecondary = () => {
+    const input = inputRef.current;
+    setIsModal(false);
+    setCode([]);
+    !!input && input.focus();
   };
 
   return (
@@ -37,7 +47,7 @@ const GroupMemberFirstPage = ({ setIsFinishPage }: StepProps) => {
             ref={inputRef}
             value={code}
             onChange={handleInputValue}
-          ></S.Input>
+          />
         </S.Container>
         {!!statusMessage && (
           <Text
@@ -54,6 +64,7 @@ const GroupMemberFirstPage = ({ setIsFinishPage }: StepProps) => {
           description={'팅에 참여하시겠습니까?'}
           secondaryWord={'취소'}
           primaryWord={'참여'}
+          onClickSecondary={onClickSecondary}
         />
       </Col>
     </>
