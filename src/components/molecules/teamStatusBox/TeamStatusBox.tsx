@@ -41,7 +41,12 @@ const TeamStatusBox = ({ teamName, type, status }: TeamStatusBoxProps) => {
         <Text label={`“${teamName}”`} weight={800} size="xl" color="#656D78" />
       </Col>
       <Col gap={8}>
-        <Row justify={'space-between'} align={'center'} width="full">
+        <Row
+          justify={'space-between'}
+          align={'center'}
+          padding={'0 20px'}
+          width="full"
+        >
           <Row align={'center'}>
             {isWaiting && <S.Loader />}
             <Text
