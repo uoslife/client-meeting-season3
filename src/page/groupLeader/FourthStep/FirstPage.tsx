@@ -74,7 +74,11 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
             color="#656D78"
           />
 
-          <DepartmentSelectBox isGroup />
+          <DepartmentSelectBox
+            selectedDepartments={dislikeDepartment}
+            setSelectedDepartments={setDislikeDepartment}
+            isDislike={true}
+          />
         </Col>
         <Col gap={32} align={'center'}>
           <Text
