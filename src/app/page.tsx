@@ -31,12 +31,12 @@ const Main = () => {
         </S.MainTextWrapper>
         <div style={{ textAlign: 'center' }}>
           <Text
-            label={'이번엔 1대1도, 3:3도 가능하다!'}
+            label={'초여름을 맞이해 돌아온 시대팅 !'}
             size={'base'}
             color="#3B4046"
           />
           <Text
-            label={'새로워진 시대팅과 함께해보세요🥰'}
+            label={'이번 여름은 설렘과 함께 💗'}
             size={'base'}
             color="#3B4046"
           />
@@ -46,24 +46,19 @@ const Main = () => {
           <S.DateTextWrapper>
             <Text
               label={'05.26'}
-              size={'3xl'}
+              size={'4xl'}
               weight={800}
-              font="LeferiPoint-SpecialA"
+              font="Leferi Point Type"
             />
-            <Text label={'(금)'} size={'xl'} weight={500} />
-            <Text
-              label={'-'}
-              size={'3xl'}
-              weight={800}
-              font="LeferiPoint-SpecialA"
-            />
+            <Text label={'(금)'} size={'2xl'} weight={500} />
+            <Text label={'-'} size={'4xl'} font="Leferi Point Type" />
             <Text
               label={'05.28'}
-              size={'3xl'}
+              size={'4xl'}
               weight={800}
-              font="LeferiPoint-SpecialA"
+              font="Leferi Point Type"
             />
-            <Text label={'(일)'} size={'xl'} weight={500} />
+            <Text label={'(일)'} size={'2xl'} weight={500} />
           </S.DateTextWrapper>
         </S.DateWrapper>
         <div style={{ width: '100%', padding: '0 48px' }}>
