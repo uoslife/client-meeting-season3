@@ -24,7 +24,7 @@ const AnimalButton = ({
   ...props
 }: AnimalButtonProps) => {
   return (
-    <S.Wrapper {...props}>
+    <S.Wrapper onClick={onClick} {...props}>
       {isActive && (
         <Checkbox
           variant={'teritary'}

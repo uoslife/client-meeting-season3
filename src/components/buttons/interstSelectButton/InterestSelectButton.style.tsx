@@ -33,4 +33,5 @@ export const GridWrapper = styled.div`
   grid-row-gap: 16px;
   width: 100%;
   cursor: pointer;
+  justify-items: center;
 `;
