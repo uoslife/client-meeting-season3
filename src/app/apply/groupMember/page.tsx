@@ -3,7 +3,7 @@
 import { ApplyInfoState } from '@/store/feature/applyInfo';
 import { useAppSelector } from '@/store/hooks';
 
-import FirstStep from '@/page/groupLeader/FirstStep';
+import FirstStep from '@/page/groupMember/FirstStep';
 import SecondStep from '@/page/groupLeader/SecondStep';
 import ThirdStep from '@/page/groupLeader/ThirdStep';
 import ConfirmStep from '@/page/common/ConfirmStep';
