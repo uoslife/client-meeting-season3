@@ -11,11 +11,9 @@ function ThirdPage({ setIsFinishPage }: StepProps) {
   const [onClickButton, buttonActiveState, isClickedButton, selectedLabel] =
     useClickButton(ANIMALS, 2);
 
-  const [animalValue, setAnimalValue] = useState<string[]>([]);
-
   useEffect(() => {
-    // selectedLabel;
-    isClickedButton && setIsFinishPage(true);
+    console.log(selectedLabel);
+    isClickedButton ? setIsFinishPage(true) : setIsFinishPage(false);
   }, [isClickedButton, selectedLabel, setIsFinishPage]);
 
   return (
