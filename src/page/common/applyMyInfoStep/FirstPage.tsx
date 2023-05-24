@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import {
   Button,
   Col,
@@ -10,20 +11,35 @@ import {
   TextRoundInput,
 } from '@/components';
 import { DropdownInput } from '@/components';
+import useInput from '@/hooks/useInput';
+
 import { StepProps } from '@/types/step.type';
+import useClickButton from '@/hooks/useClickButton';
 
 const FirstPage = ({ setIsFinishPage }: StepProps) => {
-  // const [nameStatus, setNameStatus] = useState<'success' | 'error' | 'default'>(
-  //   'default',
-  // );
-  // const [statusValue, setStatusValue] = useState('');
-  // const [nameValue, handleNameValue] = useInput('');
-  // // 초기화 필요 setIsFinishPage(false);
-  // const onClickDoubleCheckButton = () => {
-  //   setNameStatus('error');
-  //   setStatusValue('이미 있는 이름입니다.');
-  //   setIsFinishPage(true);
-  // };
+  const [nameStatus, setNameStatus] = useState<'success' | 'error' | 'default'>(
+    'default',
+  );
+  const [statusValue, setStatusValue] = useState('');
+  const [nameValue, handleNameValue] = useInput('');
+  // 초기화 필요 setIsFinishPage(false);
+  const onClickDoubleCheckButton = () => {
+    setNameStatus('error');
+    setStatusValue('이미 있는 이름입니다.');
+    setIsFinishPage(true);
+  };
+
+  //gender
+  const buttonLabelArr = ['남자', '여자'];
+  const [onClickButton, buttonActiveState, isClickedButton, selectedLabel] =
+    useClickButton(buttonLabelArr);
+
+  //age
+  const [age, setAge] = useState<string | number>(0);
+
+  //height
+  const [heigth, setHeight] = useState<string | number>(0);
+
   return (
     // footer와 겹침 문제: bottom에 padding 임시방편
     <Paddle top={32} left={24} right={24} bottom={300}>
@@ -60,21 +76,38 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
           font="LeferiBaseType-RegularA"
         />
         <Col gap={12}>
-          <Button label="남자" primary="active" textSize="base" />
-          <Button label="여자" primary="inactive" textSize="base" />
+          {buttonLabelArr.map((label, i) => (
+            <Button
+              key={i}
+              label={label}
+              primary={buttonActiveState(i) ? 'active' : 'inactive'}
+              textSize="sm"
+              onClick={() => onClickButton(i)}
+            />
+          ))}
         </Col>
         <Text
           label={'2. 본인의 나이를 선택해주세요.'}
           weight={700}
           font="LeferiBaseType-RegularA"
         />
-        <DropdownInput label="나이 선택" />
+        <DropdownInput
+          label="나이 선택"
+          value={age}
+          setValue={setAge}
+          options={[20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34]}
+        />
         <Text
           label={'3. 본인의 키를 선택해주세요.'}
           weight={700}
           font="LeferiBaseType-RegularA"
         />
-        <DropdownInput label="키 선택" />
+        <DropdownInput
+          label="키 선택"
+          value={heigth}
+          setValue={setHeight}
+          options={[130, 131]}
+        />
       </Col>
     </Paddle>
   );
