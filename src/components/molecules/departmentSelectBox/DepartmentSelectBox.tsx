@@ -12,13 +12,15 @@ import useInput from '@/hooks/useInput';
 import { DEPARTMENTS } from '@/constants/departments';
 
 export type DepartmentSelectBoxProps = {
-  isGroup?: boolean;
+  isPersonal?: boolean;
+  isDislike?: boolean;
   selectedDepartments?: string[];
   setSelectedDepartments?: Dispatch<SetStateAction<string[]>>;
 };
 
 const DepartmentSelectBox = ({
-  isGroup = false,
+  isPersonal = false,
+  isDislike = false,
   selectedDepartments,
   setSelectedDepartments,
 }: DepartmentSelectBoxProps) => {
@@ -42,8 +44,8 @@ const DepartmentSelectBox = ({
   };
 
   const handleAddDepartment = (item: string) => () => {
-    if (isGroup && selectedDepartments?.length === 1) {
-      setSelectedDepartments!(updateDepartment(false, item));
+    if (isPersonal && selectedDepartments?.length === 1) {
+      setSelectedDepartments!(updateDepartment(true, item));
       setDepartment([]);
       return;
       // 학과 1개 선택 시,
@@ -55,7 +57,7 @@ const DepartmentSelectBox = ({
 
   const handleDeleteDepartment = (item: string, i: number) => () => {
     if (selectedDepartments?.includes(item)) {
-      setSelectedDepartments!(updateDepartment(true, item, i));
+      setSelectedDepartments!(updateDepartment(false, item, i));
       setDepartment([]);
     }
   };
@@ -95,7 +97,8 @@ const DepartmentSelectBox = ({
               return (
                 <RoundedRectangleButton
                   fontSize={'sm'}
-                  type={'primary'}
+                  type={'red'}
+                  deleteColor={isDislike ? 'red' : 'white'}
                   label={name}
                   height={32}
                   isDelete={true}
