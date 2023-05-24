@@ -43,9 +43,11 @@ const useClickButton = (
   useEffect(() => {
     const activatedObj = state.filter(data => data.active);
 
+    setSelectedLabel(activatedObj);
     if (activatedObj.length !== 0) {
       setIsClickedButton(true);
-      setSelectedLabel(activatedObj);
+    } else {
+      setIsClickedButton(false);
     }
   }, [state]);
 
