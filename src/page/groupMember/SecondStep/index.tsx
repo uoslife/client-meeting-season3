@@ -17,7 +17,7 @@ import {
 
 import { GROUP_MEMBER_MAX_PAGE_ARR } from '@/constants';
 
-const MAX_PAGE = GROUP_MEMBER_MAX_PAGE_ARR[2];
+const MAX_PAGE = GROUP_MEMBER_MAX_PAGE_ARR[1];
 
 const GroupMemberFirstStep = () => {
   const { curStep } = useAppSelector(state => state.applyInfo);

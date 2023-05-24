@@ -3,10 +3,8 @@
 import { ApplyInfoState } from '@/store/feature/applyInfo';
 import { useAppSelector } from '@/store/hooks';
 
-import FirstStep from '@/page/groupMember/FirstStep';
-import SecondStep from '@/page/groupLeader/SecondStep';
-import ThirdStep from '@/page/groupLeader/ThirdStep';
-import ConfirmStep from '@/page/common/ConfirmStep';
+import ApplyMyInfoStep from '@/page/common/applyMyInfoStep';
+import SecondStep from '@/page/groupMember/SecondStep';
 import LastStep from '@/page/common/LastStep';
 
 const GroupLeaderPage = () => {
@@ -15,12 +13,10 @@ const GroupLeaderPage = () => {
   const switchStep = (applyInfo: ApplyInfoState) => {
     switch (applyInfo.curStep) {
       case 1:
-        return <FirstStep />;
+        return <ApplyMyInfoStep />;
       case 2:
         return <SecondStep />;
-      case 4:
-        return <ConfirmStep />;
-      case 5:
+      case 3:
         return <LastStep />;
       default:
         return <></>;

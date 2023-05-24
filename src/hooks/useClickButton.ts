@@ -6,7 +6,10 @@ type ButtonState = {
 };
 
 // nameArr = ['a', 'b', ...];
-const useClickButton = (nameArr: Array<string>) => {
+
+const useClickButton = (
+  nameArr: Array<string>,
+): [(order: number) => void, (order: number) => boolean, boolean, string] => {
   const initState: Array<ButtonState> = [];
   nameArr.forEach(label => initState.push({ label, active: false }));
   const [state, setState] = useState(initState);
@@ -34,7 +37,7 @@ const useClickButton = (nameArr: Array<string>) => {
     return state[order].active;
   };
 
-  return { onClickButton, buttonActiveState, isClickedButton, selectedLabel };
+  return [onClickButton, buttonActiveState, isClickedButton, selectedLabel];
 };
 
 export default useClickButton;

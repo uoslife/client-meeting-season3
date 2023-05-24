@@ -7,7 +7,7 @@ export const SOCIAL_LINK = {
 
 export const PERSONAL_MAX_PAGE_ARR = [5, 4, 4, 1, 1];
 export const GROUP_LEADER_MAX_PAGE_ARR = [2, 2, 5, 1, 1, 1];
-export const GROUP_MEMBER_MAX_PAGE_ARR = [2, 1];
+export const GROUP_MEMBER_MAX_PAGE_ARR = [2, 1, 1];
 
 export const PERSONAL_PROGRESSBAR_TITLE = [
   '01. 나의 정보 입력하기',
@@ -88,4 +88,29 @@ export const INTERESTS = [
   '영화/드라마',
   '패션',
   '요리',
+];
+
+export const AGE_ARR = [
+  20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35,
+];
+
+export const AGE_SLIDER_ARR = [
+  '20',
+  '21',
+  '22',
+  '23',
+  '24',
+  '25',
+  '26',
+  '27',
+  '28',
+  '29',
+  '30~',
+];
+
+export const HEIGHT_ARR = [
+  140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154,
+  155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169,
+  170, 171, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183,
+  184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195,
 ];

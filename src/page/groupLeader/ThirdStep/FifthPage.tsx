@@ -10,7 +10,7 @@ const FifthPage = ({ setIsFinishPage }: StepProps) => {
     '연인을 만들고 싶어요!',
     '상관 없어요!',
   ];
-  const { onClickButton, buttonActiveState, isClickedButton, selectedLabel } =
+  const [onClickButton, buttonActiveState, isClickedButton, selectedLabel] =
     useClickButton(buttonLabelArr);
 
   useEffect(() => {

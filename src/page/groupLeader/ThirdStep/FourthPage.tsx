@@ -11,7 +11,7 @@ const FourthPage = ({ setIsFinishPage }: StepProps) => {
     '적당히 마실래요!',
     '마시고 죽을래요!',
   ];
-  const { onClickButton, buttonActiveState, isClickedButton, selectedLabel } =
+  const [onClickButton, buttonActiveState, isClickedButton, selectedLabel] =
     useClickButton(buttonLabelArr);
 
   useEffect(() => {

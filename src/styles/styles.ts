@@ -64,6 +64,13 @@ export const colors = {
   Black_SubTitle: '#A0A0A0',
   Black_Ph: '#6C6C6C',
   Black_Sub: '#C3C3C3',
+
+  //figma color 변경 반영
+  Primary_100: '#EAF7FF',
+  Primary_200: '#D9EFFF',
+  Primary_300: '#9BD5FF',
+  Primary_400: '#69C0FF',
+  Primary_500: '#34AAFF',
 };
 
 export const typographies = {

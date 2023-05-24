@@ -20,7 +20,7 @@ export const Container = styled.div<Pick<ProgressHeaderProps, 'isprogress'>>`
   ${({ isprogress }) =>
     isprogress &&
     css`
-      background: ${colors.Primary700};
+      background: ${colors.Primary_500};
       color: ${colors.White};
     `};
 `;
@@ -74,7 +74,7 @@ export const ProgressBar = styled.div<{ size: number }>`
 
 export const ProgressLabel = styled.p`
   ${() => typographies.Heading6};
-  color: ${colors.Primary300};
+  color: ${colors.Primary_300};
   font-weight: 400;
   display: flex;
   align-items: center;

@@ -37,7 +37,7 @@ const ProgressHeader = ({
         setMaxStep(6);
         break;
       case 'groupMember':
-        setMaxStep(2);
+        setMaxStep(3);
         break;
       default:
         break;
@@ -51,7 +51,7 @@ const ProgressHeader = ({
       case 'groupLeader':
         return GROUP_LEADER_PROGRESSBAR_TITLE[curStep - 1];
       case 'groupMember':
-        return GROUP_MEMBER_PROGRESSBAR_TITLE[0];
+        return GROUP_MEMBER_PROGRESSBAR_TITLE[curStep - 1];
       default:
         return '';
     }
@@ -80,7 +80,7 @@ const ProgressHeader = ({
         {isprogress && (
           <path
             d="M28 28C28 28 28 0 0 3.05176e-05H28V28Z"
-            fill={colors.Primary700}
+            fill={colors.Primary_500}
           />
         )}
       </S.Decorator>

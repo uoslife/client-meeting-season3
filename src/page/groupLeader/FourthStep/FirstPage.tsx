@@ -1,20 +1,32 @@
-import { Button, Col, DepartmentSelectBox, Paddle, Text } from '@/components';
-import DropdownInput from '@/components/input/droptdownInput/DropdownInput';
-import { Dropdown } from '@/components/input/droptdownInput/DropdownInput.style';
+'use client';
+
+import {
+  Paddle,
+  Col,
+  Text,
+  Button,
+  DropdownInput,
+  Slider,
+  DepartmentSelectBox,
+} from '@/components';
+import { AGE_SLIDER_ARR } from '@/constants';
+
 import useClickButton from '@/hooks/useClickButton';
 import { StepProps } from '@/types/step.type';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const FirstPage = ({ setIsFinishPage }: StepProps) => {
+  const [value, setValue] = useState({ min: 0, max: 100 });
+
   const buttonLabelArr = ['활발한 편', '차분한 편', '둘 다 좋아요!'];
-  const { onClickButton, buttonActiveState, isClickedButton, selectedLabel } =
+  const [onClickButton, buttonActiveState, isClickedButton, selectedLabel] =
     useClickButton(buttonLabelArr);
 
   useEffect(() => {
     if (isClickedButton) {
       // selectedLabel 사용한 전역 저장 로직
       setIsFinishPage(true);
-    }
+    } else setIsFinishPage(false);
   }, [isClickedButton, selectedLabel, setIsFinishPage]);
 
   return (
@@ -25,15 +37,25 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
             label={'1. 만나고 싶은 팅원들의 평균 나이를 선택해주세요.'}
             weight={700}
             font="LeferiBaseType-RegularA"
+            color="#3B4046"
           />
           {/* DropdownInput 글자 수정 필요 */}
-          <DropdownInput label="평균 나이 선택" />
+          <Slider
+            guideText={AGE_SLIDER_ARR}
+            labelExplain="세"
+            min={0}
+            max={100}
+            step={10}
+            value={value}
+            onChange={setValue}
+          />
         </Col>
         <Col gap={12} align={'center'}>
           <Text
             label={'2. 매칭을 원하지 않는 학과를 입력해주세요.'}
             weight={700}
             font="LeferiBaseType-RegularA"
+            color="#3B4046"
           />
           {/* Figma랑 맞게 폰트 넣었는데 뭔가 많이 깨집니다.. 확인 부탁드려요오.. */}
           <Text
@@ -52,15 +74,15 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
             color="#656D78"
           />
 
-          <DepartmentSelectBox />
+          <DepartmentSelectBox isGroup />
         </Col>
         <Col gap={32} align={'center'}>
           <Text
             label={'3. 선호하는 상대 팅의 분위기를 선택해주세요.'}
             weight={700}
             font="LeferiBaseType-RegularA"
+            color="#3B4046"
           />
-          {/* Footer 겹침 현상: Pad 임시방편 */}
           <Paddle bottom={100}>
             <Col gap={12} align="center">
               {buttonLabelArr.map((label, i) => (
