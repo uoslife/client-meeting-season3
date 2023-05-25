@@ -20,7 +20,7 @@ const ConfirmStep = () => {
   const { curStep, meetingType } = useAppSelector(state => state.applyInfo);
   const commonState = useAppSelector(state => state.common);
   const personalState = useAppSelector(state => state.personal);
-  const groupLeaderState = useAppSelector(state => state.groupLeader);
+  const groupState = useAppSelector(state => state.group);
   const dispatch = useAppDispatch();
 
   const isPersonal = meetingType === 'personal';
