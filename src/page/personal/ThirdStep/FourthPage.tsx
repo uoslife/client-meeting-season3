@@ -7,17 +7,24 @@ import { colors } from '@/styles/styles';
 import { setPreferMbti } from '@/store/feature/meetingType/personalReducer';
 import { useAppDispatch } from '@/store/store';
 
-        
+type MbtiType = {
+  type: string;
+  order: number;
+};
+
 const FourthPage = ({ setIsFinishPage }: StepProps) => {
   const dispatch = useAppDispatch();
-  const [MbtiValue, setMbtiValue] = useState<string[]>([]);  
-//  useEffect(() => {
-//    const isFinishMbtiSelect = !mbtiValue.includes('');
-//    if (isFinishMbtiSelect) {
-//      dispatch(setPreferMbti(mbtiValue));
-//      setIsFinishPage(true);
-//    }
-//  }, [dispatch, mbtiValue, setIsFinishPage]);
+  const [MbtiValue, setMbtiValue] = useState<MbtiType[]>([
+    { type: '', order: 0 },
+  ]);
+  useEffect(() => {
+    // const isFinishMbtiSelect = !MbtiValue.includes('');
+    // if (isFinishMbtiSelect) {
+    //   dispatch(setPreferMbti(MbtiValue));
+    //   setIsFinishPage(true);
+    // }
+    console.log(MbtiValue);
+  }, [dispatch, MbtiValue, setIsFinishPage]);
 
   useEffect(() => {
     if (MbtiValue.length > 3) setIsFinishPage(true);
@@ -50,7 +57,7 @@ const FourthPage = ({ setIsFinishPage }: StepProps) => {
                 description={MBTI_QUESTIONS[i].description}
                 title={MBTI_TITLE[i]}
                 setValue={setMbtiValue}
-                value={mbtiValue}
+                value={MbtiValue}
                 index={i}
                 key={i}
                 isPrefer={true}
