@@ -46,7 +46,6 @@ export const SliderWrapper = styled.div`
 export const InputWrapper = styled.div`
   width: calc(100% + 16px);
   margin: 0 calc(16px / -2);
-
   position: absolute;
   height: 16px;
 `;
@@ -61,7 +60,9 @@ export const SliderInput = styled.input`
   z-index: 3;
   padding: 0;
   margin: 0;
-
+  left: 0;
+  width: calc(100% - 16px);
+  left: 8px;
   &::-ms-track {
     ${TrackStyles}
   }
@@ -94,6 +95,8 @@ export const RailWrapper = styled.div`
   width: 100%;
   position: absolute;
   height: 16px;
+  width: calc(100% - 16px);
+  left: 8px;
 `;
 
 export const SliderRail = styled.div`
