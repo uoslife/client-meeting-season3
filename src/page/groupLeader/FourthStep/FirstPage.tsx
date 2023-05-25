@@ -20,10 +20,12 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
 
   const buttonLabelArr = ['활발한 편', '차분한 편', '둘 다 좋아요!'];
   const [onClickButton, buttonActiveState, isClickedButton, selectedLabel] =
-    useClickButton(buttonLabelArr);
+    useClickButton(buttonLabelArr, 1);
 
   useEffect(() => {
     if (isClickedButton) {
+      // value.min / 10 + ' - ' + value.max / 10;
+
       // selectedLabel 사용한 전역 저장 로직
       setIsFinishPage(true);
     } else setIsFinishPage(false);
@@ -74,11 +76,11 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
             color="#656D78"
           />
 
-          <DepartmentSelectBox
+          {/* <DepartmentSelectBox
             selectedDepartments={dislikeDepartment}
             setSelectedDepartments={setDislikeDepartment}
             isDislike={true}
-          />
+          /> */}
         </Col>
         <Col gap={32} align={'center'}>
           <Text

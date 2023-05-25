@@ -6,8 +6,11 @@ import * as S from '@/components/buttons/interstSelectButton/InterestSelectButto
 import { ANIMALS } from '@/constants';
 import { useEffect, useState } from 'react';
 import useClickButton from '@/hooks/useClickButton';
+import { setPreferAnimal } from '@/store/feature/meetingType/personalReducer';
+import { useAppDispatch } from '@/store/store';
 
 function ThirdPage({ setIsFinishPage }: StepProps) {
+  const dispatch = useAppDispatch();
   const [onClickButton, buttonActiveState, isClickedButton, selectedLabel] =
     useClickButton(ANIMALS, 9);
 
@@ -15,6 +18,14 @@ function ThirdPage({ setIsFinishPage }: StepProps) {
     // selectedLabel;
     isClickedButton ? setIsFinishPage(true) : setIsFinishPage(false);
   }, [isClickedButton, selectedLabel, setIsFinishPage]);
+
+  useEffect(() => {
+    const animalArr = selectedLabel.map(item => item.label);
+    if (isClickedButton) dispatch(setPreferAnimal(animalArr));
+    else dispatch(setPreferAnimal(['']));
+
+    isClickedButton ? setIsFinishPage(true) : setIsFinishPage(false);
+  }, [dispatch, isClickedButton, selectedLabel, setIsFinishPage]);
 
   return (
     <Col gap={44} padding={'32px 24px'}>

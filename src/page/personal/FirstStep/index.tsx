@@ -7,8 +7,8 @@ import { Footer } from '@/components';
 import { useAppSelector } from '@/store/hooks';
 import { ApplyInfoState } from '@/store/feature/applyInfo';
 
-import FirstPage from './FirstPage';
-import SecondPage from './SecondPage';
+import FirstPage from '@/page/common/applyMyInfoStep/FirstPage';
+import SecondPage from '@/page/common/applyMyInfoStep/SecondPage';
 import ThirdPage from './ThirdPage';
 import FourthPage from './FourthPage';
 import FifthPage from './FifthPage';
@@ -54,7 +54,7 @@ const PersonalFirstStep = () => {
       {changePage(curPage)}
       <Footer
         maxPage={MAX_PAGE}
-        disabled={isFinishPage}
+        disabled={!isFinishPage}
         type={switchPageType()}
       />
     </>
