@@ -13,7 +13,7 @@ const ThirdPage = ({ setIsFinishPage }: StepProps) => {
     '술게임보단 대화를 많이 나누고 싶어요!',
   ];
   const [onClickButton, buttonActiveState, isClickedButton, selectedLabel] =
-    useClickButton(buttonLabelArr);
+    useClickButton(buttonLabelArr, 1);
 
   useEffect(() => {
     if (isClickedButton) {

@@ -16,7 +16,17 @@ import useInput from '@/hooks/useInput';
 import { StepProps } from '@/types/step.type';
 import { useEffect, useState } from 'react';
 
+import { useAppDispatch } from '@/store/store';
+import {
+  setInfoKakaoId,
+  setInfoMajor,
+  setInfoSmoking,
+  setInfoStudentType,
+} from '@/store/feature/common/commonReducer';
+
 const SecondPage = ({ setIsFinishPage }: StepProps) => {
+  const dispatch = useAppDispatch();
+
   const [kakaoId, onChangeKakaoId] = useInput('');
   const [myDepartment, setMyDepartment] = useState<string[]>([]);
   const studentTypeArr = ['학부생', '대학원생', '졸업생'];
@@ -25,7 +35,7 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
     studentTypeButtonActiveState,
     isClickedStudentType,
     studentType,
-  ] = useClickButton(studentTypeArr);
+  ] = useClickButton(studentTypeArr, 1);
 
   const smokingArr = ['흡연', '비흡연'];
   const [
@@ -33,24 +43,28 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
     smokingButtonActiveState,
     isClickedSmoking,
     smoking,
-  ] = useClickButton(smokingArr);
+  ] = useClickButton(smokingArr, 1);
 
   useEffect(() => {
     const isSubmitKakaoId = kakaoId !== '';
-    if (
-      myDepartment.length === 1 &&
-      isSubmitKakaoId &&
-      isClickedStudentType &&
-      isClickedSmoking
-    ) {
+    if (isSubmitKakaoId) dispatch(setInfoKakaoId(kakaoId));
+    else dispatch(setInfoKakaoId(''));
+    // if (isSelectedMajor) dispatch(setInfoMajor(major));
+    if (isClickedStudentType)
+      dispatch(setInfoStudentType(studentType[0].label));
+    if (isClickedSmoking) dispatch(setInfoSmoking(smoking[0].label));
+    if (myDepartment.length === 1 && isSubmitKakaoId && isClickedStudentType && isClickedSmoking) {
       setIsFinishPage(true);
     } else setIsFinishPage(false);
   }, [
+    dispatch,
     isClickedSmoking,
     isClickedStudentType,
     kakaoId,
     setIsFinishPage,
     myDepartment,
+    smoking,
+    studentType,
   ]);
   return (
     <>

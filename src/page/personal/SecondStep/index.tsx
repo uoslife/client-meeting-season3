@@ -51,7 +51,7 @@ const PersonalSecondStep = () => {
       {changePage(curPage)}
       <Footer
         maxPage={MAX_PAGE}
-        disabled={isFinishPage}
+        disabled={!isFinishPage}
         type={switchPageType()}
       />
     </>

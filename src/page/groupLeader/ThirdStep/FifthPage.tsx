@@ -11,7 +11,7 @@ const FifthPage = ({ setIsFinishPage }: StepProps) => {
     '상관 없어요!',
   ];
   const [onClickButton, buttonActiveState, isClickedButton, selectedLabel] =
-    useClickButton(buttonLabelArr);
+    useClickButton(buttonLabelArr, 1);
 
   useEffect(() => {
     if (isClickedButton) {
