@@ -4,13 +4,19 @@ import { StepProps } from '@/types/step.type';
 import { Col, Paddle, Row, Text, TextRoundInput } from '@/components';
 import useInput from '@/hooks/useInput';
 import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '@/store/store';
+import { setInfoName } from '@/store/feature/meetingType/groupReducer';
 
 const FirstPage = ({ setIsFinishPage }: StepProps) => {
   const [nameValue, handleNameValue] = useInput('');
 
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
-    if (nameValue !== '') setIsFinishPage(true);
-    else setIsFinishPage(false);
+    if (nameValue !== '') {
+      setIsFinishPage(true);
+      dispatch(setInfoName(nameValue ?? ''));
+    } else setIsFinishPage(false);
   }, [nameValue, setIsFinishPage]);
 
   return (

@@ -3,17 +3,27 @@ import useClickButton from '@/hooks/useClickButton';
 import { StepProps } from '@/types/step.type';
 import Image from 'next/image';
 import { useEffect } from 'react';
+import { useAppDispatch } from '@/store/store';
+import { setInfoQuestionGroup } from '@/store/feature/meetingType/groupReducer';
 
 const SecondPage = ({ setIsFinishPage }: StepProps) => {
+  const dispatch = useAppDispatch();
   const buttonLabelArr = ['활발한 편이에요!', '차분한 편이에요!'];
   const [onClickButton, buttonActiveState, isClickedButton, selectedLabel] =
     useClickButton(buttonLabelArr, 1);
 
   useEffect(() => {
     if (isClickedButton) {
-      // selectedLabel 사용한 전역 저장 로직
+      dispatch(
+        setInfoQuestionGroup(
+          { label: selectedLabel[0].label, order: 0 } ?? {
+            label: '',
+            order: 0,
+          },
+        ),
+      );
       setIsFinishPage(true);
-    }
+    } else setIsFinishPage(false);
   }, [isClickedButton, selectedLabel, setIsFinishPage]);
 
   return (

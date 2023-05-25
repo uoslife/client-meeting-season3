@@ -4,8 +4,11 @@ import { Button, Col, Paddle, Text } from '@/components';
 import useClickButton from '@/hooks/useClickButton';
 import { StepProps } from '@/types/step.type';
 import Image from 'next/image';
+import { useAppDispatch } from '@/store/store';
+import { setInfoQuestionGroup } from '@/store/feature/meetingType/groupReducer';
 
 const FourthPage = ({ setIsFinishPage }: StepProps) => {
+  const dispatch = useAppDispatch();
   const buttonLabelArr = [
     '조금만 마실래요!',
     '적당히 마실래요!',
@@ -16,9 +19,16 @@ const FourthPage = ({ setIsFinishPage }: StepProps) => {
 
   useEffect(() => {
     if (isClickedButton) {
-      // selectedLabel 사용한 전역 저장 로직
+      dispatch(
+        setInfoQuestionGroup(
+          { label: selectedLabel[0].label, order: 2 } ?? {
+            label: '',
+            order: 0,
+          },
+        ),
+      );
       setIsFinishPage(true);
-    }
+    } else setIsFinishPage(false);
   }, [isClickedButton, selectedLabel, setIsFinishPage]);
 
   return (

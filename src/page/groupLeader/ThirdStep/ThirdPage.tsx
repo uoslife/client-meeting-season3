@@ -6,8 +6,11 @@ import { Button, Col, Paddle, Text } from '@/components';
 import useClickButton from '@/hooks/useClickButton';
 
 import { StepProps } from '@/types/step.type';
+import { useAppDispatch } from '@/store/store';
+import { setInfoQuestionGroup } from '@/store/feature/meetingType/groupReducer';
 
 const ThirdPage = ({ setIsFinishPage }: StepProps) => {
+  const dispatch = useAppDispatch();
   const buttonLabelArr = [
     '다 같이 술게임을 하고 싶어요!',
     '술게임보단 대화를 많이 나누고 싶어요!',
@@ -17,9 +20,16 @@ const ThirdPage = ({ setIsFinishPage }: StepProps) => {
 
   useEffect(() => {
     if (isClickedButton) {
-      // selectedLabel 사용한 전역 저장 로직
+      dispatch(
+        setInfoQuestionGroup(
+          { label: selectedLabel[0].label, order: 1 } ?? {
+            label: '',
+            order: 0,
+          },
+        ),
+      );
       setIsFinishPage(true);
-    }
+    } else setIsFinishPage(false);
   }, [isClickedButton, selectedLabel, setIsFinishPage]);
 
   return (

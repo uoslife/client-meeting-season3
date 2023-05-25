@@ -3,8 +3,11 @@ import useClickButton from '@/hooks/useClickButton';
 import { StepProps } from '@/types/step.type';
 import Image from 'next/image';
 import { useEffect } from 'react';
+import { useAppDispatch } from '@/store/store';
+import { setInfoQuestionGroup } from '@/store/feature/meetingType/groupReducer';
 
 const FifthPage = ({ setIsFinishPage }: StepProps) => {
+  const dispatch = useAppDispatch();
   const buttonLabelArr = [
     '친구를 만들고 싶어요!',
     '연인을 만들고 싶어요!',
@@ -15,9 +18,16 @@ const FifthPage = ({ setIsFinishPage }: StepProps) => {
 
   useEffect(() => {
     if (isClickedButton) {
-      // selectedLabel 사용한 전역 저장 로직
+      dispatch(
+        setInfoQuestionGroup(
+          { label: selectedLabel[0].label, order: 3 } ?? {
+            label: '',
+            order: 0,
+          },
+        ),
+      );
       setIsFinishPage(true);
-    }
+    } else setIsFinishPage(false);
   }, [isClickedButton, selectedLabel, setIsFinishPage]);
 
   return (
