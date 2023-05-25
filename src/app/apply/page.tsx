@@ -1,6 +1,6 @@
 'use client';
 
-import { Text, Button, Checkbox, Footer } from '@/components';
+import { Text, Button, Checkbox, Footer, Toast } from '@/components';
 import Col from '@/components/layout/Col';
 import Row from '@/components/layout/Row';
 import { setMeetingType } from '@/store/feature/applyInfo';
@@ -25,6 +25,8 @@ function Apply() {
 
   const [checkboxState, setCheckboxState] = useState([false, false]);
   const [isFinishPage, setIsFinishPage] = useState(false);
+  const [modal, setModal] = useState(false);
+
   const router = useRouter();
 
   const onClickPrev = () => router.push('/');
@@ -36,6 +38,15 @@ function Apply() {
       dispatch(setMeetingType('personal'));
       router.push('apply/personal');
     }
+  };
+
+  const handleTypeClick = (i: number) => () => {
+    setMeetingTypeState(() => {
+      const newState = meetingTypeInitState;
+      newState[i].active = true;
+      return newState;
+    });
+    setModal(true);
   };
 
   useEffect(() => {
@@ -74,25 +85,13 @@ function Apply() {
               primary={meetingTypeState[0].active ? 'active' : 'inactive'}
               label="1:1 미팅"
               textSize="sm"
-              onClick={() =>
-                setMeetingTypeState(() => {
-                  const newState = meetingTypeInitState;
-                  newState[0].active = true;
-                  return newState;
-                })
-              }
+              onClick={handleTypeClick(0)}
             />
             <Button
               primary={meetingTypeState[1].active ? 'active' : 'inactive'}
               label="3:3 미팅"
               textSize="sm"
-              onClick={() =>
-                setMeetingTypeState(() => {
-                  const newState = meetingTypeInitState;
-                  newState[1].active = true;
-                  return newState;
-                })
-              }
+              onClick={handleTypeClick(1)}
             />
           </Col>
         </Col>
@@ -131,6 +130,10 @@ function Apply() {
         disabled={!isFinishPage}
         onClickPrev={onClickPrev}
         onClickNext={onClickNext}
+      />
+      <Toast
+        text={'미팅 종류를 선택하시면 바꾸실 수 없습니다'}
+        isOpen={modal}
       />
     </>
   );

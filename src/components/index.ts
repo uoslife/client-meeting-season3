@@ -47,6 +47,8 @@ export type { DropdownInputProps } from './input/dropdownInput/DropdownInput';
 // modal
 export { default as BottomSheet } from './modal/bottomSheet/BottomSheet';
 export type { BottomSheetProps } from './modal/bottomSheet/BottomSheet';
+export { default as Toast } from './modal/toast/Toast';
+export type { ToastProps } from './modal/toast/Toast';
 
 // molecules
 export { default as ResultBox } from './molecules/resultBox/ResultBox';

@@ -1,7 +1,7 @@
 import { ApplyDataArr } from '@/types/apply.type';
 
 export const copyLink = (link: string) => {
-  navigator.clipboard.writeText(link).then(() => alert('copyed!'));
+  navigator.clipboard.writeText(link);
 };
 
 export const toPostForm = (applyData: ApplyDataArr) => {
