@@ -8,9 +8,33 @@ import * as S from '@/styles/pages/page.style';
 import { copyLink } from '@/utils';
 import { SOCIAL_LINK } from '@/constants';
 import { useRouter } from 'next/navigation';
+import { useAppSelector } from '@/store/store';
 
 const Main = () => {
   const router = useRouter();
+  const { meetingType } = useAppSelector(state => state.applyInfo);
+  const handleApplyButton = () => {
+    switch (meetingType) {
+      case '':
+        router.push('/apply');
+        break;
+      case 'personal':
+        router.push('apply/personal');
+        break;
+      case 'group':
+        router.push('apply/branching');
+        break;
+      case 'groupLeader':
+        router.push('apply/groupLeader');
+        break;
+      case 'groupMember':
+        router.push('apply/groupMember');
+        break;
+      default:
+        router.push('/apply');
+        break;
+    }
+  };
   return (
     <>
       <S.MainWrapper>
@@ -44,20 +68,10 @@ const Main = () => {
         <S.DateWrapper>
           <Text label={'신청기간'} size={'lg'} weight={300} />
           <S.DateTextWrapper>
-            <Text
-              label={'05.26'}
-              size={'4xl'}
-              weight={800}
-              font="Leferi Point Type"
-            />
+            <Text label={'05.26'} size={'4xl'} weight={800} />
             <Text label={'(금)'} size={'2xl'} weight={500} />
-            <Text label={'-'} size={'4xl'} font="Leferi Point Type" />
-            <Text
-              label={'05.28'}
-              size={'4xl'}
-              weight={800}
-              font="Leferi Point Type"
-            />
+            <Text label={'-'} size={'4xl'} />
+            <Text label={'05.28'} size={'4xl'} weight={800} />
             <Text label={'(일)'} size={'2xl'} weight={500} />
           </S.DateTextWrapper>
         </S.DateWrapper>
@@ -65,7 +79,7 @@ const Main = () => {
           <Button
             primary="active"
             label="지금 참여하기 >"
-            onClick={() => router.push('/apply')}
+            onClick={handleApplyButton}
           />
         </div>
       </S.MainWrapper>
