@@ -14,7 +14,7 @@ import { AGE_SLIDER_ARR } from '@/constants';
 import useClickButton from '@/hooks/useClickButton';
 import { StepProps } from '@/types/step.type';
 import { useEffect, useState } from 'react';
-import { useAppDispatch } from '@/store/store';
+import { useAppDispatch, useAppSelector } from '@/store/store';
 import {
   setPreferAgeGroup,
   setPreferAtmosphere,
@@ -23,12 +23,17 @@ import {
 
 const FirstPage = ({ setIsFinishPage }: StepProps) => {
   const dispatch = useAppDispatch();
+  const { prefer_major, prefer_atmosphere } = useAppSelector(
+    state => state.group,
+  );
   const [age, setAge] = useState({ min: 0, max: 100 });
-  const [dislikeDepartment, setDislikeDepartment] = useState<string[]>([]);
+  const [dislikeDepartment, setDislikeDepartment] = useState<string[]>(
+    prefer_major.data[0] === '' ? [] : prefer_major.data,
+  );
   const buttonLabelArr = ['활발한 편', '차분한 편', '둘 다 좋아요!'];
 
   const [onClickButton, buttonActiveState, isClickedButton, selectedLabel] =
-    useClickButton(buttonLabelArr, 1);
+    useClickButton(buttonLabelArr, 1, prefer_atmosphere);
 
   useEffect(() => {
     if (isClickedButton) {
@@ -37,7 +42,7 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
         AGE_SLIDER_ARR[age.max / 10],
       ];
 
-      dispatch(setPreferAgeGroup(ageArr ?? []));
+      dispatch(setPreferAgeGroup(ageArr ?? ['']));
       dispatch(setPreferMajorGroup(dislikeDepartment ?? ['']));
       dispatch(setPreferAtmosphere(selectedLabel[0].label ?? ''));
 

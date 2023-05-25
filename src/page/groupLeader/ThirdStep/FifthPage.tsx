@@ -3,18 +3,19 @@ import useClickButton from '@/hooks/useClickButton';
 import { StepProps } from '@/types/step.type';
 import Image from 'next/image';
 import { useEffect } from 'react';
-import { useAppDispatch } from '@/store/store';
+import { useAppDispatch, useAppSelector } from '@/store/store';
 import { setInfoQuestionGroup } from '@/store/feature/meetingType/groupReducer';
 
 const FifthPage = ({ setIsFinishPage }: StepProps) => {
   const dispatch = useAppDispatch();
+  const { info_question } = useAppSelector(state => state.group);
   const buttonLabelArr = [
     '친구를 만들고 싶어요!',
     '연인을 만들고 싶어요!',
     '상관 없어요!',
   ];
   const [onClickButton, buttonActiveState, isClickedButton, selectedLabel] =
-    useClickButton(buttonLabelArr, 1);
+    useClickButton(buttonLabelArr, 1, info_question);
 
   useEffect(() => {
     if (isClickedButton) {

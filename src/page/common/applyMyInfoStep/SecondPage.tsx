@@ -5,18 +5,15 @@ import {
   Col,
   DepartmentSelectBox,
   Paddle,
-  RoundedRectangleButton,
-  Row,
   Text,
   TextRoundInput,
 } from '@/components';
-import { DropdownInput } from '@/components';
 import useClickButton from '@/hooks/useClickButton';
 import useInput from '@/hooks/useInput';
 import { StepProps } from '@/types/step.type';
 import { useEffect, useState } from 'react';
 
-import { useAppDispatch } from '@/store/store';
+import { useAppDispatch, useAppSelector } from '@/store/store';
 import {
   setInfoKakaoId,
   setInfoMajor,
@@ -26,16 +23,20 @@ import {
 
 const SecondPage = ({ setIsFinishPage }: StepProps) => {
   const dispatch = useAppDispatch();
+  const { info_kakaoId, info_major, info_studentType, info_smoking } =
+    useAppSelector(state => state.common);
 
-  const [kakaoId, onChangeKakaoId] = useInput('');
-  const [myDepartment, setMyDepartment] = useState<string[]>([]);
+  const [kakaoId, onChangeKakaoId] = useInput(info_kakaoId.data ?? '');
+  const [myDepartment, setMyDepartment] = useState<string[]>(
+    info_major.data ? [info_major.data] : [],
+  );
   const studentTypeArr = ['학부생', '대학원생', '졸업생'];
   const [
     onClickStudentTypeButton,
     studentTypeButtonActiveState,
     isClickedStudentType,
     studentType,
-  ] = useClickButton(studentTypeArr, 1);
+  ] = useClickButton(studentTypeArr, 1, info_studentType);
 
   const smokingArr = ['흡연', '비흡연'];
   const [
@@ -43,7 +44,7 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
     smokingButtonActiveState,
     isClickedSmoking,
     smoking,
-  ] = useClickButton(smokingArr, 1);
+  ] = useClickButton(smokingArr, 1, info_smoking);
 
   useEffect(() => {
     const isSubmitKakaoId = kakaoId !== '';

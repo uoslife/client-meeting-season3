@@ -6,17 +6,18 @@ import { Button, Col, Paddle, Text } from '@/components';
 import useClickButton from '@/hooks/useClickButton';
 
 import { StepProps } from '@/types/step.type';
-import { useAppDispatch } from '@/store/store';
+import { useAppDispatch, useAppSelector } from '@/store/store';
 import { setInfoQuestionGroup } from '@/store/feature/meetingType/groupReducer';
 
 const ThirdPage = ({ setIsFinishPage }: StepProps) => {
   const dispatch = useAppDispatch();
+  const { info_question } = useAppSelector(state => state.group);
   const buttonLabelArr = [
     '다 같이 술게임을 하고 싶어요!',
     '술게임보단 대화를 많이 나누고 싶어요!',
   ];
   const [onClickButton, buttonActiveState, isClickedButton, selectedLabel] =
-    useClickButton(buttonLabelArr, 1);
+    useClickButton(buttonLabelArr, 1, info_question);
 
   useEffect(() => {
     if (isClickedButton) {

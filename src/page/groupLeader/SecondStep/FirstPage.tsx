@@ -8,11 +8,13 @@ import { useAppDispatch, useAppSelector } from '@/store/store';
 import { setInfoName } from '@/store/feature/meetingType/groupReducer';
 
 const FirstPage = ({ setIsFinishPage }: StepProps) => {
-  const [nameValue, handleNameValue] = useInput('');
-
   const dispatch = useAppDispatch();
+  const { info_name } = useAppSelector(state => state.group);
+
+  const [nameValue, handleNameValue] = useInput(info_name.data ?? '');
 
   useEffect(() => {
+    console.log(info_name);
     if (nameValue !== '') {
       setIsFinishPage(true);
       dispatch(setInfoName(nameValue ?? ''));

@@ -8,9 +8,11 @@ import { StepProps } from '@/types/step.type';
 import Image from 'next/image';
 import Image2 from 'public/images/illust/personal/2.jpg';
 import { useEffect } from 'react';
+import { useAppSelector } from '@/store/hooks';
 
 function SecondPage({ setIsFinishPage }: StepProps) {
   const dispatch = useAppDispatch();
+  const { info_question } = useAppSelector(state => state.personal);
 
   const questionArr = [
     '그 자리에서 바로 풀어야 해요',
@@ -21,7 +23,7 @@ function SecondPage({ setIsFinishPage }: StepProps) {
     questionButtonActiveState,
     isClickedQuestion,
     question,
-  ] = useClickButton(questionArr, 1);
+  ] = useClickButton(questionArr, 1, info_question);
 
   useEffect(() => {
     if (isClickedQuestion) {
