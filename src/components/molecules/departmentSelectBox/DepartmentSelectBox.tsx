@@ -97,7 +97,7 @@ const DepartmentSelectBox = ({
               return (
                 <RoundedRectangleButton
                   fontSize={'sm'}
-                  type={'red'}
+                  type={isDislike ? 'red' : 'primary'}
                   deleteColor={isDislike ? 'red' : 'white'}
                   label={name}
                   height={32}
