@@ -16,7 +16,23 @@ import { StepProps } from '@/types/step.type';
 import useClickButton from '@/hooks/useClickButton';
 import { AGE_ARR, HEIGHT_ARR } from '@/constants';
 
+import {
+  setInfoNickname,
+  setInfoGender,
+  setInfoAge,
+  setInfoHeight,
+} from '@/store/feature/common/commonReducer';
+import { useAppDispatch, useAppSelector } from '@/store/store';
+
+const buttonLabelArr = ['남자', '여자'];
+
 const FirstPage = ({ setIsFinishPage }: StepProps) => {
+  const { info_nickname, info_gender, info_age, info_height } = useAppSelector(
+    state => state.common,
+  );
+
+  const dispatch = useAppDispatch();
+
   const [currentNicknameStatus, setCurrentNicknameStatus] = useState<
     'success' | 'error' | 'default'
   >('default');
@@ -25,21 +41,26 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
   const [isFinishNickname, setIsFinishNickname] = useState(false);
 
   const onChangeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //reset
     setCurrentNicknameStatus('default');
     setNicknameStatusMessage('');
+    dispatch(setInfoNickname('')); // 매번 호출되는 side effect..
+    //set
     setNickname(e.target.value);
     setIsFinishNickname(false);
   };
   const handleDoubleCheckButton = () => {
     setCurrentNicknameStatus('error');
     setNicknameStatusMessage('이미 있는 이름입니다.');
+
+    dispatch(setInfoNickname(nickname));
     setIsFinishNickname(true);
   };
 
   //gender
-  const buttonLabelArr = ['남자', '여자'];
+
   const [onClickButton, buttonActiveState, isClickedButton, selectedLabel] =
-    useClickButton(buttonLabelArr);
+    useClickButton(buttonLabelArr, 1);
 
   //age
   const [age, setAge] = useState<string | number>(0);
@@ -48,12 +69,38 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
   const [height, setHeight] = useState<string | number>(0);
 
   useEffect(() => {
+    //아래에 갖다붙이기? rerender..
+    if (info_nickname.data) setNickname(info_nickname.data);
+    // if (info_gender.data)
+    //   onClickButton(buttonLabelArr.indexOf(info_gender.data));
+    if (info_age.data) setAge(info_age.data);
+    if (info_height.data) setAge(info_height.data);
+  }, [
+    info_age.data,
+    info_gender.data,
+    info_height.data,
+    info_nickname.data,
+    onClickButton,
+  ]);
+
+  useEffect(() => {
     const isClickAge = age !== 0;
     const isClickHeight = height !== 0;
+    if (isClickedButton) dispatch(setInfoGender(selectedLabel[0].label));
+    if (isClickAge) dispatch(setInfoAge(age as number));
+    if (isClickHeight) dispatch(setInfoHeight(height as number));
     if (isFinishNickname && isClickedButton && isClickAge && isClickHeight) {
       setIsFinishPage(true);
     } else setIsFinishPage(false);
-  }, [age, height, isClickedButton, isFinishNickname, setIsFinishPage]);
+  }, [
+    age,
+    dispatch,
+    height,
+    isClickedButton,
+    isFinishNickname,
+    selectedLabel,
+    setIsFinishPage,
+  ]);
 
   return (
     <Paddle top={32} left={24} right={24} bottom={140}>

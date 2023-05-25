@@ -24,6 +24,15 @@ const useClickButton = (
   const onClickButton = (order: number) => {
     const isMaxSelectedCount =
       state.filter(data => data.active).length >= maxSelectedCount;
+    if (maxSelectedCount === 1) {
+      setState(() => {
+        const newState = initState;
+        newState[order].active = true;
+        return newState;
+      });
+      return;
+    }
+
     setState(prev =>
       prev.map(item =>
         item.order === order

@@ -35,9 +35,9 @@ const switchCheckboxIcon = ({
           <path
             d="M13 4L6 12L3 9"
             stroke="white"
-            stroke-width="1.5"
-            stroke-miterlimit="10"
-            stroke-linecap="square"
+            strokeWidth="1.5"
+            strokeMiterlimit="10"
+            strokeLinecap="square"
           />
           <rect
             x="0.5"
