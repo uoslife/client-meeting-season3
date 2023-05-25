@@ -1,5 +1,7 @@
-import { InformationDataType } from '@/types/information.type';
+import { InformationDataType, InformationFilterType } from '@/types/information.type';
 import { ANIMALS } from '@/constants/index';
+import { DEPARTMENTS } from '@/constants/departments';
+
 export const informationToBinary = (applyData: InformationDataType) => {
   let binary = '';
   const { height, question, mbti, animal } = applyData;
@@ -18,3 +20,23 @@ export const informationToBinary = (applyData: InformationDataType) => {
   binary = heightBinary + questionBinary + mbtiBinary + animalBinary;
   return binary;
 };
+
+
+export const informationFilterToBinary = (applyData: InformationFilterType) => {
+  let binary = '';
+  const { age, smoking, major, studentType } = applyData;
+  const { data: ageData } = age;
+  const { data: smokingData } = smoking;
+  const { data: majorData } = major;
+  const { data: studentTypeData } = studentType;
+  const ageBinary = ((2024-ageData) % 100).toString(2).padStart(7, '0');
+  const smokingBinary = smokingData === '흡연' ? '1' : '0';
+  const majorBinary = DEPARTMENTS.map((item) => majorData == item.name ? '1' : '0').join('');
+  const studentTypeArr = ['학부생', '대학원생', '졸업생'];
+  const studentTypeBinary = studentTypeArr.map((item) => studentTypeData === item ? '1' : '0').join('');
+
+  binary = ageBinary + smokingBinary + majorBinary + studentTypeBinary;
+  return binary;
+};
+
+

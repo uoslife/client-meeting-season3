@@ -6,3 +6,11 @@ export type InformationDataType = {
   mbti: ApplyData<string[]>;
   animal: ApplyData<string[]>;
 }
+
+
+export type InformationFilterType = {
+  age: ApplyData<number>;
+  smoking: ApplyData<string>;
+  major: ApplyData<string>;
+  studentType: ApplyData<string>;
+}
