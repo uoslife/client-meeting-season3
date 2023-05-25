@@ -40,7 +40,7 @@ const Main = () => {
       <S.MainWrapper>
         <MainHeader />
         <Image
-          src={'/images/MainPoster.png'}
+          src={'/images/MainPoster.jpg'}
           alt="메인 배너"
           height={421}
           width={366}
