@@ -1,8 +1,8 @@
-import { InformationDataType, InformationFilterType } from '@/types/information.type';
+import { SingleInformationDataType, SingleInformationFilterType, SinglePreferenceType } from '@/types/information.type';
 import { ANIMALS } from '@/constants/index';
 import { DEPARTMENTS } from '@/constants/departments';
 
-export const informationToBinary = (applyData: InformationDataType) => {
+export const informationToBinary = (applyData: SingleInformationDataType) => {
   let binary = '';
   const { height, question, mbti, animal } = applyData;
   const { data: heightData } = height;
@@ -22,7 +22,7 @@ export const informationToBinary = (applyData: InformationDataType) => {
 };
 
 
-export const informationFilterToBinary = (applyData: InformationFilterType) => {
+export const informationFilterToBinary = (applyData: SingleInformationFilterType) => {
   let binary = '';
   const { age, smoking, major, studentType } = applyData;
   const { data: ageData } = age;
@@ -40,3 +40,18 @@ export const informationFilterToBinary = (applyData: InformationFilterType) => {
 };
 
 
+export const preferenceToBinary = (applyData: SinglePreferenceType) => {
+  let binary = '';
+  const { height, mbti, animal } = applyData;
+  const { data: heightData } = height;
+  const { data: mbtiData } = mbti;
+  const { data: animalData } = animal;
+  const heightString = parseInt(heightData[0] + heightData[1]) 
+  const heightBinary = heightString.toString(2).padStart(8, '0');
+  const mbtiString = 'EISNTFJP';
+  const mbtiBinary = mbtiString.split('').map(char => mbtiData.includes(char) ? '1' : '0').join('');
+  const animalBinary = ANIMALS.map((item) => animalData.includes(item) ? '1' : '0').join('');
+
+  binary = heightBinary + mbtiBinary + animalBinary;
+  return binary;
+};
