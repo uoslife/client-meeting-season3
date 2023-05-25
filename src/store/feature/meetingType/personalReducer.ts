@@ -6,10 +6,10 @@ export type PersonalState = {
   info_mbti: ApplyData<string[]>;
   info_interests: ApplyData<string[]>;
   info_question: ApplyData<ApplyQuestionArrType>;
-  prefer_age: ApplyData<string>;
-  prefer_height: ApplyData<string>;
+  prefer_age: ApplyData<string[]>;
+  prefer_height: ApplyData<string[]>;
   prefer_studentType: ApplyData<string>;
-  prefer_major: ApplyData<string>;
+  prefer_major: ApplyData<string[]>;
   prefer_smoking: ApplyData<string>;
   prefer_animal: ApplyData<string[]>;
   prefer_mbti: ApplyData<string[]>;
@@ -47,31 +47,31 @@ const initialState: PersonalState = {
   },
   prefer_age: {
     title_kr: '나이',
-    title_en: 'animal',
+    title_en: 'age',
     type: 'prefer',
-    data: '',
+    data: [''],
   },
   prefer_height: {
     title_kr: '키',
-    title_en: 'animal',
+    title_en: 'height',
     type: 'prefer',
-    data: '',
+    data: [''],
   },
   prefer_studentType: {
     title_kr: '신분',
-    title_en: 'animal',
+    title_en: 'studentType',
     type: 'prefer',
     data: '',
   },
   prefer_major: {
     title_kr: '기피학과',
-    title_en: 'animal',
+    title_en: 'major',
     type: 'prefer',
-    data: '',
+    data: [''],
   },
   prefer_smoking: {
     title_kr: '흡연 여부',
-    title_en: 'animal',
+    title_en: 'smoking',
     type: 'prefer',
     data: '',
   },
@@ -83,7 +83,7 @@ const initialState: PersonalState = {
   },
   prefer_mbti: {
     title_kr: 'MBTI',
-    title_en: 'animal',
+    title_en: 'mbti',
     type: 'prefer',
     data: [''],
   },
@@ -102,7 +102,7 @@ export const personal = createSlice({
     setInfoInterests: (state, action: PayloadAction<string[]>) => {
       state.info_interests.data = action.payload;
     },
-    setInfoQuestion: (
+    setInfoQuestionPersonal: (
       state,
       action: PayloadAction<{ label: string; order: number }>,
     ) => {
@@ -112,16 +112,16 @@ export const personal = createSlice({
         l.order === order ? (l.label = label) : l,
       );
     },
-    setPreferAge: (state, action: PayloadAction<string>) => {
+    setPreferAgePersonal: (state, action: PayloadAction<string[]>) => {
       state.prefer_age.data = action.payload;
     },
-    setPreferHeight: (state, action: PayloadAction<string>) => {
+    setPreferHeight: (state, action: PayloadAction<string[]>) => {
       state.prefer_height.data = action.payload;
     },
     setPreferStudentType: (state, action: PayloadAction<string>) => {
       state.prefer_studentType.data = action.payload;
     },
-    setPreferMajor: (state, action: PayloadAction<string>) => {
+    setPreferMajorPersonal: (state, action: PayloadAction<string[]>) => {
       state.prefer_major.data = action.payload;
     },
     setPreferSmoking: (state, action: PayloadAction<string>) => {
@@ -140,11 +140,11 @@ export const {
   setInfoAnimal,
   setInfoMbti,
   setInfoInterests,
-  setInfoQuestion,
-  setPreferAge,
+  setInfoQuestionPersonal,
+  setPreferAgePersonal,
   setPreferAnimal,
   setPreferHeight,
-  setPreferMajor,
+  setPreferMajorPersonal,
   setPreferMbti,
   setPreferSmoking,
   setPreferStudentType,

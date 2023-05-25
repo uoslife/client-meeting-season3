@@ -36,13 +36,13 @@ const initialState: GroupState = {
   },
   prefer_age: {
     title_kr: '나이',
-    title_en: 'animal',
+    title_en: 'age',
     type: 'prefer',
     data: [''],
   },
   prefer_major: {
     title_kr: '기피학과',
-    title_en: 'animal',
+    title_en: 'major',
     type: 'prefer',
     data: [''],
   },
@@ -64,7 +64,7 @@ export const personal = createSlice({
     setInfoPreferDay: (state, action: PayloadAction<string[]>) => {
       state.info_preferDay.data = action.payload;
     },
-    setInfoQuestion: (
+    setInfoQuestionGroup: (
       state,
       action: PayloadAction<{ label: string; order: number }>,
     ) => {
@@ -74,10 +74,10 @@ export const personal = createSlice({
         l.order === order ? (l.label = label) : l,
       );
     },
-    setPreferAge: (state, action: PayloadAction<string[]>) => {
+    setPreferAgeGroup: (state, action: PayloadAction<string[]>) => {
       state.prefer_age.data = action.payload;
     },
-    setPreferMajor: (state, action: PayloadAction<string[]>) => {
+    setPreferMajorGroup: (state, action: PayloadAction<string[]>) => {
       state.prefer_major.data = action.payload;
     },
     setPreferAtmosphere: (state, action: PayloadAction<string>) => {
@@ -89,9 +89,9 @@ export const personal = createSlice({
 export const {
   setInfoName,
   setInfoPreferDay,
-  setInfoQuestion,
-  setPreferAge,
-  setPreferMajor,
+  setInfoQuestionGroup,
+  setPreferAgeGroup,
+  setPreferMajorGroup,
   setPreferAtmosphere,
 } = personal.actions;
 export default personal.reducer;

@@ -70,11 +70,11 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
 
   useEffect(() => {
     //아래에 갖다붙이기? rerender..
-    if (info_nickname.data) setNickname(info_nickname.data);
+    // if (info_nickname.data) setNickname(info_nickname.data);
     // if (info_gender.data)
     //   onClickButton(buttonLabelArr.indexOf(info_gender.data));
-    if (info_age.data) setAge(info_age.data);
-    if (info_height.data) setAge(info_height.data);
+    // if (info_age.data) setAge(info_age.data);
+    // if (info_height.data) setAge(info_height.data);
   }, [
     info_age.data,
     info_gender.data,
