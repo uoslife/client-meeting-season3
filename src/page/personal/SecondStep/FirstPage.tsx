@@ -2,7 +2,7 @@
 
 import { Button, Col, Text } from '@/components';
 import useClickButton from '@/hooks/useClickButton';
-import { setInfoQuestion } from '@/store/feature/meetingType/personalReducer';
+import { setInfoQuestionPersonal } from '@/store/feature/meetingType/personalReducer';
 import { useAppDispatch } from '@/store/store';
 import { StepProps } from '@/types/step.type';
 import Image from 'next/image';
@@ -22,8 +22,8 @@ function FirstPage({ setIsFinishPage }: StepProps) {
 
   useEffect(() => {
     if (isClickedQuestion) {
+      dispatch(setInfoQuestionPersonal({ label: question[0].label, order: 0 }));
       setIsFinishPage(true);
-      dispatch(setInfoQuestion({ label: question[0].label, order: 0 }));
     } else setIsFinishPage(false);
   }, [dispatch, isClickedQuestion, question, setIsFinishPage]);
   return (

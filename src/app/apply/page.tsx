@@ -3,6 +3,7 @@
 import { Text, Button, Checkbox, Footer } from '@/components';
 import Col from '@/components/layout/Col';
 import Row from '@/components/layout/Row';
+import useClickButton from '@/hooks/useClickButton';
 import { setMeetingType } from '@/store/feature/applyInfo';
 import { useAppDispatch } from '@/store/store';
 import { useRouter } from 'next/navigation';
@@ -10,42 +11,42 @@ import { useEffect, useState } from 'react';
 
 function Apply() {
   const dispatch = useAppDispatch();
-  const meetingTypeInitState = [
-    {
-      name: 'personal',
-      active: false,
-    },
-    {
-      name: 'group',
-      active: false,
-    },
-  ];
-  const [meetingTypeState, setMeetingTypeState] =
-    useState(meetingTypeInitState);
 
-  const [checkboxState, setCheckboxState] = useState([false, false]);
-  const [isFinishPage, setIsFinishPage] = useState(false);
   const router = useRouter();
 
-  const onClickPrev = () => router.push('/');
-  const onClickNext = () => {
-    if (meetingTypeState.find(data => data.active)!.name === 'group') {
-      dispatch(setMeetingType('group'));
-      router.push('/apply/branching');
-    } else {
-      dispatch(setMeetingType('personal'));
-      router.push('apply/personal');
-    }
-  };
+  const [checkboxState, setCheckboxState] = useState([false, false]);
+
+  const meetingTypeArr = ['1:1 미팅', '3:3 미팅'];
+  const [
+    onClickMeetingTypeButton,
+    meetingTypeButtonActiveState,
+    isClickedMeetingType,
+    meetingType,
+  ] = useClickButton(meetingTypeArr, 1);
+
+  const [isFinishPage, setIsFinishPage] = useState(false);
 
   useEffect(() => {
-    if (
-      !meetingTypeState.find(data => data.active) ||
-      checkboxState.includes(false)
-    )
-      setIsFinishPage(false);
-    else setIsFinishPage(true);
-  }, [meetingTypeState, checkboxState]);
+    if (isClickedMeetingType) setIsFinishPage(true);
+    else setIsFinishPage(false);
+  }, [isClickedMeetingType]);
+
+  const onClickPrev = () => router.push('/');
+
+  const onClickNext = () => {
+    switch (meetingType[0].label) {
+      case meetingTypeArr[0]:
+        dispatch(setMeetingType('personal'));
+        router.push(`apply/personal`);
+        return;
+      case meetingTypeArr[1]:
+        dispatch(setMeetingType('group'));
+        router.push('/apply/branching');
+        return;
+      default:
+        return;
+    }
+  };
 
   return (
     <>
@@ -70,30 +71,17 @@ function Apply() {
             </Col>
           </Col>
           <Col gap={12}>
-            <Button
-              primary={meetingTypeState[0].active ? 'active' : 'inactive'}
-              label="1:1 미팅"
-              textSize="sm"
-              onClick={() =>
-                setMeetingTypeState(() => {
-                  const newState = meetingTypeInitState;
-                  newState[0].active = true;
-                  return newState;
-                })
-              }
-            />
-            <Button
-              primary={meetingTypeState[1].active ? 'active' : 'inactive'}
-              label="3:3 미팅"
-              textSize="sm"
-              onClick={() =>
-                setMeetingTypeState(() => {
-                  const newState = meetingTypeInitState;
-                  newState[1].active = true;
-                  return newState;
-                })
-              }
-            />
+            {meetingTypeArr.map((label, i) => (
+              <Button
+                key={i}
+                label={label}
+                primary={
+                  meetingTypeButtonActiveState(i) ? 'active' : 'inactive'
+                }
+                textSize="base"
+                onClick={() => onClickMeetingTypeButton(i)}
+              />
+            ))}
           </Col>
         </Col>
         <Col gap={8}>

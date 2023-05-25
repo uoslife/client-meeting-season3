@@ -49,11 +49,20 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
     const isSubmitKakaoId = kakaoId !== '';
     if (isSubmitKakaoId) dispatch(setInfoKakaoId(kakaoId));
     else dispatch(setInfoKakaoId(''));
-    // if (isSelectedMajor) dispatch(setInfoMajor(major));
+
+    if (myDepartment[0]) dispatch(setInfoMajor(myDepartment[0]));
+    else dispatch(setInfoMajor(''));
+
     if (isClickedStudentType)
       dispatch(setInfoStudentType(studentType[0].label));
+
     if (isClickedSmoking) dispatch(setInfoSmoking(smoking[0].label));
-    if (myDepartment.length === 1 && isSubmitKakaoId && isClickedStudentType && isClickedSmoking) {
+    if (
+      myDepartment[0] &&
+      isSubmitKakaoId &&
+      isClickedStudentType &&
+      isClickedSmoking
+    ) {
       setIsFinishPage(true);
     } else setIsFinishPage(false);
   }, [
@@ -76,6 +85,7 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
                 label={'4. 본인의 카카오톡 ID를 선택해주세요.'}
                 weight={700}
                 font="LeferiBaseType-RegularA"
+                color="#3B4046"
               />
               <Text
                 label={
@@ -99,6 +109,7 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
                 label={'5. 본인의 학과를 선택해주세요.'}
                 weight={700}
                 font="LeferiBaseType-RegularA"
+                color="#3B4046"
               />
             </Col>
             <DepartmentSelectBox
@@ -115,6 +126,7 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
                 label={'6. 본인의 신분을 선택해주세요.'}
                 weight={700}
                 font="LeferiBaseType-RegularA"
+                color="#3B4046"
               />
             </Col>
             <Col gap={12}>

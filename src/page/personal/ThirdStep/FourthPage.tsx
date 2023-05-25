@@ -7,23 +7,22 @@ import { colors } from '@/styles/styles';
 import { setPreferMbti } from '@/store/feature/meetingType/personalReducer';
 import { useAppDispatch } from '@/store/store';
 
-        
 const FourthPage = ({ setIsFinishPage }: StepProps) => {
   const dispatch = useAppDispatch();
-  const [MbtiValue, setMbtiValue] = useState<string[]>([]);  
-//  useEffect(() => {
-//    const isFinishMbtiSelect = !mbtiValue.includes('');
-//    if (isFinishMbtiSelect) {
-//      dispatch(setPreferMbti(mbtiValue));
-//      setIsFinishPage(true);
-//    }
-//  }, [dispatch, mbtiValue, setIsFinishPage]);
+  const [mbtiValue, setMbtiValue] = useState<string[]>([]);
+  //  useEffect(() => {
+  //    const isFinishMbtiSelect = !mbtiValue.includes('');
+  //    if (isFinishMbtiSelect) {
+  //      dispatch(setPreferMbti(mbtiValue));
+  //      setIsFinishPage(true);
+  //    }
+  //  }, [dispatch, mbtiValue, setIsFinishPage]);
 
   useEffect(() => {
-    if (MbtiValue.length > 3) setIsFinishPage(true);
-  }, [MbtiValue]);
+    if (mbtiValue.length > 3) setIsFinishPage(true);
+  }, [mbtiValue, setIsFinishPage]);
 
-  // api로 값 보낼 땐, MbtiValue.split('')을 사용합니다.
+  // api로 값 보낼 땐, mbtiValue.split('')을 사용합니다.
   return (
     <Col padding={'32px 35px'} gap={36}>
       <Col gap={12} align={'center'}>

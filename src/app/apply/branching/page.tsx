@@ -3,41 +3,48 @@
 import { Text, Button, Checkbox, Footer } from '@/components';
 import Col from '@/components/layout/Col';
 import Row from '@/components/layout/Row';
+import useClickButton from '@/hooks/useClickButton';
 import { setMeetingType } from '@/store/feature/applyInfo';
 import { useAppDispatch } from '@/store/store';
+import { group } from 'console';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 function Apply() {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const groupTypeInitState = [
-    {
-      name: 'groupLeader',
-      active: false,
-    },
-    {
-      name: 'groupMember',
-      active: false,
-    },
-  ];
-  const [groupTypeState, setGroupTypeState] = useState(groupTypeInitState);
+  const groupTypeArr = ['팅 만들기', '팅 참여하기'];
+  const [
+    onClickGroupTypeButton,
+    groupTypeButtonActiveState,
+    isClickedGroupType,
+    groupType,
+  ] = useClickButton(groupTypeArr, 1);
 
   const [isFinishPage, setIsFinishPage] = useState(false);
+
   useEffect(() => {
-    if (!groupTypeState.find(data => data.active)) setIsFinishPage(false);
-    else setIsFinishPage(true);
-  }, [groupTypeState]);
+    if (isClickedGroupType) setIsFinishPage(true);
+    else setIsFinishPage(false);
+  }, [isClickedGroupType]);
 
   const onClickPrev = () => {
     router.push('apply');
   };
+
   const onClickNext = () => {
-    const currentName = groupTypeState.find(state => state.active)!.name as
-      | 'groupLeader'
-      | 'groupMember';
-    dispatch(setMeetingType(currentName));
-    router.push(`apply/${currentName}`);
+    const switchCurrentName = () => {
+      switch (groupType[0].label) {
+        case groupTypeArr[0]:
+          return 'groupLeader';
+        case groupTypeArr[1]:
+          return 'groupMember';
+        default:
+          return '';
+      }
+    };
+    dispatch(setMeetingType(switchCurrentName()));
+    router.push(`apply/${switchCurrentName()}`);
   };
 
   return (
@@ -72,30 +79,15 @@ function Apply() {
             </Col>
           </Col>
           <Col gap={12}>
-            <Button
-              primary={groupTypeState[0].active ? 'active' : 'inactive'}
-              label="팅 만들기"
-              textSize="sm"
-              onClick={() =>
-                setGroupTypeState(() => {
-                  const newState = groupTypeInitState;
-                  newState[0].active = true;
-                  return newState;
-                })
-              }
-            />
-            <Button
-              primary={groupTypeState[1].active ? 'active' : 'inactive'}
-              label="팅 참여하기"
-              textSize="sm"
-              onClick={() =>
-                setGroupTypeState(() => {
-                  const newState = groupTypeInitState;
-                  newState[1].active = true;
-                  return newState;
-                })
-              }
-            />
+            {groupTypeArr.map((label, i) => (
+              <Button
+                key={i}
+                label={label}
+                primary={groupTypeButtonActiveState(i) ? 'active' : 'inactive'}
+                textSize="base"
+                onClick={() => onClickGroupTypeButton(i)}
+              />
+            ))}
           </Col>
         </Col>
       </Col>
