@@ -33,6 +33,7 @@ const FourthPage = ({ setIsFinishPage }: StepProps) => {
                 setValue={setMbtiValue}
                 value={mbtiValue}
                 index={i}
+                isPrefer={false}
                 key={i}
               />
             );
