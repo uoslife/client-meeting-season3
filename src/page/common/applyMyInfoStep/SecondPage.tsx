@@ -3,6 +3,7 @@
 import {
   Button,
   Col,
+  DepartmentSelectBox,
   Paddle,
   RoundedRectangleButton,
   Row,
@@ -13,11 +14,11 @@ import { DropdownInput } from '@/components';
 import useClickButton from '@/hooks/useClickButton';
 import useInput from '@/hooks/useInput';
 import { StepProps } from '@/types/step.type';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const SecondPage = ({ setIsFinishPage }: StepProps) => {
   const [kakaoId, onChangeKakaoId] = useInput('');
-
+  const [myDepartment, setMyDepartment] = useState<string[]>([]);
   const studentTypeArr = ['학부생', '대학원생', '졸업생'];
   const [
     onClickStudentTypeButton,
@@ -36,10 +37,21 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
 
   useEffect(() => {
     const isSubmitKakaoId = kakaoId !== '';
-    if (isSubmitKakaoId && isClickedStudentType && isClickedSmoking) {
+    if (
+      myDepartment.length === 1 &&
+      isSubmitKakaoId &&
+      isClickedStudentType &&
+      isClickedSmoking
+    ) {
       setIsFinishPage(true);
     } else setIsFinishPage(false);
-  }, [isClickedSmoking, isClickedStudentType, kakaoId, setIsFinishPage]);
+  }, [
+    isClickedSmoking,
+    isClickedStudentType,
+    kakaoId,
+    setIsFinishPage,
+    myDepartment,
+  ]);
   return (
     <>
       <Paddle top={32} left={24} right={24} bottom={32}>
@@ -75,12 +87,11 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
                 font="LeferiBaseType-RegularA"
               />
             </Col>
-            <TextRoundInput
-              isSearch
-              placeholder={'학과명 입력(2글자 이상)'}
-              value={''}
-              onChange={() => {}}
-              onClick={() => {}}
+            <DepartmentSelectBox
+              setSelectedDepartments={setMyDepartment}
+              selectedDepartments={myDepartment}
+              isPersonal={true}
+              isDislike={false}
             />
           </Col>
 
