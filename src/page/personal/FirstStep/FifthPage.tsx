@@ -11,8 +11,10 @@ const FifthPage = ({ setIsFinishPage }: StepProps) => {
 
     if (interestValue.length < 3 && !interestValue.includes(value))
       return setInterestValue([...interestValue, value]);
+
     setInterestValue(deleteInterestState);
   };
+
   const handleIsFinishPage = () => {
     if (interestValue.length === 3) setIsFinishPage(true);
   };

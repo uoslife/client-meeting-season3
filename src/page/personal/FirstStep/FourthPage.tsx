@@ -20,6 +20,7 @@ const FourthPage = ({ setIsFinishPage }: StepProps) => {
                 setValue={setMbtiValue}
                 value={MbtiValue}
                 index={i}
+                isPrefer={false}
                 key={i}
               />
             );
