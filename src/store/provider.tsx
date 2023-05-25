@@ -2,8 +2,17 @@
 
 import { Provider } from 'react-redux';
 import { store } from './store';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistStore } from 'redux-persist';
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {
-  Provider;
-  return <Provider store={store}>{children}</Provider>;
+  // Provider;
+  const persistor = persistStore(store);
+  return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        {children}
+      </PersistGate>
+    </Provider>
+  );
 };

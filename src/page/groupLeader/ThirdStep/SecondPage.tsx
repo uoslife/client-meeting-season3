@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 const SecondPage = ({ setIsFinishPage }: StepProps) => {
   const buttonLabelArr = ['활발한 편이에요!', '차분한 편이에요!'];
   const [onClickButton, buttonActiveState, isClickedButton, selectedLabel] =
-    useClickButton(buttonLabelArr);
+    useClickButton(buttonLabelArr, 1);
 
   useEffect(() => {
     if (isClickedButton) {

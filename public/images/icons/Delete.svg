@@ -1,6 +1,6 @@
 <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_d_1_7203)">
-<path d="M5 3L15 13M15 3L5 13" stroke="#97A1AE" stroke-width="1.5" stroke-linecap="round"/>
+<path d="M5 3L15 13M15 3L5 13" stroke="#97A1AE" strokeWidth="1.5" strokeLinecap="round"/>
 </g>
 <defs>
 <filter id="filter0_d_1_7203" x="-2" y="0" width="24" height="24" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
