@@ -9,11 +9,17 @@ import {
 import { useAppDispatch } from '@/store/store';
 import { StepProps } from '@/types/step.type';
 import { useEffect, useState } from 'react';
+import { useAppSelector } from '@/store/hooks';
 
 const FirstPage = ({ setIsFinishPage }: StepProps) => {
   const dispatch = useAppDispatch();
+  const { prefer_age, prefer_height, prefer_studentType } = useAppSelector(
+    state => state.personal,
+  );
   const [age, setAge] = useState({ min: 0, max: 100 });
+  // 전역 저장 불러오기 필요
   const [height, setHeight] = useState({ min: 0, max: 80 });
+  // 전역 저장 불러오기 필요
 
   const studentTypeArr = ['학부생', '대학원생', '졸업생'];
   const [
@@ -21,9 +27,10 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
     studentTypeButtonActiveState,
     isClickedStudentType,
     studentType,
-  ] = useClickButton(studentTypeArr, 1);
+  ] = useClickButton(studentTypeArr, 1, prefer_studentType);
 
   useEffect(() => {
+    console.log(prefer_age.data);
     const ageArr = [AGE_SLIDER_ARR[age.min / 10], AGE_SLIDER_ARR[age.max / 10]];
     const heightArr = [
       HEIGHT_SLIDER_ARR[height.min / 10],

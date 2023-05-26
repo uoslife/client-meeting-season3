@@ -8,9 +8,11 @@ import { StepProps } from '@/types/step.type';
 import Image from 'next/image';
 import Image3 from 'public/images/illust/personal/3.jpg';
 import { useEffect } from 'react';
+import { useAppSelector } from '@/store/hooks';
 
 function ThirdPage({ setIsFinishPage }: StepProps) {
   const dispatch = useAppDispatch();
+  const { info_question } = useAppSelector(state => state.personal);
 
   const questionArr = [
     '시시콜콜 자주 연락하고 싶어요',
@@ -21,7 +23,7 @@ function ThirdPage({ setIsFinishPage }: StepProps) {
     questionButtonActiveState,
     isClickedQuestion,
     question,
-  ] = useClickButton(questionArr, 1);
+  ] = useClickButton(questionArr, 1, info_question);
 
   useEffect(() => {
     if (isClickedQuestion) {

@@ -5,24 +5,22 @@ import { useEffect, useState } from 'react';
 import { colors } from '@/styles/styles';
 
 import { setPreferMbti } from '@/store/feature/meetingType/personalReducer';
-import { useAppDispatch } from '@/store/store';
+import { useAppDispatch, useAppSelector } from '@/store/store';
 
 const FourthPage = ({ setIsFinishPage }: StepProps) => {
   const dispatch = useAppDispatch();
-  const [mbtiValue, setMbtiValue] = useState<string[]>([]);
-  //  useEffect(() => {
-  //    const isFinishMbtiSelect = !mbtiValue.includes('');
-  //    if (isFinishMbtiSelect) {
-  //      dispatch(setPreferMbti(mbtiValue));
-  //      setIsFinishPage(true);
-  //    }
-  //  }, [dispatch, mbtiValue, setIsFinishPage]);
+  const { prefer_mbti } = useAppSelector(state => state.personal);
 
+  const [mbtiValue, setMbtiValue] = useState<string[]>(
+    prefer_mbti.data[0] === '' ? [] : prefer_mbti.data,
+  );
   useEffect(() => {
-    if (mbtiValue.length > 3) setIsFinishPage(true);
-  }, [mbtiValue, setIsFinishPage]);
+    if (mbtiValue.length > 3) {
+      dispatch(setPreferMbti(mbtiValue));
+      setIsFinishPage(true);
+    }
+  }, [dispatch, mbtiValue, setIsFinishPage]);
 
-  // api로 값 보낼 땐, mbtiValue.split('')을 사용합니다.
   return (
     <Col padding={'32px 35px'} gap={36}>
       <Col gap={12} align={'center'}>
@@ -49,7 +47,7 @@ const FourthPage = ({ setIsFinishPage }: StepProps) => {
                 description={MBTI_QUESTIONS[i].description}
                 title={MBTI_TITLE[i]}
                 setValue={setMbtiValue}
-                value={mbtiValue}
+                value={MbtiValue}
                 index={i}
                 key={i}
                 isPrefer={true}

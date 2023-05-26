@@ -41,7 +41,7 @@ const FinishPage = () => {
           style={{
             height: '100vh',
             position: 'absolute',
-            top: '-280px',
+            top: '-255px',
           }}
         />
         <Paddle top={60}>
@@ -72,10 +72,6 @@ const FinishPage = () => {
           onClick={handleCheckInformation}
           label={'신청 정보 확인하기'}
         />
-
-        <a href="https://www.instagram.com/uoslife_official/" target={'_blank'}>
-          <Button primary={'disabled'} textSize="sm" label={'시대팅 안내'} />
-        </a>
       </BottomSelectWrapper>
     </>
   );

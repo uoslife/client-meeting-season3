@@ -37,7 +37,7 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
     'success' | 'error' | 'default'
   >('default');
   const [nicknameStatusMessage, setNicknameStatusMessage] = useState('');
-  const [nickname, setNickname] = useState('');
+  const [nickname, setNickname] = useState(info_nickname.data ?? '');
   const [isFinishNickname, setIsFinishNickname] = useState(false);
 
   const onChangeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,30 +58,14 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
   };
 
   //gender
-
   const [onClickButton, buttonActiveState, isClickedButton, selectedLabel] =
-    useClickButton(buttonLabelArr, 1);
+    useClickButton(buttonLabelArr, 1, info_gender);
 
   //age
-  const [age, setAge] = useState<string | number>(0);
+  const [age, setAge] = useState<string | number>(info_age.data ?? 0);
 
   //height
-  const [height, setHeight] = useState<string | number>(0);
-
-  useEffect(() => {
-    //아래에 갖다붙이기? rerender..
-    // if (info_nickname.data) setNickname(info_nickname.data);
-    // if (info_gender.data)
-    //   onClickButton(buttonLabelArr.indexOf(info_gender.data));
-    // if (info_age.data) setAge(info_age.data);
-    // if (info_height.data) setAge(info_height.data);
-  }, [
-    info_age.data,
-    info_gender.data,
-    info_height.data,
-    info_nickname.data,
-    onClickButton,
-  ]);
+  const [height, setHeight] = useState<string | number>(info_height.data ?? 0);
 
   useEffect(() => {
     const isClickAge = age !== 0;
@@ -124,7 +108,7 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
           {/* placeholder 설정 필요 */}
           <TextRoundInput
             placeholder={'닉네임 입력 (2글자 이상)'}
-            value={nickname}
+            value={nickname as string}
             status={currentNicknameStatus}
             statusMessage={nicknameStatusMessage}
             onChange={onChangeNickname}

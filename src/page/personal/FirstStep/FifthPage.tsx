@@ -4,31 +4,19 @@ import * as S from '@/components/buttons/interstSelectButton/InterestSelectButto
 import { INTERESTS } from '@/constants';
 import { useEffect, useState } from 'react';
 import useClickButton from '@/hooks/useClickButton';
-import { useAppDispatch } from '@/store/store';
+import { useAppDispatch, useAppSelector } from '@/store/store';
 import { setInfoInterests } from '@/store/feature/meetingType/personalReducer';
 
 const FifthPage = ({ setIsFinishPage }: StepProps) => {
-  // const [interestValue, setInterestValue] = useState<string[]>([]);
-  // const handleSelectInterest = (value: string) => () => {
-  //   const deleteInterestState = interestValue.filter(item => item != value);
-
-  //   if (interestValue.length < 3 && !interestValue.includes(value))
-  //     return setInterestValue([...interestValue, value]);
-  //   setInterestValue(deleteInterestState);
-  // };
-  // const handleIsFinishPage = () => {
-  //   if (interestValue.length === 3) setIsFinishPage(true);
-  // };
-
   const dispatch = useAppDispatch();
+  const { info_interests } = useAppSelector(state => state.personal);
 
   const [onClickButton, buttonActiveState, isClickedButton, selectedLabel] =
-    useClickButton(INTERESTS, 3);
+    useClickButton(INTERESTS, 3, info_interests);
 
   useEffect(() => {
     const interestsArr = selectedLabel.map(item => item.label);
-    if (isClickedButton) dispatch(setInfoInterests(interestsArr));
-    else dispatch(setInfoInterests(['']));
+    if (isClickedButton) dispatch(setInfoInterests(interestsArr ?? ['']));
 
     selectedLabel.length === 3 ? setIsFinishPage(true) : setIsFinishPage(false);
   }, [dispatch, isClickedButton, selectedLabel, setIsFinishPage]);

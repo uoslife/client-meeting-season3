@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { CommonState } from '@/store/feature/common/commonReducer';
+import { ApplyData, ApplyQuestionArrType } from '@/types/apply.type';
 
 type ButtonState = {
   label: string;
@@ -8,9 +10,10 @@ type ButtonState = {
 
 // nameArr = ['a', 'b', ...];
 
-const useClickButton = (
+const useClickButton = <T>(
   nameArr: Array<string>,
   maxSelectedCount: number,
+  storedState?: ApplyData<string | string[] | ApplyQuestionArrType>,
 ): [
   (order: number) => void,
   (order: number) => boolean,
@@ -18,7 +21,38 @@ const useClickButton = (
   ButtonState[],
 ] => {
   const initState: Array<ButtonState> = [];
-  nameArr.map((label, i) => initState.push({ label, active: false, order: i }));
+
+  if (!storedState)
+    nameArr.map((label, i) =>
+      initState.push({ label, active: false, order: i }),
+    );
+  else {
+    if (storedState.title_en === 'question') {
+      nameArr.map((label, i) =>
+        (storedState.data as ApplyQuestionArrType).filter(
+          data => data.label === label,
+        ).length !== 0
+          ? initState.push({ label, active: true, order: i })
+          : initState.push({ label, active: false, order: i }),
+      );
+    } else if (typeof storedState.data === 'object') {
+      nameArr.map((label, i) =>
+        (storedState.data as string[]).includes(label)
+          ? initState.push({ label, active: true, order: i })
+          : initState.push({ label, active: false, order: i }),
+      );
+    }
+    if (typeof storedState.data === 'string') {
+      nameArr.map((label, i) =>
+        storedState.data === label
+          ? initState.push({ label, active: true, order: i })
+          : initState.push({ label, active: false, order: i }),
+      );
+    } else
+      nameArr.map((label, i) =>
+        initState.push({ label, active: false, order: i }),
+      );
+  }
   const [state, setState] = useState(initState);
 
   const onClickButton = (order: number) => {
@@ -26,7 +60,9 @@ const useClickButton = (
       state.filter(data => data.active).length >= maxSelectedCount;
     if (maxSelectedCount === 1) {
       setState(() => {
-        const newState = initState;
+        const newState = initState.map(data =>
+          data.active ? { ...data, active: false } : data,
+        );
         newState[order].active = true;
         return newState;
       });

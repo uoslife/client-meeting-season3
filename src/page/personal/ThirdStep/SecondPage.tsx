@@ -6,15 +6,18 @@ import {
   setPreferMajorPersonal,
   setPreferSmoking,
 } from '@/store/feature/meetingType/personalReducer';
-import { useAppDispatch } from '@/store/store';
+import { useAppDispatch, useAppSelector } from '@/store/store';
 import useClickButton from '@/hooks/useClickButton';
 
 const SecondPage = ({ setIsFinishPage }: StepProps) => {
   const dispatch = useAppDispatch();
+  const { prefer_major, prefer_smoking } = useAppSelector(
+    state => state.personal,
+  );
 
   const [dislikeDepartmentValue, setDislikeDepartmentValue] = useState<
     string[]
-  >([]);
+  >(prefer_major.data[0] === '' ? [] : prefer_major.data);
 
   const smokingArr = ['흡연', '비흡연', '상관 없어요!'];
   const [
@@ -22,9 +25,10 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
     smokingButtonActiveState,
     isClickedSmoking,
     smoking,
-  ] = useClickButton(smokingArr, 1);
+  ] = useClickButton(smokingArr, 1, prefer_smoking);
 
   useEffect(() => {
+    console.log(prefer_major.data);
     if (dislikeDepartmentValue[0])
       dispatch(setPreferMajorPersonal(dislikeDepartmentValue));
     else dispatch(setPreferMajorPersonal(['']));
@@ -70,14 +74,6 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
           font={'LeferiBaseType-RegularA'}
         />
         <Col gap={12}>
-          {/* {smokeArr.map((item, i) => (
-            <Button
-              key={i}
-              primary={smokeValue === item ? 'active' : 'inactive'}
-              label={item}
-              onClick={handleSmokeValue(item)}
-            />
-          ))} */}
           {smokingArr.map((label, i) => (
             <Button
               key={i}

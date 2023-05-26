@@ -27,6 +27,8 @@ const ResultBox = ({ title, applyDataArr }: ResultBoxProps) => {
     // mbti
     if (data.title_en === 'mbti' && data.type === 'info')
       return (data.data as string[]).join('');
+    if (data.title_en === 'mbti' && data.type === 'prefer')
+      return (data.data as string[]).join('');
     // 기피학과
     // if (data.title_en === 'major' && data.type === 'prefer')
     // return (data.data as string[]).join('');
