@@ -15,9 +15,17 @@ const FourthPage = ({ setIsFinishPage }: StepProps) => {
     prefer_mbti.data[0] === '' ? [] : prefer_mbti.data,
   );
   useEffect(() => {
-    if (mbtiValue.length > 3) {
+    const isFinishMbtiValue =
+      mbtiValue.filter(data => data === 'E' || data === 'I').length !== 0 &&
+      mbtiValue.filter(data => data === 'S' || data === 'N').length !== 0 &&
+      mbtiValue.filter(data => data === 'T' || data === 'F').length !== 0 &&
+      mbtiValue.filter(data => data === 'J' || data === 'P').length !== 0;
+    if (isFinishMbtiValue) {
       dispatch(setPreferMbti(mbtiValue));
       setIsFinishPage(true);
+    } else {
+      dispatch(setPreferMbti(['']));
+      setIsFinishPage(false);
     }
   }, [dispatch, mbtiValue, setIsFinishPage]);
 
