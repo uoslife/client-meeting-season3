@@ -2,15 +2,17 @@
 
 import { Button, Col, Text } from '@/components';
 import useClickButton from '@/hooks/useClickButton';
-import { setInfoQuestion } from '@/store/feature/meetingType/personalReducer';
+import { setInfoQuestionPersonal } from '@/store/feature/meetingType/personalReducer';
 import { useAppDispatch } from '@/store/store';
 import { StepProps } from '@/types/step.type';
 import Image from 'next/image';
 import Image2 from 'public/images/illust/personal/2.jpg';
 import { useEffect } from 'react';
+import { useAppSelector } from '@/store/hooks';
 
 function SecondPage({ setIsFinishPage }: StepProps) {
   const dispatch = useAppDispatch();
+  const { info_question } = useAppSelector(state => state.personal);
 
   const questionArr = [
     '그 자리에서 바로 풀어야 해요',
@@ -21,12 +23,12 @@ function SecondPage({ setIsFinishPage }: StepProps) {
     questionButtonActiveState,
     isClickedQuestion,
     question,
-  ] = useClickButton(questionArr, 1);
+  ] = useClickButton(questionArr, 1, info_question);
 
   useEffect(() => {
     if (isClickedQuestion) {
+      dispatch(setInfoQuestionPersonal({ label: question[0].label, order: 1 }));
       setIsFinishPage(true);
-      dispatch(setInfoQuestion({ label: question[0].label, order: 1 }));
     } else setIsFinishPage(false);
   }, [dispatch, isClickedQuestion, question, setIsFinishPage]);
 

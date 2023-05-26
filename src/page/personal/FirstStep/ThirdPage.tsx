@@ -7,19 +7,18 @@ import { ANIMALS } from '@/constants';
 import { useEffect, useState } from 'react';
 import useClickButton from '@/hooks/useClickButton';
 import { setInfoAnimal } from '@/store/feature/meetingType/personalReducer';
-import { useAppDispatch } from '@/store/store';
+import { useAppDispatch, useAppSelector } from '@/store/store';
 
 function ThirdPage({ setIsFinishPage }: StepProps) {
   const dispatch = useAppDispatch();
+  const { info_animal } = useAppSelector(state => state.personal);
 
   const [onClickButton, buttonActiveState, isClickedButton, selectedLabel] =
-    useClickButton(ANIMALS, 2);
+    useClickButton(ANIMALS, 2, info_animal);
 
   useEffect(() => {
-    const animalArr = selectedLabel.map(item => item.label);
-    if (isClickedButton) dispatch(setInfoAnimal(animalArr));
-    else dispatch(setInfoAnimal(['']));
-
+    const animalArr = selectedLabel?.map((item, i) => item.label);
+    if (isClickedButton) dispatch(setInfoAnimal(animalArr ?? ['']));
     isClickedButton ? setIsFinishPage(true) : setIsFinishPage(false);
   }, [dispatch, isClickedButton, selectedLabel, setIsFinishPage]);
 

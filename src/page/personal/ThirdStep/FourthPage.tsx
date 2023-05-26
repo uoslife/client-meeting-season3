@@ -5,32 +5,22 @@ import { useEffect, useState } from 'react';
 import { colors } from '@/styles/styles';
 
 import { setPreferMbti } from '@/store/feature/meetingType/personalReducer';
-import { useAppDispatch } from '@/store/store';
-
-type MbtiType = {
-  type: string;
-  order: number;
-};
+import { useAppDispatch, useAppSelector } from '@/store/store';
 
 const FourthPage = ({ setIsFinishPage }: StepProps) => {
   const dispatch = useAppDispatch();
-  const [MbtiValue, setMbtiValue] = useState<MbtiType[]>([
-    { type: '', order: 0 },
-  ]);
-  useEffect(() => {
-    // const isFinishMbtiSelect = !MbtiValue.includes('');
-    // if (isFinishMbtiSelect) {
-    //   dispatch(setPreferMbti(MbtiValue));
-    //   setIsFinishPage(true);
-    // }
-    console.log(MbtiValue);
-  }, [dispatch, MbtiValue, setIsFinishPage]);
+  const { prefer_mbti } = useAppSelector(state => state.personal);
 
+  const [mbtiValue, setMbtiValue] = useState<string[]>(
+    prefer_mbti.data[0] === '' ? [] : prefer_mbti.data,
+  );
   useEffect(() => {
-    if (MbtiValue.length > 3) setIsFinishPage(true);
-  }, [MbtiValue]);
+    if (mbtiValue.length > 3) {
+      dispatch(setPreferMbti(mbtiValue));
+      setIsFinishPage(true);
+    }
+  }, [dispatch, mbtiValue, setIsFinishPage]);
 
-  // api로 값 보낼 땐, MbtiValue.split('')을 사용합니다.
   return (
     <Col padding={'32px 35px'} gap={36}>
       <Col gap={12} align={'center'}>

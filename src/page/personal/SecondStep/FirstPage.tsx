@@ -2,15 +2,17 @@
 
 import { Button, Col, Text } from '@/components';
 import useClickButton from '@/hooks/useClickButton';
-import { setInfoQuestion } from '@/store/feature/meetingType/personalReducer';
+import { setInfoQuestionPersonal } from '@/store/feature/meetingType/personalReducer';
 import { useAppDispatch } from '@/store/store';
 import { StepProps } from '@/types/step.type';
 import Image from 'next/image';
 import Image1 from 'public/images/illust/personal/1.jpg';
 import { useEffect } from 'react';
+import { useAppSelector } from '@/store/hooks';
 
 function FirstPage({ setIsFinishPage }: StepProps) {
   const dispatch = useAppDispatch();
+  const { info_question } = useAppSelector(state => state.personal);
 
   const questionArr = ['친구처럼 편한 연애', '달달하고 늘 두근대는 연애'];
   const [
@@ -18,12 +20,12 @@ function FirstPage({ setIsFinishPage }: StepProps) {
     questionButtonActiveState,
     isClickedQuestion,
     question,
-  ] = useClickButton(questionArr, 1);
+  ] = useClickButton(questionArr, 1, info_question);
 
   useEffect(() => {
     if (isClickedQuestion) {
+      dispatch(setInfoQuestionPersonal({ label: question[0].label, order: 0 }));
       setIsFinishPage(true);
-      dispatch(setInfoQuestion({ label: question[0].label, order: 0 }));
     } else setIsFinishPage(false);
   }, [dispatch, isClickedQuestion, question, setIsFinishPage]);
   return (
@@ -48,7 +50,6 @@ function FirstPage({ setIsFinishPage }: StepProps) {
             weight={700}
           />
         </Col>
-
         <Image src={Image1} alt="" width={360} height={218} />
         <Col gap={12}>
           {questionArr.map((label, i) => (

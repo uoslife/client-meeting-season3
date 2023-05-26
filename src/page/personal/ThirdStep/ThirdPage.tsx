@@ -8,14 +8,15 @@ import { useEffect, useState } from 'react';
 import useClickButton from '@/hooks/useClickButton';
 import { setPreferAnimal } from '@/store/feature/meetingType/personalReducer';
 import { useAppDispatch } from '@/store/store';
+import { useAppSelector } from '@/store/hooks';
 
 function ThirdPage({ setIsFinishPage }: StepProps) {
   const dispatch = useAppDispatch();
+  const { prefer_animal } = useAppSelector(state => state.personal);
   const [onClickButton, buttonActiveState, isClickedButton, selectedLabel] =
-    useClickButton(ANIMALS, 9);
+    useClickButton(ANIMALS, 9, prefer_animal);
 
   useEffect(() => {
-    // selectedLabel;
     isClickedButton ? setIsFinishPage(true) : setIsFinishPage(false);
   }, [isClickedButton, selectedLabel, setIsFinishPage]);
 

@@ -2,19 +2,49 @@ import { StepProps } from '@/types/step.type';
 import { Button, Col, DepartmentSelectBox, Text } from '@/components';
 import { colors } from '@/styles/styles';
 import { useEffect, useState } from 'react';
+import {
+  setPreferMajorPersonal,
+  setPreferSmoking,
+} from '@/store/feature/meetingType/personalReducer';
+import { useAppDispatch, useAppSelector } from '@/store/store';
+import useClickButton from '@/hooks/useClickButton';
 
 const SecondPage = ({ setIsFinishPage }: StepProps) => {
-  const smokeArr = ['흡연', '비흡연', '상관 없어요!'];
+  const dispatch = useAppDispatch();
+  const { prefer_major, prefer_smoking } = useAppSelector(
+    state => state.personal,
+  );
+
   const [dislikeDepartmentValue, setDislikeDepartmentValue] = useState<
     string[]
-  >([]);
-  const [smokeValue, setSmokeValue] = useState<string>('');
+  >(prefer_major.data[0] === '' ? [] : prefer_major.data);
 
-  const handleSmokeValue = (item: string) => () => setSmokeValue(item);
+  const smokingArr = ['흡연', '비흡연', '상관 없어요!'];
+  const [
+    onClickSmokingButton,
+    smokingButtonActiveState,
+    isClickedSmoking,
+    smoking,
+  ] = useClickButton(smokingArr, 1, prefer_smoking);
 
   useEffect(() => {
-    if (!!smokeValue && !!dislikeDepartmentValue) setIsFinishPage(true);
-  });
+    console.log(prefer_major.data);
+    if (dislikeDepartmentValue[0])
+      dispatch(setPreferMajorPersonal(dislikeDepartmentValue));
+    else dispatch(setPreferMajorPersonal(['']));
+
+    if (isClickedSmoking) {
+      dispatch(setPreferSmoking(smoking[0].label));
+      setIsFinishPage(true);
+    } else setIsFinishPage(false);
+  }, [
+    dislikeDepartmentValue,
+    dispatch,
+    isClickedSmoking,
+    setIsFinishPage,
+    smoking,
+  ]);
+
   return (
     <Col gap={44} padding={'32px 24px'}>
       <Col align={'center'} gap={12}>
@@ -44,12 +74,13 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
           font={'LeferiBaseType-RegularA'}
         />
         <Col gap={12}>
-          {smokeArr.map((item, i) => (
+          {smokingArr.map((label, i) => (
             <Button
               key={i}
-              primary={smokeValue === item ? 'active' : 'inactive'}
-              label={item}
-              onClick={handleSmokeValue(item)}
+              label={label}
+              primary={smokingButtonActiveState(i) ? 'active' : 'inactive'}
+              textSize="base"
+              onClick={() => onClickSmokingButton(i)}
             />
           ))}
         </Col>

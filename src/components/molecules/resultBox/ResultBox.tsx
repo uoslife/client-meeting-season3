@@ -27,6 +27,11 @@ const ResultBox = ({ title, applyDataArr }: ResultBoxProps) => {
     // mbti
     if (data.title_en === 'mbti' && data.type === 'info')
       return (data.data as string[]).join('');
+    if (data.title_en === 'mbti' && data.type === 'prefer')
+      return (data.data as string[]).join('');
+    // 기피학과
+    // if (data.title_en === 'major' && data.type === 'prefer')
+    // return (data.data as string[]).join('');
 
     switch (typeof data.data) {
       case 'string':
@@ -39,6 +44,7 @@ const ResultBox = ({ title, applyDataArr }: ResultBoxProps) => {
         return data.data;
     }
   };
+  console.log(applyDataArr);
   return (
     <S.Wrapper>
       <Text label={`💙 ${title}`} size="base" weight={600} color="#3B4046" />
