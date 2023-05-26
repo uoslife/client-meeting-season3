@@ -1,16 +1,43 @@
 'use client';
 
-import { Button, Col, ResultBox, TeamStatusBox, Text } from '@/components';
+import { meetingAPI } from '@/api';
+import {
+  Button,
+  Col,
+  ProgressHeader,
+  ResultBox,
+  TeamStatusBox,
+  Text,
+} from '@/components';
+import { useRouter } from 'next/navigation';
 
-const ConfirmPage = () => {
+const ApplicationInfo = () => {
+  // single인지triple인지 구분 필요
+  meetingAPI
+    .getTeamInfo({ teamType: 'SINGLE' })
+    .then()
+    .catch(() => console.log('hi'));
+
+  const router = useRouter();
   const onClickCancleApply = () => {
-    // 신청 취소 API 작성 시 추가
+    meetingAPI
+      .deleteTeam({ teamType: 'SINGLE', isTeamLeader: true })
+      .then(() => {
+        alert('신청 취소되었습니다.');
+        router.push('/');
+      })
+      .catch(() => {});
   };
 
   return (
     <>
-      <Col padding="24px" gap={85}>
-        <Col gap={12}>
+      <ProgressHeader
+        isprogress={false}
+        isprogressbar={false}
+        title="신청 정보"
+      />
+      <Col padding="32px 24px 12px" gap={85}>
+        <Col gap={12} padding="24px 0 0 0">
           <TeamStatusBox
             teamName="건공관 지박령"
             type="confirm"
@@ -28,7 +55,7 @@ const ConfirmPage = () => {
               color="#656D78"
             />
             <Text
-              label="(신청 취소 기한 : 5월 27일 자정까지)"
+              label="(신청 취소 기한 : 5월 28일 오후 10시까지)"
               weight={400}
               size="sm"
               color="#656D78"
@@ -45,4 +72,4 @@ const ConfirmPage = () => {
     </>
   );
 };
-export default ConfirmPage;
+export default ApplicationInfo;
