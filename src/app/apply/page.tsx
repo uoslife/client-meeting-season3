@@ -1,5 +1,6 @@
 'use client';
 
+import { meetingAPI } from '@/api';
 import { Text, Button, Checkbox, Footer } from '@/components';
 import Col from '@/components/layout/Col';
 import Row from '@/components/layout/Row';
@@ -37,7 +38,10 @@ function Apply() {
     switch (meetingType[0].label) {
       case meetingTypeArr[0]:
         dispatch(setMeetingType('personal'));
-        router.push(`apply/personal`);
+        meetingAPI
+          .createTeam({ teamType: 'SINGLE', isTeamLeader: true })
+          .then(() => router.push('apply/personal'))
+          .catch(e => console.error(e));
         return;
       case meetingTypeArr[1]:
         dispatch(setMeetingType('group'));
