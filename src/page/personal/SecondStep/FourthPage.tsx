@@ -8,9 +8,11 @@ import { StepProps } from '@/types/step.type';
 import Image from 'next/image';
 import Image4 from 'public/images/illust/personal/4.jpg';
 import { useEffect } from 'react';
+import { useAppSelector } from '@/store/hooks';
 
 function FourthPage({ setIsFinishPage }: StepProps) {
   const dispatch = useAppDispatch();
+  const { info_question } = useAppSelector(state => state.personal);
 
   const questionArr = [
     '혼자만의 휴식 시간도 필요해요',
@@ -21,7 +23,7 @@ function FourthPage({ setIsFinishPage }: StepProps) {
     questionButtonActiveState,
     isClickedQuestion,
     question,
-  ] = useClickButton(questionArr, 1);
+  ] = useClickButton(questionArr, 1, info_question);
 
   useEffect(() => {
     if (isClickedQuestion) {

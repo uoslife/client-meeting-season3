@@ -4,14 +4,18 @@ import { MBTI_TITLE, MBTI_QUESTIONS } from '@/constants';
 import { useEffect, useState } from 'react';
 
 import { setInfoMbti } from '@/store/feature/meetingType/personalReducer';
-import { useAppDispatch } from '@/store/store';
+import { useAppDispatch, useAppSelector } from '@/store/store';
 
 const FourthPage = ({ setIsFinishPage }: StepProps) => {
   const dispatch = useAppDispatch();
+  const { info_mbti } = useAppSelector(state => state.personal);
 
-  const [mbtiValue, setMbtiValue] = useState<string[]>(Array(4).fill(''));
+  const [mbtiValue, setMbtiValue] = useState<string[]>(
+    info_mbti ? info_mbti.data : Array(4).fill(''),
+  );
   // api로 값 보낼 땐, mbtiValue.split('')을 사용합니다.
   useEffect(() => {
+    console.log(info_mbti);
     const isFinishMbtiSelect = !mbtiValue.includes('');
     if (isFinishMbtiSelect) {
       dispatch(setInfoMbti(mbtiValue));
@@ -24,7 +28,7 @@ const FourthPage = ({ setIsFinishPage }: StepProps) => {
       <Col gap={30} align={'center'}>
         <Text weight={700} label={'10. 본인의 MBTI를 선택해주세요.'} />
         <Col gap={34}>
-          {mbtiValue.map((item, i) => {
+          {mbtiValue?.map((item, i) => {
             return (
               <MbtiSelectBox
                 type={MBTI_QUESTIONS[i].type}

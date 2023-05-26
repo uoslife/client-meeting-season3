@@ -39,13 +39,21 @@ const ConfirmStep = () => {
     dispatch(incrementStep());
   };
 
-  const applyInfoDataArr: ApplyDataArr = (
+  const applyInfoPersonalDataArr: ApplyDataArr = (
     Object.values(commonState) as ApplyDataArr
   ).concat(Object.values(personalState).filter(data => data.type === 'info'));
 
-  const applyPreferDataArr: ApplyDataArr = Object.values(personalState).filter(
-    data => data.type === 'prefer',
-  );
+  const applyPreferPersonalDataArr: ApplyDataArr = Object.values(
+    personalState,
+  ).filter(data => data.type === 'prefer');
+
+  const applyInfoGroupDataArr: ApplyDataArr = (
+    Object.values(commonState) as ApplyDataArr
+  ).concat(Object.values(groupState).filter(data => data.type === 'info'));
+
+  const applyPreferGroupDataArr: ApplyDataArr = Object.values(
+    groupState,
+  ).filter(data => data.type === 'prefer');
   return (
     <Col padding={'40px 16px 120px'}>
       <Col gap={40}>
@@ -72,19 +80,25 @@ const ConfirmStep = () => {
           )}
           {isPersonal ? (
             <>
-              <ResultBox title={'내 정보'} applyDataArr={applyInfoDataArr} />
+              <ResultBox
+                title={'내 정보'}
+                applyDataArr={applyInfoPersonalDataArr}
+              />
               <ResultBox
                 title={'선호 사항'}
-                applyDataArr={applyPreferDataArr}
+                applyDataArr={applyPreferPersonalDataArr}
               />
             </>
           ) : (
             <>
               <ResultBox
                 title={'상대 팅에게 보여지는 정보'}
-                applyDataArr={[]}
+                applyDataArr={applyInfoGroupDataArr}
               />
-              <ResultBox title={'원하는 팅의 정보'} applyDataArr={[]} />
+              <ResultBox
+                title={'원하는 팅의 정보'}
+                applyDataArr={applyPreferGroupDataArr}
+              />
             </>
           )}
         </Col>
