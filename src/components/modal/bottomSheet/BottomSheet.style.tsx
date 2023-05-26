@@ -69,7 +69,7 @@ export const Button = styled.div<BottomSheetProps>`
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-
+  height: 52px;
   cursor: pointer;
 
   ${({ type }) => {
