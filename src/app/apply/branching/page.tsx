@@ -1,12 +1,11 @@
 'use client';
 
+import { meetingAPI } from '@/api';
 import { Text, Button, Checkbox, Footer } from '@/components';
 import Col from '@/components/layout/Col';
-import Row from '@/components/layout/Row';
 import useClickButton from '@/hooks/useClickButton';
 import { setMeetingType } from '@/store/feature/applyInfo';
 import { useAppDispatch } from '@/store/store';
-import { group } from 'console';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -33,18 +32,24 @@ function Apply() {
   };
 
   const onClickNext = () => {
-    const switchCurrentName = () => {
-      switch (groupType[0].label) {
-        case groupTypeArr[0]:
-          return 'groupLeader';
-        case groupTypeArr[1]:
-          return 'groupMember';
-        default:
-          return '';
-      }
-    };
-    dispatch(setMeetingType(switchCurrentName()));
-    router.push(`apply/${switchCurrentName()}`);
+    switch (groupType[0].label) {
+      case groupTypeArr[0]:
+        dispatch(setMeetingType('groupLeader'));
+        meetingAPI
+          .createTeam({ teamType: 'TRIPLE', isTeamLeader: true })
+          .then(() => router.push('apply/groupLeader'))
+          .catch(e => console.error(e));
+        return;
+      case groupTypeArr[1]:
+        dispatch(setMeetingType('groupMember'));
+        meetingAPI
+          .createTeam({ teamType: 'TRIPLE', isTeamLeader: false })
+          .then(() => router.push('apply/groupMember'))
+          .catch(e => console.error(e));
+        return;
+      default:
+        return;
+    }
   };
 
   return (

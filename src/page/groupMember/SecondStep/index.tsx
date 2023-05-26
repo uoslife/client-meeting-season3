@@ -1,7 +1,5 @@
 'use client';
 
-import { useState } from 'react';
-
 import { Footer } from '@/components';
 
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
@@ -30,13 +28,12 @@ const GroupMemberFirstStep = () => {
     dispatch(resetPage());
     dispatch(incrementStep());
   };
-  const [isFinishPage, setIsFinishPage] = useState(false);
   return (
     <>
-      <FirstPage setIsFinishPage={setIsFinishPage} />;
+      <FirstPage />;
       <Footer
         maxPage={MAX_PAGE}
-        disabled={isFinishPage}
+        disabled={true}
         onClickPrev={onClickPrev}
         onClickNext={onClickNext}
       />

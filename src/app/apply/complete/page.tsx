@@ -3,8 +3,9 @@
 import styled from 'styled-components';
 import { Player } from '@lottiefiles/react-lottie-player';
 import { Button, Col, Paddle, Text } from '@/components';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import congratulation from '@/assets/lottie/congratulation.json';
+import { useRouter } from 'next/navigation';
 
 const BottomSelectWrapper = styled.div`
   position: fixed;
@@ -18,11 +19,17 @@ const BottomSelectWrapper = styled.div`
 `;
 
 const FinishPage = () => {
+  const router = useRouter();
   const playerRef = useRef(Player);
 
   const handleCheckInformation = () => {
-    // 신청 정보 페이지 만들어지면 로직 추가할 예정
+    router.push('/applicationInfo');
   };
+
+  useEffect(() => {
+    router.prefetch('/applicationInfo');
+  }, []);
+
   return (
     <>
       <Col fill>
