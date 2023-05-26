@@ -20,6 +20,7 @@ import {
   resetPage,
 } from '@/store/feature/applyInfo';
 import { useRouter } from 'next/navigation';
+import { meetingAPI } from '@/api';
 
 export type FooterProps = {
   maxPage: number;
@@ -82,8 +83,59 @@ const Footer = ({
     // 마지막 step, page인 경우
     if (type === 'lastStep') {
       dispatch(resetAll());
-      // api POST 로직
-      router.push('/apply/complete'); // 신청완료 페이지로
+      switch (meetingType) {
+        case 'personal':
+          meetingAPI
+            .postTeamInfo(
+              { teamType: 'SINGLE', isTeamLeader: true },
+              {
+                informationDistance: '01010101',
+                informationFilter: '010101',
+                informationMeetingTime: '',
+                preferenceDistance: '010101',
+                preferenceFilter: '0101011',
+              },
+            )
+            .then(() => {
+              router.push('/apply/complete');
+            });
+          break;
+        case 'groupLeader':
+          meetingAPI
+            .postTeamInfo(
+              { teamType: 'TRIPLE', isTeamLeader: true },
+              {
+                informationDistance: '',
+                informationFilter: '',
+                informationMeetingTime: '',
+                preferenceDistance: '',
+                preferenceFilter: '',
+              },
+            )
+            .then(() => {
+              router.push('/apply/complete');
+            });
+          break;
+        case 'groupMember':
+          meetingAPI
+            .postTeamInfo(
+              { teamType: 'TRIPLE', isTeamLeader: false },
+              {
+                informationDistance: '',
+                informationFilter: '',
+                informationMeetingTime: '',
+                preferenceDistance: '',
+                preferenceFilter: '',
+              },
+            )
+            .then(() => {
+              router.push('/apply/complete');
+            });
+          break;
+
+        default:
+          break;
+      }
     }
 
     // 기본
