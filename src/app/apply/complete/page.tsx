@@ -3,9 +3,8 @@
 import styled from 'styled-components';
 import { Player } from '@lottiefiles/react-lottie-player';
 import { Button, Col, Paddle, Text } from '@/components';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import congratulation from '@/assets/lottie/congratulation.json';
-import { Router } from 'next/router';
 import { useRouter } from 'next/navigation';
 
 const BottomSelectWrapper = styled.div`
@@ -26,6 +25,11 @@ const FinishPage = () => {
   const handleCheckInformation = () => {
     router.push('/applicationInfo');
   };
+
+  useEffect(() => {
+    router.prefetch('/applicationInfo');
+  }, []);
+
   return (
     <>
       <Col fill>
