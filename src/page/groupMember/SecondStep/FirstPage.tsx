@@ -1,11 +1,11 @@
 'use client';
 
+import { meetingAPI } from '@/api';
 import { BottomSheet, Col, Text } from '@/components';
 import * as S from '@/styles/pages/GroupMemberPage.style';
-import { StepProps } from '@/types/step.type';
 import { useEffect, useRef, useState } from 'react';
 
-const GroupMemberFirstPage = ({ setIsFinishPage }: StepProps) => {
+const GroupMemberFirstPage = () => {
   const [code, setCode] = useState<(string | number)[]>();
   const [statusResult, setStatusResult] = useState<boolean>();
   const [isModal, setIsModal] = useState(false);
@@ -21,6 +21,13 @@ const GroupMemberFirstPage = ({ setIsFinishPage }: StepProps) => {
   }, [code]);
   const handleInputValue = (e: any) => {
     setCode(e.target.value);
+  };
+
+  const onClickPrimary = () => {
+    meetingAPI
+      .enterTeam({ teamType: 'TRIPLE', code: code as unknown as string })
+      .then(() => {})
+      .catch(() => {});
   };
   const onClickSecondary = () => {
     const input = inputRef.current;
@@ -64,6 +71,7 @@ const GroupMemberFirstPage = ({ setIsFinishPage }: StepProps) => {
           description={'팅에 참여하시겠습니까?'}
           secondaryWord={'취소'}
           primaryWord={'참여'}
+          onClickPrimary={onClickPrimary}
           onClickSecondary={onClickSecondary}
         />
       </Col>
