@@ -36,7 +36,6 @@ const Main = () => {
         break;
     }
   };
-  const router = useRouter();
   const [modal, setModal] = useState(false);
 
   const handleCopyLink = async () => {

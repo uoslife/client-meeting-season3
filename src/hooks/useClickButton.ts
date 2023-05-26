@@ -41,8 +41,7 @@ const useClickButton = <T>(
           ? initState.push({ label, active: true, order: i })
           : initState.push({ label, active: false, order: i }),
       );
-    }
-    if (typeof storedState.data === 'string') {
+    } else if (typeof storedState.data === 'string') {
       nameArr.map((label, i) =>
         storedState.data === label
           ? initState.push({ label, active: true, order: i })
