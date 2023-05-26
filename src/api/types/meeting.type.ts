@@ -15,11 +15,11 @@ export type CreateTeamResponse = {};
 
 export type PostTeamInfoParams = TeamTypeWithObject & IsTeamLeaderWithObject;
 export type PostTeamInfoRequest = {
-  informationDistance: 'string';
-  informationFilter: 'string';
-  informationMeetingTime: 'string';
-  preferenceDistance: 'string';
-  preferenceFilter: 'string';
+  informationDistance: string;
+  informationFilter: string;
+  informationMeetingTime: string;
+  preferenceDistance: string;
+  preferenceFilter: string;
 };
 export type PostTeamInfoResponse = {};
 
