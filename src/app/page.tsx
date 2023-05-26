@@ -1,13 +1,14 @@
 'use client';
 import Image from 'next/image';
 
-import { Button, IconButton, MainHeader, Text } from '@/components';
+import { Button, IconButton, MainHeader, Text, Toast } from '@/components';
 
 import * as S from '@/styles/pages/page.style';
 
 import { copyLink } from '@/utils';
 import { SOCIAL_LINK } from '@/constants';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { useAppSelector } from '@/store/store';
 
 const Main = () => {
@@ -35,6 +36,17 @@ const Main = () => {
         break;
     }
   };
+  const router = useRouter();
+  const [modal, setModal] = useState(false);
+
+  const handleCopyLink = async () => {
+    copyLink(SOCIAL_LINK.Sharelink);
+    setModal(true);
+    setTimeout(() => {
+      setModal(false);
+    }, 1000);
+  };
+
   return (
     <>
       <S.MainWrapper>
@@ -95,7 +107,7 @@ const Main = () => {
             iconName="Share"
             width={56}
             height={56}
-            onClick={() => copyLink(SOCIAL_LINK.Sharelink)}
+            onClick={handleCopyLink}
           />
           <Text
             label="(클릭 시 공유링크가 클립보드에 복사됩니다)"
@@ -126,6 +138,7 @@ const Main = () => {
           </S.SocialLink>
         </S.SocialWrapper>
       </S.BottomWrapper>
+      <Toast text={'복사되었습니다!'} isOpen={modal} />
     </>
   );
 };

@@ -1,6 +1,6 @@
 'use client';
 
-import { Text, Button, Checkbox, Footer } from '@/components';
+import { Text, Button, Checkbox, Footer, Toast } from '@/components';
 import Col from '@/components/layout/Col';
 import Row from '@/components/layout/Row';
 import useClickButton from '@/hooks/useClickButton';
@@ -25,7 +25,8 @@ function Apply() {
   ] = useClickButton(meetingTypeArr, 1);
 
   const [isFinishPage, setIsFinishPage] = useState(false);
-
+  
+  const [modal, setModal] = useState(false);
   useEffect(() => {
     if (isClickedMeetingType) setIsFinishPage(true);
     else setIsFinishPage(false);
@@ -48,6 +49,24 @@ function Apply() {
     }
   };
 
+  //const handleTypeClick = (i: number) => () => {
+  //  setMeetingTypeState(() => {
+  //    const newState = meetingTypeInitState;
+  //    newState[i].active = true;
+  //    return newState;
+  //  });
+  //  setModal(true);
+  //};
+
+  // useEffect(() => {
+  //  if (
+  //    !meetingTypeState.find(data => data.active) ||
+  //    checkboxState.includes(false)
+  //  )
+  //    setIsFinishPage(false);
+  //  else setIsFinishPage(true);
+  //}, [meetingTypeState, checkboxState]);
+    
   return (
     <>
       <Col gap={36} padding={'32px 24px'}>
@@ -119,6 +138,10 @@ function Apply() {
         disabled={!isFinishPage}
         onClickPrev={onClickPrev}
         onClickNext={onClickNext}
+      />
+      <Toast
+        text={'미팅 종류를 선택하시면 바꾸실 수 없습니다'}
+        isOpen={modal}
       />
     </>
   );
