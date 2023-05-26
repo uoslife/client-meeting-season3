@@ -47,7 +47,7 @@ const FourthPage = ({ setIsFinishPage }: StepProps) => {
                 description={MBTI_QUESTIONS[i].description}
                 title={MBTI_TITLE[i]}
                 setValue={setMbtiValue}
-                value={MbtiValue}
+                value={mbtiValue}
                 index={i}
                 key={i}
                 isPrefer={true}
