@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   experimental: {
     appDir: true,
   },
@@ -9,7 +9,15 @@ const nextConfig = {
   },
   output: 'standalone',
   typescript: {
-     ignoreBuildErrors: true,
+    ignoreBuildErrors: true,
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'https://meeting.uoslife.com/api/:path*',
+      },
+    ];
   },
 };
 
