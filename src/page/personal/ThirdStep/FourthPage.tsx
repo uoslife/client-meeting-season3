@@ -14,7 +14,6 @@ const FourthPage = ({ setIsFinishPage }: StepProps) => {
   const [mbtiValue, setMbtiValue] = useState<string[]>(
     prefer_mbti.data[0] === '' ? [] : prefer_mbti.data,
   );
-
   useEffect(() => {
     if (mbtiValue.length > 3) {
       dispatch(setPreferMbti(mbtiValue));
@@ -48,7 +47,7 @@ const FourthPage = ({ setIsFinishPage }: StepProps) => {
                 description={MBTI_QUESTIONS[i].description}
                 title={MBTI_TITLE[i]}
                 setValue={setMbtiValue}
-                value={mbtiValue}
+                value={MbtiValue}
                 index={i}
                 key={i}
                 isPrefer={true}
