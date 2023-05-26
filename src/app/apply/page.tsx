@@ -3,6 +3,7 @@
 import { Text, Button, Checkbox, Footer, Toast } from '@/components';
 import Col from '@/components/layout/Col';
 import Row from '@/components/layout/Row';
+import useClickButton from '@/hooks/useClickButton';
 import { setMeetingType } from '@/store/feature/applyInfo';
 import { useAppDispatch } from '@/store/store';
 import { useRouter } from 'next/navigation';
@@ -10,54 +11,62 @@ import { useEffect, useState } from 'react';
 
 function Apply() {
   const dispatch = useAppDispatch();
-  const meetingTypeInitState = [
-    {
-      name: 'personal',
-      active: false,
-    },
-    {
-      name: 'group',
-      active: false,
-    },
-  ];
-  const [meetingTypeState, setMeetingTypeState] =
-    useState(meetingTypeInitState);
-
-  const [checkboxState, setCheckboxState] = useState([false, false]);
-  const [isFinishPage, setIsFinishPage] = useState(false);
-  const [modal, setModal] = useState(false);
 
   const router = useRouter();
 
+  const [checkboxState, setCheckboxState] = useState([false, false]);
+
+  const meetingTypeArr = ['1:1 미팅', '3:3 미팅'];
+  const [
+    onClickMeetingTypeButton,
+    meetingTypeButtonActiveState,
+    isClickedMeetingType,
+    meetingType,
+  ] = useClickButton(meetingTypeArr, 1);
+
+  const [isFinishPage, setIsFinishPage] = useState(false);
+  
+  const [modal, setModal] = useState(false);
+  useEffect(() => {
+    if (isClickedMeetingType) setIsFinishPage(true);
+    else setIsFinishPage(false);
+  }, [isClickedMeetingType]);
+
   const onClickPrev = () => router.push('/');
+
   const onClickNext = () => {
-    if (meetingTypeState.find(data => data.active)!.name === 'group') {
-      dispatch(setMeetingType('group'));
-      router.push('/apply/branching');
-    } else {
-      dispatch(setMeetingType('personal'));
-      router.push('apply/personal');
+    switch (meetingType[0].label) {
+      case meetingTypeArr[0]:
+        dispatch(setMeetingType('personal'));
+        router.push(`apply/personal`);
+        return;
+      case meetingTypeArr[1]:
+        dispatch(setMeetingType('group'));
+        router.push('/apply/branching');
+        return;
+      default:
+        return;
     }
   };
 
-  const handleTypeClick = (i: number) => () => {
-    setMeetingTypeState(() => {
-      const newState = meetingTypeInitState;
-      newState[i].active = true;
-      return newState;
-    });
-    setModal(true);
-  };
+  //const handleTypeClick = (i: number) => () => {
+  //  setMeetingTypeState(() => {
+  //    const newState = meetingTypeInitState;
+  //    newState[i].active = true;
+  //    return newState;
+  //  });
+  //  setModal(true);
+  //};
 
-  useEffect(() => {
-    if (
-      !meetingTypeState.find(data => data.active) ||
-      checkboxState.includes(false)
-    )
-      setIsFinishPage(false);
-    else setIsFinishPage(true);
-  }, [meetingTypeState, checkboxState]);
-
+  // useEffect(() => {
+  //  if (
+  //    !meetingTypeState.find(data => data.active) ||
+  //    checkboxState.includes(false)
+  //  )
+  //    setIsFinishPage(false);
+  //  else setIsFinishPage(true);
+  //}, [meetingTypeState, checkboxState]);
+    
   return (
     <>
       <Col gap={36} padding={'32px 24px'}>
@@ -81,18 +90,17 @@ function Apply() {
             </Col>
           </Col>
           <Col gap={12}>
-            <Button
-              primary={meetingTypeState[0].active ? 'active' : 'inactive'}
-              label="1:1 미팅"
-              textSize="sm"
-              onClick={handleTypeClick(0)}
-            />
-            <Button
-              primary={meetingTypeState[1].active ? 'active' : 'inactive'}
-              label="3:3 미팅"
-              textSize="sm"
-              onClick={handleTypeClick(1)}
-            />
+            {meetingTypeArr.map((label, i) => (
+              <Button
+                key={i}
+                label={label}
+                primary={
+                  meetingTypeButtonActiveState(i) ? 'active' : 'inactive'
+                }
+                textSize="base"
+                onClick={() => onClickMeetingTypeButton(i)}
+              />
+            ))}
           </Col>
         </Col>
         <Col gap={8}>

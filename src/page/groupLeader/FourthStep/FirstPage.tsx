@@ -14,20 +14,48 @@ import { AGE_SLIDER_ARR } from '@/constants';
 import useClickButton from '@/hooks/useClickButton';
 import { StepProps } from '@/types/step.type';
 import { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '@/store/store';
+import {
+  setPreferAgeGroup,
+  setPreferAtmosphere,
+  setPreferMajorGroup,
+} from '@/store/feature/meetingType/groupReducer';
 
 const FirstPage = ({ setIsFinishPage }: StepProps) => {
-  const [value, setValue] = useState({ min: 0, max: 100 });
-
+  const dispatch = useAppDispatch();
+  const { prefer_major, prefer_atmosphere } = useAppSelector(
+    state => state.group,
+  );
+  const [age, setAge] = useState({ min: 0, max: 100 });
+  const [dislikeDepartment, setDislikeDepartment] = useState<string[]>(
+    prefer_major.data[0] === '' ? [] : prefer_major.data,
+  );
   const buttonLabelArr = ['활발한 편', '차분한 편', '둘 다 좋아요!'];
+
   const [onClickButton, buttonActiveState, isClickedButton, selectedLabel] =
-    useClickButton(buttonLabelArr);
+    useClickButton(buttonLabelArr, 1, prefer_atmosphere);
 
   useEffect(() => {
     if (isClickedButton) {
-      // selectedLabel 사용한 전역 저장 로직
+      const ageArr = [
+        AGE_SLIDER_ARR[age.min / 10],
+        AGE_SLIDER_ARR[age.max / 10],
+      ];
+
+      dispatch(setPreferAgeGroup(ageArr ?? ['']));
+      dispatch(setPreferMajorGroup(dislikeDepartment ?? ['']));
+      dispatch(setPreferAtmosphere(selectedLabel[0].label ?? ''));
+
       setIsFinishPage(true);
     } else setIsFinishPage(false);
-  }, [isClickedButton, selectedLabel, setIsFinishPage]);
+  }, [
+    isClickedButton,
+    selectedLabel,
+    setIsFinishPage,
+    age.max,
+    age.min,
+    dislikeDepartment,
+  ]);
 
   return (
     <Paddle top={32} left={24} right={24}>
@@ -39,15 +67,14 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
             font="LeferiBaseType-RegularA"
             color="#3B4046"
           />
-          {/* DropdownInput 글자 수정 필요 */}
           <Slider
             guideText={AGE_SLIDER_ARR}
             labelExplain="세"
             min={0}
             max={100}
             step={10}
-            value={value}
-            onChange={setValue}
+            value={age}
+            onChange={setAge}
           />
         </Col>
         <Col gap={12} align={'center'}>
@@ -57,10 +84,9 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
             font="LeferiBaseType-RegularA"
             color="#3B4046"
           />
-          {/* Figma랑 맞게 폰트 넣었는데 뭔가 많이 깨집니다.. 확인 부탁드려요오.. */}
           <Text
             label={
-              '(단, 상대 팅원 모두가 입력한 학과에 해당할 경우에만 매칭되지 않습니다.)'
+              '(상대 팅원 모두가 입력한 학과에 해당할 경우에만 매칭되지 않습니다.)'
             }
             weight={400}
             size="xs"
@@ -70,7 +96,7 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
             label={
               '매칭을 원하지 않는 학과가 없다면 바로 넘어갈 수 있으며, 많은 학과를 선택할수록 원하는 팅과의 매칭 성공 확률이 떨어질 수 있습니다.'
             }
-            size="sm"
+            size="xs"
             color="#656D78"
           />
 
@@ -78,6 +104,7 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
             selectedDepartments={dislikeDepartment}
             setSelectedDepartments={setDislikeDepartment}
             isDislike={true}
+            isPersonal={false}
           />
         </Col>
         <Col gap={32} align={'center'}>

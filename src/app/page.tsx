@@ -9,8 +9,33 @@ import { copyLink } from '@/utils';
 import { SOCIAL_LINK } from '@/constants';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { useAppSelector } from '@/store/store';
 
 const Main = () => {
+  const router = useRouter();
+  const { meetingType } = useAppSelector(state => state.applyInfo);
+  const handleApplyButton = () => {
+    switch (meetingType) {
+      case '':
+        router.push('/apply');
+        break;
+      case 'personal':
+        router.push('apply/personal');
+        break;
+      case 'group':
+        router.push('apply/branching');
+        break;
+      case 'groupLeader':
+        router.push('apply/groupLeader');
+        break;
+      case 'groupMember':
+        router.push('apply/groupMember');
+        break;
+      default:
+        router.push('/apply');
+        break;
+    }
+  };
   const router = useRouter();
   const [modal, setModal] = useState(false);
 
@@ -27,7 +52,7 @@ const Main = () => {
       <S.MainWrapper>
         <MainHeader />
         <Image
-          src={'/images/MainPoster.png'}
+          src={'/images/MainPoster.jpg'}
           alt="메인 배너"
           height={421}
           width={366}
@@ -55,20 +80,10 @@ const Main = () => {
         <S.DateWrapper>
           <Text label={'신청기간'} size={'lg'} weight={300} />
           <S.DateTextWrapper>
-            <Text
-              label={'05.26'}
-              size={'4xl'}
-              weight={800}
-              font="Leferi Point Type"
-            />
+            <Text label={'05.26'} size={'4xl'} weight={800} />
             <Text label={'(금)'} size={'2xl'} weight={500} />
-            <Text label={'-'} size={'4xl'} font="Leferi Point Type" />
-            <Text
-              label={'05.28'}
-              size={'4xl'}
-              weight={800}
-              font="Leferi Point Type"
-            />
+            <Text label={'-'} size={'4xl'} />
+            <Text label={'05.28'} size={'4xl'} weight={800} />
             <Text label={'(일)'} size={'2xl'} weight={500} />
           </S.DateTextWrapper>
         </S.DateWrapper>
@@ -76,7 +91,7 @@ const Main = () => {
           <Button
             primary="active"
             label="지금 참여하기 >"
-            onClick={() => router.push('/apply')}
+            onClick={handleApplyButton}
           />
         </div>
       </S.MainWrapper>

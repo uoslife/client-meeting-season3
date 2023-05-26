@@ -16,44 +16,75 @@ import { StepProps } from '@/types/step.type';
 import useClickButton from '@/hooks/useClickButton';
 import { AGE_ARR, HEIGHT_ARR } from '@/constants';
 
+import {
+  setInfoNickname,
+  setInfoGender,
+  setInfoAge,
+  setInfoHeight,
+} from '@/store/feature/common/commonReducer';
+import { useAppDispatch, useAppSelector } from '@/store/store';
+
+const buttonLabelArr = ['남자', '여자'];
+
 const FirstPage = ({ setIsFinishPage }: StepProps) => {
+  const { info_nickname, info_gender, info_age, info_height } = useAppSelector(
+    state => state.common,
+  );
+
+  const dispatch = useAppDispatch();
+
   const [currentNicknameStatus, setCurrentNicknameStatus] = useState<
     'success' | 'error' | 'default'
   >('default');
   const [nicknameStatusMessage, setNicknameStatusMessage] = useState('');
-  const [nickname, setNickname] = useState('');
+  const [nickname, setNickname] = useState(info_nickname.data ?? '');
   const [isFinishNickname, setIsFinishNickname] = useState(false);
 
   const onChangeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //reset
     setCurrentNicknameStatus('default');
     setNicknameStatusMessage('');
+    dispatch(setInfoNickname('')); // 매번 호출되는 side effect..
+    //set
     setNickname(e.target.value);
     setIsFinishNickname(false);
   };
   const handleDoubleCheckButton = () => {
     setCurrentNicknameStatus('error');
     setNicknameStatusMessage('이미 있는 이름입니다.');
+
+    dispatch(setInfoNickname(nickname));
     setIsFinishNickname(true);
   };
 
   //gender
-  const buttonLabelArr = ['남자', '여자'];
   const [onClickButton, buttonActiveState, isClickedButton, selectedLabel] =
-    useClickButton(buttonLabelArr);
+    useClickButton(buttonLabelArr, 1, info_gender);
 
   //age
-  const [age, setAge] = useState<string | number>(0);
+  const [age, setAge] = useState<string | number>(info_age.data ?? 0);
 
   //height
-  const [height, setHeight] = useState<string | number>(0);
+  const [height, setHeight] = useState<string | number>(info_height.data ?? 0);
 
   useEffect(() => {
     const isClickAge = age !== 0;
     const isClickHeight = height !== 0;
+    if (isClickedButton) dispatch(setInfoGender(selectedLabel[0].label));
+    if (isClickAge) dispatch(setInfoAge(age as number));
+    if (isClickHeight) dispatch(setInfoHeight(height as number));
     if (isFinishNickname && isClickedButton && isClickAge && isClickHeight) {
       setIsFinishPage(true);
     } else setIsFinishPage(false);
-  }, [age, height, isClickedButton, isFinishNickname, setIsFinishPage]);
+  }, [
+    age,
+    dispatch,
+    height,
+    isClickedButton,
+    isFinishNickname,
+    selectedLabel,
+    setIsFinishPage,
+  ]);
 
   return (
     <Paddle top={32} left={24} right={24} bottom={140}>
@@ -77,7 +108,7 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
           {/* placeholder 설정 필요 */}
           <TextRoundInput
             placeholder={'닉네임 입력 (2글자 이상)'}
-            value={nickname}
+            value={nickname as string}
             status={currentNicknameStatus}
             statusMessage={nicknameStatusMessage}
             onChange={onChangeNickname}

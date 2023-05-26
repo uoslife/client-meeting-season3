@@ -1,11 +1,37 @@
 'use client';
 
 import { Button, Col, Text } from '@/components';
+import useClickButton from '@/hooks/useClickButton';
+import { setInfoQuestionPersonal } from '@/store/feature/meetingType/personalReducer';
+import { useAppDispatch } from '@/store/store';
 import { StepProps } from '@/types/step.type';
 import Image from 'next/image';
 import Image4 from 'public/images/illust/personal/4.jpg';
+import { useEffect } from 'react';
+import { useAppSelector } from '@/store/hooks';
 
 function FourthPage({ setIsFinishPage }: StepProps) {
+  const dispatch = useAppDispatch();
+  const { info_question } = useAppSelector(state => state.personal);
+
+  const questionArr = [
+    '혼자만의 휴식 시간도 필요해요',
+    '시간 날 때마다 함께 있고 싶어요',
+  ];
+  const [
+    onClickQuestionButton,
+    questionButtonActiveState,
+    isClickedQuestion,
+    question,
+  ] = useClickButton(questionArr, 1, info_question);
+
+  useEffect(() => {
+    if (isClickedQuestion) {
+      dispatch(setInfoQuestionPersonal({ label: question[0].label, order: 3 }));
+      setIsFinishPage(true);
+    } else setIsFinishPage(false);
+  }, [dispatch, isClickedQuestion, question, setIsFinishPage]);
+
   return (
     <Col fill align="center">
       <Col gap={32} align="center" padding="32px 24px 32px 24px">
@@ -31,20 +57,16 @@ function FourthPage({ setIsFinishPage }: StepProps) {
 
         <Image src={Image4} alt="" width={360} height={254} />
         <Col gap={12}>
-          <Button
-            height={56}
-            label="혼자만의 휴식 시간도 필요해요"
-            textSize="sm"
-            primary="inactive"
-            width={366}
-          />
-          <Button
-            height={56}
-            label="시간 날 때마다 함께 있고 싶어요"
-            textSize="sm"
-            primary="inactive"
-            width={366}
-          />
+          {questionArr.map((label, i) => (
+            <Button
+              height={56}
+              key={i}
+              label={label}
+              primary={questionButtonActiveState(i) ? 'active' : 'inactive'}
+              textSize="sm"
+              onClick={() => onClickQuestionButton(i)}
+            />
+          ))}
         </Col>
       </Col>
     </Col>

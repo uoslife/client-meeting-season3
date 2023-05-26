@@ -50,9 +50,11 @@ const DepartmentSelectBox = ({
       return;
       // 학과 1개 선택 시,
     }
-    setSelectedDepartments!([...selectedDepartments!, item]);
-    setDepartment([]);
-    // 학과 2개 이상 선택 시,
+    if (selectedDepartments?.length < 5) {
+      setSelectedDepartments!([...selectedDepartments!, item]);
+      setDepartment([]);
+      // 학과 2개 이상 선택 시,
+    }
   };
 
   const handleDeleteDepartment = (item: string, i: number) => () => {
@@ -97,7 +99,7 @@ const DepartmentSelectBox = ({
               return (
                 <RoundedRectangleButton
                   fontSize={'sm'}
-                  type={'red'}
+                  type={isDislike ? 'red' : 'primary'}
                   deleteColor={isDislike ? 'red' : 'white'}
                   label={name}
                   height={32}

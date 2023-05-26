@@ -3,28 +3,40 @@
 import {
   Button,
   Col,
+  DepartmentSelectBox,
   Paddle,
-  RoundedRectangleButton,
-  Row,
   Text,
   TextRoundInput,
 } from '@/components';
-import { DropdownInput } from '@/components';
 import useClickButton from '@/hooks/useClickButton';
 import useInput from '@/hooks/useInput';
 import { StepProps } from '@/types/step.type';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+
+import { useAppDispatch, useAppSelector } from '@/store/store';
+import {
+  setInfoKakaoId,
+  setInfoMajor,
+  setInfoSmoking,
+  setInfoStudentType,
+} from '@/store/feature/common/commonReducer';
 
 const SecondPage = ({ setIsFinishPage }: StepProps) => {
-  const [kakaoId, onChangeKakaoId] = useInput('');
+  const dispatch = useAppDispatch();
+  const { info_kakaoId, info_major, info_studentType, info_smoking } =
+    useAppSelector(state => state.common);
 
+  const [kakaoId, onChangeKakaoId] = useInput(info_kakaoId.data ?? '');
+  const [myDepartment, setMyDepartment] = useState<string[]>(
+    info_major.data ? [info_major.data] : [],
+  );
   const studentTypeArr = ['학부생', '대학원생', '졸업생'];
   const [
     onClickStudentTypeButton,
     studentTypeButtonActiveState,
     isClickedStudentType,
     studentType,
-  ] = useClickButton(studentTypeArr);
+  ] = useClickButton(studentTypeArr, 1, info_studentType);
 
   const smokingArr = ['흡연', '비흡연'];
   const [
@@ -32,14 +44,38 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
     smokingButtonActiveState,
     isClickedSmoking,
     smoking,
-  ] = useClickButton(smokingArr);
+  ] = useClickButton(smokingArr, 1, info_smoking);
 
   useEffect(() => {
     const isSubmitKakaoId = kakaoId !== '';
-    if (isSubmitKakaoId && isClickedStudentType && isClickedSmoking) {
+    if (isSubmitKakaoId) dispatch(setInfoKakaoId(kakaoId));
+    else dispatch(setInfoKakaoId(''));
+
+    if (myDepartment[0]) dispatch(setInfoMajor(myDepartment[0]));
+    else dispatch(setInfoMajor(''));
+
+    if (isClickedStudentType)
+      dispatch(setInfoStudentType(studentType[0].label));
+
+    if (isClickedSmoking) dispatch(setInfoSmoking(smoking[0].label));
+    if (
+      myDepartment[0] &&
+      isSubmitKakaoId &&
+      isClickedStudentType &&
+      isClickedSmoking
+    ) {
       setIsFinishPage(true);
     } else setIsFinishPage(false);
-  }, [isClickedSmoking, isClickedStudentType, kakaoId, setIsFinishPage]);
+  }, [
+    dispatch,
+    isClickedSmoking,
+    isClickedStudentType,
+    kakaoId,
+    setIsFinishPage,
+    myDepartment,
+    smoking,
+    studentType,
+  ]);
   return (
     <>
       <Paddle top={32} left={24} right={24} bottom={32}>
@@ -50,6 +86,7 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
                 label={'4. 본인의 카카오톡 ID를 선택해주세요.'}
                 weight={700}
                 font="LeferiBaseType-RegularA"
+                color="#3B4046"
               />
               <Text
                 label={
@@ -73,14 +110,14 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
                 label={'5. 본인의 학과를 선택해주세요.'}
                 weight={700}
                 font="LeferiBaseType-RegularA"
+                color="#3B4046"
               />
             </Col>
-            <TextRoundInput
-              isSearch
-              placeholder={'학과명 입력(2글자 이상)'}
-              value={''}
-              onChange={() => {}}
-              onClick={() => {}}
+            <DepartmentSelectBox
+              setSelectedDepartments={setMyDepartment}
+              selectedDepartments={myDepartment}
+              isPersonal={true}
+              isDislike={false}
             />
           </Col>
 
@@ -90,6 +127,7 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
                 label={'6. 본인의 신분을 선택해주세요.'}
                 weight={700}
                 font="LeferiBaseType-RegularA"
+                color="#3B4046"
               />
             </Col>
             <Col gap={12}>

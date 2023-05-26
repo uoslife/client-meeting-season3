@@ -60,7 +60,7 @@ const ApplyMyInfoStep = () => {
       {changePage(curPage)}
       <Footer
         maxPage={returnMaxPage()}
-        disabled={isFinishPage}
+        disabled={!isFinishPage}
         type={switchPageType()}
       />
     </>
