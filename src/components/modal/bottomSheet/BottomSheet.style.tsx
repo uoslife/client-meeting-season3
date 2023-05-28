@@ -63,27 +63,25 @@ export const Sheet = styled.div<BottomSheetProps>`
 
 export const Button = styled.div<BottomSheetProps>`
   all: unset;
-  box-sizing: border-box;
 
   display: flex;
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-  height: 52px;
   cursor: pointer;
 
   ${({ type }) => {
     switch (type) {
       case 'primary':
         return css`
-          padding: 25px 80px;
+          padding: 12px 55px;
           background: ${colors.Primary_500};
           color: ${colors.White};
           border-radius: 8px;
         `;
       case 'white':
         return css`
-          padding: 25px 80px;
+          padding: 12px 55px;
           background: ${colors.Secondary100};
           color: ${colors.Black};
           border-radius: 12px;

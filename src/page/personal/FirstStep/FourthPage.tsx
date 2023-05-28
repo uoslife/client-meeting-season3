@@ -26,7 +26,7 @@ const FourthPage = ({ setIsFinishPage }: StepProps) => {
   return (
     <Paddle top={32} left={35} right={35}>
       <Col gap={30} align={'center'}>
-        <Text weight={700} label={'10. 본인의 MBTI를 선택해주세요.'} />
+        <Text weight={700} label={'9. 본인의 MBTI를 선택해주세요.'} />
         <Col gap={34}>
           {mbtiValue?.map((item, i) => {
             return (

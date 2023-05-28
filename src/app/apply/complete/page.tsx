@@ -6,6 +6,7 @@ import { Button, Col, Paddle, Text } from '@/components';
 import { useEffect, useRef } from 'react';
 import congratulation from '@/assets/lottie/congratulation.json';
 import { useRouter } from 'next/navigation';
+import { colors } from '@/styles/styles';
 
 const BottomSelectWrapper = styled.div`
   position: fixed;
@@ -57,10 +58,14 @@ const FinishPage = () => {
 
             <Col align={'center'} gap={8}>
               <Col align={'center'}>
-                <Text label="05/28 일요일 저녁!" weight={600} />
+                <Text label="06/01 목요일 저녁!" weight={600} />
                 <Text label="시대생 어플로 알림을 보내드려요." />
               </Col>
-              <Text label="(신청 취소 기한: 5월 27일 자정까지)" />
+              <Text
+                color={colors.Primary_500}
+                size={'xs'}
+                label="(신청 취소 기한: 5월 31일 오후 10시까지)"
+              />
             </Col>
           </Col>
         </Paddle>

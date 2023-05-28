@@ -27,7 +27,7 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
     studentTypeButtonActiveState,
     isClickedStudentType,
     studentType,
-  ] = useClickButton(studentTypeArr, 1, prefer_studentType);
+  ] = useClickButton(studentTypeArr, 3, prefer_studentType);
 
   useEffect(() => {
     console.log(prefer_age.data);
