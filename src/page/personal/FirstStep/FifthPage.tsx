@@ -25,7 +25,7 @@ const FifthPage = ({ setIsFinishPage }: StepProps) => {
     <Col gap={32} padding={'32px 24px'}>
       <Col align={'center'}>
         <Text
-          label={'11. 본인의 관심사를 3가지 선택해주세요.'}
+          label={'10. 본인의 관심사를 3가지 선택해주세요.'}
           color={'#3B4046'}
           weight={700}
         />

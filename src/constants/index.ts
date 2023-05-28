@@ -1,5 +1,6 @@
 export const SOCIAL_LINK = {
-  Sharelink: 'https://www.instagram.com/p/CpEycd2yep6/?igshid=MjkzY2Y1YTY=',
+  Sharelink:
+    'https://www.instagram.com/p/Cskqlsyy9Ar/?utm_source=ig_web_copy_link&igshid=MmJiY2I4NDBkZg==',
   Instagram: 'https://www.instagram.com/uoslife_official/',
   Kakaotalk: 'https://pf.kakao.com/_gMEHK',
   Uoslife: 'https://uoslife.com/',
@@ -105,7 +106,6 @@ export const ANIMALS = [
 export const AGE_ARR = [
   20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35,
 ];
-
 export const AGE_SLIDER_ARR = [
   '20',
   '21',

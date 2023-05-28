@@ -12,6 +12,7 @@ import {
   SOCIAL_LINK,
 } from '@/constants';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export type ProgressHeaderProps = {
   isprogress: boolean;
@@ -24,6 +25,7 @@ const ProgressHeader = ({
   isprogressbar = false,
   title,
 }: ProgressHeaderProps) => {
+  const router = useRouter();
   const { meetingType, curStep } = useAppSelector(state => state.applyInfo);
 
   const [maxStep, setMaxStep] = useState(0);
@@ -61,7 +63,7 @@ const ProgressHeader = ({
     <S.Wrapper>
       <S.Container isprogress={isprogress}>
         <Row justify={'space-between'} align={'center'} fill>
-          <S.SocialLink href={SOCIAL_LINK.Uoslife}>
+          <S.SocialLink onClick={() => router.push('/')}>
             <IconButton iconName="Home" width={24} height={24} />
           </S.SocialLink>
           <S.HeaderTitle>{title || returnTitleByMeetingType()}</S.HeaderTitle>
