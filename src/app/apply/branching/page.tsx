@@ -35,17 +35,11 @@ function Apply() {
     switch (groupType[0].label) {
       case groupTypeArr[0]:
         dispatch(setMeetingType('groupLeader'));
-        meetingAPI
-          .createTeam({ teamType: 'TRIPLE', isTeamLeader: true })
-          .then(() => router.push('apply/groupLeader'))
-          .catch(e => console.error(e));
+        router.push('apply/groupLeader');
         return;
       case groupTypeArr[1]:
         dispatch(setMeetingType('groupMember'));
-        meetingAPI
-          .createTeam({ teamType: 'TRIPLE', isTeamLeader: false })
-          .then(() => router.push('apply/groupMember'))
-          .catch(e => console.error(e));
+        router.push('apply/groupMember');
         return;
       default:
         return;
