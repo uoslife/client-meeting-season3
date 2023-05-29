@@ -44,7 +44,6 @@ const ResultBox = ({ title, applyDataArr }: ResultBoxProps) => {
         return data.data;
     }
   };
-  console.log(applyDataArr);
   return (
     <S.Wrapper>
       <Text label={`💙 ${title}`} size="base" weight={600} color="#3B4046" />
