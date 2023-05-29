@@ -38,6 +38,10 @@ const Main = () => {
         break;
     }
   };
+  const handleCheckInfoButton = () => {
+    router.push('/applicationInfo');
+  };
+
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleCopyLink = async () => {
@@ -48,11 +52,24 @@ const Main = () => {
     }, 5000);
   };
 
+  const [isApply, setIsApply] = useState(false);
   const getUser = () => {
     meetingAPI.getUser().then(data => console.log(data.data));
   };
+  const getTeamInfo = () => {
+    meetingAPI
+      .getTeamInfo({ teamType: 'SINGLE' })
+      .then(data => {
+        setIsApply(true);
+      })
+      .catch(e => {
+        console.error(e);
+        setIsApply(false);
+      });
+  };
   useEffect(() => {
     getUser();
+    getTeamInfo();
   }, []);
 
   return (
@@ -105,13 +122,23 @@ const Main = () => {
             <Text label={'(수)'} size={'2xl'} weight={500} />
           </S.DateTextWrapper>
         </S.DateWrapper>
-        <div style={{ width: '100%', padding: '0 48px' }}>
-          <Button
-            primary="active"
-            label="지금 참여하기 >"
-            onClick={handleApplyButton}
-          />
-        </div>
+        {isApply ? (
+          <div style={{ width: '100%', padding: '0 48px' }}>
+            <Button
+              primary="active"
+              label="신청 정보 확인하기 >"
+              onClick={handleCheckInfoButton}
+            />
+          </div>
+        ) : (
+          <div style={{ width: '100%', padding: '0 48px' }}>
+            <Button
+              primary="active"
+              label="지금 참여하기 >"
+              onClick={handleApplyButton}
+            />
+          </div>
+        )}
       </S.MainWrapper>
       <S.BottomWrapper>
         <S.ShareWrapper>

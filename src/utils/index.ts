@@ -1,3 +1,7 @@
+import {
+  GetTeamInfoResponse,
+  GetTeamStatusResponse,
+} from '@/api/types/meeting.type';
 import { DEPARTMENTS } from '@/constants/departments';
 import { ApplyDataArr } from '@/types/apply.type';
 
@@ -5,12 +9,19 @@ export const copyLink = (link: string) => {
   navigator.clipboard.writeText(link);
 };
 
-export const toPostForm = (applyData: ApplyDataArr) => {
-  let newArr = {};
-  applyData.forEach(data => {
-    newArr = { ...newArr, [data.title_en]: data.data };
+export const toTeamStatus = (data: GetTeamInfoResponse) => {
+  let newUserListArr: GetTeamStatusResponse['userList'] = [];
+  data.teamUserList.forEach(data => {
+    newUserListArr.push({
+      nickname: data.nickname,
+      age: data.age,
+    });
   });
-  return newArr;
+  const teamStatus = {
+    teamName: data.userName,
+    userList: newUserListArr,
+  };
+  return teamStatus;
 };
 
 export const changeStudentType = (studentType: string) => {

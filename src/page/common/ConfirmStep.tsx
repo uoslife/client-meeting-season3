@@ -18,6 +18,7 @@ import {
   PERSONAL_QUESTIONS,
 } from '@/constants';
 import { ApplyDataArr } from '@/types/apply.type';
+
 import { infoToBinary } from '@/utils/binary/informationToBinary';
 
 const ConfirmStep = () => {
@@ -54,9 +55,7 @@ const ConfirmStep = () => {
     undefined,
     undefined,
   );
-  const personalBinaryData = new infoToBinary(
-    'personal',
-    commonState.info_height.data,
+  const personalBinaryData = new binaryToInfo(
     personalState.prefer_height.data,
     personalState.info_question.data,
     personalState.info_mbti.data,
@@ -119,6 +118,21 @@ const ConfirmStep = () => {
   const applyPreferGroupDataArr: ApplyDataArr = Object.values(
     groupState,
   ).filter(data => data.type === 'prefer');
+
+  // get Group Status
+  const [teamStatus, setTeamStatus] = useState<GetTeamStatusResponse>();
+  const getTeamStatus = () => {
+    meetingAPI
+      .getTeamStatus({ teamType: 'TRIPLE', code: groupState.code })
+      .then(data => {
+        setTeamStatus(data.data);
+      })
+      .catch(e => console.error(e));
+  };
+  useEffect(() => {
+    if (!isPersonal) getTeamStatus();
+  }, []);
+
   return (
     <Col padding={'40px 16px 120px'}>
       <Col gap={40}>
@@ -136,11 +150,11 @@ const ConfirmStep = () => {
           />
         </Col>
         <Col gap={12}>
-          {!isPersonal && (
+          {!!teamStatus && (
             <TeamStatusBox
               teamName={groupState.info_name.data}
               type={'confirm'}
-              status={'complete'}
+              statusData={teamStatus!}
             />
           )}
           {isPersonal ? (
