@@ -1,6 +1,7 @@
 'use client';
 
 import { meetingAPI } from '@/api';
+import { GetTeamInfoResponse, TeamType } from '@/api/types/meeting.type';
 import {
   Button,
   Col,
@@ -9,24 +10,58 @@ import {
   TeamStatusBox,
   Text,
 } from '@/components';
+import { resetAll } from '@/store/feature/applyInfo';
+import { resetAllCommonState } from '@/store/feature/common/commonReducer';
+import { resetAllGroupState } from '@/store/feature/meetingType/groupReducer';
+import { resetAllPersonalState } from '@/store/feature/meetingType/personalReducer';
+import { useAppDispatch } from '@/store/store';
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 const ApplicationInfo = () => {
-  // single인지triple인지 구분 필요
-  meetingAPI
-    .getTeamInfo({ teamType: 'SINGLE' })
-    .then()
-    .catch(() => console.log('hi'));
-
+  const dispatch = useAppDispatch();
   const router = useRouter();
-  const onClickCancleApply = () => {
+
+  // single인지triple인지 구분 필요!!
+  const [teamInfo, setTeamInfo] = useState<GetTeamInfoResponse>();
+  const [teamType, setTeamType] = useState<TeamType | ''>('');
+  const getTeamInfo = () => {
     meetingAPI
-      .deleteTeam({ teamType: 'SINGLE', isTeamLeader: true })
-      .then(() => {
-        alert('신청 취소되었습니다.');
-        router.push('/');
+      .getTeamInfo({ teamType: 'SINGLE' })
+      .then(data => {
+        setTeamInfo(data.data);
+        const teamTypeInTeamInfo =
+          data.data.teamUserList.length === 1 ? 'SINGLE' : 'TRIPLE';
+        setTeamType(teamTypeInTeamInfo);
       })
-      .catch(() => {});
+      .catch(e => {
+        console.error(e);
+        alert('팀 신청을 먼저 해주세요!');
+        router.push('/');
+      });
+  };
+
+  useEffect(() => {
+    getTeamInfo();
+  }, []);
+
+  // store state 초기화 필요!!
+  const onClickCancleApply = () => {
+    const ok = window.confirm('신청 취소하겠습니까?');
+    if (ok)
+      meetingAPI
+        .deleteTeam({ teamType: teamType as TeamType, isTeamLeader: true })
+        .then(() => {
+          dispatch(resetAll());
+          dispatch(resetAllCommonState());
+          dispatch(resetAllPersonalState());
+          dispatch(resetAllGroupState());
+          alert('신청 취소되었습니다.');
+          router.push('/');
+        })
+        .catch(() => {
+          alert('팀 신청 후 요청해주세요');
+        });
   };
 
   return (
@@ -38,11 +73,11 @@ const ApplicationInfo = () => {
       />
       <Col padding="32px 24px 12px" gap={85}>
         <Col gap={12} padding="24px 0 0 0">
-          <TeamStatusBox
+          {/* <TeamStatusBox
             teamName="건공관 지박령"
             type="confirm"
             status="waiting"
-          />
+          /> */}
           <ResultBox title={'내 정보'} applyDataArr={[]} />
           <ResultBox title={'선호 사항'} applyDataArr={[]} />
         </Col>
@@ -72,4 +107,5 @@ const ApplicationInfo = () => {
     </>
   );
 };
+
 export default ApplicationInfo;
