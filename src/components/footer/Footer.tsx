@@ -62,8 +62,11 @@ const Footer = ({
   const onClickStepPrev = () => {
     // 처음 step, page인 경우
     if (type === 'firstPage' && curStep === 1) {
-      dispatch(resetAll());
-      router.push('/apply');
+      if (meetingType === 'groupLeader' || meetingType === 'groupMember') {
+        dispatch(resetAll());
+        router.push('/apply');
+        return;
+      }
       return;
     }
     // 마지막 step, page인 경우
