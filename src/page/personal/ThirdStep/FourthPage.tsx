@@ -35,7 +35,7 @@ const FourthPage = ({ setIsFinishPage }: StepProps) => {
         <Text
           weight={700}
           font={'LeferiBaseType-RegularA'}
-          label={'10. 선호하는 상대의 MBTI를 선택해주세요.'}
+          label={'7. 선호하는 상대의 MBTI를 선택해주세요.'}
         />
         <Text
           color={colors.Secondary700}

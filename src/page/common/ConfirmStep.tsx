@@ -73,7 +73,7 @@ const ConfirmStep = () => {
         <Col gap={12}>
           {!isPersonal && (
             <TeamStatusBox
-              teamName={'건공관 지박령'}
+              teamName={groupState.info_name.data}
               type={'confirm'}
               status={'complete'}
             />

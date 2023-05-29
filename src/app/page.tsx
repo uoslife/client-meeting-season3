@@ -10,7 +10,8 @@ import { SOCIAL_LINK } from '@/constants';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '@/store/store';
-import { meetingAPI } from '@/api';
+import { meetingAPI } from '@/api'
+import { colors } from '@/styles/styles';
 
 const Main = () => {
   const router = useRouter();
@@ -69,7 +70,7 @@ const Main = () => {
             label="시대팅 시즌 3"
             size="4xl"
             font="LeferiPoint-SpecialA"
-            color="#2E74FF"
+            color={colors.Primary_500}
           />
         </S.MainTextWrapper>
         <div style={{ textAlign: 'center' }}>

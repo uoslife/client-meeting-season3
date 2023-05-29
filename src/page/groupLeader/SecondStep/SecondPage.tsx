@@ -19,7 +19,7 @@ import { meetingAPI } from '@/api';
 import { useEffect, useState } from 'react';
 
 const SecondPage = ({ setIsFinishPage }: StepProps) => {
-  // const [code, setCode] = useState(8250);
+  const { info_name } = useAppSelector(state => state.group);
   const { code } = useAppSelector(state => state.group);
   const [statusData, setStatusData] = useState<GetTeamStatusResponse>({
     teamName: '',
@@ -46,6 +46,7 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
             <Text
               label="팅 코드를 팅원에게 공유해주세요."
               size="xl"
+              weight={600}
               color="#656D78"
             />
             <Text
@@ -64,7 +65,7 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
         />
         <S.Divider />
         <TeamStatusBox
-          teamName={'건공관 지박령'}
+          teamName={info_name.data}
           type={'apply'}
           statusData={statusData}
         />

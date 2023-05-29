@@ -32,7 +32,7 @@ function ThirdPage({ setIsFinishPage }: StepProps) {
     <Col gap={44} padding={'32px 24px'}>
       <Col align={'center'} gap={12}>
         <Text
-          label={'8. 선호하는 상대의 동물상을 선택해주세요.'}
+          label={'6. 선호하는 상대의 동물상을 선택해주세요.'}
           color={'#3B4046'}
           weight={700}
         />

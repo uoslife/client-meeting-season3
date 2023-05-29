@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colors } from '@/styles/styles';
 
 export const MainWrapper = styled.main`
   display: flex;
@@ -33,7 +34,7 @@ export const MainTextWrapper = styled.div`
   justify-content: center;
   align-items: flex-start;
   padding: 8px 28px;
-  border: 1px solid #2e74ff;
+  border: 1px solid ${colors.Primary_500};
   border-radius: 12px;
   opacity: 0.9;
 `;

@@ -32,7 +32,7 @@ const InterestSelectButton = ({
           height={54}
         />
       </S.ImgWrapper>
-      <Text label={label} weight={600} color={'#808A98'} />
+      <Text label={label} size={'sm'} weight={600} color={'#808A98'} />
     </S.Wrapper>
   );
 };

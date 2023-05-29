@@ -26,12 +26,20 @@ const ResultBox = ({ title, applyDataArr }: ResultBoxProps) => {
     }
     // mbti
     if (data.title_en === 'mbti' && data.type === 'info')
-      return (data.data as string[]).join('');
+      return (data.data as string[]).join(', ');
     if (data.title_en === 'mbti' && data.type === 'prefer')
       return (data.data as string[]).join(', ');
     // 기피학과
     // if (data.title_en === 'major' && data.type === 'prefer')
     // return (data.data as string[]).join('');
+
+    if (data.title_en === 'height' && data.type === 'prefer')
+      return `${parseInt(data.data[0])} ~ ${parseInt(data.data[1])}`;
+
+    if (data.title_en === 'age' && data.type === 'prefer') {
+      const formattedData = data.data?.map(item => item.replace(/~/g, ''));
+      return `${parseInt(formattedData[0])} ~ ${parseInt(formattedData[1])}`;
+    }
 
     switch (typeof data.data) {
       case 'string':
