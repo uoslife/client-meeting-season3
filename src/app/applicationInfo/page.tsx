@@ -1,7 +1,11 @@
 'use client';
 
 import { meetingAPI } from '@/api';
-import { GetTeamInfoResponse, TeamType } from '@/api/types/meeting.type';
+import {
+  GetTeamInfoResponse,
+  GetTeamStatusResponse,
+  TeamType,
+} from '@/api/types/meeting.type';
 import {
   BottomSheet,
   Button,
@@ -15,30 +19,47 @@ import { resetAll } from '@/store/feature/applyInfo';
 import { resetAllCommonState } from '@/store/feature/common/commonReducer';
 import { resetAllGroupState } from '@/store/feature/meetingType/groupReducer';
 import { resetAllPersonalState } from '@/store/feature/meetingType/personalReducer';
-import { useAppDispatch } from '@/store/store';
+import { useAppDispatch, useAppSelector } from '@/store/store';
+import { toTeamStatus } from '@/utils';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const ApplicationInfo = () => {
   const dispatch = useAppDispatch();
+  const { code } = useAppSelector(state => state.group);
   const router = useRouter();
 
   // single인지triple인지 구분 필요!!
   const [teamInfo, setTeamInfo] = useState<GetTeamInfoResponse>();
-  const [teamType, setTeamType] = useState<TeamType | ''>('');
+  const [teamStatus, setTeamStatus] = useState<GetTeamStatusResponse>();
+  const [teamType, setTeamType] = useState<TeamType>();
+
+  const [errorState, setErrorState] = useState([false, false]);
   const getTeamInfo = () => {
     meetingAPI
       .getTeamInfo({ teamType: 'SINGLE' })
       .then(data => {
+        console.log(data.data);
         setTeamInfo(data.data);
-        const teamTypeInTeamInfo =
-          data.data.teamUserList.length === 1 ? 'SINGLE' : 'TRIPLE';
-        setTeamType(teamTypeInTeamInfo);
+        setTeamType(data.data.teamType);
       })
       .catch(e => {
         console.error(e);
-        alert('팀 신청을 먼저 해주세요!');
-        router.push('/');
+        // alert('팀 신청을 먼저 해주세요!');
+        // router.push('/');
+      });
+    meetingAPI
+      .getTeamInfo({ teamType: 'TRIPLE' })
+      .then(data => {
+        console.log(data.data);
+        setTeamInfo(data.data);
+        setTeamType(data.data.teamType);
+        setTeamStatus(toTeamStatus(data.data));
+      })
+      .catch(e => {
+        console.error(e);
+        // alert('팀 신청을 먼저 해주세요!');
+        // router.push('/');
       });
   };
 
@@ -53,7 +74,7 @@ const ApplicationInfo = () => {
   };
   const onClickPrimary = () => {
     meetingAPI
-      .deleteTeam({ teamType: teamType as TeamType, isTeamLeader: true })
+      .deleteTeam({ teamType: teamType!, isTeamLeader: true })
       .then(() => {
         dispatch(resetAll());
         dispatch(resetAllCommonState());
@@ -79,13 +100,27 @@ const ApplicationInfo = () => {
       />
       <Col padding="32px 24px 12px" gap={85}>
         <Col gap={12} padding="24px 0 0 0">
-          {/* <TeamStatusBox
-            teamName="건공관 지박령"
-            type="confirm"
-            status="waiting"
-          /> */}
-          <ResultBox title={'내 정보'} applyDataArr={[]} />
-          <ResultBox title={'선호 사항'} applyDataArr={[]} />
+          {!!teamStatus && (
+            <TeamStatusBox
+              teamName="건공관 지박령"
+              type="confirm"
+              statusData={teamStatus!}
+            />
+          )}
+          {teamType === 'SINGLE' ? (
+            <>
+              <ResultBox title={'내 정보'} applyDataArr={[]} />
+              <ResultBox title={'선호 사항'} applyDataArr={[]} />
+            </>
+          ) : (
+            <>
+              <ResultBox
+                title={'상대 팅에게 보여지는 정보'}
+                applyDataArr={[]}
+              />
+              <ResultBox title={'원하는 팅의 정보'} applyDataArr={[]} />
+            </>
+          )}
         </Col>
         <Col gap={10}>
           <Col align={'center'}>
