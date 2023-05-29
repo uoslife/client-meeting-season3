@@ -140,4 +140,63 @@ export class binary implements IBinary {
     ).join('');
     // 완
   }
+
+  // 바이너리 -> 정보
+  binaryToSmoking() {
+    const arrNum = this.smokingToBinary().split('').indexOf('1');
+    return preferAtmosphereArr[arrNum];
+  }
+  binaryToPreferAtmosphere() {
+    const arrNum = this.smokingToBinary().split('').indexOf('1');
+    return preferAtmosphereArr[arrNum];
+  }
+
+  binaryToInterest() {
+    const arr = this.interestToBinary().split('');
+    const result = [];
+    INTERESTS.map((item, i) => (arr[i] === '1' ? result.push(item) : null));
+    return result;
+  }
+
+  binaryToPreferDay() {
+    const arr = this.preferDayToBinary().split('');
+    const result = [];
+    preferDayArr.map((item, i) => (arr[i] === '1' ? result.push(item) : null));
+    return result;
+  }
+
+  binaryToStudentType() {
+    const arr = this.studentTypeToBinary().split('');
+    const result = [];
+    studentTypeArr.map((item, i) =>
+      arr[i] === '1' ? result.push(item) : null,
+    );
+    return result;
+  }
+
+  binaryToDepartment() {
+    const arr = this.departmentToBinary().split('');
+    const result = [];
+    DEPARTMENTS.map((item, i) => (arr[i] === '1' ? result.push(item) : null));
+    return result;
+  }
+
+  binaryToAnimal(isPrefer: boolean) {
+    const arr = this.animalToBinary(isPrefer).split('');
+    const result = [];
+    ANIMALS.map((item, i) => (arr[i] === '1' ? result.push(item) : null));
+    return result;
+  }
+
+  binaryToPreferAge() {
+    const result = this.preferHeightToBinary()
+      .match(/.{1,8}/g)
+      .map(item => parseInt(item, 2));
+
+    return `${result[0]} ~ ${result[1]}`;
+  }
+
+  // 해야하는 것들
+  // mbtiToBinary
+  // qeustionToBinary
 }
