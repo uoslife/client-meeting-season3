@@ -1,4 +1,4 @@
-import { IBinary } from '@/types/information.type';
+import { IBinaryToInfo } from '@/types/information.type';
 import { ANIMALS, INTERESTS } from '@/constants/index';
 import { DEPARTMENTS } from '@/constants/departments';
 
@@ -8,49 +8,21 @@ const preferDayArr = ['월', '화', '수', '목', '금', '토', '일'];
 const preferAtmosphereArr = ['활발한 편', '차분한 편', '둘 다 좋아요!'];
 const mbtiString = 'EISNTFJP';
 
-export class binary implements IBinary {
-  preferHeight?: string[];
-  preferAge?: string[];
-  questions?: object;
-  myMbti?: string[];
-  preferMbti?: string[];
-  preferAnimal?: string[];
-  myAnimal?: string[];
-  smoking?: string;
-  major?: string[];
-  studentType?: string[];
-  preferDay?: string[];
-  atmosphere?: string;
-  interests?: string[];
-
+export class binaryToInfo implements IBinaryToInfo {
+  informationDistance?: 'string';
+  informationFilter?: 'string';
+  preferenceDistance?: 'string';
+  preferenceFilter?: 'string';
   constructor(
-    preferHeight?,
-    questions?,
-    myMbti?,
-    preferMbti?,
-    preferAge?,
-    myAnimal?,
-    preferAnimal?,
-    smoking?,
-    major?,
-    studentType?,
-    preferDay?,
-    atmosphere?,
-    interests?,
+    informationDistance?
+    informationFilter?
+    preferenceDistance?
+    preferenceFilter?
   ) {
-    (this.preferHeight = preferHeight),
-      (this.preferAge = preferAge),
-      (this.questions = questions),
-      (this.myMbti = myMbti),
-      (this.preferMbti = preferMbti),
-      (this.myAnimal = myAnimal),
-      (this.preferAnimal = preferAnimal),
-      (this.smoking = smoking),
-      (this.major = major),
-      (this.studentType = studentType),
-      (this.preferDay = preferDay),
-      (this.atmosphere = atmosphere),
-      (this.interests = interests);
+    (this.informationDistance = informationDistance),
+    (this.informationFilter = informationFilter),
+    (this.preferenceDistance = preferenceDistance),
+    (this.preferenceFilter = preferenceFilter),
   }
 
   // 정보 -> 바이너리

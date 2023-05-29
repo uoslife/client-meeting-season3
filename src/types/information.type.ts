@@ -1,6 +1,6 @@
 import { ApplyData, ApplyQuestionArrType } from '@/types/apply.type';
 
-export interface IBinary {
+export interface IInfoToBinary {
   myHeight?: ApplyData<number>;
   myAge?: ApplyData<number>;
   questions?: ApplyData<ApplyQuestionArrType>;
@@ -16,6 +16,14 @@ export interface IBinary {
   preferDay?: ApplyData<string[]>;
   atmosphere?: ApplyData<string>;
   interests?: ApplyData<string[]>;
+}
+
+export interface IBinaryToInfo {
+  informationDistance?: 'string';
+  informationFilter?: 'string';
+
+  preferenceDistance?: 'string';
+  preferenceFilter?: 'string';
 }
 
 export type SingleInformationFilterType = {
