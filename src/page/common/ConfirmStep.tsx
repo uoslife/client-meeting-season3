@@ -18,7 +18,7 @@ import {
   PERSONAL_QUESTIONS,
 } from '@/constants';
 import { ApplyDataArr } from '@/types/apply.type';
-import { binary } from '@/utils/binary/informationToBinary';
+import { infoToBinary } from '@/utils/binary/informationToBinary';
 
 const ConfirmStep = () => {
   const [isFinishPage, setIsFinishPage] = useState(false);
@@ -29,40 +29,67 @@ const ConfirmStep = () => {
   const groupState = useAppSelector(state => state.group);
   const dispatch = useAppDispatch();
 
-  const groupBinaryData = new binary(
+  const groupBinaryData = new infoToBinary(
+    'group',
+    commonState.info_height.data,
     undefined,
     groupState.info_question.data,
     undefined,
     undefined,
+    commonState.info_age.data,
     groupState.prefer_age.data,
     undefined,
     undefined,
+    commonState.info_smoking.data,
     undefined,
+    commonState.info_major.data,
     groupState.prefer_major.data,
+    commonState.info_studentType.data,
     undefined,
     groupState.info_preferDay.data,
     groupState.prefer_atmosphere.data,
     undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
   );
-  const personalBinaryData = new binary(
+  const personalBinaryData = new infoToBinary(
+    'personal',
+    commonState.info_height.data,
     personalState.prefer_height.data,
     personalState.info_question.data,
     personalState.info_mbti.data,
     personalState.prefer_mbti.data,
+    commonState.info_age.data,
     personalState.prefer_age.data,
     personalState.info_animal.data,
     personalState.prefer_animal.data,
+    commonState.info_smoking.data,
     personalState.prefer_smoking.data,
+    commonState.info_major.data,
     personalState.prefer_major.data,
+    commonState.info_studentType.data,
     personalState.prefer_studentType.data,
     undefined,
     undefined,
     personalState.info_interests.data,
+    '',
+    '',
+    '',
+    '',
   );
+
+  useEffect(() => {
+    console.log('선호', personalBinaryData.preferAgeToBinary().length);
+    console.log('선호', personalBinaryData.preferSmokingToBinary().length);
+    console.log('선호', personalBinaryData.departmentToBinary(true).length);
+    console.log('선호', personalBinaryData.preferStudentTypeToBinary().length);
+    console.log('선호', personalBinaryData.totalPreferenceFilter().length);
+  }, [infoToBinary]);
 
   const isPersonal = meetingType === 'personal';
   const onClickPrev = () => {
-    if (meetingType === 'groupMember') return;
     dispatch(
       setPage(
         isPersonal
