@@ -90,15 +90,15 @@ const Main = () => {
           <S.DateTextWrapper>
             <Text
               label={'05.29'}
-              size={'4xl'}
+              size={'3xl'}
               weight={800}
               font="LeferiPoint-SpecialA"
             />
             <Text label={'(월)'} size={'2xl'} weight={500} />
             <Text label={'-'} size={'4xl'} />
             <Text
-              label={'06.01'}
-              size={'4xl'}
+              label={'05.31'}
+              size={'3xl'}
               weight={800}
               font="LeferiPoint-SpecialA"
             />
