@@ -48,7 +48,7 @@ export const DateWrapper = styled.div`
 export const DateTextWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
 `;
 
 export const SocialLink = styled.a`
