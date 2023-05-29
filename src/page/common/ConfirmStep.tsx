@@ -20,6 +20,8 @@ import {
 import { ApplyDataArr } from '@/types/apply.type';
 
 import { infoToBinary } from '@/utils/binary/informationToBinary';
+import { meetingAPI } from '@/api';
+import { GetTeamStatusResponse } from '@/api/types/meeting.type';
 
 const ConfirmStep = () => {
   const [isFinishPage, setIsFinishPage] = useState(false);
@@ -50,12 +52,14 @@ const ConfirmStep = () => {
     groupState.info_preferDay.data,
     groupState.prefer_atmosphere.data,
     undefined,
-    undefined,
-    undefined,
-    undefined,
-    undefined,
+    '',
+    '',
+    '',
+    '',
   );
-  const personalBinaryData = new binaryToInfo(
+  const personalBinaryData = new infoToBinary(
+    'personal',
+    commonState.info_height.data,
     personalState.prefer_height.data,
     personalState.info_question.data,
     personalState.info_mbti.data,
@@ -78,14 +82,6 @@ const ConfirmStep = () => {
     '',
     '',
   );
-
-  useEffect(() => {
-    console.log('선호', personalBinaryData.preferAgeToBinary().length);
-    console.log('선호', personalBinaryData.preferSmokingToBinary().length);
-    console.log('선호', personalBinaryData.departmentToBinary(true).length);
-    console.log('선호', personalBinaryData.preferStudentTypeToBinary().length);
-    console.log('선호', personalBinaryData.totalPreferenceFilter().length);
-  }, [infoToBinary]);
 
   const isPersonal = meetingType === 'personal';
   const onClickPrev = () => {
