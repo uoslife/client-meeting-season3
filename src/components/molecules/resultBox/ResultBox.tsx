@@ -56,23 +56,24 @@ const ResultBox = ({ title, applyDataArr }: ResultBoxProps) => {
     <S.Wrapper>
       <Text label={`💙 ${title}`} size="base" weight={600} color="#3B4046" />
       <S.TextWrapper>
-        {applyDataArr.map((data, i) => (
-          <S.TextBox key={i}>
-            <Text
-              label={data.title_kr}
-              size="sm"
-              weight={400}
-              color="#97A1AE"
-              style={{ width: '70px' }}
-            />
-            <Text
-              label={switchLabelData(data)}
-              size="sm"
-              weight={400}
-              color="#3B4046"
-            />
-          </S.TextBox>
-        ))}
+        {!!applyDataArr &&
+          applyDataArr.map((data, i) => (
+            <S.TextBox key={i}>
+              <Text
+                label={data.title_kr}
+                size="sm"
+                weight={400}
+                color="#97A1AE"
+                style={{ width: '70px' }}
+              />
+              <Text
+                label={switchLabelData(data)}
+                size="sm"
+                weight={400}
+                color="#3B4046"
+              />
+            </S.TextBox>
+          ))}
       </S.TextWrapper>
     </S.Wrapper>
   );

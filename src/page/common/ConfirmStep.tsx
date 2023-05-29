@@ -77,11 +77,11 @@ const ConfirmStep = () => {
     undefined,
     undefined,
     personalState.info_interests.data,
-    '',
-    '',
-    '',
-    '',
-  );
+  //   '',
+  //   '',
+  //   '',
+  //   '',
+  // );
 
   const isPersonal = meetingType === 'personal';
   const onClickPrev = () => {
@@ -126,6 +126,8 @@ const ConfirmStep = () => {
       .catch(e => console.error(e));
   };
   useEffect(() => {
+    console.log(applyInfoGroupDataArr);
+    console.log(applyPreferGroupDataArr);
     if (!isPersonal) getTeamStatus();
   }, []);
 

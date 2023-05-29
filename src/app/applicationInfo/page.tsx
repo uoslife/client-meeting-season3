@@ -20,7 +20,8 @@ import { resetAllCommonState } from '@/store/feature/common/commonReducer';
 import { resetAllGroupState } from '@/store/feature/meetingType/groupReducer';
 import { resetAllPersonalState } from '@/store/feature/meetingType/personalReducer';
 import { useAppDispatch, useAppSelector } from '@/store/store';
-import { toTeamStatus } from '@/utils';
+import { ApplyDataArr } from '@/types/apply.type';
+import { ToDataArrType, toDataArr, toTeamStatus } from '@/utils';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -34,6 +35,9 @@ const ApplicationInfo = () => {
   const [teamStatus, setTeamStatus] = useState<GetTeamStatusResponse>();
   const [teamType, setTeamType] = useState<TeamType>();
 
+  const [infoDataArr, setInfoDataArr] = useState<ApplyDataArr>();
+  const [preferDataArr, setPreferDataArr] = useState<ApplyDataArr>();
+
   const [errorState, setErrorState] = useState([false, false]);
   const getTeamInfo = () => {
     meetingAPI
@@ -42,6 +46,19 @@ const ApplicationInfo = () => {
         console.log(data.data);
         setTeamInfo(data.data);
         setTeamType(data.data.teamType);
+        const infoPrefer = {
+          informationDistance: data.data.informationDistance,
+          informationFilter: data.data.informationFilter,
+          preferenceDistance: data.data.preferenceDistance,
+          preferenceFilter: data.data.preferenceFilter,
+        };
+        const todataArr: ToDataArrType = {
+          infoPrefer,
+          sex: data.data.sex,
+          teamUserList: data.data.teamUserList,
+        };
+        setInfoDataArr(toDataArr(todataArr, 'personal', 'info'));
+        // setPreferDataArr(toDataArr(todataArr, 'personal', 'prefer'));
       })
       .catch(e => {
         console.error(e);
@@ -109,16 +126,19 @@ const ApplicationInfo = () => {
           )}
           {teamType === 'SINGLE' ? (
             <>
-              <ResultBox title={'내 정보'} applyDataArr={[]} />
-              <ResultBox title={'선호 사항'} applyDataArr={[]} />
+              <ResultBox title={'내 정보'} applyDataArr={infoDataArr!} />
+              <ResultBox title={'선호 사항'} applyDataArr={preferDataArr!} />
             </>
           ) : (
             <>
               <ResultBox
                 title={'상대 팅에게 보여지는 정보'}
-                applyDataArr={[]}
+                applyDataArr={infoDataArr!}
               />
-              <ResultBox title={'원하는 팅의 정보'} applyDataArr={[]} />
+              <ResultBox
+                title={'원하는 팅의 정보'}
+                applyDataArr={preferDataArr!}
+              />
             </>
           )}
         </Col>

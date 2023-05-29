@@ -48,10 +48,12 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     handleTopMargin(nativeActions).then(margin => setTopMargin(margin));
   }, []);
 
-  history.pushState(null, '', location.href);
-  window.onpopstate = () => {
-    history.go(1);
-  };
+  if (typeof window !== 'undefined') {
+    history.pushState(null, '', location.href);
+    window.onpopstate = () => {
+      history.go(1);
+    };
+  }
 
   return (
     <html lang="ko">
