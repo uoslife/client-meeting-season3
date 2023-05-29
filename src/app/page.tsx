@@ -69,7 +69,7 @@ const Main = () => {
           <Text
             label="시대팅 시즌 3"
             size="4xl"
-            font="LeferiPoint-SpecialA"
+            font="LeferiSpecial"
             color={colors.Primary_500}
           />
         </S.MainTextWrapper>
@@ -88,11 +88,21 @@ const Main = () => {
         <S.DateWrapper>
           <Text label={'신청기간'} size={'lg'} weight={300} />
           <S.DateTextWrapper>
-            <Text label={'05.26'} size={'4xl'} weight={800} />
-            <Text label={'(금)'} size={'2xl'} weight={500} />
+            <Text
+              label={'05.29'}
+              size={'4xl'}
+              weight={800}
+              font="LeferiPoint-SpecialA"
+            />
+            <Text label={'(월)'} size={'2xl'} weight={500} />
             <Text label={'-'} size={'4xl'} />
-            <Text label={'05.28'} size={'4xl'} weight={800} />
-            <Text label={'(일)'} size={'2xl'} weight={500} />
+            <Text
+              label={'06.01'}
+              size={'4xl'}
+              weight={800}
+              font="LeferiPoint-SpecialA"
+            />
+            <Text label={'(수)'} size={'2xl'} weight={500} />
           </S.DateTextWrapper>
         </S.DateWrapper>
         <div style={{ width: '100%', padding: '0 48px' }}>

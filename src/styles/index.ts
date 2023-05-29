@@ -15,14 +15,18 @@ export const GlobalStyles = createGlobalStyle`
   @font-face {
     font-family: 'LeferiPoint-SpecialA';
     src: url('/fonts/LeferiPointBlack.ttf') format("truetype");
-    src: url('/fonts/LeferiPointBlackOblique.ttf') format("truetype");
     font-weight: normal;
     font-style: normal;
   }
   @font-face {
     font-family: 'LeferiBaseType-RegularA';
-    src: url('/fonts/LeferiBaseBold.ttf') format("truetype");
-    src: url('/fonts/LeferiBaseRegular.ttf') format("truetype");
+    src: url('/fonts/LeferiBaseBold.ttf') format("truetype") url('/fonts/LeferiBaseRegular.ttf') format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+  @font-face {
+    font-family: 'LeferiSpecial';
+    src: url('/fonts/LeferiPointSpecial.ttf') format("truetype");
     font-weight: normal;
     font-style: normal;
 }
