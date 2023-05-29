@@ -10,7 +10,7 @@ import { SOCIAL_LINK } from '@/constants';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '@/store/store';
-import { meetingAPI } from '@/api'
+import { meetingAPI } from '@/api';
 import { colors } from '@/styles/styles';
 
 const Main = () => {
@@ -38,14 +38,14 @@ const Main = () => {
         break;
     }
   };
-  const [modal, setModal] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleCopyLink = async () => {
     copyLink(SOCIAL_LINK.Sharelink);
-    setModal(true);
+    setModalOpen(true);
     setTimeout(() => {
-      setModal(false);
-    }, 1000);
+      setModalOpen(false);
+    }, 5000);
   };
 
   const getUser = () => {
@@ -146,7 +146,7 @@ const Main = () => {
           </S.SocialLink>
         </S.SocialWrapper>
       </S.BottomWrapper>
-      <Toast text={'복사되었습니다!'} isOpen={modal} />
+      <Toast text={'복사되었습니다!'} isOpen={modalOpen} />
     </>
   );
 };

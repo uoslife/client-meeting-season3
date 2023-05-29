@@ -28,7 +28,7 @@ function Apply() {
   }, [isClickedGroupType]);
 
   const onClickPrev = () => {
-    router.push('apply');
+    return;
   };
 
   const onClickNext = () => {
