@@ -5,10 +5,12 @@ import { BottomSheet, Col, Text } from '@/components';
 import { incrementStep, setPage } from '@/store/feature/applyInfo';
 import { useAppDispatch } from '@/store/store';
 import * as S from '@/styles/pages/GroupMemberPage.style';
+import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
 const GroupMemberFirstPage = () => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const [code, setCode] = useState<string>('');
   const [isStatusExist, setIsStatusExist] = useState<boolean>(false);
@@ -39,7 +41,11 @@ const GroupMemberFirstPage = () => {
             };
           });
         })
-        .catch(() => {
+        .catch(e => {
+          if (e.response.data.code === 'M02') {
+            alert('이미 팀이 존재합니다');
+            // router.push('/');
+          }
           setStatusMessage('존재하지 않는 팀 코드입니다');
           setIsStatusExist(false);
           setIsModal(false);

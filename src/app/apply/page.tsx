@@ -41,7 +41,12 @@ function Apply() {
         meetingAPI
           .createTeam({ teamType: 'SINGLE', isTeamLeader: true })
           .then(() => router.push('apply/personal'))
-          .catch(e => console.error(e));
+          .catch(e => {
+            if (e.response.status === 400) {
+              alert('이미 신청하였습니다.');
+              router.push('/');
+            }
+          });
         return;
       case meetingTypeArr[1]:
         dispatch(setMeetingType('group'));
