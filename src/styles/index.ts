@@ -14,13 +14,15 @@ export const GlobalStyles = createGlobalStyle`
 
   @font-face {
     font-family: 'LeferiPoint-SpecialA';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-SpecialA.woff') format('woff');
+    src: url('/fonts/LeferiPointBlack.ttf') format("truetype");
+    src: url('/fonts/LeferiPointBlackOblique.ttf') format("truetype");
     font-weight: normal;
     font-style: normal;
   }
   @font-face {
     font-family: 'LeferiBaseType-RegularA';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiBaseType-RegularA.woff') format('woff');
+    src: url('/fonts/LeferiBaseBold.ttf') format("truetype");
+    src: url('/fonts/LeferiBaseRegular.ttf') format("truetype");
     font-weight: normal;
     font-style: normal;
 }
@@ -32,6 +34,9 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
+    font-family: ${globalFontFamily};
+    font-weight: 500;
+    box-sizing: border-box;
     max-width: 414px;
     margin: 0 auto;
   }
