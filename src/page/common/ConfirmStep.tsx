@@ -32,57 +32,6 @@ const ConfirmStep = () => {
   const groupState = useAppSelector(state => state.group);
   const dispatch = useAppDispatch();
 
-  const groupBinaryData = new infoToBinary(
-    'group',
-    commonState.info_height.data,
-    undefined,
-    groupState.info_question.data,
-    undefined,
-    undefined,
-    commonState.info_age.data,
-    groupState.prefer_age.data,
-    undefined,
-    undefined,
-    commonState.info_smoking.data,
-    undefined,
-    commonState.info_major.data,
-    groupState.prefer_major.data,
-    commonState.info_studentType.data,
-    undefined,
-    groupState.info_preferDay.data,
-    groupState.prefer_atmosphere.data,
-    undefined,
-    '',
-    '',
-    '',
-    '',
-  );
-  const personalBinaryData = new infoToBinary(
-    'personal',
-    commonState.info_height.data,
-    personalState.prefer_height.data,
-    personalState.info_question.data,
-    personalState.info_mbti.data,
-    personalState.prefer_mbti.data,
-    commonState.info_age.data,
-    personalState.prefer_age.data,
-    personalState.info_animal.data,
-    personalState.prefer_animal.data,
-    commonState.info_smoking.data,
-    personalState.prefer_smoking.data,
-    commonState.info_major.data,
-    personalState.prefer_major.data,
-    commonState.info_studentType.data,
-    personalState.prefer_studentType.data,
-    undefined,
-    undefined,
-    personalState.info_interests.data,
-  //   '',
-  //   '',
-  //   '',
-  //   '',
-  // );
-
   const isPersonal = meetingType === 'personal';
   const onClickPrev = () => {
     dispatch(
@@ -108,7 +57,14 @@ const ConfirmStep = () => {
   ).filter(data => data.type === 'prefer');
 
   const applyInfoGroupDataArr: ApplyDataArr = (
-    Object.values(commonState) as ApplyDataArr
+    Object.values(commonState).filter(
+      data =>
+        data.title_en === 'gender' ||
+        data.title_en === 'age' ||
+        data.title_en === 'kakaoId' ||
+        data.title_en === 'major' ||
+        data.title_en === 'studentType',
+    ) as ApplyDataArr
   ).concat(Object.values(groupState).filter(data => data.type === 'info'));
 
   const applyPreferGroupDataArr: ApplyDataArr = Object.values(
@@ -126,8 +82,6 @@ const ConfirmStep = () => {
       .catch(e => console.error(e));
   };
   useEffect(() => {
-    console.log(applyInfoGroupDataArr);
-    console.log(applyPreferGroupDataArr);
     if (!isPersonal) getTeamStatus();
   }, []);
 

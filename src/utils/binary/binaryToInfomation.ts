@@ -155,13 +155,9 @@ export class BinaryToInfo implements IBinaryToInfo {
 
   /** 1대1 prefer */
   binaryToPreferHeight(binary1: string, binary2: string) {
-    const result: Array<string> = [];
-    HEIGHT_SLIDER_ARR.map((item, i) =>
-      binary1[i] === '1' ? result.push(item) : null,
-    );
-    HEIGHT_SLIDER_ARR.map((item, i) =>
-      binary2[i] === '1' ? result.push(item) : null,
-    );
+    const firstHeight = binary1 === '150' ? '~' + binary1 : binary1;
+    const secondHeight = binary2 === '190' ? binary2 + '~' : binary2;
+    const result: Array<string> = [firstHeight, secondHeight];
     return result;
   }
   binaryToPreferMbti(binary: string) {
@@ -200,7 +196,7 @@ export class BinaryToInfo implements IBinaryToInfo {
   }
   binaryToSmoking(binary: string) {
     const arrNum = binary.split('').indexOf('1');
-    return preferAtmosphereArr[arrNum];
+    return smokingArr[arrNum];
   }
   binaryToDepartment(binary: string) {
     const arr = binary.split('');
@@ -551,7 +547,7 @@ export class BinaryToInfo implements IBinaryToInfo {
           title_kr: '키',
           title_en: 'height',
           type: 'prefer',
-          dataPrefer: this.binaryToPreferHeight(
+          data: this.binaryToPreferHeight(
             this.binaryToSaperatedArray(
               this.preferenceDistance!,
               false,
@@ -625,7 +621,7 @@ export class BinaryToInfo implements IBinaryToInfo {
           ),
         },
       ];
-    else
+    else {
       return [
         {
           title_kr: '나이',
@@ -669,6 +665,7 @@ export class BinaryToInfo implements IBinaryToInfo {
           ),
         },
       ];
+    }
   }
 
   // 해야하는 것들

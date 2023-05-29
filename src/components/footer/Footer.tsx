@@ -28,6 +28,7 @@ import {
 import { changeDepartment, changeStudentType } from '@/utils';
 import { resetAllCommonState } from '@/store/feature/common/commonReducer';
 import { resetAllPersonalState } from '@/store/feature/meetingType/personalReducer';
+import { infoToBinary } from '@/utils/binary/informationToBinary';
 
 export type FooterProps = {
   maxPage: number;
@@ -48,6 +49,7 @@ const Footer = ({
     state => state.applyInfo,
   );
   const commonState = useAppSelector(state => state.common);
+  const personalState = useAppSelector(state => state.personal);
   const groupState = useAppSelector(state => state.group);
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -99,20 +101,72 @@ const Footer = ({
   };
 
   const onClickStepNext = () => {
+    const groupBinaryData = new infoToBinary(
+      'group',
+      commonState.info_height.data,
+      undefined,
+      groupState.info_question.data,
+      undefined,
+      undefined,
+      commonState.info_age.data,
+      groupState.prefer_age.data,
+      undefined,
+      undefined,
+      commonState.info_smoking.data,
+      undefined,
+      commonState.info_major.data,
+      groupState.prefer_major.data,
+      commonState.info_studentType.data,
+      undefined,
+      groupState.info_preferDay.data,
+      groupState.prefer_atmosphere.data,
+      undefined,
+      '',
+      '',
+      '',
+      '',
+    );
+    const personalBinaryData = new infoToBinary(
+      'personal',
+      commonState.info_height.data,
+      personalState.prefer_height.data,
+      personalState.info_question.data,
+      personalState.info_mbti.data,
+      personalState.prefer_mbti.data,
+      commonState.info_age.data,
+      personalState.prefer_age.data,
+      personalState.info_animal.data,
+      personalState.prefer_animal.data,
+      commonState.info_smoking.data,
+      personalState.prefer_smoking.data,
+      commonState.info_major.data,
+      personalState.prefer_major.data,
+      commonState.info_studentType.data,
+      personalState.prefer_studentType.data,
+      undefined,
+      undefined,
+      personalState.info_interests.data,
+      '',
+      '',
+      '',
+      '',
+    );
+
     // 마지막 step, page인 경우
     if (type === 'lastStep') {
-      dispatch(resetAll());
       switch (meetingType) {
         case 'personal':
           meetingAPI
             .postTeamInfo(
               { teamType: 'SINGLE', isTeamLeader: true },
               {
-                informationDistance: '01010101',
-                informationFilter: '010101',
+                informationDistance:
+                  personalBinaryData.totalInformationDistance(),
+                informationFilter: personalBinaryData.totalInformationFilter(),
                 informationMeetingTime: '',
-                preferenceDistance: '010101',
-                preferenceFilter: '0101011',
+                preferenceDistance:
+                  personalBinaryData.totalPreferenceDistance(),
+                preferenceFilter: personalBinaryData.totalPreferenceFilter(),
               },
             )
             .then(() => {
@@ -128,11 +182,11 @@ const Footer = ({
             .postTeamInfo(
               { teamType: 'TRIPLE', isTeamLeader: true },
               {
-                informationDistance: '11',
-                informationFilter: '11',
+                informationDistance: groupBinaryData.totalInformationDistance(),
+                informationFilter: groupBinaryData.totalInformationFilter(),
                 informationMeetingTime: '',
-                preferenceDistance: '11',
-                preferenceFilter: '11',
+                preferenceDistance: groupBinaryData.totalPreferenceDistance(),
+                preferenceFilter: groupBinaryData.totalPreferenceFilter(),
               },
             )
             .then(() => {
@@ -190,7 +244,7 @@ const Footer = ({
       } else dispatch(incrementPage());
     }
 
-    // 마지막 step인 경우
+    // 마지막 page인 경우
     else {
       if (
         (meetingType === 'groupLeader' && curStep === 1) ||

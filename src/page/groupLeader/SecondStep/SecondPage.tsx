@@ -35,12 +35,13 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
     teamName: '',
     userList: [],
   });
-  setIsFinishPage(true);
 
   const getTeamStatus = () => {
-    meetingAPI
-      .getTeamStatus({ teamType: 'TRIPLE', code })
-      .then(data => setStatusData(data.data));
+    meetingAPI.getTeamStatus({ teamType: 'TRIPLE', code }).then(data => {
+      setStatusData(data.data);
+      if (data.data.userList.length === 3) setIsFinishPage(true);
+      else setIsFinishPage(false);
+    });
   };
 
   useEffect(() => {
