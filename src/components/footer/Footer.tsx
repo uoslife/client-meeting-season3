@@ -21,8 +21,13 @@ import {
 } from '@/store/feature/applyInfo';
 import { useRouter } from 'next/navigation';
 import { meetingAPI } from '@/api';
-import { setCode } from '@/store/feature/meetingType/groupReducer';
+import {
+  resetAllGroupState,
+  setCode,
+} from '@/store/feature/meetingType/groupReducer';
 import { changeDepartment, changeStudentType } from '@/utils';
+import { resetAllCommonState } from '@/store/feature/common/commonReducer';
+import { resetAllPersonalState } from '@/store/feature/meetingType/personalReducer';
 
 export type FooterProps = {
   maxPage: number;
@@ -65,7 +70,7 @@ const Footer = ({
     if (type === 'firstPage' && curStep === 1) {
       if (meetingType === 'groupLeader' || meetingType === 'groupMember') {
         dispatch(resetAll());
-        router.push('/apply');
+        router.push('/apply/branching');
         return;
       }
       return;
@@ -78,11 +83,18 @@ const Footer = ({
     }
 
     // 기본
-    if (type !== 'firstPage') dispatch(decrementPage());
+    if (type !== 'firstPage') {
+      if (meetingType === 'groupLeader' && curStep === 2) {
+        return;
+      }
+      dispatch(decrementPage());
+      return;
+    }
     // 처음 step인 경우
     else {
       dispatch(setPage(changePageArrByMeetingType()));
       dispatch(decrementStep());
+      return;
     }
   };
 
@@ -104,6 +116,10 @@ const Footer = ({
               },
             )
             .then(() => {
+              dispatch(resetAll());
+              dispatch(resetAllCommonState());
+              dispatch(resetAllPersonalState());
+              dispatch(resetAllGroupState());
               router.push('/apply/complete');
             });
           break;
@@ -112,32 +128,23 @@ const Footer = ({
             .postTeamInfo(
               { teamType: 'TRIPLE', isTeamLeader: true },
               {
-                informationDistance: '',
-                informationFilter: '',
+                informationDistance: '11',
+                informationFilter: '11',
                 informationMeetingTime: '',
-                preferenceDistance: '',
-                preferenceFilter: '',
+                preferenceDistance: '11',
+                preferenceFilter: '11',
               },
             )
             .then(() => {
+              dispatch(resetAll());
+              dispatch(resetAllCommonState());
+              dispatch(resetAllPersonalState());
+              dispatch(resetAllGroupState());
               router.push('/apply/complete');
             });
           break;
         case 'groupMember':
-          meetingAPI
-            .postTeamInfo(
-              { teamType: 'TRIPLE', isTeamLeader: false },
-              {
-                informationDistance: '',
-                informationFilter: '',
-                informationMeetingTime: '',
-                preferenceDistance: '',
-                preferenceFilter: '',
-              },
-            )
-            .then(() => {
-              router.push('/apply/complete');
-            });
+          router.push('/apply/complete');
           break;
 
         default:
