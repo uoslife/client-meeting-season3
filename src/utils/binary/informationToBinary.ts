@@ -1,5 +1,10 @@
-import { IBinary, IInfoToBinary } from '@/types/information.type';
-import { ANIMALS, INTERESTS } from '@/constants/index';
+import { IInfoToBinary } from '@/types/information.type';
+import {
+  ANIMALS,
+  GROUP_QUESTIONS,
+  INTERESTS,
+  PERSONAL_QUESTIONS,
+} from '@/constants/index';
 import { DEPARTMENTS } from '@/constants/departments';
 
 const studentTypeArr = ['학부생', '대학원생', '졸업생'];
@@ -9,16 +14,23 @@ const preferAtmosphereArr = ['활발한 편', '차분한 편', '둘 다 좋아�
 const mbtiString = 'EISNTFJP';
 
 export class infoToBinary implements IInfoToBinary {
+  type?: 'personal' | 'group';
+  myHeight?: number;
   preferHeight?: string[];
+  myAge?: number;
   preferAge?: string[];
   questions?: object;
   myMbti?: string[];
   preferMbti?: string[];
-  preferAnimal?: string[];
   myAnimal?: string[];
-  smoking?: string;
-  major?: string[];
-  studentType?: string[];
+  preferAnimal?: string[];
+
+  mySmoking?: string;
+  preferSmoking?: string;
+  myMajor?: string[];
+  preferMajor?: string[];
+  myStudentType?: string;
+  preferStudentType?: string;
   preferDay?: string[];
   atmosphere?: string;
   interests?: string[];
@@ -29,45 +41,60 @@ export class infoToBinary implements IInfoToBinary {
   preferenceFilter?: 'string';
 
   constructor(
+    type?,
+    myHeight?,
     preferHeight?,
     questions?,
     myMbti?,
     preferMbti?,
+    myAge?,
     preferAge?,
     myAnimal?,
     preferAnimal?,
-    smoking?,
-    major?,
-    studentType?,
+    mySmoking?,
+    preferSmoking?,
+    myMajor?,
+    preferMajor?,
+    myStudentType?,
+    preferStudentType?,
     preferDay?,
     atmosphere?,
     interests?,
-    informationDistance?
-    informationFilter?
-    preferenceDistance?
-    preferenceFilter?
+    informationDistance?,
+    informationFilter?,
+    preferenceDistance?,
+    preferenceFilter?,
   ) {
-    (this.preferHeight = preferHeight),
-    (this.preferAge = preferAge),
-    (this.questions = questions),
-    (this.myMbti = myMbti),
-    (this.preferMbti = preferMbti),
-    (this.myAnimal = myAnimal),
-    (this.preferAnimal = preferAnimal),
-    (this.smoking = smoking),
-    (this.major = major),
-    (this.studentType = studentType),
-    (this.preferDay = preferDay),
-    (this.atmosphere = atmosphere),
-    (this.interests = interests);
+    (this.type = type),
+      (this.myHeight = myHeight),
+      (this.preferHeight = preferHeight),
+      (this.myAge = myAge),
+      (this.preferAge = preferAge),
+      (this.questions = questions),
+      (this.myMbti = myMbti),
+      (this.preferMbti = preferMbti),
+      (this.myAnimal = myAnimal),
+      (this.preferAnimal = preferAnimal),
+      (this.mySmoking = mySmoking),
+      (this.preferSmoking = preferSmoking),
+      (this.myMajor = myMajor),
+      (this.preferMajor = preferMajor),
+      (this.myStudentType = myStudentType),
+      (this.preferStudentType = preferStudentType),
+      (this.preferDay = preferDay),
+      (this.atmosphere = atmosphere),
+      (this.interests = interests);
     (this.informationDistance = informationDistance),
-    (this.informationFilter = informationFilter),
-    (this.preferenceDistance = preferenceDistance),
-    (this.preferenceFilter = preferenceFilter),
+      (this.informationFilter = informationFilter),
+      (this.preferenceDistance = preferenceDistance),
+      (this.preferenceFilter = preferenceFilter);
   }
-
   // 정보 -> 바이너리
 
+  myHeightToBinary() {
+    return parseInt(String(this.myHeight), 10).toString(2);
+    // 완료
+  }
   preferHeightToBinary() {
     const modifiedArray = (this.preferHeight ?? []).map(item =>
       parseInt(item.replace('~', '')),
@@ -75,6 +102,13 @@ export class infoToBinary implements IInfoToBinary {
     return modifiedArray.map(item => item.toString(2)).join('');
     // 완료
   }
+  myAgeToBinary() {
+    const middle = 2023 - this.myAge;
+    const result = parseInt(String(middle).slice(-2), 10).toString(2);
+    return '0'.repeat(7 - result.length) + result;
+  }
+
+  // myStudentType 바이너리 필요
 
   preferAgeToBinary() {
     const initialData = (this.preferAge ?? []).map(item =>
@@ -83,7 +117,8 @@ export class infoToBinary implements IInfoToBinary {
     const middle = initialData.map(item => 2023 - item);
     const result = middle.map(year => String(year).slice(-2));
     const a = result.map(item => parseInt(item, 10));
-    return a.map(item => item.toString(2));
+    const b = a.map(item => item.toString(2));
+    return '0'.repeat(7 - b.length) + b.join('');
   }
 
   questionsToBinary(questionArr: object) {
@@ -92,7 +127,8 @@ export class infoToBinary implements IInfoToBinary {
       let dummyBinary = questionArr[i]
         .map(item => (item === this.questions![i].label ? '1' : '0'))
         .join('');
-      totalBinary += dummyBinary;
+      let result = dummyBinary?.includes('1') ? '1' : '0';
+      totalBinary += result;
     }
     return totalBinary;
   }
@@ -114,22 +150,39 @@ export class infoToBinary implements IInfoToBinary {
       .join('');
   }
 
-  departmentToBinary() {
+  departmentToBinary(isPrefer: boolean) {
     return DEPARTMENTS.map(item =>
-      this.major?.includes(item.name) ? '1' : '0',
+      (isPrefer ? this.preferMajor : this.myMajor)?.includes(item.name)
+        ? '1'
+        : '0',
     ).join('');
     // 완
   }
 
-  studentTypeToBinary() {
+  myStudentTypeToBinary() {
     return studentTypeArr
-      .map(item => (this.studentType?.includes(item) ? '1' : '0'))
+      .map(item => (this.preferStudentType === item ? '1' : '0'))
+      .join('');
+  }
+  preferStudentTypeToBinary() {
+    return studentTypeArr
+      .map(item => (this.preferStudentType?.includes(item) ? '1' : '0'))
       .join('');
     // 완
   }
 
-  smokingToBinary() {
-    return smokingArr.map(item => (this.smoking === item ? '1' : '0')).join('');
+  mySmokingToBinary() {
+    return smokingArr.includes!(this.preferSmoking) ? '1' : '0';
+  }
+
+  preferSmokingToBinary() {
+    let result = smokingArr
+      .map(item => (this.preferSmoking === item ? '1' : '0'))
+      .join('');
+    if (result === '001') result = '10';
+    if (result === '010') result = '00';
+    if (result === '100') result = '01';
+    return result;
     // 완
   }
 
@@ -153,64 +206,48 @@ export class infoToBinary implements IInfoToBinary {
     ).join('');
     // 완
   }
-
-  // 바이너리 -> 정보
-  binaryToSmoking() {
-    const arrNum = this.smokingToBinary().split('').indexOf('1');
-    return preferAtmosphereArr[arrNum];
-  }
-  binaryToPreferAtmosphere() {
-    const arrNum = this.smokingToBinary().split('').indexOf('1');
-    return preferAtmosphereArr[arrNum];
-  }
-
-  binaryToInterest() {
-    const arr = this.interestToBinary().split('');
-    const result = [];
-    INTERESTS.map((item, i) => (arr[i] === '1' ? result.push(item) : null));
-    return result;
+  totalInformationDistance() {
+    return this.type === 'personal'
+      ? this.myHeightToBinary() +
+          this.mbtiToBinary(false) +
+          this.questionsToBinary(PERSONAL_QUESTIONS) +
+          this.animalToBinary(false)
+      : this.myHeightToBinary() +
+          this.questionsToBinary(GROUP_QUESTIONS) +
+          this.preferDayToBinary();
   }
 
-  binaryToPreferDay() {
-    const arr = this.preferDayToBinary().split('');
-    const result = [];
-    preferDayArr.map((item, i) => (arr[i] === '1' ? result.push(item) : null));
-    return result;
+  totalInformationFilter() {
+    return this.type === 'personal'
+      ? this.myAgeToBinary() +
+          this.mySmokingToBinary() +
+          this.departmentToBinary(false) +
+          this.myStudentTypeToBinary()
+      : this.myAgeToBinary() +
+          this.mySmokingToBinary() +
+          this.departmentToBinary(false) +
+          this.myStudentTypeToBinary();
   }
 
-  binaryToStudentType() {
-    const arr = this.studentTypeToBinary().split('');
-    const result = [];
-    studentTypeArr.map((item, i) =>
-      arr[i] === '1' ? result.push(item) : null,
-    );
-    return result;
+  totalPreferenceDistance() {
+    return this.type === 'personal'
+      ? this.preferHeightToBinary() +
+          this.mbtiToBinary(true) +
+          this.animalToBinary(true)
+      : this.preferHeightToBinary() +
+          this.mbtiToBinary(true) +
+          this.animalToBinary(true);
   }
 
-  binaryToDepartment() {
-    const arr = this.departmentToBinary().split('');
-    const result = [];
-    DEPARTMENTS.map((item, i) => (arr[i] === '1' ? result.push(item) : null));
-    return result;
+  totalPreferenceFilter() {
+    return this.type === 'personal'
+      ? this.preferAgeToBinary() +
+          this.preferSmokingToBinary() +
+          this.departmentToBinary(true) +
+          this.preferStudentTypeToBinary()
+      : this.preferAgeToBinary() +
+          this.preferSmokingToBinary() +
+          this.departmentToBinary(true) +
+          this.preferStudentTypeToBinary();
   }
-
-  binaryToAnimal(isPrefer: boolean) {
-    const arr = this.animalToBinary(isPrefer).split('');
-    const result = [];
-    ANIMALS.map((item, i) => (arr[i] === '1' ? result.push(item) : null));
-    return result;
-  }
-
-  binaryToPreferAge() {
-    const result = this.preferHeightToBinary()
-      .match(/.{1,8}/g)
-      .map(item => parseInt(item, 2));
-
-    return `${result[0]} ~ ${result[1]}`;
-  }
-
-  toInformationDistance() {
-    return this.binaryToAge() + this.questionsToBinary() +
-  }
-
 }

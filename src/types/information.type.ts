@@ -1,6 +1,7 @@
 import { ApplyData, ApplyQuestionArrType } from '@/types/apply.type';
 
 export interface IInfoToBinary {
+  type?: 'personal' | 'group';
   myHeight?: ApplyData<number>;
   myAge?: ApplyData<number>;
   questions?: ApplyData<ApplyQuestionArrType>;

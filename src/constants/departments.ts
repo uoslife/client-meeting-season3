@@ -20,10 +20,6 @@ export const DEPARTMENTS = [
     eng_name: 'ECONOMICS',
   },
   {
-    name: '융합전공학부',
-    eng_name: '',
-  },
-  {
     name: '화학공학과',
     eng_name: 'CHEMICAL_ENGINEERING',
   },
