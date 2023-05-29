@@ -15,7 +15,6 @@ const FourthPage = ({ setIsFinishPage }: StepProps) => {
   );
   // api로 값 보낼 땐, mbtiValue.split('')을 사용합니다.
   useEffect(() => {
-    console.log(info_mbti);
     const isFinishMbtiSelect = !mbtiValue.includes('');
     if (isFinishMbtiSelect) {
       dispatch(setInfoMbti(mbtiValue));

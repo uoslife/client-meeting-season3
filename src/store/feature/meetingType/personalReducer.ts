@@ -133,6 +133,7 @@ export const personal = createSlice({
     setPreferMbti: (state, action: PayloadAction<string[]>) => {
       state.prefer_mbti.data = action.payload;
     },
+    resetAllPersonalState: () => initialState,
   },
 });
 
@@ -148,5 +149,6 @@ export const {
   setPreferMbti,
   setPreferSmoking,
   setPreferStudentType,
+  resetAllPersonalState,
 } = personal.actions;
 export default personal.reducer;

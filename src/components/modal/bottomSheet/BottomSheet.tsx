@@ -40,7 +40,7 @@ const BottomSheet = ({
             <S.SubTitle>{subTitle}</S.SubTitle>
             <S.HighlightedBold>&ldquo;{title}&rdquo;</S.HighlightedBold>
             {!!current && (
-              <Row gap={8} justify={'center'} align={'flex-end'}>
+              <Row gap={8} justify={'center'} align={'center'}>
                 <IconButton iconName="Person" width={13} height={13} />
                 <Text label={`${current} / 3`} color={'#808A98'} />
               </Row>

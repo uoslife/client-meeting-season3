@@ -91,6 +91,7 @@ export const personal = createSlice({
     setInfoSmoking: (state, action: PayloadAction<string>) => {
       state.info_smoking.data = action.payload;
     },
+    resetAllCommonState: () => initialState,
   },
 });
 
@@ -103,5 +104,6 @@ export const {
   setInfoMajor,
   setInfoStudentType,
   setInfoSmoking,
+  resetAllCommonState,
 } = personal.actions;
 export default personal.reducer;

@@ -28,7 +28,6 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
   ] = useClickButton(smokingArr, 1, prefer_smoking);
 
   useEffect(() => {
-    console.log(prefer_major.data);
     if (dislikeDepartmentValue[0])
       dispatch(setPreferMajorPersonal(dislikeDepartmentValue));
     else dispatch(setPreferMajorPersonal(['']));

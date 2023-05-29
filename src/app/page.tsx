@@ -8,8 +8,9 @@ import * as S from '@/styles/pages/page.style';
 import { copyLink } from '@/utils';
 import { SOCIAL_LINK } from '@/constants';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppSelector } from '@/store/store';
+import { meetingAPI } from '@/api'
 import { colors } from '@/styles/styles';
 
 const Main = () => {
@@ -46,6 +47,13 @@ const Main = () => {
       setModal(false);
     }, 1000);
   };
+
+  const getUser = () => {
+    meetingAPI.getUser().then(data => console.log(data.data));
+  };
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <>
