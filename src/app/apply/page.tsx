@@ -26,8 +26,7 @@ function Apply() {
   ] = useClickButton(meetingTypeArr, 1);
 
   const [isFinishPage, setIsFinishPage] = useState(false);
-  
-  const [modal, setModal] = useState(false);
+
   useEffect(() => {
     if (isClickedMeetingType) setIsFinishPage(true);
     else setIsFinishPage(false);
@@ -53,6 +52,15 @@ function Apply() {
     }
   };
 
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleCheckButtonClick = async () => {
+    setModalOpen(true);
+    setTimeout(() => {
+      setModalOpen(false);
+    }, 5000);
+  };
+
   //const handleTypeClick = (i: number) => () => {
   //  setMeetingTypeState(() => {
   //    const newState = meetingTypeInitState;
@@ -70,7 +78,7 @@ function Apply() {
   //    setIsFinishPage(false);
   //  else setIsFinishPage(true);
   //}, [meetingTypeState, checkboxState]);
-    
+
   return (
     <>
       <Col gap={36} padding={'32px 24px'}>
@@ -111,7 +119,10 @@ function Apply() {
           <Row
             gap={8}
             align="center"
-            onClick={() => setCheckboxState(prev => [!prev[0], prev[1]])}
+            onClick={() => {
+              setCheckboxState(prev => [!prev[0], prev[1]]);
+              handleCheckButtonClick();
+            }}
           >
             <Checkbox variant="primary" isActive={checkboxState[0]} />
             <Text
@@ -145,7 +156,7 @@ function Apply() {
       />
       <Toast
         text={'미팅 종류를 선택하시면 바꾸실 수 없습니다'}
-        isOpen={modal}
+        isOpen={modalOpen}
       />
     </>
   );
