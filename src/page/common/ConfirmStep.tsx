@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Col, Footer, ResultBox, TeamStatusBox, Text } from '@/components';
 
@@ -11,8 +11,14 @@ import {
   setPage,
   resetPage,
 } from '@/store/feature/applyInfo';
-import { PERSONAL_MAX_PAGE_ARR, GROUP_LEADER_MAX_PAGE_ARR } from '@/constants';
+import {
+  PERSONAL_MAX_PAGE_ARR,
+  GROUP_LEADER_MAX_PAGE_ARR,
+  GROUP_QUESTIONS,
+  PERSONAL_QUESTIONS,
+} from '@/constants';
 import { ApplyDataArr } from '@/types/apply.type';
+import { binary } from '@/utils/binary/informationToBinary';
 
 const ConfirmStep = () => {
   const [isFinishPage, setIsFinishPage] = useState(false);
@@ -22,6 +28,37 @@ const ConfirmStep = () => {
   const personalState = useAppSelector(state => state.personal);
   const groupState = useAppSelector(state => state.group);
   const dispatch = useAppDispatch();
+
+  const groupBinaryData = new binary(
+    undefined,
+    groupState.info_question.data,
+    undefined,
+    undefined,
+    groupState.prefer_age.data,
+    undefined,
+    undefined,
+    undefined,
+    groupState.prefer_major.data,
+    undefined,
+    groupState.info_preferDay.data,
+    groupState.prefer_atmosphere.data,
+    undefined,
+  );
+  const personalBinaryData = new binary(
+    personalState.prefer_height.data,
+    personalState.info_question.data,
+    personalState.info_mbti.data,
+    personalState.prefer_mbti.data,
+    personalState.prefer_age.data,
+    personalState.info_animal.data,
+    personalState.prefer_animal.data,
+    personalState.prefer_smoking.data,
+    personalState.prefer_major.data,
+    personalState.prefer_studentType.data,
+    undefined,
+    undefined,
+    personalState.info_interests.data,
+  );
 
   const isPersonal = meetingType === 'personal';
   const onClickPrev = () => {
