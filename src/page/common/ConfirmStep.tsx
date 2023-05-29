@@ -20,6 +20,8 @@ import {
 import { ApplyDataArr } from '@/types/apply.type';
 
 import { infoToBinary } from '@/utils/binary/informationToBinary';
+import { meetingAPI } from '@/api';
+import { GetTeamStatusResponse } from '@/api/types/meeting.type';
 
 const ConfirmStep = () => {
   const [isFinishPage, setIsFinishPage] = useState(false);
@@ -50,41 +52,42 @@ const ConfirmStep = () => {
     groupState.info_preferDay.data,
     groupState.prefer_atmosphere.data,
     undefined,
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-  );
-  const personalBinaryData = new binaryToInfo(
-    personalState.prefer_height.data,
-    personalState.info_question.data,
-    personalState.info_mbti.data,
-    personalState.prefer_mbti.data,
-    commonState.info_age.data,
-    personalState.prefer_age.data,
-    personalState.info_animal.data,
-    personalState.prefer_animal.data,
-    commonState.info_smoking.data,
-    personalState.prefer_smoking.data,
-    commonState.info_major.data,
-    personalState.prefer_major.data,
-    commonState.info_studentType.data,
-    personalState.prefer_studentType.data,
-    undefined,
-    undefined,
-    personalState.info_interests.data,
     '',
     '',
     '',
     '',
   );
+  // const personalBinaryData = new binaryToInfo(
+  //   personalState.prefer_height.data,
+  //   personalState.info_question.data,
+  //   personalState.info_mbti.data,
+  //   personalState.prefer_mbti.data,
+  //   commonState.info_age.data,
+  //   personalState.prefer_age.data,
+  //   personalState.info_animal.data,
+  //   personalState.prefer_animal.data,
+  //   commonState.info_smoking.data,
+  //   personalState.prefer_smoking.data,
+  //   commonState.info_major.data,
+  //   personalState.prefer_major.data,
+  //   commonState.info_studentType.data,
+  //   personalState.prefer_studentType.data,
+  //   undefined,
+  //   undefined,
+  //   personalState.info_interests.data,
+  //   '',
+  //   '',
+  //   '',
+  //   '',
+  // );
 
   useEffect(() => {
-    console.log('선호', personalBinaryData.preferAgeToBinary().length);
-    console.log('선호', personalBinaryData.preferSmokingToBinary().length);
-    console.log('선호', personalBinaryData.departmentToBinary(true).length);
-    console.log('선호', personalBinaryData.preferStudentTypeToBinary().length);
-    console.log('선호', personalBinaryData.totalPreferenceFilter().length);
+    console.log(groupBinaryData.totalPreferenceFilter());
+    // console.log('선호', personalBinaryData.preferAgeToBinary().length);
+    // console.log('선호', personalBinaryData.preferSmokingToBinary().length);
+    // console.log('선호', personalBinaryData.departmentToBinary(true).length);
+    // console.log('선호', personalBinaryData.preferStudentTypeToBinary().length);
+    // console.log('선호', personalBinaryData.totalPreferenceFilter().length);
   }, [infoToBinary]);
 
   const isPersonal = meetingType === 'personal';
@@ -130,6 +133,8 @@ const ConfirmStep = () => {
       .catch(e => console.error(e));
   };
   useEffect(() => {
+    console.log(applyInfoGroupDataArr);
+    console.log(applyPreferGroupDataArr);
     if (!isPersonal) getTeamStatus();
   }, []);
 

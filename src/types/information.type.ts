@@ -20,11 +20,12 @@ export interface IInfoToBinary {
 }
 
 export interface IBinaryToInfo {
-  informationDistance?: 'string';
-  informationFilter?: 'string';
+  type?: 'personal' | 'group';
+  informationDistance?: string;
+  informationFilter?: string;
 
-  preferenceDistance?: 'string';
-  preferenceFilter?: 'string';
+  preferenceDistance?: string;
+  preferenceFilter?: string;
 }
 
 export type SingleInformationFilterType = {
