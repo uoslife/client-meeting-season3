@@ -22,6 +22,7 @@ import {
 import { useRouter } from 'next/navigation';
 import { meetingAPI } from '@/api';
 import { setCode } from '@/store/feature/meetingType/groupReducer';
+import { changeDepartment, changeStudentType } from '@/utils';
 
 export type FooterProps = {
   maxPage: number;
@@ -147,17 +148,16 @@ const Footer = ({
     // 기본
     if (type !== 'lastPage') {
       if (meetingType === 'personal' && curStep === 1 && curPage === 2)
-        /** user 정보 업데이트 */
+        /** personal일 때 user 정보 업데이트 */
         meetingAPI.updateUser({
           birthYear: commonState.info_age.data,
           gender: commonState.info_gender.data === '남자' ? 'MALE' : 'FEMALE',
-          name: '',
-          department: 'ADMINISTRATION',
-          studentType: 'UNDERGRADUATE',
+          department: changeDepartment(commonState.info_major.data),
+          studentType: changeStudentType(commonState.info_studentType.data),
           smoking: commonState.info_smoking.data === '흡연' ? true : false,
-          spiritAnimal: '',
-          mbti: '',
-          interest: '',
+          spiritAnimal: 'a',
+          mbti: 'a',
+          interest: 'a',
           height: commonState.info_height.data,
           nickname: commonState.info_nickname.data,
         }); // then login 추가!!
@@ -184,18 +184,16 @@ const Footer = ({
         (meetingType === 'groupLeader' && curStep === 1) ||
         (meetingType === 'groupMember' && curStep === 1)
       ) {
-        /** user 정보 업데이트 */
+        /** group일 때 user 정보 업데이트 */
         meetingAPI.updateUser({
-          // id: "96fcde78-62e6-40cb-b8a1-5a1e4f2648f2",
           birthYear: commonState.info_age.data,
           gender: commonState.info_gender.data === '남자' ? 'MALE' : 'FEMALE',
-          // name: '',
-          department: commonState.info_major.data,
-          studentType: commonState.info_studentType.data,
+          department: changeDepartment(commonState.info_major.data),
+          studentType: changeStudentType(commonState.info_studentType.data),
           smoking: commonState.info_smoking.data === '흡연' ? true : false,
-          // spiritAnimal: '',
-          // mbti: '',
-          // interest: '',
+          spiritAnimal: 'a',
+          mbti: 'a',
+          interest: 'a',
           height: commonState.info_height.data,
           nickname: commonState.info_nickname.data,
         });
