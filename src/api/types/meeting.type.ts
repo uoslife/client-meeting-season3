@@ -63,7 +63,7 @@ export type PostTeamInfoResponse = {};
 
 export type GetTeamInfoParams = TeamTypeWithObject;
 export type GetTeamInfoResponse = {
-  teamType: string;
+  teamType: TeamType;
   sex: 'MALE' | 'FEMALE' | '' | null;
   teamUserList: Array<{
     nickname: string;
