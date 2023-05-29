@@ -12,11 +12,31 @@ import {
 } from '@/components';
 import * as S from '@/styles/pages/GroupLeaderPage.style';
 
-import { useState } from 'react';
+import { GetTeamStatusResponse } from '@/api/types/meeting.type';
+
+import { useAppSelector } from '@/store/store';
+import { meetingAPI } from '@/api';
+import { useEffect, useState } from 'react';
 
 const SecondPage = ({ setIsFinishPage }: StepProps) => {
-  const [code, setCode] = useState(8250);
+  // const [code, setCode] = useState(8250);
+  const { code } = useAppSelector(state => state.group);
+  const [statusData, setStatusData] = useState<GetTeamStatusResponse>({
+    teamName: '',
+    userList: [],
+  });
   setIsFinishPage(true);
+
+  const getTeamStatus = () => {
+    meetingAPI
+      .getTeamStatus({ teamType: 'TRIPLE', code })
+      .then(data => setStatusData(data.data));
+  };
+
+  useEffect(() => {
+    getTeamStatus();
+  }, []);
+
   return (
     <Col fill padding={'24px 0 140px 0'}>
       <Col align={'center'} gap={24}>
@@ -46,7 +66,7 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
         <TeamStatusBox
           teamName={'건공관 지박령'}
           type={'apply'}
-          status={'waiting'}
+          statusData={statusData}
         />
       </Col>
     </Col>
