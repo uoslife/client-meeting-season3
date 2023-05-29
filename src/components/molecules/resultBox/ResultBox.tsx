@@ -34,11 +34,11 @@ const ResultBox = ({ title, applyDataArr }: ResultBoxProps) => {
     // return (data.data as string[]).join('');
 
     if (data.title_en === 'height' && data.type === 'prefer')
-      return `${parseInt(data.data[0])} ~ ${parseInt(data.data[1])}`;
+      return `${data.data[0]} ~ ${data.data[1]}`;
 
     if (data.title_en === 'age' && data.type === 'prefer') {
       const formattedData = data.data?.map(item => item.replace(/~/g, ''));
-      return `${parseInt(formattedData[0])} ~ ${parseInt(formattedData[1])}`;
+      return `${formattedData[0]} ~ ${formattedData[1]}`;
     }
 
     switch (typeof data.data) {
