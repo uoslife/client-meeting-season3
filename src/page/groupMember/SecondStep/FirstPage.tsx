@@ -45,6 +45,13 @@ const GroupMemberFirstPage = () => {
           if (e.response.data.code === 'M02') {
             alert('이미 팀이 존재합니다');
             // router.push('/');
+            return;
+          }
+          if (e.response.data.code === 'M17') {
+            setStatusMessage('같은 성별끼리만 참여가 가능합니다.');
+            setIsStatusExist(false);
+            setIsModal(false);
+            return;
           }
           setStatusMessage('존재하지 않는 팀 코드입니다');
           setIsStatusExist(false);
