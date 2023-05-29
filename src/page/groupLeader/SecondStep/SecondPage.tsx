@@ -2,6 +2,7 @@
 
 import { StepProps } from '@/types/step.type';
 import {
+  BottomSheet,
   Button,
   CheckCircle,
   Col,
@@ -46,22 +47,28 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
     getTeamStatus();
   }, []);
 
+  const [isModal, setIsModal] = useState(false);
+
   const onClickCancleApply = () => {
-    const ok = window.confirm('신청 취소하겠습니까?');
-    if (ok)
-      meetingAPI
-        .deleteTeam({ teamType: 'TRIPLE', isTeamLeader: true })
-        .then(() => {
-          dispatch(resetAll());
-          dispatch(resetAllCommonState());
-          dispatch(resetAllPersonalState());
-          dispatch(resetAllGroupState());
-          alert('신청 취소되었습니다.');
-          router.push('/');
-        })
-        .catch(() => {
-          alert('팀 신청 후 요청해주세요');
-        });
+    setIsModal(true);
+  };
+  const onClickPrimary = () => {
+    meetingAPI
+      .deleteTeam({ teamType: 'TRIPLE', isTeamLeader: true })
+      .then(() => {
+        dispatch(resetAll());
+        dispatch(resetAllCommonState());
+        dispatch(resetAllPersonalState());
+        dispatch(resetAllGroupState());
+        alert('신청 취소되었습니다.');
+        router.push('/');
+      })
+      .catch(() => {
+        alert('팀 신청 후 요청해주세요');
+      });
+  };
+  const onClickSecondary = () => {
+    setIsModal(false);
   };
 
   return (
@@ -102,6 +109,14 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
         textSize="sm"
         onClick={onClickCancleApply}
         label={'신청 취소하기'}
+      />
+      <BottomSheet
+        isActive={isModal}
+        subTitle="신청 취소 하시겠습니까?"
+        secondaryWord={'취소'}
+        primaryWord={'확인'}
+        onClickPrimary={onClickPrimary}
+        onClickSecondary={onClickSecondary}
       />
     </Col>
   );

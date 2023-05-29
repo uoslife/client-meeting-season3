@@ -3,6 +3,7 @@
 import { meetingAPI } from '@/api';
 import { GetTeamInfoResponse, TeamType } from '@/api/types/meeting.type';
 import {
+  BottomSheet,
   Button,
   Col,
   ProgressHeader,
@@ -45,23 +46,28 @@ const ApplicationInfo = () => {
     getTeamInfo();
   }, []);
 
-  // store state 초기화 필요!!
+  const [isModal, setIsModal] = useState(false);
+
   const onClickCancleApply = () => {
-    const ok = window.confirm('신청 취소하겠습니까?');
-    if (ok)
-      meetingAPI
-        .deleteTeam({ teamType: teamType as TeamType, isTeamLeader: true })
-        .then(() => {
-          dispatch(resetAll());
-          dispatch(resetAllCommonState());
-          dispatch(resetAllPersonalState());
-          dispatch(resetAllGroupState());
-          alert('신청 취소되었습니다.');
-          router.push('/');
-        })
-        .catch(() => {
-          alert('팀 신청 후 요청해주세요');
-        });
+    setIsModal(true);
+  };
+  const onClickPrimary = () => {
+    meetingAPI
+      .deleteTeam({ teamType: teamType as TeamType, isTeamLeader: true })
+      .then(() => {
+        dispatch(resetAll());
+        dispatch(resetAllCommonState());
+        dispatch(resetAllPersonalState());
+        dispatch(resetAllGroupState());
+        alert('신청 취소되었습니다.');
+        router.push('/');
+      })
+      .catch(() => {
+        alert('팀 신청 후 요청해주세요');
+      });
+  };
+  const onClickSecondary = () => {
+    setIsModal(false);
   };
 
   return (
@@ -103,6 +109,14 @@ const ApplicationInfo = () => {
             label={'신청 취소하기'}
           />
         </Col>
+        <BottomSheet
+          isActive={isModal}
+          subTitle="신청 취소 하시겠습니까?"
+          secondaryWord={'취소'}
+          primaryWord={'확인'}
+          onClickPrimary={onClickPrimary}
+          onClickSecondary={onClickSecondary}
+        />
       </Col>
     </>
   );
