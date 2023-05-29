@@ -35,6 +35,7 @@ export type DuplicateCheckResponse = {
 export type UpdateUserRequest = {
   birthYear: number;
   gender: 'MALE' | 'FEMALE' | '' | null;
+  kakaoTalkId: string;
   name?: string;
   department: string;
   studentType: string;

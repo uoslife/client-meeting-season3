@@ -159,6 +159,7 @@ const Footer = ({
         meetingAPI.updateUser({
           birthYear: commonState.info_age.data,
           gender: commonState.info_gender.data === '남자' ? 'MALE' : 'FEMALE',
+          kakaoTalkId: commonState.info_kakaoId.data,
           department: changeDepartment(commonState.info_major.data),
           studentType: changeStudentType(commonState.info_studentType.data),
           smoking: commonState.info_smoking.data === '흡연' ? true : false,
@@ -199,6 +200,7 @@ const Footer = ({
         meetingAPI.updateUser({
           birthYear: commonState.info_age.data,
           gender: commonState.info_gender.data === '남자' ? 'MALE' : 'FEMALE',
+          kakaoTalkId: commonState.info_kakaoId.data,
           department: changeDepartment(commonState.info_major.data),
           studentType: changeStudentType(commonState.info_studentType.data),
           smoking: commonState.info_smoking.data === '흡연' ? true : false,
