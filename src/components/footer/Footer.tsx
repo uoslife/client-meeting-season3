@@ -170,7 +170,7 @@ const Footer = ({
         }); // then login 추가!!
 
       /** 3대3 리더 팀 생성 */
-      if (meetingType === 'groupLeader' && curStep === 2 && curPage === 1)
+      if (meetingType === 'groupLeader' && curStep === 2 && curPage === 1) {
         meetingAPI
           .createTeam({
             teamType: 'TRIPLE',
@@ -181,8 +181,12 @@ const Footer = ({
             dispatch(setCode(data.data));
             dispatch(incrementPage());
           })
-          .catch(e => console.log(e));
-      else dispatch(incrementPage());
+          .catch(e => {
+            if (e.response.data.code === 'M11')
+              alert('2자리 이상 입력해주세요');
+            console.log(e);
+          });
+      } else dispatch(incrementPage());
     }
 
     // 마지막 step인 경우

@@ -14,7 +14,7 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
   const [nameValue, handleNameValue] = useInput(info_name.data ?? '');
 
   useEffect(() => {
-    if (nameValue !== '') {
+    if (nameValue !== '' && nameValue.length >= 2) {
       setIsFinishPage(true);
       dispatch(setInfoName(nameValue ?? ''));
     } else setIsFinishPage(false);
