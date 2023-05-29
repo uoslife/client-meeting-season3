@@ -62,6 +62,7 @@ const ConfirmStep = () => {
 
   const isPersonal = meetingType === 'personal';
   const onClickPrev = () => {
+    if (meetingType === 'groupMember') return;
     dispatch(
       setPage(
         isPersonal

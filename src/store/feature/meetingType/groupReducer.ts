@@ -2,6 +2,7 @@ import { ApplyData, ApplyQuestionArrType } from '@/types/apply.type';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type GroupState = {
+  code: string;
   info_name: ApplyData<string>;
   info_preferDay: ApplyData<string[]>;
   info_question: ApplyData<ApplyQuestionArrType>;
@@ -11,6 +12,7 @@ export type GroupState = {
 };
 
 const initialState: GroupState = {
+  code: '',
   info_name: {
     title_kr: '팅 이름',
     title_en: 'name',
@@ -58,6 +60,9 @@ export const personal = createSlice({
   name: 'personal',
   initialState,
   reducers: {
+    setCode: (state, action: PayloadAction<string>) => {
+      state.code = action.payload;
+    },
     setInfoName: (state, action: PayloadAction<string>) => {
       state.info_name.data = action.payload;
     },
@@ -83,15 +88,18 @@ export const personal = createSlice({
     setPreferAtmosphere: (state, action: PayloadAction<string>) => {
       state.prefer_atmosphere.data = action.payload;
     },
+    resetAllGroupState: () => initialState,
   },
 });
 
 export const {
+  setCode,
   setInfoName,
   setInfoPreferDay,
   setInfoQuestionGroup,
   setPreferAgeGroup,
   setPreferMajorGroup,
   setPreferAtmosphere,
+  resetAllGroupState,
 } = personal.actions;
 export default personal.reducer;

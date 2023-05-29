@@ -8,8 +8,9 @@ import * as S from '@/styles/pages/page.style';
 import { copyLink } from '@/utils';
 import { SOCIAL_LINK } from '@/constants';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppSelector } from '@/store/store';
+import { meetingAPI } from '@/api';
 import { colors } from '@/styles/styles';
 
 const Main = () => {
@@ -37,15 +38,22 @@ const Main = () => {
         break;
     }
   };
-  const [modal, setModal] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleCopyLink = async () => {
     copyLink(SOCIAL_LINK.Sharelink);
-    setModal(true);
+    setModalOpen(true);
     setTimeout(() => {
-      setModal(false);
-    }, 1000);
+      setModalOpen(false);
+    }, 5000);
   };
+
+  const getUser = () => {
+    meetingAPI.getUser().then(data => console.log(data.data));
+  };
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <>
@@ -61,7 +69,7 @@ const Main = () => {
           <Text
             label="시대팅 시즌 3"
             size="4xl"
-            font="LeferiPoint-SpecialA"
+            font="LeferiSpecial"
             color={colors.Primary_500}
           />
         </S.MainTextWrapper>
@@ -80,11 +88,21 @@ const Main = () => {
         <S.DateWrapper>
           <Text label={'신청기간'} size={'lg'} weight={300} />
           <S.DateTextWrapper>
-            <Text label={'05.26'} size={'4xl'} weight={800} />
-            <Text label={'(금)'} size={'2xl'} weight={500} />
+            <Text
+              label={'05.29'}
+              size={'3xl'}
+              weight={800}
+              font="LeferiPoint-SpecialA"
+            />
+            <Text label={'(월)'} size={'2xl'} weight={500} />
             <Text label={'-'} size={'4xl'} />
-            <Text label={'05.28'} size={'4xl'} weight={800} />
-            <Text label={'(일)'} size={'2xl'} weight={500} />
+            <Text
+              label={'05.31'}
+              size={'3xl'}
+              weight={800}
+              font="LeferiPoint-SpecialA"
+            />
+            <Text label={'(수)'} size={'2xl'} weight={500} />
           </S.DateTextWrapper>
         </S.DateWrapper>
         <div style={{ width: '100%', padding: '0 48px' }}>
@@ -138,7 +156,7 @@ const Main = () => {
           </S.SocialLink>
         </S.SocialWrapper>
       </S.BottomWrapper>
-      <Toast text={'복사되었습니다!'} isOpen={modal} />
+      <Toast text={'복사되었습니다!'} isOpen={modalOpen} />
     </>
   );
 };

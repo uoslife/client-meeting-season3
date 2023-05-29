@@ -1,12 +1,27 @@
 import * as Type from '@/api/types/meeting.type';
 
-import { ServiceFunc, ServiceFuncWithRequestBody } from './types';
+import {
+  ServiceFunc,
+  ServiceFuncWithRequest,
+  ServiceFuncOnlyRequest,
+  ServiceFuncOnlyResponse,
+} from './types';
 
 type MeetingService = {
+  /** user */
+  getUser: ServiceFuncOnlyResponse<Type.GetUserResponse>;
+
+  duplicateCheck: ServiceFunc<
+    Type.DuplicateCheckParams,
+    Type.DuplicateCheckResponse
+  >;
+
+  updateUser: ServiceFuncOnlyRequest<Type.UpdateUserRequest>;
+
   /** common */
   createTeam: ServiceFunc<Type.CreateTeamParams, Type.CreateTeamResponse>;
 
-  postTeamInfo: ServiceFuncWithRequestBody<
+  postTeamInfo: ServiceFuncWithRequest<
     Type.PostTeamInfoParams,
     Type.PostTeamInfoRequest,
     Type.PostTeamInfoResponse
@@ -22,7 +37,11 @@ type MeetingService = {
     Type.GetTeamStatusResponse
   >;
 
-  enterTeam: ServiceFunc<Type.EnterTeamParams, Type.EnterTeamResponse>;
+  enterTeam: ServiceFuncWithRequest<
+    Type.EnterTeamParams,
+    Type.EnterTeamRequest,
+    Type.EnterTeamResponse
+  >;
 };
 
 export default MeetingService;

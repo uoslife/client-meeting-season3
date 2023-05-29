@@ -20,11 +20,12 @@ const Toast = ({ text, isOpen, ...props }: ToastProps) => {
   return (
     <div>
       <ToastContainer
+        autoClose={5000}
         toastStyle={{
           height: '90px',
-          marginTop: '300px',
+          marginTop: '80px',
           fontSize: '15px',
-          fontFamily: 'LeferiBaseType-RegularA',
+          fontFamily: 'Pretendard',
           textAlign: 'center',
         }}
       />

@@ -23,6 +23,7 @@ import {
   setInfoHeight,
 } from '@/store/feature/common/commonReducer';
 import { useAppDispatch, useAppSelector } from '@/store/store';
+import { meetingAPI } from '@/api';
 
 const buttonLabelArr = ['남자', '여자'];
 
@@ -49,12 +50,20 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
     setNickname(e.target.value);
     setIsFinishNickname(false);
   };
-  const handleDoubleCheckButton = () => {
-    setCurrentNicknameStatus('error');
-    setNicknameStatusMessage('이미 있는 이름입니다.');
 
-    dispatch(setInfoNickname(nickname));
-    setIsFinishNickname(true);
+  const handleDoubleCheckButton = () => {
+    meetingAPI.duplicateCheck({ nickname }).then(res => {
+      if (res.data.duplicated) {
+        setCurrentNicknameStatus('error');
+        setNicknameStatusMessage('이미 존재하는 닉네임입니다.');
+        setIsFinishNickname(false);
+      } else {
+        setCurrentNicknameStatus('success');
+        setNicknameStatusMessage('사용 가능한 닉네임입니다.');
+        setIsFinishNickname(true);
+        dispatch(setInfoNickname(nickname));
+      }
+    });
   };
 
   //gender
@@ -132,7 +141,7 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
               key={i}
               label={label}
               primary={buttonActiveState(i) ? 'active' : 'inactive'}
-              textSize="sm"
+              textSize="base"
               onClick={() => onClickButton(i)}
             />
           ))}

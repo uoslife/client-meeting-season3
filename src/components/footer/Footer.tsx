@@ -21,6 +21,13 @@ import {
 } from '@/store/feature/applyInfo';
 import { useRouter } from 'next/navigation';
 import { meetingAPI } from '@/api';
+import {
+  resetAllGroupState,
+  setCode,
+} from '@/store/feature/meetingType/groupReducer';
+import { changeDepartment, changeStudentType } from '@/utils';
+import { resetAllCommonState } from '@/store/feature/common/commonReducer';
+import { resetAllPersonalState } from '@/store/feature/meetingType/personalReducer';
 
 export type FooterProps = {
   maxPage: number;
@@ -40,6 +47,8 @@ const Footer = ({
   const { curStep, curPage, meetingType } = useAppSelector(
     state => state.applyInfo,
   );
+  const commonState = useAppSelector(state => state.common);
+  const groupState = useAppSelector(state => state.group);
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -59,8 +68,11 @@ const Footer = ({
   const onClickStepPrev = () => {
     // 처음 step, page인 경우
     if (type === 'firstPage' && curStep === 1) {
-      dispatch(resetAll());
-      router.push('/apply');
+      if (meetingType === 'groupLeader' || meetingType === 'groupMember') {
+        dispatch(resetAll());
+        router.push('/apply/branching');
+        return;
+      }
       return;
     }
     // 마지막 step, page인 경우
@@ -71,11 +83,18 @@ const Footer = ({
     }
 
     // 기본
-    if (type !== 'firstPage') dispatch(decrementPage());
+    if (type !== 'firstPage') {
+      if (meetingType === 'groupLeader' && curStep === 2) {
+        return;
+      }
+      dispatch(decrementPage());
+      return;
+    }
     // 처음 step인 경우
     else {
       dispatch(setPage(changePageArrByMeetingType()));
       dispatch(decrementStep());
+      return;
     }
   };
 
@@ -97,6 +116,10 @@ const Footer = ({
               },
             )
             .then(() => {
+              dispatch(resetAll());
+              dispatch(resetAllCommonState());
+              dispatch(resetAllPersonalState());
+              dispatch(resetAllGroupState());
               router.push('/apply/complete');
             });
           break;
@@ -105,32 +128,23 @@ const Footer = ({
             .postTeamInfo(
               { teamType: 'TRIPLE', isTeamLeader: true },
               {
-                informationDistance: '',
-                informationFilter: '',
+                informationDistance: '11',
+                informationFilter: '11',
                 informationMeetingTime: '',
-                preferenceDistance: '',
-                preferenceFilter: '',
+                preferenceDistance: '11',
+                preferenceFilter: '11',
               },
             )
             .then(() => {
+              dispatch(resetAll());
+              dispatch(resetAllCommonState());
+              dispatch(resetAllPersonalState());
+              dispatch(resetAllGroupState());
               router.push('/apply/complete');
             });
           break;
         case 'groupMember':
-          meetingAPI
-            .postTeamInfo(
-              { teamType: 'TRIPLE', isTeamLeader: false },
-              {
-                informationDistance: '',
-                informationFilter: '',
-                informationMeetingTime: '',
-                preferenceDistance: '',
-                preferenceFilter: '',
-              },
-            )
-            .then(() => {
-              router.push('/apply/complete');
-            });
+          router.push('/apply/complete');
           break;
 
         default:
@@ -139,9 +153,62 @@ const Footer = ({
     }
 
     // 기본
-    if (type !== 'lastPage') dispatch(incrementPage());
+    if (type !== 'lastPage') {
+      if (meetingType === 'personal' && curStep === 1 && curPage === 2)
+        /** personal일 때 user 정보 업데이트 */
+        meetingAPI.updateUser({
+          birthYear: commonState.info_age.data,
+          gender: commonState.info_gender.data === '남자' ? 'MALE' : 'FEMALE',
+          department: changeDepartment(commonState.info_major.data),
+          studentType: changeStudentType(commonState.info_studentType.data),
+          smoking: commonState.info_smoking.data === '흡연' ? true : false,
+          spiritAnimal: 'a',
+          mbti: 'a',
+          interest: 'a',
+          height: commonState.info_height.data,
+          nickname: commonState.info_nickname.data,
+        }); // then login 추가!!
+
+      /** 3대3 리더 팀 생성 */
+      if (meetingType === 'groupLeader' && curStep === 2 && curPage === 1) {
+        meetingAPI
+          .createTeam({
+            teamType: 'TRIPLE',
+            isTeamLeader: true,
+            name: groupState.info_name.data,
+          })
+          .then(data => {
+            dispatch(setCode(data.data));
+            dispatch(incrementPage());
+          })
+          .catch(e => {
+            if (e.response.data.code === 'M11')
+              alert('2자리 이상 입력해주세요');
+            console.log(e);
+          });
+      } else dispatch(incrementPage());
+    }
+
     // 마지막 step인 경우
     else {
+      if (
+        (meetingType === 'groupLeader' && curStep === 1) ||
+        (meetingType === 'groupMember' && curStep === 1)
+      ) {
+        /** group일 때 user 정보 업데이트 */
+        meetingAPI.updateUser({
+          birthYear: commonState.info_age.data,
+          gender: commonState.info_gender.data === '남자' ? 'MALE' : 'FEMALE',
+          department: changeDepartment(commonState.info_major.data),
+          studentType: changeStudentType(commonState.info_studentType.data),
+          smoking: commonState.info_smoking.data === '흡연' ? true : false,
+          spiritAnimal: 'a',
+          mbti: 'a',
+          interest: 'a',
+          height: commonState.info_height.data,
+          nickname: commonState.info_nickname.data,
+        });
+      }
       dispatch(resetPage());
       dispatch(incrementStep());
     }

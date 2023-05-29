@@ -38,9 +38,11 @@ const BottomSheet = ({
           <S.GrayHandler></S.GrayHandler>
           <Col align={'center'} gap={8}>
             <S.SubTitle>{subTitle}</S.SubTitle>
-            <S.HighlightedBold>&ldquo;{title}&rdquo;</S.HighlightedBold>
+            {!!title && (
+              <S.HighlightedBold>&ldquo;{title}&rdquo;</S.HighlightedBold>
+            )}
             {!!current && (
-              <Row gap={8} justify={'center'} align={'flex-end'}>
+              <Row gap={8} justify={'center'} align={'center'}>
                 <IconButton iconName="Person" width={13} height={13} />
                 <Text label={`${current} / 3`} color={'#808A98'} />
               </Row>

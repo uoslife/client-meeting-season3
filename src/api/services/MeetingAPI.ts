@@ -4,10 +4,21 @@ import * as Type from '@/api/types/meeting.type';
 import MeetingService from './Meeting.type';
 
 export default class MeetingAxiosAPI implements MeetingService {
+  /** user */
+  getUser() {
+    return API.get<Type.GetUserResponse>('/api/user');
+  }
+  duplicateCheck(params: Type.DuplicateCheckParams) {
+    return API.get<Type.DuplicateCheckResponse>(`/api/user/${params.nickname}`);
+  }
+  updateUser(request: Type.UpdateUserRequest) {
+    return API.patch('/api/user', request);
+  }
+
   /** common */
   createTeam(params: Type.CreateTeamParams) {
     return API.post<Type.CreateTeamResponse>(
-      `/api/meeting/${params.teamType}/${params.isTeamLeader}/create`,
+      `/api/meeting/${params.teamType}/${params.isTeamLeader}/create?name=${params.name}`,
     );
   }
   postTeamInfo(
@@ -33,12 +44,12 @@ export default class MeetingAxiosAPI implements MeetingService {
   /** meeting(TRIPLE) */
   getTeamStatus(params: Type.GetTeamStatusParams) {
     return API.get<Type.GetTeamStatusResponse>(
-      `/api/meeting/${params.teamType}/user/list`,
+      `/api/meeting/${params.teamType}/${params.code}/user/list`,
     );
   }
   enterTeam(params: Type.EnterTeamParams) {
     return API.post<Type.EnterTeamResponse>(
-      `/api/meeting/${params.teamType}/join/${params.code}`,
+      `/api/meeting/${params.teamType}/join/${params.code}?isJoin=${params.isJoin}`,
     );
   }
 }
