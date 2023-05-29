@@ -30,7 +30,6 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
   ] = useClickButton(studentTypeArr, 3, prefer_studentType);
 
   useEffect(() => {
-    console.log(prefer_age.data);
     const ageArr = [AGE_SLIDER_ARR[age.min / 10], AGE_SLIDER_ARR[age.max / 10]];
     const heightArr = [
       HEIGHT_SLIDER_ARR[height.min / 10],

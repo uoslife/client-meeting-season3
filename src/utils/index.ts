@@ -66,6 +66,22 @@ export const toDataArr = (
     data.infoPrefer.preferenceFilter,
   );
 
+  const changeDepartment = (department: string) => {
+    return DEPARTMENTS.filter(data => data.eng_name === department)[0].name;
+  };
+  const changeStudentType = (studentType: string) => {
+    switch (studentType) {
+      case 'UNDERGRADUATE':
+        return '학부생';
+      case 'POSTGRADUATE':
+        '대학원생';
+      case 'GRADUATE':
+        return '졸업생';
+      default:
+        return '';
+    }
+  };
+
   if (infoOrPrefer === 'info') {
     const { sex } = data;
     const {
@@ -77,6 +93,20 @@ export const toDataArr = (
       studentType,
       smoking,
     } = data.teamUserList[0];
+
+    const groupAge = data.teamUserList
+      .map(data => data.age.toString() + '년생')
+      .join(', ');
+    const groupKakaoId = data.teamUserList
+      .map(data => data.kakaoTalkId)
+      .join(', ');
+    const groupDepartment = data.teamUserList
+      .map(data => changeDepartment(data.department))
+      .join(', ');
+    const groupStudentType = data.teamUserList
+      .map(data => changeStudentType(data.studentType))
+      .join(', ');
+
     const beforeArr: ApplyDataArr =
       type === 'personal'
         ? [
@@ -96,7 +126,7 @@ export const toDataArr = (
               title_kr: '나이',
               title_en: 'age',
               type: 'info',
-              data: age,
+              data: age.toString() + '년생',
             },
             {
               title_kr: '키',
@@ -114,13 +144,13 @@ export const toDataArr = (
               title_kr: '학과',
               title_en: 'major',
               type: 'info',
-              data: department,
+              data: changeDepartment(department),
             },
             {
               title_kr: '신분',
               title_en: 'studentType',
               type: 'info',
-              data: studentType,
+              data: changeStudentType(studentType),
             },
             {
               title_kr: '흡연 여부',
@@ -132,58 +162,34 @@ export const toDataArr = (
         : [
             // 3개 합치기
             {
-              title_kr: '닉네임',
-              title_en: 'nickname',
-              type: 'info',
-              data: 'ㅂㄹㅈㄷㄱ',
-            },
-            {
               title_kr: '성별',
               title_en: 'gender',
               type: 'info',
-              data: '남자',
+              data: sex === 'MALE' ? '남자' : '여자',
             },
             {
               title_kr: '나이',
               title_en: 'age',
               type: 'info',
-              data: 22,
-            },
-            {
-              title_kr: '키',
-              title_en: 'height',
-              type: 'info',
-              data: 143,
+              data: groupAge,
             },
             {
               title_kr: '카카오톡 ID',
               title_en: 'kakaoId',
               type: 'info',
-              data: '1234ㄱㄹ',
+              data: groupKakaoId,
             },
             {
               title_kr: '학과',
               title_en: 'major',
               type: 'info',
-              data: '행정학과',
+              data: groupDepartment,
             },
             {
               title_kr: '신분',
               title_en: 'studentType',
               type: 'info',
-              data: '학부생',
-            },
-            {
-              title_kr: '흡연 여부',
-              title_en: 'smoking',
-              type: 'info',
-              data: '흡연',
-            },
-            {
-              title_kr: '팅 이름',
-              title_en: 'name',
-              type: 'info',
-              data: '1234',
+              data: groupStudentType,
             },
           ];
     return beforeArr.concat(

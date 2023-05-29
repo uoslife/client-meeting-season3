@@ -43,7 +43,6 @@ const ApplicationInfo = () => {
     meetingAPI
       .getTeamInfo({ teamType: 'SINGLE' })
       .then(data => {
-        console.log(data.data);
         setTeamInfo(data.data);
         setTeamType(data.data.teamType);
         const infoPrefer = {
@@ -58,7 +57,7 @@ const ApplicationInfo = () => {
           teamUserList: data.data.teamUserList,
         };
         setInfoDataArr(toDataArr(todataArr, 'personal', 'info'));
-        // setPreferDataArr(toDataArr(todataArr, 'personal', 'prefer'));
+        setPreferDataArr(toDataArr(todataArr, 'personal', 'prefer'));
       })
       .catch(e => {
         console.error(e);
@@ -68,10 +67,22 @@ const ApplicationInfo = () => {
     meetingAPI
       .getTeamInfo({ teamType: 'TRIPLE' })
       .then(data => {
-        console.log(data.data);
         setTeamInfo(data.data);
         setTeamType(data.data.teamType);
         setTeamStatus(toTeamStatus(data.data));
+        const infoPrefer = {
+          informationDistance: data.data.informationDistance,
+          informationFilter: data.data.informationFilter,
+          preferenceDistance: data.data.preferenceDistance,
+          preferenceFilter: data.data.preferenceFilter,
+        };
+        const todataArr: ToDataArrType = {
+          infoPrefer,
+          sex: data.data.sex,
+          teamUserList: data.data.teamUserList,
+        };
+        setInfoDataArr(toDataArr(todataArr, 'group', 'info'));
+        setPreferDataArr(toDataArr(todataArr, 'group', 'prefer'));
       })
       .catch(e => {
         console.error(e);

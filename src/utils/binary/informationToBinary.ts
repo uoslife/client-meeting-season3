@@ -107,9 +107,12 @@ export class infoToBinary implements IInfoToBinary {
   }
   preferAgeToBinary() {
     let result = [];
+    const modifiedArray = (this.preferAge ?? []).map(item =>
+      item.replace('~', ''),
+    );
     for (let i = 0; i < 2; i++) {
       result.push(
-        AGE_ARR.map(item => (this.preferAge![i] == item ? '1' : '0')).join(''),
+        AGE_ARR.map(item => (modifiedArray[i] === item ? '1' : '0')).join(''),
       );
     }
     return result.join('');
@@ -154,9 +157,7 @@ export class infoToBinary implements IInfoToBinary {
   studentTypeToBinary(isPrefer: boolean) {
     return studentTypeArr
       .map(item =>
-        isPrefer
-          ? this.preferStudentType
-          : this.myStudentType === item
+        (isPrefer ? this.preferStudentType : this.myStudentType) === item
           ? '1'
           : '0',
       )
@@ -209,9 +210,9 @@ export class infoToBinary implements IInfoToBinary {
           this.mySmokingToBinary() +
           this.departmentToBinary(false) +
           this.studentTypeToBinary(false)
-      : this.myAgeToBinary() +
+      : this.preferAgeToBinary() +
           this.departmentToBinary(false) +
-          this.studentTypeToBinary(false);
+          this.preferAtmosphereToBinary();
   }
 
   totalPreferenceDistance() {
