@@ -23,7 +23,7 @@ const Toast = ({ text, isOpen, ...props }: ToastProps) => {
         autoClose={5000}
         toastStyle={{
           height: '90px',
-          marginTop: '56px',
+          marginTop: '80px',
           fontSize: '15px',
           fontFamily: 'Pretendard',
           textAlign: 'center',
