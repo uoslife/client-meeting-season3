@@ -138,7 +138,7 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
                   primary={
                     studentTypeButtonActiveState(i) ? 'active' : 'inactive'
                   }
-                  textSize="sm"
+                  textSize="base"
                   onClick={() => onClickStudentTypeButton(i)}
                 />
               ))}
@@ -164,7 +164,7 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
                 key={i}
                 label={label}
                 primary={smokingButtonActiveState(i) ? 'active' : 'inactive'}
-                textSize="sm"
+                textSize="base"
                 onClick={() => onClickSmokingButton(i)}
               />
             ))}

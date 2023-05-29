@@ -141,7 +141,7 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
               key={i}
               label={label}
               primary={buttonActiveState(i) ? 'active' : 'inactive'}
-              textSize="sm"
+              textSize="base"
               onClick={() => onClickButton(i)}
             />
           ))}
