@@ -4,31 +4,69 @@ import * as S from './TeamStatusBox.style';
 
 import { Checkbox, Col, IconButton, Row, Text } from '@/components';
 
+import { GetTeamStatusResponse } from '@/api/types/meeting.type';
+
 export type TeamStatusBoxProps = {
   teamName: string;
   type: 'apply' | 'confirm';
-  status: 'waiting' | 'complete';
+  statusData: GetTeamStatusResponse;
 };
 
-const MemberTextWrapper = () => {
+const MemberTextWrapper = ({
+  data,
+  isComplete,
+}: {
+  data?: { nickname: string; age: number };
+  isComplete: boolean;
+}) => {
   return (
     <Row justify={'space-between'} width="full">
       <Row gap={8} align={'center'}>
         <IconButton iconName="User" width={20} height={20} />
-        <Text label="호랑이 (본인)" weight={600} />
+        <Text label={isComplete ? data!.nickname : ''} weight={600} />
       </Row>
       <Row gap={8} align={'center'}>
-        <Text label="입장완료" color={'#34AAFF'} weight={600} />
-        <Checkbox variant="teritary" isActive={true} />
+        <Text
+          label={isComplete ? '입장완료' : '미입장'}
+          color={isComplete ? '#34AAFF' : '#BEC4CD'}
+          weight={600}
+        />
+        <Checkbox variant="teritary" isActive={isComplete} />
       </Row>
     </Row>
   );
 };
 
-const TeamStatusBox = ({ teamName, type, status }: TeamStatusBoxProps) => {
+const TeamStatusBox = ({ teamName, type, statusData }: TeamStatusBoxProps) => {
   const isApply = type === 'apply';
-  const isWaiting = status === 'waiting';
+  const userListLength = statusData.userList.length;
+  const isWaiting = userListLength !== 3;
 
+  const remainUnCompleteWrapper = (remainLength: number) => {
+    switch (remainLength) {
+      case 3:
+        return (
+          <>
+            <MemberTextWrapper isComplete={false} />
+            <MemberTextWrapper isComplete={false} />
+            <MemberTextWrapper isComplete={false} />
+          </>
+        );
+      case 2:
+        return (
+          <>
+            <MemberTextWrapper isComplete={false} />
+            <MemberTextWrapper isComplete={false} />
+          </>
+        );
+      case 1:
+        return <MemberTextWrapper isComplete={false} />;
+      case 0:
+        return <></>;
+      default:
+        return <></>;
+    }
+  };
   return (
     <Col gap={24}>
       <Col gap={8} align="center">
@@ -58,13 +96,14 @@ const TeamStatusBox = ({ teamName, type, status }: TeamStatusBoxProps) => {
           </Row>
           <Row gap={4} align="center" style={{ width: '' }}>
             <IconButton iconName="Person" width={13} height={13} />
-            <Text label={`1/3`} weight={600} color="#97A1AE" />
+            <Text label={`${userListLength}/3`} weight={600} color="#97A1AE" />
           </Row>
         </Row>
         <S.TeamContainer>
-          <MemberTextWrapper />
-          <MemberTextWrapper />
-          <MemberTextWrapper />
+          {statusData.userList.map((data, i) => (
+            <MemberTextWrapper key={i} data={data} isComplete={true} />
+          ))}
+          {remainUnCompleteWrapper(3 - userListLength)}
         </S.TeamContainer>
       </Col>
     </Col>
