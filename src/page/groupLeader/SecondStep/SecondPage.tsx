@@ -2,6 +2,7 @@
 
 import { StepProps } from '@/types/step.type';
 import {
+  Button,
   CheckCircle,
   Col,
   IconButton,
@@ -14,11 +15,19 @@ import * as S from '@/styles/pages/GroupLeaderPage.style';
 
 import { GetTeamStatusResponse } from '@/api/types/meeting.type';
 
-import { useAppSelector } from '@/store/store';
+import { useAppDispatch, useAppSelector } from '@/store/store';
 import { meetingAPI } from '@/api';
 import { useEffect, useState } from 'react';
+import { resetAll } from '@/store/feature/applyInfo';
+import { useRouter } from 'next/navigation';
+import { resetAllCommonState } from '@/store/feature/common/commonReducer';
+import { resetAllGroupState } from '@/store/feature/meetingType/groupReducer';
+import { resetAllPersonalState } from '@/store/feature/meetingType/personalReducer';
 
 const SecondPage = ({ setIsFinishPage }: StepProps) => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
   const { info_name } = useAppSelector(state => state.group);
   const { code } = useAppSelector(state => state.group);
   const [statusData, setStatusData] = useState<GetTeamStatusResponse>({
@@ -37,8 +46,26 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
     getTeamStatus();
   }, []);
 
+  const onClickCancleApply = () => {
+    const ok = window.confirm('신청 취소하겠습니까?');
+    if (ok)
+      meetingAPI
+        .deleteTeam({ teamType: 'TRIPLE', isTeamLeader: true })
+        .then(() => {
+          dispatch(resetAll());
+          dispatch(resetAllCommonState());
+          dispatch(resetAllPersonalState());
+          dispatch(resetAllGroupState());
+          alert('신청 취소되었습니다.');
+          router.push('/');
+        })
+        .catch(() => {
+          alert('팀 신청 후 요청해주세요');
+        });
+  };
+
   return (
-    <Col fill padding={'24px 0 140px 0'}>
+    <Col fill gap={56} padding={'24px 0 130px 0'}>
       <Col align={'center'} gap={24}>
         <Paddle top={20}>
           <S.Code>{code}</S.Code>
@@ -70,6 +97,12 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
           statusData={statusData}
         />
       </Col>
+      <Button
+        primary={'disabled'}
+        textSize="sm"
+        onClick={onClickCancleApply}
+        label={'신청 취소하기'}
+      />
     </Col>
   );
 };
