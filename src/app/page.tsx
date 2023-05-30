@@ -9,12 +9,17 @@ import { copyLink } from '@/utils';
 import { SOCIAL_LINK } from '@/constants';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { useAppSelector } from '@/store/store';
+import { useAppDispatch, useAppSelector } from '@/store/store';
 import { meetingAPI } from '@/api';
 import { colors } from '@/styles/styles';
+import { resetAll } from '@/store/feature/applyInfo';
+import { resetAllCommonState } from '@/store/feature/common/commonReducer';
+import { resetAllGroupState } from '@/store/feature/meetingType/groupReducer';
+import { resetAllPersonalState } from '@/store/feature/meetingType/personalReducer';
 
 const Main = () => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const { meetingType } = useAppSelector(state => state.applyInfo);
   const handleApplyButton = () => {
     switch (meetingType) {
@@ -63,7 +68,7 @@ const Main = () => {
         setIsApply(true);
       })
       .catch(e => {
-        console.error(e);
+        // console.error(e);
         setIsApply(false);
         meetingAPI
           .getTeamInfo({ teamType: 'TRIPLE' })
@@ -71,6 +76,10 @@ const Main = () => {
             setIsApply(true);
           })
           .catch(e => {
+            dispatch(resetAll());
+            dispatch(resetAllCommonState());
+            dispatch(resetAllPersonalState());
+            dispatch(resetAllGroupState());
             console.error(e);
             setIsApply(false);
           });
