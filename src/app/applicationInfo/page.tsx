@@ -38,7 +38,7 @@ const ApplicationInfo = () => {
   const [infoDataArr, setInfoDataArr] = useState<ApplyDataArr>();
   const [preferDataArr, setPreferDataArr] = useState<ApplyDataArr>();
 
-  const [isLeader, setIsLeader] = useState(false);
+  const [isTeamMember, setIsTeamMember] = useState(false);
   // const [errorState, setErrorState] = useState([false, false]);
   const getTeamInfo = () => {
     meetingAPI
@@ -87,7 +87,9 @@ const ApplicationInfo = () => {
         meetingAPI
           .getUser()
           .then(d =>
-            setIsLeader(d.data.nickname === data.data.teamUserList[0].nickname),
+            setIsTeamMember(
+              d.data.nickname !== data.data.teamUserList[0].nickname,
+            ),
           );
       })
       .catch(e => {
@@ -133,7 +135,10 @@ const ApplicationInfo = () => {
         isprogressbar={false}
         title="신청 정보"
       />
-      <Col padding={isLeader ? '32px 24px 12px' : '32px 24px 60px'} gap={85}>
+      <Col
+        padding={isTeamMember ? '32px 24px 12px' : '32px 24px 60px'}
+        gap={85}
+      >
         <Col gap={12} padding="24px 0 0 0">
           {!!teamStatus && (
             <TeamStatusBox
@@ -160,7 +165,7 @@ const ApplicationInfo = () => {
             </>
           )}
         </Col>
-        {isLeader && (
+        {!isTeamMember && (
           <Col gap={10}>
             <Col align={'center'}>
               <Text
