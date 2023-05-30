@@ -65,6 +65,15 @@ const Main = () => {
       .catch(e => {
         console.error(e);
         setIsApply(false);
+        meetingAPI
+          .getTeamInfo({ teamType: 'TRIPLE' })
+          .then(data => {
+            setIsApply(true);
+          })
+          .catch(e => {
+            console.error(e);
+            setIsApply(false);
+          });
       });
   };
   useEffect(() => {
