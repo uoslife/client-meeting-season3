@@ -37,8 +37,8 @@ const ResultBox = ({ title, applyDataArr }: ResultBoxProps) => {
       return `${data.data[0]} ~ ${data.data[1]}`;
 
     if (data.title_en === 'age' && data.type === 'prefer') {
-      const formattedData = data.data?.map(item => item.replace(/~/g, ''));
-      return `${formattedData[0]} ~ ${formattedData[1]}`;
+      // const formattedData = data.data?.map(item => item.replace(/~/g, ''));
+      return `${data.data[0]} ~ ${data.data[1]}`;
     }
 
     switch (typeof data.data) {
