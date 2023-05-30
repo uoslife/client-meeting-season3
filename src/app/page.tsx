@@ -21,7 +21,18 @@ const Main = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { meetingType } = useAppSelector(state => state.applyInfo);
+
+  const [isWaitingTeamComplete, setIsWaitingTeamComplete] = useState(false);
+  const [waitingModalOpen, setWaitingModalOpen] = useState(false);
+
   const handleApplyButton = () => {
+    if (isWaitingTeamComplete) {
+      setWaitingModalOpen(true);
+      setTimeout(() => {
+        setWaitingModalOpen(false);
+      }, 5000);
+      return;
+    }
     switch (meetingType) {
       case '':
         router.push('/apply');
@@ -47,6 +58,7 @@ const Main = () => {
     router.push('/applicationInfo');
   };
 
+  // modal
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleCopyLink = async () => {
@@ -76,11 +88,13 @@ const Main = () => {
             setIsApply(true);
           })
           .catch(e => {
+            if (e.response.data.code === 'M07') {
+              setIsWaitingTeamComplete(true);
+            } else setIsWaitingTeamComplete(false);
             // dispatch(resetAll());
             // dispatch(resetAllCommonState());
             // dispatch(resetAllPersonalState());
             // dispatch(resetAllGroupState());
-            console.error(e);
             setIsApply(false);
           });
       });
@@ -202,6 +216,10 @@ const Main = () => {
         </S.SocialWrapper>
       </S.BottomWrapper>
       <Toast text={'복사되었습니다!'} isOpen={modalOpen} />
+      <Toast
+        text={'팅장이 신청을 완료할 때까지 기다려주세요!'}
+        isOpen={waitingModalOpen}
+      />
     </>
   );
 };
