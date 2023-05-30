@@ -89,7 +89,7 @@ const Main = () => {
           })
           .catch(e => {
             if (e.response.data.code === 'M07') {
-              setIsWaitingTeamComplete(true);
+              setIsWaitingTeamComplete(false);
             } else setIsWaitingTeamComplete(false);
             // dispatch(resetAll());
             // dispatch(resetAllCommonState());
