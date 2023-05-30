@@ -31,7 +31,7 @@ const LastStep = () => {
 
   return (
     <>
-      <Col gap={32} padding="32px 24px">
+      <Col gap={32} padding="32px 24px 130px">
         <Col gap={12} align="center">
           <Text
             label="즐거운 시대팅을 위해 약속해주세요."
