@@ -89,7 +89,8 @@ const Main = () => {
           })
           .catch(e => {
             if (e.response.data.code === 'M07') {
-              setIsWaitingTeamComplete(false);
+              if (meetingType === 'groupMember') setIsWaitingTeamComplete(true);
+              else setIsWaitingTeamComplete(false);
             } else setIsWaitingTeamComplete(false);
             // dispatch(resetAll());
             // dispatch(resetAllCommonState());
