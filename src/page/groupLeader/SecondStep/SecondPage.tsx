@@ -61,6 +61,7 @@ const SecondPage = ({ setIsFinishPage }: StepProps) => {
         dispatch(resetAllCommonState());
         dispatch(resetAllPersonalState());
         dispatch(resetAllGroupState());
+        meetingAPI.deleteUser();
         alert('신청 취소되었습니다.');
         router.push('/');
       })

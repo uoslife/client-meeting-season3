@@ -43,7 +43,7 @@ const ApplicationInfo = () => {
     meetingAPI
       .getTeamInfo({ teamType: 'SINGLE' })
       .then(data => {
-        setTeamInfo(data.data);
+        // setTeamInfo(data.data);
         setTeamType(data.data.teamType);
         const infoPrefer = {
           informationDistance: data.data.informationDistance,
@@ -67,7 +67,7 @@ const ApplicationInfo = () => {
     meetingAPI
       .getTeamInfo({ teamType: 'TRIPLE' })
       .then(data => {
-        setTeamInfo(data.data);
+        // setTeamInfo(data.data);
         setTeamType(data.data.teamType);
         setTeamStatus(toTeamStatus(data.data));
         const infoPrefer = {
@@ -108,6 +108,7 @@ const ApplicationInfo = () => {
         dispatch(resetAllCommonState());
         dispatch(resetAllPersonalState());
         dispatch(resetAllGroupState());
+        meetingAPI.deleteUser();
         alert('신청 취소되었습니다.');
         router.push('/');
       })
@@ -162,7 +163,7 @@ const ApplicationInfo = () => {
               color="#656D78"
             />
             <Text
-              label="(신청 취소 기한 : 5월 28일 오후 10시까지)"
+              label="(신청 취소 기한 : 5월 31일 오후 10시까지)"
               weight={400}
               size="sm"
               color="#656D78"

@@ -14,6 +14,9 @@ export default class MeetingAxiosAPI implements MeetingService {
   updateUser(request: Type.UpdateUserRequest) {
     return API.patch('/api/user', request);
   }
+  deleteUser() {
+    return API.put('api/user');
+  }
 
   /** common */
   createTeam(params: Type.CreateTeamParams) {
