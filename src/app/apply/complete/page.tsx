@@ -7,6 +7,7 @@ import { useEffect, useRef } from 'react';
 import congratulation from '@/assets/lottie/congratulation.json';
 import { useRouter } from 'next/navigation';
 import { colors } from '@/styles/styles';
+import { useAppSelector } from '@/store/store';
 
 const BottomSelectWrapper = styled.div`
   position: fixed;
@@ -23,7 +24,13 @@ const FinishPage = () => {
   const router = useRouter();
   const playerRef = useRef(Player);
 
+  const { meetingType } = useAppSelector(state => state.applyInfo);
+
   const handleCheckInformation = () => {
+    if (meetingType === 'groupMember') {
+      router.push('/');
+      return;
+    }
     router.push('/applicationInfo');
   };
 
@@ -50,7 +57,11 @@ const FinishPage = () => {
             <Col align={'center'}>
               <Text label="🎉신청이 완료되었습니다." weight={800} size={'lg'} />
               <Text
-                label="매칭 결과가 나오면 알려드릴게요!"
+                label={
+                  meetingType === 'groupMember'
+                    ? '팅장이 신청을 완료할 때까지 기다려주세요'
+                    : '매칭 결과가 나오면 알려드릴게요!'
+                }
                 weight={800}
                 size={'lg'}
               />
@@ -58,7 +69,7 @@ const FinishPage = () => {
 
             <Col align={'center'} gap={8}>
               <Col align={'center'}>
-                <Text label="06/01 목요일 저녁!" weight={600} />
+                <Text label="6/1 목요일 저녁," weight={600} />
                 <Text label="시대생 어플로 알림을 보내드려요." />
               </Col>
               <Text
@@ -75,7 +86,11 @@ const FinishPage = () => {
           primary={'inactive'}
           textSize="sm"
           onClick={handleCheckInformation}
-          label={'신청 정보 확인하기'}
+          label={
+            meetingType === 'groupMember'
+              ? '홈 화면으로 돌아가기'
+              : '신청 정보 확인하기'
+          }
         />
       </BottomSelectWrapper>
     </>
