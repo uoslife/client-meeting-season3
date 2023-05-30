@@ -53,11 +53,11 @@ const Main = () => {
   };
 
   const [isApply, setIsApply] = useState(false);
-  const getUser = () => {
-    meetingAPI.getUser().then(data => console.log(data.data));
+  const getUser = async () => {
+    await meetingAPI.getUser().then(() => {});
   };
-  const getTeamInfo = () => {
-    meetingAPI
+  const getTeamInfo = async () => {
+    await meetingAPI
       .getTeamInfo({ teamType: 'SINGLE' })
       .then(data => {
         setIsApply(true);

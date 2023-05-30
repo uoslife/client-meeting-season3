@@ -7,7 +7,7 @@ API.interceptors.response.use(
   (error: AxiosError) => {
     const statusCode = error.response?.status;
     if (statusCode === 401) {
-      alert('로그인 후 다시 시도해주세요');
+      alert('다시 접속해주세요!');
       window.location.href = 'https://uoslife.com';
     } else return Promise.reject(error);
   },
