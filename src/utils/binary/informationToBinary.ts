@@ -33,7 +33,7 @@ export class infoToBinary implements IInfoToBinary {
   myMajor?: string[];
   preferMajor?: string[];
   myStudentType?: string;
-  preferStudentType?: string;
+  preferStudentType?: string[];
   preferDay?: string[];
   atmosphere?: string;
   interests?: string[];
@@ -162,13 +162,14 @@ export class infoToBinary implements IInfoToBinary {
   }
 
   studentTypeToBinary(isPrefer: boolean) {
-    return studentTypeArr
-      .map(item =>
-        (isPrefer ? this.preferStudentType : this.myStudentType) === item
-          ? '1'
-          : '0',
-      )
-      .join('');
+    if (isPrefer) {
+      return studentTypeArr
+        .map(item => (this.preferStudentType?.includes(item) ? '1' : '0'))
+        .join('');
+    } else
+      return studentTypeArr
+        .map(item => (this.myStudentType === item ? '1' : '0'))
+        .join('');
   }
 
   mySmokingToBinary() {
