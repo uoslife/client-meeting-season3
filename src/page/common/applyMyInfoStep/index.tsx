@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-import { Footer } from '@/components';
+import { Footer, Toast } from '@/components';
 
 import { useAppSelector } from '@/store/hooks';
 import { ApplyInfoState } from '@/store/feature/applyInfo';
@@ -18,6 +18,22 @@ import useCurPageReset from '@/hooks/useCurPageReset';
 
 const ApplyMyInfoStep = () => {
   const { curPage, meetingType } = useAppSelector(state => state.applyInfo);
+
+  /** 중복 선택시 안내 문구 추가*/
+  const [isDoubleCheck, setIsDoubleCheck] = useState(false);
+  const [isModalOpen, setisModalOpen] = useState(false);
+
+  const handleDoubleCheckInfo = () => {
+    if (!isDoubleCheck) {
+      setisModalOpen(true);
+      setTimeout(() => {
+        setisModalOpen(false);
+      }, 5000);
+    }
+  };
+  useEffect(() => {
+    setIsDoubleCheck(false);
+  }, [curPage]);
 
   const returnMaxPage = () => {
     switch (meetingType) {
@@ -37,7 +53,12 @@ const ApplyMyInfoStep = () => {
   const changePage = (curPage: ApplyInfoState['curPage']) => {
     switch (curPage) {
       case 1:
-        return <FirstPage setIsFinishPage={setIsFinishPage} />;
+        return (
+          <FirstPage
+            setIsFinishPage={setIsFinishPage}
+            setIsDoubleCheck={setIsDoubleCheck}
+          />
+        );
       case 2:
         return <SecondPage setIsFinishPage={setIsFinishPage} />;
       default:
@@ -62,6 +83,12 @@ const ApplyMyInfoStep = () => {
         maxPage={returnMaxPage()}
         disabled={!isFinishPage}
         type={switchPageType()}
+        handleDoubleCheckInfo={handleDoubleCheckInfo}
+      />
+      <Toast
+        text={'닉네임 중복확인 후 진행해주세요'}
+        isOpen={isModalOpen}
+        isWarn
       />
     </>
   );
