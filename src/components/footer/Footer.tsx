@@ -36,6 +36,7 @@ export type FooterProps = {
   type?: 'firstPage' | 'lastPage' | 'lastStep';
   onClickPrev?: () => void;
   onClickNext?: () => void;
+  handleDoubleCheckInfo?: () => void;
 };
 
 const Footer = ({
@@ -44,6 +45,7 @@ const Footer = ({
   type,
   onClickPrev,
   onClickNext,
+  handleDoubleCheckInfo,
 }: FooterProps) => {
   const { curStep, curPage, meetingType } = useAppSelector(
     state => state.applyInfo,
@@ -280,7 +282,11 @@ const Footer = ({
       <FooterStepButton
         type={'next'}
         disabled={disabled}
-        onClick={disabled ? undefined : onClickNext || onClickStepNext}
+        onClick={
+          disabled
+            ? handleDoubleCheckInfo || undefined
+            : onClickNext || onClickStepNext
+        }
       ></FooterStepButton>
     </S.StepHandler>
   );

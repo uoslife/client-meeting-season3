@@ -5,9 +5,16 @@ import { useEffect } from 'react';
 export type ToastProps = {
   text: string;
   isOpen: boolean;
+  isWarn?: boolean;
 };
-const Toast = ({ text, isOpen, ...props }: ToastProps) => {
+const Toast = ({ text, isOpen, isWarn }: ToastProps) => {
   const notify = () => {
+    if (isWarn) {
+      toast.warn(text, {
+        position: 'top-right',
+      });
+      return;
+    }
     toast.info(text, {
       position: 'top-right',
     });

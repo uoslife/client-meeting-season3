@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import {
   Button,
   Col,
@@ -27,7 +27,10 @@ import { meetingAPI } from '@/api';
 
 const buttonLabelArr = ['남자', '여자'];
 
-const FirstPage = ({ setIsFinishPage }: StepProps) => {
+const FirstPage = ({
+  setIsFinishPage,
+  setIsDoubleCheck,
+}: StepProps & { setIsDoubleCheck: Dispatch<SetStateAction<boolean>> }) => {
   const { info_nickname, info_gender, info_age, info_height } = useAppSelector(
     state => state.common,
   );
@@ -46,6 +49,7 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
     setCurrentNicknameStatus('default');
     setNicknameStatusMessage('');
     dispatch(setInfoNickname('')); // 매번 호출되는 side effect..
+    setIsDoubleCheck(false); //
     //set
     setNickname(e.target.value);
     setIsFinishNickname(false);
@@ -57,10 +61,12 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
         setCurrentNicknameStatus('error');
         setNicknameStatusMessage('이미 존재하는 닉네임입니다.');
         setIsFinishNickname(false);
+        setIsDoubleCheck(false); //
       } else {
         setCurrentNicknameStatus('success');
         setNicknameStatusMessage('사용 가능한 닉네임입니다.');
         setIsFinishNickname(true);
+        setIsDoubleCheck(true); //
         dispatch(setInfoNickname(nickname));
       }
     });
