@@ -32,7 +32,7 @@ const FifthPage = ({ setIsFinishPage }: StepProps) => {
   }, [isClickedButton, selectedLabel, setIsFinishPage]);
 
   return (
-    <Paddle top={32} left={24} right={24}>
+    <Paddle top={32} left={24} right={24} bottom={120}>
       <Col align="center" gap={32}>
         <Col align="center" gap={12}>
           <Text label="Q4" font="LeferiPoint-SpecialA" color="#4C89FF" />
