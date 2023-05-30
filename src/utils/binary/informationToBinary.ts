@@ -4,6 +4,7 @@ import {
   ANIMALS,
   GROUP_QUESTIONS,
   INTERESTS,
+  MBTI_QUESTIONS,
   PERSONAL_QUESTIONS,
 } from '@/constants/index';
 import { DEPARTMENTS } from '@/constants/departments';
@@ -110,9 +111,12 @@ export class infoToBinary implements IInfoToBinary {
     const modifiedArray = (this.preferAge ?? []).map(item =>
       item.replace('~', ''),
     );
+    console.log(modifiedArray[0]);
     for (let i = 0; i < 2; i++) {
       result.push(
-        AGE_ARR.map(item => (modifiedArray[i] === item ? '1' : '0')).join(''),
+        AGE_ARR.map(item =>
+          modifiedArray[i] === item.toString() ? '1' : '0',
+        ).join(''),
       );
     }
     return result.join('');
@@ -138,12 +142,15 @@ export class infoToBinary implements IInfoToBinary {
   }
 
   mbtiToBinary(isPrefer: boolean) {
-    return mbtiString
-      .split('')
-      .map(char =>
-        (isPrefer ? this.preferMbti : this.myMbti)?.includes(char) ? '1' : '0',
-      )
-      .join('');
+    const newArr: string[] = [];
+    MBTI_QUESTIONS.forEach(data =>
+      data.type.forEach(data =>
+        (isPrefer ? this.preferMbti : this.myMbti)?.includes(data)
+          ? newArr.push('1')
+          : newArr.push('0'),
+      ),
+    );
+    return newArr.join('');
   }
 
   departmentToBinary(isPrefer: boolean) {
@@ -216,6 +223,7 @@ export class infoToBinary implements IInfoToBinary {
   }
 
   totalPreferenceDistance() {
+    console.log(this.mbtiToBinary(true), '-', this.mbtiToBinary(false));
     return this.type === 'personal'
       ? this.preferHeightToBinary() +
           this.mbtiToBinary(true) +

@@ -161,19 +161,12 @@ export class BinaryToInfo implements IBinaryToInfo {
     return result;
   }
   binaryToPreferMbti(binary: string) {
-    const newBinary = [
-      binary.slice(0, 2),
-      binary.slice(2, 4),
-      binary.slice(4, 6),
-      binary.slice(6, 8),
-    ];
     const result: Array<string> = [];
-    MBTI_QUESTIONS.map((item, i) => {
-      for (let j = 0; j < 2; j++) {
-        if (newBinary[i][j] === '1') result.push(item.type[j]);
-        else return;
-      }
-    });
+    MBTI_QUESTIONS.map((data, i) =>
+      data.type.forEach((data, j) =>
+        binary[i * 2 + j] === '1' ? result.push(data) : null,
+      ),
+    );
     return result;
   }
   binaryToPreferAnimal(binary: string) {
@@ -192,6 +185,8 @@ export class BinaryToInfo implements IBinaryToInfo {
     AGE_SLIDER_ARR.map((item, i) =>
       binary2[i] === '1' ? result.push(item) : null,
     );
+    if (result[0] === '20') result[0] = '~20';
+    if (result[1] === '20') result[0] = '30~';
     return result;
   }
   binaryToSmoking(binary: string) {
