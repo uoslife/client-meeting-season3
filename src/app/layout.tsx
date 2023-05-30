@@ -13,6 +13,8 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   const [topMargin, setTopMargin] = useState<number>(0);
   const [userId, setUserId] = useState<number>(0);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const loginWithDevice = async (nativeActions: NativeActions) => {
     const [device_id, secret] = await Promise.all([
       nativeActions.getDeviceId(),
@@ -44,7 +46,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const nativeActions = new NativeActions(new NativeBridge());
-    loginWithDevice(nativeActions).then();
+    loginWithDevice(nativeActions).then(() => setIsLoading(true));
     handleTopMargin(nativeActions).then(margin => setTopMargin(margin));
   }, []);
 
@@ -73,7 +75,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       <body style={{ paddingTop: `${topMargin}px` }}>
         <UserIdContext.Provider value={{ userId, setUserId }}>
           <StyledComponentsRegistry>
-            <Providers>{children}</Providers>
+            <Providers>{isLoading && children}</Providers>
           </StyledComponentsRegistry>
         </UserIdContext.Provider>
       </body>
