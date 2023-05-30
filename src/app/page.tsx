@@ -76,10 +76,10 @@ const Main = () => {
             setIsApply(true);
           })
           .catch(e => {
-            dispatch(resetAll());
-            dispatch(resetAllCommonState());
-            dispatch(resetAllPersonalState());
-            dispatch(resetAllGroupState());
+            // dispatch(resetAll());
+            // dispatch(resetAllCommonState());
+            // dispatch(resetAllPersonalState());
+            // dispatch(resetAllGroupState());
             console.error(e);
             setIsApply(false);
           });
