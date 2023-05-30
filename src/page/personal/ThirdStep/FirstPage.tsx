@@ -38,7 +38,7 @@ const FirstPage = ({ setIsFinishPage }: StepProps) => {
     dispatch(setPreferAgePersonal(ageArr));
     dispatch(setPreferHeight(heightArr));
     if (isClickedStudentType)
-      dispatch(setPreferStudentType(studentType[0].label));
+      dispatch(setPreferStudentType(studentType.map(data => data.label)));
 
     if (isClickedStudentType) setIsFinishPage(true);
     else setIsFinishPage(false);

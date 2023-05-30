@@ -23,7 +23,11 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
 
     if (!device_id || !secret) {
       // web, production
-      if (process.env.NODE_ENV === 'production') return;
+      if (process.env.NODE_ENV === 'production') {
+        alert('시대생 앱에서 신청이 가능합니다');
+        window.location.href = 'https://uoslife.com';
+        return;
+      }
       // web, development
       else if (process.env.NODE_ENV === 'development') {
         return authAPI.registerDevice({

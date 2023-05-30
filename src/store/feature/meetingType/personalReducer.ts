@@ -8,7 +8,7 @@ export type PersonalState = {
   info_question: ApplyData<ApplyQuestionArrType>;
   prefer_age: ApplyData<string[]>;
   prefer_height: ApplyData<string[]>;
-  prefer_studentType: ApplyData<string>;
+  prefer_studentType: ApplyData<string[]>;
   prefer_major: ApplyData<string[]>;
   prefer_smoking: ApplyData<string>;
   prefer_animal: ApplyData<string[]>;
@@ -61,7 +61,7 @@ const initialState: PersonalState = {
     title_kr: '신분',
     title_en: 'studentType',
     type: 'prefer',
-    data: '',
+    data: [''],
   },
   prefer_major: {
     title_kr: '기피학과',
@@ -118,7 +118,7 @@ export const personal = createSlice({
     setPreferHeight: (state, action: PayloadAction<string[]>) => {
       state.prefer_height.data = action.payload;
     },
-    setPreferStudentType: (state, action: PayloadAction<string>) => {
+    setPreferStudentType: (state, action: PayloadAction<string[]>) => {
       state.prefer_studentType.data = action.payload;
     },
     setPreferMajorPersonal: (state, action: PayloadAction<string[]>) => {
