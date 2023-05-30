@@ -185,8 +185,7 @@ export class BinaryToInfo implements IBinaryToInfo {
     AGE_SLIDER_ARR.map((item, i) =>
       binary2[i] === '1' ? result.push(item) : null,
     );
-    if (result[0] === '20') result[0] = '~20';
-    if (result[1] === '20') result[0] = '30~';
+    if (result[1] === '30') result[0] = '30~';
     return result;
   }
   binaryToSmoking(binary: string) {
