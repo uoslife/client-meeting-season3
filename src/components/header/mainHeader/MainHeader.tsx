@@ -6,7 +6,7 @@ import { IconButton, Text } from '@/components';
 
 const MainHeader = () => {
   const onClickBackButton = () => {
-    document.location.href = 'http://uoslife.com';
+    window.location.href = 'https://uoslife.com';
   };
   return (
     <S.Header>
