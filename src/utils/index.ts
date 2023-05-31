@@ -74,7 +74,7 @@ export const toDataArr = (
       case 'UNDERGRADUATE':
         return '학부생';
       case 'POSTGRADUATE':
-        '대학원생';
+        return '대학원생';
       case 'GRADUATE':
         return '졸업생';
       default:
