@@ -23,7 +23,7 @@ const FourthPage = ({ setIsFinishPage }: StepProps) => {
   }, [dispatch, mbtiValue, setIsFinishPage]);
 
   return (
-    <Paddle top={32} left={35} right={35}>
+    <Paddle top={32} left={35} right={35} bottom={120}>
       <Col gap={30} align={'center'}>
         <Text weight={700} label={'9. 본인의 MBTI를 선택해주세요.'} />
         <Col gap={34}>
