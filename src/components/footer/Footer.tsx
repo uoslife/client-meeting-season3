@@ -29,6 +29,8 @@ import { changeDepartment, changeStudentType } from '@/utils';
 import { resetAllCommonState } from '@/store/feature/common/commonReducer';
 import { resetAllPersonalState } from '@/store/feature/meetingType/personalReducer';
 import { infoToBinary } from '@/utils/binary/informationToBinary';
+import { useState } from 'react';
+import BottomSheet from '../modal/bottomSheet/BottomSheet';
 
 export type FooterProps = {
   maxPage: number;
@@ -67,6 +69,39 @@ const Footer = ({
       default:
         return 0;
     }
+  };
+
+  /** 비정상적인 접근시 취소 가능하도록 팝업 */
+  const [isModal, setIsModal] = useState(false);
+
+  const onClickPrimary = () => {
+    meetingAPI
+      .deleteTeam({ teamType: 'TRIPLE', isTeamLeader: true })
+      .then(() => {
+        dispatch(resetAll());
+        dispatch(resetAllCommonState());
+        dispatch(resetAllPersonalState());
+        dispatch(resetAllGroupState());
+        meetingAPI.deleteUser();
+        alert('신청 취소되었습니다.');
+        router.push('/');
+      })
+      .catch(() => {
+        meetingAPI
+          .deleteTeam({ teamType: 'SINGLE', isTeamLeader: true })
+          .then(() => {
+            dispatch(resetAll());
+            dispatch(resetAllCommonState());
+            dispatch(resetAllPersonalState());
+            dispatch(resetAllGroupState());
+            meetingAPI.deleteUser();
+            alert('신청 취소되었습니다.');
+            router.push('/');
+          });
+      });
+  };
+  const onClickSecondary = () => {
+    setIsModal(false);
   };
 
   const onClickStepPrev = () => {
@@ -177,6 +212,9 @@ const Footer = ({
               dispatch(resetAllPersonalState());
               dispatch(resetAllGroupState());
               router.push('/apply/complete');
+            })
+            .catch(() => {
+              setIsModal(true);
             });
           break;
         case 'groupLeader':
@@ -289,6 +327,14 @@ const Footer = ({
             : onClickNext || onClickStepNext
         }
       ></FooterStepButton>
+      <BottomSheet
+        isActive={isModal}
+        subTitle={`오류가 발생했습니다. 아래 확인 버튼을 누른 후 다시 신청해주세요`}
+        secondaryWord={'취소'}
+        primaryWord={'확인'}
+        onClickPrimary={onClickPrimary}
+        onClickSecondary={onClickSecondary}
+      />
     </S.StepHandler>
   );
 };
