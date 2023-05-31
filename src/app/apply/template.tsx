@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 const Template = ({ children }: { children: React.ReactNode }) => {
   const changeIsProgress = () => {
     return (
-      usePathname() !== '/apply/complete' && usePathname() !== '/apply/confirm'
+      usePathname() !== '/apply/complete' && usePathname() !== '/apply/confirm' && usePathname() !== '/apply/result'
     );
   };
   const changeIsProgressBar = () => {
@@ -28,6 +28,8 @@ const Template = ({ children }: { children: React.ReactNode }) => {
         return '신청 완료!';
       case '/apply/confirm':
         return '신청 정보';
+      case '/apply/result':
+        return '매칭 결과';
       default:
         return undefined;
     }
