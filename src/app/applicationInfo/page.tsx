@@ -175,7 +175,7 @@ const ApplicationInfo = () => {
                 color="#656D78"
               />
               <Text
-                label="(신청 취소 기한 : 5월 31일 오후 10시까지)"
+                label="(신청 취소 기한 : 6월 1일 오후 2시까지)"
                 weight={400}
                 size="sm"
                 color="#656D78"

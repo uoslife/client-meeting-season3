@@ -75,7 +75,7 @@ const FinishPage = () => {
               <Text
                 color={colors.Primary_500}
                 size={'xs'}
-                label="(신청 취소 기한: 5월 31일 오후 10시까지)"
+                label="(신청 취소 기한: 6월 1일 오후 2시까지)"
               />
             </Col>
           </Col>

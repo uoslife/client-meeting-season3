@@ -24,7 +24,15 @@ const Main = () => {
 
   const [isWaitingTeamComplete, setIsWaitingTeamComplete] = useState(false);
   const [waitingModalOpen, setWaitingModalOpen] = useState(false);
+  const [applyExtensionInfoModalOpen, setApplyExtensionInfoModalOpen] =
+    useState(false);
 
+  useEffect(() => {
+    setApplyExtensionInfoModalOpen(true);
+    setTimeout(() => {
+      setApplyExtensionInfoModalOpen(false);
+    }, 6000);
+  }, []);
   const handleApplyButton = () => {
     if (isWaitingTeamComplete) {
       setWaitingModalOpen(true);
@@ -147,12 +155,12 @@ const Main = () => {
             <Text label={'(월)'} size={'2xl'} weight={500} />
             <Text label={'-'} size={'4xl'} />
             <Text
-              label={'05.31'}
+              label={'06.01'}
               size={'3xl'}
               weight={800}
               font="LeferiPoint-SpecialA"
             />
-            <Text label={'(수)'} size={'2xl'} weight={500} />
+            <Text label={'(목)'} size={'2xl'} weight={500} />
           </S.DateTextWrapper>
         </S.DateWrapper>
         {isApply ? (
@@ -216,11 +224,26 @@ const Main = () => {
           </S.SocialLink>
         </S.SocialWrapper>
       </S.BottomWrapper>
-      <Toast text={'복사되었습니다!'} isOpen={modalOpen} />
-      <Toast
-        text={'팅장이 신청을 완료할 때까지 기다려주세요!'}
-        isOpen={waitingModalOpen}
-      />
+      {modalOpen && <Toast text={'복사되었습니다!'} isOpen={modalOpen} />}
+      {waitingModalOpen && (
+        <Toast
+          text={'팅장이 신청을 완료할 때까지 기다려주세요!'}
+          isOpen={waitingModalOpen}
+        />
+      )}
+      {applyExtensionInfoModalOpen && (
+        <Toast
+          text={
+            <p style={{ lineHeight: '1.4' }}>
+              신청기간이 연장되었어요!
+              <br />
+              6/1 오후 2시까지 신청해주세요😆
+            </p>
+          }
+          isOpen={applyExtensionInfoModalOpen}
+          autoClose={6000}
+        />
+      )}
     </>
   );
 };
