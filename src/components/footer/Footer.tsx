@@ -349,11 +349,7 @@ const Footer = ({
           onClickSecondary={onClickSecondary}
         />
       </S.StepHandler>
-      <Toast
-        text={'팅장이 신청을 완료할 때까지 기다려주세요!'}
-        isOpen={infoToastOpen}
-        isWarn
-      />
+      <Toast text={'2자리 이상 입력해주세요!'} isOpen={infoToastOpen} isWarn />
     </>
   );
 };
