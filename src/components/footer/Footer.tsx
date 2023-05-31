@@ -2,6 +2,7 @@
 
 import FooterStepButton from '@/components/buttons/footerStepButton/FooterStepButton';
 import * as S from '@/components/footer/Footer.style';
+import { Toast } from '@/components';
 
 import {
   GROUP_LEADER_MAX_PAGE_ARR,
@@ -57,6 +58,9 @@ const Footer = ({
   const groupState = useAppSelector(state => state.group);
   const dispatch = useAppDispatch();
   const router = useRouter();
+
+  /** 안내 모달 */
+  const [infoToastOpen, setInfoToastOpen] = useState(false);
 
   const changePageArrByMeetingType = () => {
     switch (meetingType) {
@@ -278,9 +282,17 @@ const Footer = ({
             dispatch(incrementPage());
           })
           .catch(e => {
-            if (e.response.data.code === 'M11')
-              alert('2자리 이상 입력해주세요');
-            console.log(e);
+            if (e.response.data.code === 'M11') {
+              setInfoToastOpen(true);
+              setTimeout(() => {
+                setInfoToastOpen(false);
+              }, 5000);
+              return;
+            }
+            if (e.response.data.code === 'M02') {
+              setIsModal(true);
+              return;
+            }
           });
       } else dispatch(incrementPage());
     }
@@ -312,30 +324,37 @@ const Footer = ({
   };
 
   return (
-    <S.StepHandler>
-      <FooterStepButton
-        type={'prev'}
-        onClick={onClickPrev || onClickStepPrev}
-      ></FooterStepButton>
-      <S.StepText>{`${curPage} / ${maxPage}`}</S.StepText>
-      <FooterStepButton
-        type={'next'}
-        disabled={disabled}
-        onClick={
-          disabled
-            ? handleDoubleCheckInfo || undefined
-            : onClickNext || onClickStepNext
-        }
-      ></FooterStepButton>
-      <BottomSheet
-        isActive={isModal}
-        subTitle={`오류가 발생했습니다. 아래 확인 버튼을 누른 후 다시 신청해주세요`}
-        secondaryWord={'취소'}
-        primaryWord={'확인'}
-        onClickPrimary={onClickPrimary}
-        onClickSecondary={onClickSecondary}
+    <>
+      <S.StepHandler>
+        <FooterStepButton
+          type={'prev'}
+          onClick={onClickPrev || onClickStepPrev}
+        ></FooterStepButton>
+        <S.StepText>{`${curPage} / ${maxPage}`}</S.StepText>
+        <FooterStepButton
+          type={'next'}
+          disabled={disabled}
+          onClick={
+            disabled
+              ? handleDoubleCheckInfo || undefined
+              : onClickNext || onClickStepNext
+          }
+        ></FooterStepButton>
+        <BottomSheet
+          isActive={isModal}
+          subTitle={`오류가 발생했습니다. 아래 확인 버튼을 누른 후 다시 신청해주세요`}
+          secondaryWord={'취소'}
+          primaryWord={'확인'}
+          onClickPrimary={onClickPrimary}
+          onClickSecondary={onClickSecondary}
+        />
+      </S.StepHandler>
+      <Toast
+        text={'팅장이 신청을 완료할 때까지 기다려주세요!'}
+        isOpen={infoToastOpen}
+        isWarn
       />
-    </S.StepHandler>
+    </>
   );
 };
 
