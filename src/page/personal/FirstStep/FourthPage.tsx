@@ -19,7 +19,7 @@ const FourthPage = ({ setIsFinishPage }: StepProps) => {
     if (isFinishMbtiSelect) {
       dispatch(setInfoMbti(mbtiValue));
       setIsFinishPage(true);
-    }
+    } else setIsFinishPage(false);
   }, [dispatch, mbtiValue, setIsFinishPage]);
 
   return (

@@ -27,7 +27,7 @@ const PersonalFirstStep = () => {
   const [isModalOpen, setisModalOpen] = useState(false);
 
   const handleDoubleCheckInfo = () => {
-    if (!isDoubleCheck) {
+    if (!isDoubleCheck && curPage === 1) {
       setisModalOpen(true);
       setTimeout(() => {
         setisModalOpen(false);
