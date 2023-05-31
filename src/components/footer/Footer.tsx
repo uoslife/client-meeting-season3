@@ -201,6 +201,7 @@ const Footer = ({
           break;
         case 'groupMember':
           router.push('/apply/complete');
+          dispatch(resetAllCommonState());
           break;
 
         default:
