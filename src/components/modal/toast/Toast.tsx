@@ -3,11 +3,12 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import { useEffect } from 'react';
 
 export type ToastProps = {
-  text: string;
+  text: string | React.ReactNode;
   isOpen: boolean;
   isWarn?: boolean;
+  autoClose?: number;
 };
-const Toast = ({ text, isOpen, isWarn }: ToastProps) => {
+const Toast = ({ text, isOpen, isWarn, autoClose }: ToastProps) => {
   const notify = () => {
     if (isWarn) {
       toast.warn(text, {
@@ -27,7 +28,7 @@ const Toast = ({ text, isOpen, isWarn }: ToastProps) => {
   return (
     <div>
       <ToastContainer
-        autoClose={5000}
+        autoClose={autoClose || 5000}
         toastStyle={{
           height: '90px',
           marginTop: '80px',
