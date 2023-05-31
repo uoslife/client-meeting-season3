@@ -351,6 +351,7 @@ const Footer = ({
       </S.StepHandler>
       <Toast text={'2자리 이상 입력해주세요!'} isOpen={infoToastOpen} isWarn />
     </>
+
   );
 };
 
