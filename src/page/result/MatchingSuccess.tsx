@@ -17,8 +17,9 @@ const MatchingSuccess = ({
 }) => {
   const isTeamSingle = matchingSuccessData.teamType === 'SINGLE';
   const onClickGuide = () => {
-    // TODO: 가이드 페이지로 이동
-    // window.location.href = '';
+    /** 가이드 페이지로 이동 */
+    window.location.href =
+      'https://uoslife.com/board/free/1b9d751e-362d-43f6-b540-86781b7e5f81';
   };
 
   return (
