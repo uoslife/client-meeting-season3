@@ -165,7 +165,7 @@ const ApplicationInfo = () => {
             </>
           )}
         </Col>
-        {!isTeamMember && (
+        {/* {!isTeamMember && (
           <Col gap={10}>
             <Col align={'center'}>
               <Text
@@ -188,7 +188,7 @@ const ApplicationInfo = () => {
               label={'신청 취소하기'}
             />
           </Col>
-        )}
+        )} */}
         <BottomSheet
           isActive={isModal}
           subTitle="신청 취소 하시겠습니까?"
