@@ -42,6 +42,9 @@ type MeetingService = {
     Type.EnterTeamRequest,
     Type.EnterTeamResponse
   >;
+
+  /** matching */
+  getMatch: ServiceFuncOnlyResponse<Type.GetMatchResponse>;
 };
 
 export default MeetingService;
