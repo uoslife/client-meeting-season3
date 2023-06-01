@@ -55,4 +55,8 @@ export default class MeetingAxiosAPI implements MeetingService {
       `/api/meeting/${params.teamType}/join/${params.code}?isJoin=${params.isJoin}`,
     );
   }
+  /** matching */
+  getMatch() {
+    return API.get<Type.GetMatchResponse>(`/api/match`);
+  }
 }

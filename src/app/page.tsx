@@ -8,6 +8,7 @@ import {
   MainHeader,
   Text,
   Toast,
+  Col,
 } from '@/components';
 
 import * as S from '@/styles/pages/page.style';
@@ -45,36 +46,15 @@ const Main = () => {
   const handleApplyButton = () => {
     setApplyFinishInfoModalOpen(true);
     return;
-    if (isWaitingTeamComplete) {
-      setWaitingModalOpen(true);
-      setTimeout(() => {
-        setWaitingModalOpen(false);
-      }, 5000);
-      return;
-    }
-    switch (meetingType) {
-      case '':
-        router.push('/apply');
-        break;
-      case 'personal':
-        router.push('apply/personal');
-        break;
-      case 'group':
-        router.push('apply/branching');
-        break;
-      case 'groupLeader':
-        router.push('apply/groupLeader');
-        break;
-      case 'groupMember':
-        router.push('apply/groupMember');
-        break;
-      default:
-        router.push('/apply');
-        break;
-    }
   };
+
+  /** 신청 정보 확인 */
   const handleCheckInfoButton = () => {
     router.push('/applicationInfo');
+  };
+  /** 매칭 결과 확인 */
+  const handleCheckResultButton = () => {
+    router.push('/result');
   };
 
   // modal
@@ -174,23 +154,34 @@ const Main = () => {
             <Text label={'(목)'} size={'2xl'} weight={500} />
           </S.DateTextWrapper>
         </S.DateWrapper>
-        {isApply ? (
-          <div style={{ width: '100%', padding: '0 48px' }}>
-            <Button
-              primary="active"
-              label="신청 정보 확인하기 >"
-              onClick={handleCheckInfoButton}
-            />
-          </div>
-        ) : (
-          <div style={{ width: '100%', padding: '0 48px' }}>
-            <Button
-              primary="active"
-              label="지금 참여하기 >"
-              onClick={handleApplyButton}
-            />
-          </div>
-        )}
+        <Col gap={12}>
+          {isApply && (
+            <div style={{ width: '100%', padding: '0 48px' }}>
+              <Button
+                primary="active"
+                label="매칭 결과 확인하기 >"
+                onClick={handleCheckResultButton}
+              />
+            </div>
+          )}
+          {isApply ? (
+            <div style={{ width: '100%', padding: '0 48px' }}>
+              <Button
+                primary="inactive"
+                label="신청 정보 확인하기 >"
+                onClick={handleCheckInfoButton}
+              />
+            </div>
+          ) : (
+            <div style={{ width: '100%', padding: '0 48px' }}>
+              <Button
+                primary="active"
+                label="지금 참여하기 >"
+                onClick={handleApplyButton}
+              />
+            </div>
+          )}
+        </Col>
       </S.MainWrapper>
       <Banner link={'MmedAdvertise.jpg'} url={BANNER_AD_URL.Mmed} />
       <S.BottomWrapper>

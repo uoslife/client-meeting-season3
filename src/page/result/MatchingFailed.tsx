@@ -29,7 +29,7 @@ const BottomSelectWrapper = styled.div`
   width: 100%;
 `;
 
-function FinishPage() {
+function MatchingFailed() {
   const router = useRouter();
 
   return (
@@ -74,4 +74,4 @@ function FinishPage() {
     </>
   );
 }
-export default FinishPage;
+export default MatchingFailed;

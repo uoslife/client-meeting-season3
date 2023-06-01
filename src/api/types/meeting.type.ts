@@ -107,3 +107,5 @@ export type EnterTeamResponse = null | {
     age: number;
   }>;
 };
+
+export type GetMatchResponse = GetTeamInfoResponse;
