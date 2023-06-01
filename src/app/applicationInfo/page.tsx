@@ -14,6 +14,7 @@ import {
   ResultBox,
   TeamStatusBox,
   Text,
+  Toast,
 } from '@/components';
 import { resetAll } from '@/store/feature/applyInfo';
 import { resetAllCommonState } from '@/store/feature/common/commonReducer';
@@ -189,6 +190,18 @@ const ApplicationInfo = () => {
             />
           </Col>
         )} */}
+
+        <Toast
+          text={
+            <p style={{ lineHeight: '1.4' }}>
+              매칭이 이뤄지고 있어요😊
+              <br />
+              오늘 밤에 만나요!
+            </p>
+          }
+          isOpen={true}
+          autoClose={6000}
+        />
         <BottomSheet
           isActive={isModal}
           subTitle="신청 취소 하시겠습니까?"
