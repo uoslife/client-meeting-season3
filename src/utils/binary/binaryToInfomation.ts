@@ -145,7 +145,7 @@ export class BinaryToInfo implements IBinaryToInfo {
         newBinary[j][i] === '1'
           ? result.push({
               label: item,
-              order: i,
+              order: j,
             })
           : null,
       ),
@@ -229,7 +229,7 @@ export class BinaryToInfo implements IBinaryToInfo {
         newBinary[j][i] === '1'
           ? result.push({
               label: item,
-              order: i,
+              order: j,
             })
           : null,
       ),
@@ -662,7 +662,92 @@ export class BinaryToInfo implements IBinaryToInfo {
     }
   }
 
-  // 해야하는 것들
-  // mbtiToBinary
-  // qeustionToBinary
+  /** 1대1 성공 binary to information */
+  successQuestionData() {
+    return this.binaryToPersonalQuestion(
+      this.binaryToSaperatedArray(
+        this.informationDistance!,
+        false,
+        'InfoDistance',
+      )[1],
+      this.binaryToSaperatedArray(
+        this.informationDistance!,
+        false,
+        'InfoDistance',
+      )[2],
+      this.binaryToSaperatedArray(
+        this.informationDistance!,
+        false,
+        'InfoDistance',
+      )[3],
+      this.binaryToSaperatedArray(
+        this.informationDistance!,
+        false,
+        'InfoDistance',
+      )[4],
+    );
+  }
+  successMbtiData() {
+    return this.binaryToPreferMbti(
+      this.binaryToSaperatedArray(
+        this.informationDistance!,
+        false,
+        'InfoDistance',
+      )[5],
+    );
+  }
+  successAnimalData() {
+    return this.binaryToPreferAnimal(
+      this.binaryToSaperatedArray(
+        this.informationDistance!,
+        false,
+        'InfoDistance',
+      )[6],
+    );
+  }
+  successInterestData() {
+    return this.binaryToInterest(
+      this.binaryToSaperatedArray(
+        this.informationDistance!,
+        false,
+        'InfoDistance',
+      )[7],
+    );
+  }
+
+  /** 3대3 성공 binary to information */
+
+  successGroupQuestionData() {
+    return this.binaryToGroupQuestion(
+      this.binaryToSaperatedArray(
+        this.informationDistance!,
+        true,
+        'InfoDistance',
+      )[1],
+      this.binaryToSaperatedArray(
+        this.informationDistance!,
+        true,
+        'InfoDistance',
+      )[2],
+      this.binaryToSaperatedArray(
+        this.informationDistance!,
+        true,
+        'InfoDistance',
+      )[3],
+      this.binaryToSaperatedArray(
+        this.informationDistance!,
+        true,
+        'InfoDistance',
+      )[4],
+    );
+  }
+  successGroupDayData() {
+    return this.binaryToDay(
+      this.binaryToSaperatedArray(
+        this.informationDistance!,
+        true,
+        'InfoDistance',
+      )[0],
+    );
+  }
 }
