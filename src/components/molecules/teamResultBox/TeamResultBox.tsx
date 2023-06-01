@@ -39,6 +39,7 @@ const KakaoIdInfoWrapper = forwardRef(
           ref={ref}
           value={kakaoIdInfo.kakaoId}
           style={{ position: 'fixed', top: '-100px', left: '-100px' }}
+          inputMode="none"
         />
       </Row>
     );
