@@ -1,12 +1,19 @@
 'use client';
 import Image from 'next/image';
 
-import { Button, IconButton, MainHeader, Text, Toast } from '@/components';
+import {
+  Banner,
+  Button,
+  IconButton,
+  MainHeader,
+  Text,
+  Toast,
+} from '@/components';
 
 import * as S from '@/styles/pages/page.style';
 
 import { copyLink } from '@/utils';
-import { SOCIAL_LINK } from '@/constants';
+import { BANNER_AD_URL, SOCIAL_LINK } from '@/constants';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/store';
@@ -185,6 +192,7 @@ const Main = () => {
           </div>
         )}
       </S.MainWrapper>
+      <Banner link={'MmedAdvertise.jpg'} url={BANNER_AD_URL.Mmed} />
       <S.BottomWrapper>
         <S.ShareWrapper>
           <Text

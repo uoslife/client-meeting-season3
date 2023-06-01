@@ -63,3 +63,7 @@ export { default as MbtiSelectBox } from './molecules/mbtiSelectBox/MbtiButton';
 export type { MbtiSelectBoxProps } from './molecules/mbtiSelectBox/MbtiButton';
 export { default as Slider } from './molecules/slider/Slider';
 export type { SliderProps } from './molecules/slider/Slider';
+
+//banner
+export { default as Banner } from './banner/Banner';
+export type { BannerProps } from './banner/Banner';

@@ -151,3 +151,7 @@ export const GROUP_QUESTIONS = [
   ['조금만 마실래요!', '적당히 마실래요!', '마시고 죽을래요!'],
   ['친구를 만들고 싶어요!', '연인을 만들고 싶어요!', '상관 없어요!'],
 ];
+
+export const BANNER_AD_URL = {
+  Mmed: 'https://linktr.ee/mned_seoul',
+};
