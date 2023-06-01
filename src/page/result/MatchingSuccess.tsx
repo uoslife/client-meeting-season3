@@ -33,7 +33,7 @@ const MatchingSuccess = ({
         <Col gap={32}>
           <Col align={'center'} gap={8}>
             <Text
-              label={`🎉호랑이 님,\n 성공적으로 매칭되었어요!`}
+              label={`🎉${matchingSuccessData.kakaoIdArr[0].nickname} 님,\n 성공적으로 매칭되었어요!`}
               size="xl"
               color="#3B4046"
               weight={800}
