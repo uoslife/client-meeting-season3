@@ -219,7 +219,7 @@ export class infoToBinary implements IInfoToBinary {
           this.departmentToBinary(false) +
           this.studentTypeToBinary(false)
       : this.preferAgeToBinary() +
-          this.departmentToBinary(false) +
+          this.departmentToBinary(true) +
           this.preferAtmosphereToBinary();
   }
 
