@@ -8,13 +8,20 @@ export type BannerProps = Combine<
     url?: string;
     width?: number;
     height?: number;
+    isTransition?: boolean;
   },
   React.ComponentProps<'div'>
 >;
 
-const Banner = ({ link, url, width = 414, height = 94 }) => {
+const Banner = ({
+  link,
+  url,
+  width = 414,
+  height = 94,
+  isTransition,
+}: BannerProps) => {
   return (
-    <S.Container width={width} height={height}>
+    <S.Container width={width} height={height} isTransition={isTransition}>
       <a href={url} target={'_blank'}>
         <Image src={`/images/banner/${link}`} alt={''} fill />
       </a>
