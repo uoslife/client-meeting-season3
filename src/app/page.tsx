@@ -37,6 +37,7 @@ const Main = () => {
   }, []);
   const handleApplyButton = () => {
     setApplyFinishInfoModalOpen(true);
+    return;
     if (isWaitingTeamComplete) {
       setWaitingModalOpen(true);
       setTimeout(() => {
