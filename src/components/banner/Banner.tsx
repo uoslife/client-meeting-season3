@@ -1,31 +1,24 @@
-import styled from 'styled-components';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { Combine } from '@/types/utils.type';
+import * as S from './banner.style';
 
-const Container = styled.div`
-  max-width: 414px;
-  position: relative;
-`;
+export type BannerProps = Combine<
+  {
+    link?: 'MmedAdvertise.jpg';
+    url?: string;
+    width?: number;
+    height?: number;
+  },
+  React.ComponentProps<'div'>
+>;
 
-const Banner = () => {
-  const images = ['test.jpeg', 'MainPoster.jpg'];
-  const [imageNum, setImageNum] = useState(0);
-
-  const handleSwitchNum = () => {};
-
-  useEffect(() => {
-    setInterval(() => {}, 3000);
-  });
-  // 광고 객체 받아오기
+const Banner = ({ link, url, width = 414, height = 94 }) => {
   return (
-    <Container>
-      <Image
-        src={`/images/${images[imageNum]}`}
-        alt={''}
-        width={414}
-        height={100}
-      />
-    </Container>
+    <S.Container width={width} height={height}>
+      <a href={url} target={'_blank'}>
+        <Image src={`/images/banner/${link}`} alt={''} fill />
+      </a>
+    </S.Container>
   );
 };
 
