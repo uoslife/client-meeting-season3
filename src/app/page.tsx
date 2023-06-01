@@ -26,6 +26,8 @@ const Main = () => {
   const [waitingModalOpen, setWaitingModalOpen] = useState(false);
   const [applyExtensionInfoModalOpen, setApplyExtensionInfoModalOpen] =
     useState(false);
+  const [applyFinishInfoModalOpen, setApplyFinishInfoModalOpen] =
+    useState(false);
 
   useEffect(() => {
     setApplyExtensionInfoModalOpen(true);
@@ -34,6 +36,7 @@ const Main = () => {
     }, 6000);
   }, []);
   const handleApplyButton = () => {
+    setApplyFinishInfoModalOpen(true);
     if (isWaitingTeamComplete) {
       setWaitingModalOpen(true);
       setTimeout(() => {
@@ -231,7 +234,7 @@ const Main = () => {
           isOpen={waitingModalOpen}
         />
       )}
-      {applyExtensionInfoModalOpen && (
+      {/* {applyExtensionInfoModalOpen && (
         <Toast
           text={
             <p style={{ lineHeight: '1.4' }}>
@@ -241,6 +244,19 @@ const Main = () => {
             </p>
           }
           isOpen={applyExtensionInfoModalOpen}
+          autoClose={6000}
+        />
+      )} */}
+      {applyFinishInfoModalOpen && (
+        <Toast
+          text={
+            <p style={{ lineHeight: '1.4' }}>
+              신청이 마감되었습니다🥲
+              <br />
+              다음 시즌으로 찾아뵐게요!
+            </p>
+          }
+          isOpen={applyFinishInfoModalOpen}
           autoClose={6000}
         />
       )}
