@@ -1,7 +1,7 @@
 # 시대팅 시즌 3 Client
 
 <div align="center">
-<img src="https://github.com/uoslife/client-meeting-season3/assets/76601773/83e001cf-1d7c-4217-b6bd-4a21586fc150" width="33%">  
+<img src="https://github.com/uoslife/client-meeting-season3/assets/76601773/83e001cf-1d7c-4217-b6bd-4a21586fc150" width="50%">  
 </div>
 
 ## Installing Dependencies
