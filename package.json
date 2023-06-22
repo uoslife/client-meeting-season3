@@ -9,7 +9,7 @@
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "cypress": "cypress open"
+    "test": "jest --watch"
   },
   "dependencies": {
     "@lottiefiles/react-lottie-player": "^3.5.3",
