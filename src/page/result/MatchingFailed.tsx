@@ -21,7 +21,7 @@ const SquareBackground = styled.div`
 
 const BottomSelectWrapper = styled.div`
   position: fixed;
-  max-width: 414px;
+  max-width: var(--default-browser-max-width);
   bottom: 0;
   display: flex;
   flex-direction: column;

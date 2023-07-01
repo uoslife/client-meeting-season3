@@ -31,6 +31,9 @@ export const GlobalStyles = createGlobalStyle`
     font-style: normal;
 }
 
+  :root {
+    --default-browser-max-width: 414px;
+  }
   * {
     font-family: ${globalFontFamily};
     font-weight: 500;
@@ -41,7 +44,8 @@ export const GlobalStyles = createGlobalStyle`
     font-family: ${globalFontFamily};
     font-weight: 500;
     box-sizing: border-box;
-    max-width: 414px;
+    max-width: var(--default-browser-max-width);
+    width: 100%;
     margin: 0 auto;
   }
 

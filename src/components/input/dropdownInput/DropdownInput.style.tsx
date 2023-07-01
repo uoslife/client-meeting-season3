@@ -51,7 +51,7 @@ export const DummyBox = styled.div`
 `;
 
 export const Dropdown = styled.div<{ showOption: boolean }>`
-  max-width: 414px;
+  max-width: var(--default-browser-max-width);
   height: 350px;
   width: 100%;
   margin: 0 auto;
