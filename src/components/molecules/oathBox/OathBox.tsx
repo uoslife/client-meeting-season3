@@ -20,7 +20,7 @@ const OathBox = ({
   onClick,
 }: OathBoxProps) => {
   return (
-    <S.Wrapper onClick={onClick}>
+    <S.Wrapper onClick={onClick} data-testid="oathBox-wrapper">
       <Col gap={12}>
         <Text label={title} size="base" weight={600} color="#656D78" />
         <Text
