@@ -30,6 +30,7 @@ const switchCheckboxIcon = ({
             width="15"
             height="15"
             rx="3.5"
+            data-testid="primary-attribute"
             fill={`${isActive ? '#2E74FF' : '#ECEEF0'}`}
           />
           <path
@@ -60,6 +61,7 @@ const switchCheckboxIcon = ({
         >
           <path
             d="M12 0C5.376 0 0 5.376 0 12C0 18.624 5.376 24 12 24C18.624 24 24 18.624 24 12C24 5.376 18.624 0 12 0ZM9.6 18L3.6 12L5.292 10.308L9.6 14.604L18.708 5.496L20.4 7.2L9.6 18Z"
+            data-testid="secondary-attribute"
             fill={`${isActive ? '#80AAFF' : '#ECEEF0'}`}
           />
         </svg>
@@ -75,6 +77,7 @@ const switchCheckboxIcon = ({
         >
           <path
             d="M8.99996 0.666687C4.39996 0.666687 0.666626 4.40002 0.666626 9.00002C0.666626 13.6 4.39996 17.3334 8.99996 17.3334C13.6 17.3334 17.3333 13.6 17.3333 9.00002C17.3333 4.40002 13.6 0.666687 8.99996 0.666687ZM7.33329 13.1667L3.16663 9.00002L4.34163 7.82502L7.33329 10.8084L13.6583 4.48335L14.8333 5.66669L7.33329 13.1667Z"
+            data-testid="teritary-attribute"
             fill={isActive ? '#34AAFF' : '#BEC4CD'}
           />
         </svg>
