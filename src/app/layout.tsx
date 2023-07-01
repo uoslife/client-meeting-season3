@@ -5,13 +5,11 @@ import { Providers } from '@/store/provider';
 import { NativeActions } from '@/utils/native/actions';
 import { NativeBridge } from '@/utils/native/bridge';
 import { useState, useEffect } from 'react';
-import { UserIdContext } from '@/utils/context/userIdContext';
 
 import StyledComponentsRegistry from '@/lib/registry';
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   const [topMargin, setTopMargin] = useState<number>(0);
-  const [userId, setUserId] = useState<number>(0);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -77,11 +75,9 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         />
       </head>
       <body style={{ paddingTop: `${topMargin}px` }}>
-        <UserIdContext.Provider value={{ userId, setUserId }}>
-          <StyledComponentsRegistry>
-            <Providers>{isLoading && children}</Providers>
-          </StyledComponentsRegistry>
-        </UserIdContext.Provider>
+        <StyledComponentsRegistry>
+          <Providers>{isLoading && children}</Providers>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );
